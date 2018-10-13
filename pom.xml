@@ -33,7 +33,7 @@
     <scm>
         <connection>scm:git:git://github.com/rkonovalov/jsonignore.git</connection>
         <developerConnection>scm:git:ssh://github.com:rkonovalov/jsonignore.git</developerConnection>
-        <url>http://github.com/rkonovalov/jsonignore/tree/master</url>
+        <url>https://github.com/rkonovalov/jsonignore</url>
     </scm>
 
     <dependencies>
