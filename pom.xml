@@ -21,7 +21,20 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>Ruslan Konovalov</name>
+            <email>rkonovalov86@gmail.com</email>
+            <organization>com.github.rkonovalov</organization>
+            <organizationUrl>https://github.com/rkonovalov/</organizationUrl>
+        </developer>
+    </developers>
 
+    <scm>
+        <connection>scm:git:git://github.com/rkonovalov/jsonignore.git</connection>
+        <developerConnection>scm:git:ssh://github.com:rkonovalov/jsonignore.git</developerConnection>
+        <url>http://github.com/rkonovalov/jsonignore/tree/master</url>
+    </scm>
 
     <dependencies>
         <dependency>
