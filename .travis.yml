@@ -1,12 +1,16 @@
+ (15 sloc)  398 Bytes
 language: java
-sudo: false
-jdk:
-  - oraclejdk8
-install: true
-
-branches:
-  only:
-  - master
-
-script:
-  - mvn clean install
+jdk: openjdk8
+branches: 
+only:
+- master
+cache:
+  directories:
+  - "$HOME/.m2"
+after_success:
+- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/pubring.gpg.enc -out $GPG_DIR/pubring.gpg -d
+- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/secring.gpg.enc -out $GPG_DIR/secring.gpg -d
+- "$GPG_DIR/publish.sh"
+env:
+  global:
+  - GPG_DIR="`pwd`/deploy"
