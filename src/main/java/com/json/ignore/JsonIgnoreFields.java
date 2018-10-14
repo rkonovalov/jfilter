@@ -30,21 +30,30 @@ import java.util.*;
  */
 
 public class JsonIgnoreFields {
-    public static final List<String> ignoredNames = Arrays.asList("CASE_INSENSITIVE_ORDER", "LOGGER");
+    private static final List<String> ignoredNames = Arrays.asList("CASE_INSENSITIVE_ORDER", "LOGGER");
 
     private Map<Class, List<String>> ignore;
     private List<String> fieldNames;
+
+    public JsonIgnoreFields() {
+        this.fieldNames = new ArrayList<>();
+    }
+
+    public JsonIgnoreFields(Map<Class, List<String>> ignore) {
+        this();
+        this.ignore = ignore;
+    }
 
     public JsonIgnoreFields(MethodParameter methodParameter) {
         this(getAnnotations(methodParameter));
     }
 
     public JsonIgnoreFields(List<JsonIgnoreSetting> annotations) {
-        this.fieldNames = new ArrayList<>();
+        this();
         this.ignore = parseSettingAnnotation(annotations);
     }
 
-    public boolean fieldHasGetter(Field field, Class clazz) {
+    private boolean fieldHasGetter(Field field, Class clazz) {
         for (Method method : clazz.getDeclaredMethods()) {
             if (method.getName().toLowerCase().equals("get" + field.getName().toLowerCase())) {
                 return true;
@@ -53,19 +62,20 @@ public class JsonIgnoreFields {
         return false;
     }
 
-    public void process(Map map) {
+    @SuppressWarnings("unchecked")
+    private void process(Map map) {
         map.forEach((k, v) -> {
             ignoreFields(k);
             ignoreFields(v);
         });
     }
 
-    public void process(Collection items) {
+    private void process(Collection items) {
         for (Object item : items)
             ignoreFields(item);
     }
 
-    public boolean isFieldIgnored(Field field, Class clazz) {
+    private boolean isFieldIgnored(Field field, Class clazz) {
         for (Class cl : ignore.keySet()) {
             List<String> items = ignore.get(cl);
             if (items.contains(field.getName())) {
@@ -76,7 +86,7 @@ public class JsonIgnoreFields {
         return false;
     }
 
-    public void clearField(Field field, Object object) {
+    private void clearField(Field field, Object object) {
         try {
             field.setAccessible(true);
             switch (field.getType().getName()) {
@@ -163,14 +173,11 @@ public class JsonIgnoreFields {
 
     public static boolean annotationFound(MethodParameter methodParameter) {
         Method method = methodParameter.getMethod();
-        if (method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null ||
-                method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null) {
-            return true;
-        } else
-            return false;
+        return method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null ||
+                method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null;
     }
 
-    public static List<JsonIgnoreSetting> getAnnotations(MethodParameter methodParameter) {
+    private static List<JsonIgnoreSetting> getAnnotations(MethodParameter methodParameter) {
         Method method = methodParameter.getMethod();
         List<JsonIgnoreSetting> annotations = new ArrayList<>();
 
