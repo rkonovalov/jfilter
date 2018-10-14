@@ -268,7 +268,7 @@ Where: className specific class, fields - fields which we need to exclude from r
  @JsonIgnoreSetting(className = Street.class, fields = {"id", "streetNumber"})
  ...
 ```
-In this example we declared multiple settings. If module finds next classes in respons next fields will be excluded:
+In this example we declared multiple settings. If module finds next classes in response next fields will be excluded:
 1) On User.class, fields: id, password, secretKey
 2) On Address.class, fields: id, apartmentNumber
 3) On Street.class, fields: id, streetNumber
