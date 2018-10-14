@@ -11,11 +11,11 @@ If you are using Maven you need add next dependecy
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 If you are using another build automation tool, you can find configuration string by this URL:
-https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.0/jar
+https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.2/jar
 
 ## ControllerAdvice class example
 For handling response from Rest controller we should to create ControllerAdvice class
@@ -23,6 +23,7 @@ For handling response from Rest controller we should to create ControllerAdvice 
 ```java
 @ControllerAdvice
 public class IgnoreAdvice implements ResponseBodyAdvice<Serializable> {
+    public static final Logger logger = Logger.getLogger(IgnoreAdvice.class);
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
@@ -36,7 +37,12 @@ public class IgnoreAdvice implements ResponseBodyAdvice<Serializable> {
                                         ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         //Parse JsonIgnoreSetting annotation in string and try to filter(exclude) fields of Json response                               
         JsonIgnoreFields ignoreFields = new JsonIgnoreFields(methodParameter);
-        ignoreFields.ignoreFields(obj);
+        try {
+            ignoreFields.ignoreFields(obj);
+        } catch (IllegalAccessException e) {
+            if(logger.isEnabledFor(Level.ERROR))
+                logger.error(e);
+        }
         return obj;
     }
 }
