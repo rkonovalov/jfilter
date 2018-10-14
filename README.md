@@ -4,7 +4,7 @@ Json ignore module for Spring Framework can be used in Spring MVC Rest project f
 # Getting started
 For using this module need to follow for next steps
 
-## Importing dependecy
+## Importing dependency
 If you are using Maven you need add next dependecy
 
 ```java
