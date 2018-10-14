@@ -25,11 +25,6 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 
-/**
- * @author Ruslan {@literal <rkonovalov86@gmail.com>}
- * @version 1.0
- */
-
 public class JsonIgnoreFields {
     private static final List<String> ignoredNames = Arrays.asList("CASE_INSENSITIVE_ORDER", "LOGGER");
 
