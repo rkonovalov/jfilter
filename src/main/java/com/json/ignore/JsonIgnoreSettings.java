@@ -23,11 +23,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * @author Ruslan {@literal <rkonovalov86@gmail.com>}
- * @version 1.0
- */
-
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface JsonIgnoreSettings {

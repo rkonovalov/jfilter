@@ -20,11 +20,6 @@ package com.json.ignore;
 
 import java.lang.annotation.*;
 
-/**
- * @author Ruslan {@literal <rkonovalov86@gmail.com>}
- * @version 1.0
- */
-
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(value = JsonIgnoreSettings.class )
