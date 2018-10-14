@@ -1,3 +1,2 @@
 language: java
-
 script: bundle exec thor build
