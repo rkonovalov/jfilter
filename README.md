@@ -302,5 +302,8 @@ If you need to exclude some fields in class and subclasses, you shouldn't specif
 }
 ```
 # Release notes
+## Version 1.0.2
+Added additional constructors
+
 ## Version 1.0.0
 Initial release
