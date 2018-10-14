@@ -1,2 +1,12 @@
 language: java
-script: bundle exec thor build
+sudo: false
+jdk:
+  - oraclejdk8
+install: true
+
+branches:
+  only:
+  - master
+
+script:
+  - mvn clean install
