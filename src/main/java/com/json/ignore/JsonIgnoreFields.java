@@ -24,6 +24,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 
+
 /**
  * @author Ruslan {@literal <rkonovalov86@gmail.com>}
  * @version 1.0
@@ -63,14 +64,18 @@ public class JsonIgnoreFields {
     }
 
     @SuppressWarnings("unchecked")
-    private void process(Map map) {
+    private void process(Map map) throws RuntimeException {
         map.forEach((k, v) -> {
-            ignoreFields(k);
-            ignoreFields(v);
+            try {
+                ignoreFields(k);
+                ignoreFields(v);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
-    private void process(Collection items) {
+    private void process(Collection items) throws IllegalAccessException {
         for (Object item : items)
             ignoreFields(item);
     }
@@ -86,47 +91,44 @@ public class JsonIgnoreFields {
         return false;
     }
 
-    private void clearField(Field field, Object object) {
-        try {
-            field.setAccessible(true);
-            switch (field.getType().getName()) {
-                case "boolean":
-                    field.setBoolean(object, Boolean.FALSE);
-                    break;
-                case "byte":
-                    field.setByte(object, Byte.MIN_VALUE);
-                    break;
-                case "char":
-                    field.setChar(object, Character.MIN_VALUE);
-                    break;
-                case "double":
-                    field.setDouble(object, Double.MIN_VALUE);
-                    break;
-                case "float":
-                    field.setFloat(object, Float.MIN_VALUE);
-                    break;
-                case "int":
-                    field.setInt(object, Integer.MIN_VALUE);
-                    break;
-                case "long":
-                    field.setLong(object, Long.MIN_VALUE);
-                    break;
-                case "short":
-                    field.setLong(object, Short.MIN_VALUE);
-                    break;
-                default:
-                    field.set(object, null);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+    private void clearField(Field field, Object object) throws IllegalAccessException {
+        field.setAccessible(true);
+        switch (field.getType().getName()) {
+            case "boolean":
+                field.setBoolean(object, Boolean.FALSE);
+                break;
+            case "byte":
+                field.setByte(object, Byte.MIN_VALUE);
+                break;
+            case "char":
+                field.setChar(object, Character.MIN_VALUE);
+                break;
+            case "double":
+                field.setDouble(object, Double.MIN_VALUE);
+                break;
+            case "float":
+                field.setFloat(object, Float.MIN_VALUE);
+                break;
+            case "int":
+                field.setInt(object, Integer.MIN_VALUE);
+                break;
+            case "long":
+                field.setLong(object, Long.MIN_VALUE);
+                break;
+            case "short":
+                field.setLong(object, Short.MIN_VALUE);
+                break;
+            default:
+                field.set(object, null);
         }
+
     }
 
     private boolean fieldAcceptable(Field field) {
         return field.getType().isPrimitive() || field.getType().isArray() || ignoredNames.contains(field.getName());
     }
 
-    public void ignoreFields(Object object) {
+    public void ignoreFields(Object object) throws IllegalAccessException {
         Class clazz = object.getClass().getDeclaredFields().length > 0 ? object.getClass() : object.getClass().getSuperclass();
         Class currentClass = object.getClass();
 
@@ -136,18 +138,14 @@ public class JsonIgnoreFields {
                 if (isFieldIgnored(field, currentClass)) {
                     clearField(field, object);
                 } else {
-                    try {
-                        Object value = field.get(object);
-                        if (value != null) {
-                            if (value instanceof Collection) {
-                                process((Collection) value);
-                            } else if (value instanceof Map) {
-                                process((Map) value);
-                            } else
-                                ignoreFields(value);
-                        }
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+                    Object value = field.get(object);
+                    if (value != null) {
+                        if (value instanceof Collection) {
+                            process((Collection) value);
+                        } else if (value instanceof Map) {
+                            process((Map) value);
+                        } else
+                            ignoreFields(value);
                     }
                 }
             }
