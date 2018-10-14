@@ -1,5 +1,12 @@
 language: java
-sudo: false # faster builds
+sudo: false
+jdk:
+  - oraclejdk8
+install: true
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+branches:
+  only:
+  - master
+
+script:
+  - mvn clean install
