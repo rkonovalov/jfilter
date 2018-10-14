@@ -41,12 +41,22 @@ public class JsonIgnoreFields {
     }
 
     public JsonIgnoreFields(MethodParameter methodParameter) {
-        this(getAnnotations(methodParameter));
+        this(getAnnotations(methodParameter.getMethod()));
     }
 
     public JsonIgnoreFields(List<JsonIgnoreSetting> annotations) {
         this();
         this.ignore = parseSettingAnnotation(annotations);
+    }
+
+    public JsonIgnoreFields(Method method) {
+        this(getAnnotations(method));
+    }
+
+    public JsonIgnoreFields(Class clazz, List<String> ignoreFields) {
+        this();
+        this.ignore = new HashMap<>();
+        this.ignore.put(clazz, ignoreFields);
     }
 
     private boolean fieldHasGetter(Field field, Class clazz) {
@@ -170,8 +180,7 @@ public class JsonIgnoreFields {
                 method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null;
     }
 
-    private static List<JsonIgnoreSetting> getAnnotations(MethodParameter methodParameter) {
-        Method method = methodParameter.getMethod();
+    private static List<JsonIgnoreSetting> getAnnotations(Method method) {
         List<JsonIgnoreSetting> annotations = new ArrayList<>();
 
         if (method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null) {
