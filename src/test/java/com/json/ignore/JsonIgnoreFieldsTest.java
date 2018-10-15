@@ -8,7 +8,7 @@ public class JsonIgnoreFieldsTest {
     private JsonIgnoreFields jsonIgnoreFields;
 
     @Before
-    private void init() {
+    public void init() {
         jsonIgnoreFields = new JsonIgnoreFields();
     }
 
