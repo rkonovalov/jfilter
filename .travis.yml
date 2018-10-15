@@ -6,7 +6,6 @@ jdk:
     - openjdk8
     - oraclejdk10
     - openjdk10
-    - openjdk11
 
 script:
   mvn test
