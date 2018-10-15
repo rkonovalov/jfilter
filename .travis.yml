@@ -1,16 +1,9 @@
 language: java
 
-os:
-  - windows
-  - linux
-  - osx
-
 jdk:
     - oraclejdk8
     - oraclejdk9
     - openjdk8
-    - oraclejdk10
-    - openjdk10
 
 script:
   mvn test
