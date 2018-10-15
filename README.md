@@ -11,7 +11,7 @@ For using this module need to follow for next steps
 ## Importing dependency
 If you are using Maven you need add next dependecy
 
-```java
+```xml
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
@@ -221,20 +221,20 @@ public class Street {
 ```
 
 ### Example of Json response without filtration(exclusion)
-```java
+```json
 {
-  id: 10,
-  email: "janedoe@gmail.com", 
-  fullName: "Jane Doe",
-  password: "12345",
-  secretKey: "54321"
-  address: {
-    id: 15,
-    apartmentNumber: 22,
-    street: {
-      id: 155,
-      streetName: "Bourbon Street",
-      streetNumber: 15
+  "id": 10,
+  "email": "janedoe@gmail.com", 
+  "fullName": "Jane Doe",
+  "password": "12345",
+  "secretKey": "54321",
+  "address": {
+    "id": 15,
+    "apartmentNumber": 22,
+    "street": {
+      "id": 155,
+      "streetName": "Bourbon Street",
+      "streetNumber": 15
     }
   }
 }
@@ -243,30 +243,30 @@ public class Street {
 By using JsonIgnoreSetting you can flexible configure of Json response result. You can exclude fields on specific class, subclasses or whole object
 
 ## Filtration(exclusion) of fields on specific class
-```java
+```text
  @JsonIgnoreSetting(className = User.class, fields = {"password", "secretKey"})
 ```
 Where: className specific class, fields - fields which we need to exclude from response
 ### Result
-```java
-{
-  id: 10,
-  email: "janedoe@gmail.com", 
-  fullName: "Jane Doe", 
-  address: {
-    id: 15,
-    apartmentNumber: 22,
-    street: {
-      id: 155,
-      streetName: "Bourbon Street",
-      streetNumber: 15
+```json
+{  
+  "id":10,
+  "email":"janedoe@gmail.com",
+  "fullName":"Jane Doe",
+  "address":{  
+    "id":15,
+    "apartmentNumber":22,
+    "street":{  
+      "id":155,
+      "streetName":"Bourbon Street",
+      "streetNumber":15
     }
   }
 }
 ```
 
 ## Filtration(exclusion) of fields on subclasses
-```java
+```text
  @JsonIgnoreSetting(className = User.class, fields = {"id", "password", "secretKey"})
  @JsonIgnoreSetting(className = Address.class, fields = {"id", "apartmentNumber"})
  @JsonIgnoreSetting(className = Street.class, fields = {"id", "streetNumber"})
@@ -277,36 +277,36 @@ In this example we declared multiple settings. If module finds next classes in r
 2) On Address.class, fields: id, apartmentNumber
 3) On Street.class, fields: id, streetNumber
 ### Result:
-```java
+```json
 {
-  email: "janedoe@gmail.com", 
-  fullName: "Jane Doe",
-  address: {
-    street: {
-      streetName: "Bourbon Street"
+  "email": "janedoe@gmail.com", 
+  "fullName": "Jane Doe",
+  "address": {
+    "street": {
+      "streetName": "Bourbon Street"
     }
   }
 }
 ```
 
 ## Filtration(exclusion) of fields on whole object
-```java
+```text
  @JsonIgnoreSetting(fields = {"id"})
  ...
 ```
 If you need to exclude some fields in class and subclasses, you shouldn't specify className parameter
 ### Result:
-```java
+```json
 {
-  email: "janedoe@gmail.com", 
-  fullName: "Jane Doe",
-  password:"12345",
-  secretKey: "54321",
-  address: {
-    apartmentNumber: 22,
-    street: {
-      streetName: "Bourbon Street",
-      streetNumber: 15
+  "email": "janedoe@gmail.com", 
+  "fullName": "Jane Doe",
+  "password":"12345",
+  "secretKey": "54321",
+  "address": {
+    "apartmentNumber": 22,
+    "street": {
+      "streetName": "Bourbon Street",
+      "streetNumber": 15
     }
   }
 }
