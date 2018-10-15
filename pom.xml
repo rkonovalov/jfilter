@@ -13,6 +13,10 @@
     <description>Json ignore module for spring framework</description>
     <url>https://github.com/rkonovalov/jsonignore</url>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
 
 
 
