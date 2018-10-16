@@ -69,14 +69,15 @@ public class JsonIgnoreFieldsTest {
         return userMock;
     }
 
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"id"})
+    @JsonIgnoreSetting(fields = {"id"})
     private void singleAnnotation() {
 
     }
 
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"id"})
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"email", "fullName", "password", "intValue", "collectionValue",
-            "mapValue", "boolValue", "byteValue", "charValue", "doubleValue", "floatValue", "longValue", "shortValue"})
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"id", "email", "fullName"})
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"password", "intValue", "collectionValue"})
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
     private void multipleAnnotation() {
 
     }
