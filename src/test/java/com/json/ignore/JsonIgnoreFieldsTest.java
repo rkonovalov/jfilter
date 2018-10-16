@@ -18,12 +18,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class JsonIgnoreFieldsTest {
-    private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"}}";
-    private static final String USER_WITHOUT_ID = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"}}";
-    private static final String USER_EMPTY = "{\"intValue\":0}";
+    private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"},\"boolValue\":true}";
+    private static final String USER_WITHOUT_ID = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"},\"boolValue\":true}";
+    private static final String USER_EMPTY = "{\"intValue\":" + Integer.MIN_VALUE +",\"boolValue\":false}";
 
     private static final List<String> LIST_ID = Arrays.asList("id");
-    private static final List<String> LIST_ALL = Arrays.asList("id", "email", "fullName", "password", "intValue", "collectionValue", "mapValue");
+    private static final List<String> LIST_ALL = Arrays.asList("id", "email", "fullName", "password", "intValue", "collectionValue", "mapValue", "boolValue");
 
     private ObjectMapper mapper;
     private JsonIgnoreFields jsonIgnoreFields;
@@ -49,7 +49,8 @@ public class JsonIgnoreFieldsTest {
                 .setPassword("1234567")
                 .setId(100)
                 .setCollectionValue(new ArrayList<>(Arrays.asList("Hello", "World")))
-                .setMapValue(values);
+                .setMapValue(values)
+                .setBoolValue(true);
 
         return userMock;
     }
@@ -60,7 +61,7 @@ public class JsonIgnoreFieldsTest {
     }
 
     @JsonIgnoreSetting(className = UserMock.class, fields = {"id"})
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"email", "fullName", "password", "intValue", "collectionValue", "mapValue"})
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"email", "fullName", "password", "intValue", "collectionValue", "mapValue", "boolValue"})
     private void multipleAnnotation() {
 
     }

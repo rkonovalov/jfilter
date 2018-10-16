@@ -13,6 +13,7 @@ public class UserMock implements Serializable {
     private int intValue;
     private Collection<String> collectionValue;
     private Map<String, String> mapValue;
+    private boolean boolValue;
 
     public UserMock() {
     }
@@ -77,6 +78,15 @@ public class UserMock implements Serializable {
 
     public UserMock setMapValue(Map<String, String> mapValue) {
         this.mapValue = mapValue;
+        return this;
+    }
+
+    public boolean getBoolValue() {
+        return boolValue;
+    }
+
+    public UserMock setBoolValue(boolean boolValue) {
+        this.boolValue = boolValue;
         return this;
     }
 }

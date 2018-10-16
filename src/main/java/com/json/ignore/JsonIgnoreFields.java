@@ -130,7 +130,7 @@ public class JsonIgnoreFields {
     }
 
     private boolean fieldAcceptable(Field field) {
-        return field.getType().isPrimitive() || field.getType().isArray() || ignoredNames.contains(field.getName());
+        return /*field.getType().isPrimitive() ||*/ field.getType().isArray() || ignoredNames.contains(field.getName());
     }
 
     public void ignoreFields(Object object) throws IllegalAccessException {
