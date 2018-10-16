@@ -5,6 +5,7 @@ jdk:
 
 script:
    "mvn cobertura:cobertura"
+   "mvn test"
 
 
 after_success:

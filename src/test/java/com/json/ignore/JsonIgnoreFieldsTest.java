@@ -15,6 +15,7 @@ import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class JsonIgnoreFieldsTest {
     private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0}";
@@ -142,5 +143,16 @@ public class JsonIgnoreFieldsTest {
         String strUser = mapper.writeValueAsString(user);
 
         assertEquals(USER_WITHOUT_ID, (strUser));
+    }
+
+    @Test
+    public void testAnnotationFound() {
+        Method method = findDeclaredMethod("singleAnnotation");
+        assertNotNull(method);
+
+        MethodParameter methodParameter = new MethodParameter(method, 0);
+        boolean result = JsonIgnoreFields.annotationFound(methodParameter);
+
+        assertTrue(result);
     }
 }
