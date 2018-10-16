@@ -14,6 +14,12 @@ public class UserMock implements Serializable {
     private Collection<String> collectionValue;
     private Map<String, String> mapValue;
     private boolean boolValue;
+    private byte byteValue;
+    private char charValue;
+    private double doubleValue;
+    private float floatValue;
+    private long longValue;
+    private short shortValue;
 
     public UserMock() {
     }
@@ -87,6 +93,60 @@ public class UserMock implements Serializable {
 
     public UserMock setBoolValue(boolean boolValue) {
         this.boolValue = boolValue;
+        return this;
+    }
+
+    public byte getByteValue() {
+        return byteValue;
+    }
+
+    public UserMock setByteValue(byte byteValue) {
+        this.byteValue = byteValue;
+        return this;
+    }
+
+    public char getCharValue() {
+        return charValue;
+    }
+
+    public UserMock setCharValue(char charValue) {
+        this.charValue = charValue;
+        return this;
+    }
+
+    public double getDoubleValue() {
+        return doubleValue;
+    }
+
+    public UserMock setDoubleValue(double doubleValue) {
+        this.doubleValue = doubleValue;
+        return this;
+    }
+
+    public float getFloatValue() {
+        return floatValue;
+    }
+
+    public UserMock setFloatValue(float floatValue) {
+        this.floatValue = floatValue;
+        return this;
+    }
+
+    public long getLongValue() {
+        return longValue;
+    }
+
+    public UserMock setLongValue(long longValue) {
+        this.longValue = longValue;
+        return this;
+    }
+
+    public short getShortValue() {
+        return shortValue;
+    }
+
+    public UserMock setShortValue(short shortValue) {
+        this.shortValue = shortValue;
         return this;
     }
 }

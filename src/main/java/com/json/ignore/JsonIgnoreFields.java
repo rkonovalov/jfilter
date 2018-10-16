@@ -121,7 +121,7 @@ public class JsonIgnoreFields {
                 field.setLong(object, Long.MIN_VALUE);
                 break;
             case "short":
-                field.setLong(object, Short.MIN_VALUE);
+                field.setShort(object, Short.MIN_VALUE);
                 break;
             default:
                 field.set(object, null);

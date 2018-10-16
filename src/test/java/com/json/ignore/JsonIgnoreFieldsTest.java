@@ -18,12 +18,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class JsonIgnoreFieldsTest {
-    private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"},\"boolValue\":true}";
-    private static final String USER_WITHOUT_ID = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"},\"boolValue\":true}";
-    private static final String USER_EMPTY = "{\"intValue\":" + Integer.MIN_VALUE +",\"boolValue\":false}";
+    private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"},\"boolValue\":true,\"byteValue\":100,\"charValue\":\"c\",\"doubleValue\":5.5,\"floatValue\":5.5,\"longValue\":100500,\"shortValue\":15}";
+    private static final String USER_WITHOUT_ID = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"},\"boolValue\":true,\"byteValue\":100,\"charValue\":\"c\",\"doubleValue\":5.5,\"floatValue\":5.5,\"longValue\":100500,\"shortValue\":15}";
+    private static final String USER_EMPTY = "{\"intValue\":" + Integer.MIN_VALUE + ",\"boolValue\":false,\"byteValue\":"+ Byte.MIN_VALUE + ",\"charValue\":\"\\u0000\",\"doubleValue\":" + Double.MIN_VALUE + ",\"floatValue\":" + Float.MIN_VALUE + ",\"longValue\":" + Long.MIN_VALUE + ",\"shortValue\":" + Short.MIN_VALUE + "}";
 
-    private static final List<String> LIST_ID = Arrays.asList("id");
-    private static final List<String> LIST_ALL = Arrays.asList("id", "email", "fullName", "password", "intValue", "collectionValue", "mapValue", "boolValue");
+    private static final List<String> LIST_ID = Collections.singletonList("id");
+    private static final List<String> LIST_ALL = Arrays.asList("id", "email", "fullName", "password", "intValue", "collectionValue",
+            "mapValue", "boolValue", "byteValue", "charValue", "doubleValue", "floatValue", "longValue", "shortValue");
 
     private ObjectMapper mapper;
     private JsonIgnoreFields jsonIgnoreFields;
@@ -50,7 +51,13 @@ public class JsonIgnoreFieldsTest {
                 .setId(100)
                 .setCollectionValue(new ArrayList<>(Arrays.asList("Hello", "World")))
                 .setMapValue(values)
-                .setBoolValue(true);
+                .setBoolValue(true)
+                .setByteValue((byte) 100)
+                .setCharValue('c')
+                .setDoubleValue(5.5)
+                .setFloatValue(5.5f)
+                .setLongValue(100500)
+                .setShortValue((short) 15);
 
         return userMock;
     }
@@ -61,7 +68,8 @@ public class JsonIgnoreFieldsTest {
     }
 
     @JsonIgnoreSetting(className = UserMock.class, fields = {"id"})
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"email", "fullName", "password", "intValue", "collectionValue", "mapValue", "boolValue"})
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"email", "fullName", "password", "intValue", "collectionValue",
+            "mapValue", "boolValue", "byteValue", "charValue", "doubleValue", "floatValue", "longValue", "shortValue"})
     private void multipleAnnotation() {
 
     }
