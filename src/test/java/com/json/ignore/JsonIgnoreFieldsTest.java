@@ -7,20 +7,22 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import mock.UserMock;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.core.MethodParameter;
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Method;
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class JsonIgnoreFieldsTest {
-    private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\"}";
-    private static final String USER_WITHOUT_ID = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\"}";
-    private static final String USER_WITHOUT_ID_AND_PASSWORD = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\"}";
+    private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0}";
+    private static final String USER_WITHOUT_ID = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0}";
+    private static final String USER_EMPTY = "{\"intValue\":0}";
 
     private static final List<String> LIST_ID = Arrays.asList("id");
-    private static final List<String> LIST_ID_AND_PASSWORD = Arrays.asList("id", "password");
-    private static final List<String> LIST_ALL = Arrays.asList("id", "email", "fullName", "password");
+    private static final List<String> LIST_ALL = Arrays.asList("id", "email", "fullName", "password", "intValue");
 
     private ObjectMapper mapper;
     private JsonIgnoreFields jsonIgnoreFields;
@@ -44,6 +46,29 @@ public class JsonIgnoreFieldsTest {
         return userMock;
     }
 
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"id"})
+    private void singleAnnotation() {
+
+    }
+
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"id"})
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"email", "fullName", "password", "intValue"})
+    private void multipleAnnotation() {
+
+    }
+
+    private Method findDeclaredMethod(String methodName) {
+        Method[] methods = this.getClass().getDeclaredMethods();
+
+        for(Method method : methods) {
+            if(method.getName().equals(methodName))
+            if (method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null ||
+                    method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null)
+                return method;
+        }
+        return null;
+    }
+
     @Test
     public void testJsonIgnoreFieldsExists() {
         Assert.notNull(jsonIgnoreFields);
@@ -58,7 +83,7 @@ public class JsonIgnoreFieldsTest {
     public void testUserSerialization() throws JsonProcessingException {
         UserMock user = getUserMock();
         String strUser = mapper.writeValueAsString(user);
-        Assert.isTrue(SERIALIZED_USER.equals(strUser));
+        assertEquals(SERIALIZED_USER, strUser);
     }
 
     @Test
@@ -67,24 +92,55 @@ public class JsonIgnoreFieldsTest {
         jsonIgnoreFields = new JsonIgnoreFields(UserMock.class, LIST_ID);
         jsonIgnoreFields.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
-        Assert.isTrue(USER_WITHOUT_ID.equals(strUser));
+        assertEquals(USER_WITHOUT_ID, strUser);
     }
 
     @Test
-    public void testUserIgnoreIdAndPassword() throws JsonProcessingException, IllegalAccessException {
+    public void testConstructorMap() throws JsonProcessingException, IllegalAccessException {
         UserMock user = getUserMock();
-        jsonIgnoreFields = new JsonIgnoreFields(UserMock.class, LIST_ID_AND_PASSWORD);
+        Map<Class, List<String>> ignores = new HashMap<>();
+        ignores.put(UserMock.class, LIST_ALL);
+        jsonIgnoreFields = new JsonIgnoreFields(ignores);
         jsonIgnoreFields.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
-        Assert.isTrue(USER_WITHOUT_ID_AND_PASSWORD.equals(strUser));
+        assertEquals(USER_EMPTY, strUser);
     }
 
     @Test
-    public void testUserIgnoreAll() throws JsonProcessingException, IllegalAccessException {
+    public void testSingleAnnotationMethod() throws JsonProcessingException, IllegalAccessException {
+        Method method = findDeclaredMethod("singleAnnotation");
+        assertNotNull(method);
+
         UserMock user = getUserMock();
-        jsonIgnoreFields = new JsonIgnoreFields(UserMock.class, LIST_ALL);
+        jsonIgnoreFields = new JsonIgnoreFields(method);
         jsonIgnoreFields.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
-        Assert.isTrue("{}".equals(strUser));
+        assertEquals(USER_WITHOUT_ID, (strUser));
+    }
+
+    @Test
+    public void testMultipleAnnotationMethod() throws JsonProcessingException, IllegalAccessException {
+        Method method = findDeclaredMethod("multipleAnnotation");
+        assertNotNull(method);
+
+        UserMock user = getUserMock();
+        jsonIgnoreFields = new JsonIgnoreFields(method);
+        jsonIgnoreFields.ignoreFields(user);
+        String strUser = mapper.writeValueAsString(user);
+        assertEquals(USER_EMPTY, (strUser));
+    }
+
+    @Test
+    public void testByMethodParameter() throws JsonProcessingException, IllegalAccessException {
+        Method method = findDeclaredMethod("singleAnnotation");
+        assertNotNull(method);
+
+        UserMock user = getUserMock();
+        MethodParameter methodParameter = new MethodParameter(method, 0);
+        jsonIgnoreFields = new JsonIgnoreFields(methodParameter);
+        jsonIgnoreFields.ignoreFields(user);
+        String strUser = mapper.writeValueAsString(user);
+
+        assertEquals(USER_WITHOUT_ID, (strUser));
     }
 }

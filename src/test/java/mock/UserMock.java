@@ -8,6 +8,8 @@ public class UserMock implements Serializable {
     private String fullName;
     private String password;
 
+    private int intValue;
+
     public UserMock() {
     }
 
@@ -44,6 +46,15 @@ public class UserMock implements Serializable {
 
     public UserMock setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public int getIntValue() {
+        return intValue;
+    }
+
+    public UserMock setIntValue(int intValue) {
+        this.intValue = intValue;
         return this;
     }
 }
