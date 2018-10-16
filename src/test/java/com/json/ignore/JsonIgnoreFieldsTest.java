@@ -18,12 +18,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class JsonIgnoreFieldsTest {
-    private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0}";
-    private static final String USER_WITHOUT_ID = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0}";
+    private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"}}";
+    private static final String USER_WITHOUT_ID = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"}}";
     private static final String USER_EMPTY = "{\"intValue\":0}";
 
     private static final List<String> LIST_ID = Arrays.asList("id");
-    private static final List<String> LIST_ALL = Arrays.asList("id", "email", "fullName", "password", "intValue");
+    private static final List<String> LIST_ALL = Arrays.asList("id", "email", "fullName", "password", "intValue", "collectionValue", "mapValue");
 
     private ObjectMapper mapper;
     private JsonIgnoreFields jsonIgnoreFields;
@@ -39,10 +39,17 @@ public class JsonIgnoreFieldsTest {
     private UserMock getUserMock() {
         UserMock userMock = new UserMock();
 
+        Map<String, String> values = new HashMap<>();
+        values.put("name", "value");
+
+
         userMock.setId(100)
                 .setEmail("mail@mail.com")
                 .setFullName("Jane Doe")
-                .setPassword("1234567");
+                .setPassword("1234567")
+                .setId(100)
+                .setCollectionValue(new ArrayList<>(Arrays.asList("Hello", "World")))
+                .setMapValue(values);
 
         return userMock;
     }
@@ -53,7 +60,7 @@ public class JsonIgnoreFieldsTest {
     }
 
     @JsonIgnoreSetting(className = UserMock.class, fields = {"id"})
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"email", "fullName", "password", "intValue"})
+    @JsonIgnoreSetting(className = UserMock.class, fields = {"email", "fullName", "password", "intValue", "collectionValue", "mapValue"})
     private void multipleAnnotation() {
 
     }

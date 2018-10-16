@@ -1,6 +1,8 @@
 package mock;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Map;
 
 public class UserMock implements Serializable {
     private Integer id;
@@ -9,6 +11,8 @@ public class UserMock implements Serializable {
     private String password;
 
     private int intValue;
+    private Collection<String> collectionValue;
+    private Map<String, String> mapValue;
 
     public UserMock() {
     }
@@ -55,6 +59,24 @@ public class UserMock implements Serializable {
 
     public UserMock setIntValue(int intValue) {
         this.intValue = intValue;
+        return this;
+    }
+
+    public Collection<String> getCollectionValue() {
+        return collectionValue;
+    }
+
+    public UserMock setCollectionValue(Collection<String> collectionValue) {
+        this.collectionValue = collectionValue;
+        return this;
+    }
+
+    public Map<String, String> getMapValue() {
+        return mapValue;
+    }
+
+    public UserMock setMapValue(Map<String, String> mapValue) {
+        this.mapValue = mapValue;
         return this;
     }
 }
