@@ -335,7 +335,7 @@ public class SessionService {
 
     //Check if session has attribute ROLE with value ADMIN
     @SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
-            @FieldFilterSetting(className = Customer.class, fields = {"id", "email"})
+            @FieldFilterSetting(fields = {"id"})
     })
   
     @RequestMapping(value = "/users/signIn",
