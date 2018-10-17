@@ -1,5 +1,6 @@
 package com.json.ignore;
 
+import com.json.ignore.filter.FieldFilterSetting;
 import com.json.ignore.strategy.SessionStrategy;
 import mock.MockMethods;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("multipleAnnotation");
         assertNotNull(method);
 
-        FieldIgnoreSetting[] annotations = AnnotationUtil.getDeclaredAnnotations(method, FieldIgnoreSetting.class);
+        FieldFilterSetting[] annotations = AnnotationUtil.getDeclaredAnnotations(method, FieldFilterSetting.class);
         assertTrue(annotations.length > 0);
     }
 
@@ -22,7 +23,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("mockIgnoreSettingsMethod");
         assertNotNull(method);
 
-        FieldIgnoreSetting annotation = AnnotationUtil.getDeclaredAnnotation(method, FieldIgnoreSetting.class);
+        FieldFilterSetting annotation = AnnotationUtil.getDeclaredAnnotation(method, FieldFilterSetting.class);
         assertNotNull(annotation);
     }
 
@@ -31,7 +32,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("mockIgnoreSettingsMethod");
         assertNotNull(method);
 
-        boolean result = AnnotationUtil.isAnnotationExists(method, FieldIgnoreSetting.class);
+        boolean result = AnnotationUtil.isAnnotationExists(method, FieldFilterSetting.class);
         assertTrue(result);
     }
 
@@ -40,7 +41,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("multipleAnnotation");
         assertNotNull(method);
 
-        FieldIgnoreSetting[] annotations = AnnotationUtil.getSettingAnnotations(method);
+        FieldFilterSetting[] annotations = AnnotationUtil.getSettingAnnotations(method);
         assertTrue(annotations.length > 0);
     }
 

@@ -1,4 +1,4 @@
-package com.json.ignore.strategy;
+package com.json.ignore.filter;
 
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
  *
  */
 
-public abstract class Ignore {
+public abstract class Filter {
     /**
      * Http session, may be null
      */
@@ -19,7 +19,7 @@ public abstract class Ignore {
      * Default constructor
      * @param serverHttpRequest {@link ServerHttpRequest} servlet request
      */
-    public Ignore(ServerHttpRequest serverHttpRequest) {
+    public Filter(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
             this.session = servletRequest.getServletRequest().getSession();

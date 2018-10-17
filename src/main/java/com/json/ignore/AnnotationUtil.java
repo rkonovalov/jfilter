@@ -1,7 +1,10 @@
 package com.json.ignore;
 
+import com.json.ignore.filter.FieldFilterSetting;
+import com.json.ignore.filter.FieldFilterSettings;
 import com.json.ignore.strategy.SessionStrategies;
 import com.json.ignore.strategy.SessionStrategy;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 /**
@@ -17,9 +20,8 @@ public class AnnotationUtil {
      * @param <T> generic class
      * @return list of found annotations if found, else an array of length zero
      */
-    @SuppressWarnings("unchecked")
-    public static <T> T[] getDeclaredAnnotations(Method method, Class annotationClass) {
-        return (T[]) method.getDeclaredAnnotationsByType(annotationClass);
+    public static <T extends Annotation> T[] getDeclaredAnnotations(Method method, Class<T> annotationClass) {
+        return method.getDeclaredAnnotationsByType(annotationClass);
     }
 
     /**
@@ -29,9 +31,8 @@ public class AnnotationUtil {
      * @param <T> generic class
      * @return annotation if found, else null
      */
-    @SuppressWarnings("unchecked")
-    public static <T> T getDeclaredAnnotation(Method method, Class annotationClass) {
-        return (T) method.getDeclaredAnnotation(annotationClass);
+    public static <T extends Annotation> T getDeclaredAnnotation(Method method, Class<T> annotationClass) {
+        return method.getDeclaredAnnotation(annotationClass);
     }
 
     /**
@@ -49,16 +50,16 @@ public class AnnotationUtil {
     }
 
     /**
-     * Search for {@link FieldIgnoreSetting} in method
+     * Search for {@link FieldFilterSetting} in method
      * @param method object's method which may have annotation
-     * @return list of {@link FieldIgnoreSetting} if this type of annotation declared in method
+     * @return list of {@link FieldFilterSetting} if this type of annotation declared in method
      */
-    public static FieldIgnoreSetting[] getSettingAnnotations(Method method) {
-        FieldIgnoreSettings settings = AnnotationUtil.getDeclaredAnnotation(method, FieldIgnoreSettings.class);
+    public static FieldFilterSetting[] getSettingAnnotations(Method method) {
+        FieldFilterSettings settings = AnnotationUtil.getDeclaredAnnotation(method, FieldFilterSettings.class);
         if (settings != null) {
             return  settings.value();
         } else
-            return AnnotationUtil.getDeclaredAnnotations(method, FieldIgnoreSetting.class);
+            return AnnotationUtil.getDeclaredAnnotations(method, FieldFilterSetting.class);
     }
 
     /**
@@ -71,6 +72,6 @@ public class AnnotationUtil {
         if(strategies != null) {
             return strategies.value();
         } else
-            return  AnnotationUtil.getDeclaredAnnotation(method, SessionStrategy.class);
+            return  AnnotationUtil.getDeclaredAnnotations(method, SessionStrategy.class);
     }
 }

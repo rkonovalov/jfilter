@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/json-ignore.iml" filepath="$PROJECT_DIR$/json-ignore.iml" />
       <module fileurl="file://$PROJECT_DIR$/jsonignore.iml" filepath="$PROJECT_DIR$/jsonignore.iml" />
     </modules>
   </component>

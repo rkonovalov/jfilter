@@ -3,6 +3,7 @@ package com.json.ignore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.json.ignore.filter.FieldFilterProcessor;
 import mock.MockClasses;
 import mock.MockMethods;
 import mock.MockUser;
@@ -14,7 +15,7 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class FieldIgnoreProcessorTest {
+public class FieldFilterProcessorTest {
     private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\"," +
             "\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"}," +
             "\"boolValue\":true,\"byteValue\":100,\"charValue\":\"c\",\"doubleValue\":5.5,\"floatValue\":5.5,\"longValue\":100500,\"shortValue\":15}";
@@ -30,19 +31,19 @@ public class FieldIgnoreProcessorTest {
             "mapValue", "boolValue", "byteValue", "charValue", "doubleValue", "floatValue", "longValue", "shortValue");
 
     private ObjectMapper mapper;
-    private FieldIgnoreProcessor fieldIgnoreProcessor;
+    private FieldFilterProcessor fieldFilterProcessor;
 
 
     @Before
     public void init() {
         mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        fieldIgnoreProcessor = new FieldIgnoreProcessor();
+        fieldFilterProcessor = new FieldFilterProcessor();
     }
 
     @Test
     public void testJsonIgnoreFieldsExists() {
-        assertNotNull(fieldIgnoreProcessor);
+        assertNotNull(fieldFilterProcessor);
     }
 
     @Test
@@ -60,8 +61,8 @@ public class FieldIgnoreProcessorTest {
     @Test
     public void testUserIgnoreId() throws JsonProcessingException, IllegalAccessException {
         MockUser user = MockClasses.getUserMock();
-        fieldIgnoreProcessor = new FieldIgnoreProcessor(MockUser.class, LIST_ID);
-        fieldIgnoreProcessor.ignoreFields(user);
+        fieldFilterProcessor = new FieldFilterProcessor(MockUser.class, LIST_ID);
+        fieldFilterProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_WITHOUT_ID, strUser);
     }
@@ -71,8 +72,8 @@ public class FieldIgnoreProcessorTest {
         MockUser user = MockClasses.getUserMock();
         Map<Class, List<String>> ignores = new HashMap<>();
         ignores.put(MockUser.class, LIST_ALL);
-        fieldIgnoreProcessor = new FieldIgnoreProcessor(ignores);
-        fieldIgnoreProcessor.ignoreFields(user);
+        fieldFilterProcessor = new FieldFilterProcessor(ignores);
+        fieldFilterProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_EMPTY, strUser);
     }
@@ -83,8 +84,8 @@ public class FieldIgnoreProcessorTest {
         assertNotNull(method);
 
         MockUser user = MockClasses.getUserMock();
-        fieldIgnoreProcessor = new FieldIgnoreProcessor(method);
-        fieldIgnoreProcessor.ignoreFields(user);
+        fieldFilterProcessor = new FieldFilterProcessor(method);
+        fieldFilterProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_WITHOUT_ID, (strUser));
     }
@@ -95,8 +96,8 @@ public class FieldIgnoreProcessorTest {
         assertNotNull(method);
 
         MockUser user = MockClasses.getUserMock();
-        fieldIgnoreProcessor = new FieldIgnoreProcessor(method);
-        fieldIgnoreProcessor.ignoreFields(user);
+        fieldFilterProcessor = new FieldFilterProcessor(method);
+        fieldFilterProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_EMPTY, (strUser));
     }
@@ -108,8 +109,8 @@ public class FieldIgnoreProcessorTest {
 
         MockUser user = MockClasses.getUserMock();
         MethodParameter methodParameter = new MethodParameter(method, 0);
-        fieldIgnoreProcessor = new FieldIgnoreProcessor(methodParameter);
-        fieldIgnoreProcessor.ignoreFields(user);
+        fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
+        fieldFilterProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
 
         assertEquals(USER_WITHOUT_ID, (strUser));

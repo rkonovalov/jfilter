@@ -1,12 +1,16 @@
 package com.json.ignore.strategy;
 
+import com.json.ignore.filter.FieldFilter;
+import com.json.ignore.filter.Filter;
+import com.json.ignore.filter.FilterFactory;
+import com.json.ignore.filter.StrategyFilter;
 import mock.MockMethods;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import java.lang.reflect.Method;
 import static org.junit.Assert.*;
 
-public class IgnoreFactoryTest {
+public class FilterFactoryTest {
 
     @Test
     public void testIgnoreSettingMethod() {
@@ -14,7 +18,7 @@ public class IgnoreFactoryTest {
         assertNotNull(method);
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
-        assertTrue(IgnoreFactory.isAccept(methodParameter));
+        assertTrue(FilterFactory.isAccept(methodParameter));
     }
 
     @Test
@@ -23,7 +27,7 @@ public class IgnoreFactoryTest {
         assertNotNull(method);
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
-        assertTrue(IgnoreFactory.isAccept(methodParameter));
+        assertTrue(FilterFactory.isAccept(methodParameter));
     }
 
     @Test
@@ -33,10 +37,10 @@ public class IgnoreFactoryTest {
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
 
-        Ignore ignore = IgnoreFactory.getIgnore(null, methodParameter);
-        assertNotNull(ignore);
+        Filter filter = FilterFactory.getIgnore(null, methodParameter);
+        assertNotNull(filter);
 
-        assertEquals(ignore.getClass(), FieldIgnore.class);
+        assertEquals(filter.getClass(), FieldFilter.class);
     }
 
     @Test
@@ -46,9 +50,9 @@ public class IgnoreFactoryTest {
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
 
-        Ignore ignore = IgnoreFactory.getIgnore(null, methodParameter);
-        assertNotNull(ignore);
+        Filter filter = FilterFactory.getIgnore(null, methodParameter);
+        assertNotNull(filter);
 
-        assertEquals(ignore.getClass(), StrategyIgnore.class);
+        assertEquals(filter.getClass(), StrategyFilter.class);
     }
 }

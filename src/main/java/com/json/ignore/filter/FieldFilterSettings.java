@@ -1,4 +1,4 @@
-package com.json.ignore;
+package com.json.ignore.filter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,16 +7,16 @@ import java.lang.annotation.Target;
 
 /**
  *
- * Repeatable annotation of {@link FieldIgnoreSetting} interface
+ * Repeatable annotation of {@link FieldFilterSetting} interface
  */
 
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FieldIgnoreSettings {
+public @interface FieldFilterSettings {
 
     /**
      *
-     * @return array of {@link FieldIgnoreSetting}
+     * @return array of {@link FieldFilterSetting}
      */
-    FieldIgnoreSetting[] value();
+    FieldFilterSetting[] value();
 }

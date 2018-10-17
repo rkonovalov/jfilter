@@ -1,6 +1,6 @@
 package mock;
 
-import com.json.ignore.FieldIgnoreSetting;
+import com.json.ignore.filter.FieldFilterSetting;
 import com.json.ignore.strategy.SessionStrategies;
 import com.json.ignore.strategy.SessionStrategy;
 
@@ -9,14 +9,14 @@ import java.lang.reflect.Method;
 
 public class MockMethods {
 
-    @FieldIgnoreSetting(fields = {"id", "password"})
+    @FieldFilterSetting(fields = {"id", "password"})
     public boolean mockIgnoreSettingsMethod() {
         return false;
     }
 
     @SessionStrategies({
             @SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
-                    @FieldIgnoreSetting(fields = {"id", "password"})
+                    @FieldFilterSetting(fields = {"id", "password"})
             })
     })
     public boolean mockIgnoreStrategiesMethod() {
@@ -26,22 +26,22 @@ public class MockMethods {
 
 
     @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
-            @FieldIgnoreSetting(fields = {"id", "password"})
+            @FieldFilterSetting(fields = {"id", "password"})
     })
     public boolean mockIgnoreStrategyMethod() {
         return false;
     }
 
 
-    @FieldIgnoreSetting(fields = {"id"})
+    @FieldFilterSetting(fields = {"id"})
     public boolean singleAnnotation() {
         return false;
     }
 
-    @FieldIgnoreSetting(className = MockUser.class, fields = {"id", "email", "fullName"})
-    @FieldIgnoreSetting(className = MockUser.class, fields = {"password", "intValue", "collectionValue"})
-    @FieldIgnoreSetting(className = MockUser.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
-    @FieldIgnoreSetting(className = MockUser.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
+    @FieldFilterSetting(className = MockUser.class, fields = {"id", "email", "fullName"})
+    @FieldFilterSetting(className = MockUser.class, fields = {"password", "intValue", "collectionValue"})
+    @FieldFilterSetting(className = MockUser.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
+    @FieldFilterSetting(className = MockUser.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
     public boolean multipleAnnotation() {
         return false;
     }

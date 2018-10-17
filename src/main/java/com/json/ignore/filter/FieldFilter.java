@@ -1,31 +1,28 @@
-package com.json.ignore.strategy;
+package com.json.ignore.filter;
 
 import com.json.ignore.AnnotationUtil;
-import com.json.ignore.FieldIgnoreSetting;
-import com.json.ignore.FieldIgnoreProcessor;
-import com.json.ignore.FieldIgnoreSettings;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 
 /**
- * This class used for simple filtration of object's fields based on FieldIgnoreSetting configuration
+ * This class used for simple filtration of object's fields based on FieldFilterSetting configuration
  */
-public class FieldIgnore extends Ignore {
+public class FieldFilter extends Filter {
 
     /**
-     * Array of {@link FieldIgnoreSetting} configuration annotations
+     * Array of {@link FieldFilterSetting} configuration annotations
      */
-    private FieldIgnoreSetting[] config;
+    private FieldFilterSetting[] config;
 
     /**
      * Constructor
      * @param serverHttpRequest {@link ServerHttpRequest} servlet request
      * @param methodParameter {@link MethodParameter} Rest method of Rest controller
      */
-    public FieldIgnore(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
+    public FieldFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
         super(serverHttpRequest);
         /*
-         * Attempt to retrieve all FieldIgnoreSetting annotations from method
+         * Attempt to retrieve all FieldFilterSetting annotations from method
          */
         config = AnnotationUtil.getSettingAnnotations(methodParameter.getMethod());
     }
@@ -37,16 +34,16 @@ public class FieldIgnore extends Ignore {
      */
     @Override
     public void jsonIgnore(Object object) throws IllegalAccessException {
-        FieldIgnoreProcessor jsonIgnore = new FieldIgnoreProcessor(config);
+        FieldFilterProcessor jsonIgnore = new FieldFilterProcessor(config);
         jsonIgnore.ignoreFields(object);
     }
 
     /**
-     * Used to show that method has {@link FieldIgnoreSetting} or {@link FieldIgnoreSettings} annotations
+     * Used to show that method has {@link FieldFilterSetting} or {@link FieldFilterSettings} annotations
      * @param methodParameter {@link MethodParameter} Rest method of Rest controller
      * @return {@link Boolean} true if annotations found, otherwise false
      */
     public static boolean isAccept(MethodParameter methodParameter) {
-        return AnnotationUtil.isAnnotationExists(methodParameter.getMethod(), FieldIgnoreSetting.class, FieldIgnoreSettings.class);
+        return AnnotationUtil.isAnnotationExists(methodParameter.getMethod(), FieldFilterSetting.class, FieldFilterSettings.class);
     }
 }

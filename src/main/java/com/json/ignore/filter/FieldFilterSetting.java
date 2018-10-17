@@ -1,4 +1,4 @@
-package com.json.ignore;
+package com.json.ignore.filter;
 
 import java.lang.annotation.*;
 
@@ -9,8 +9,8 @@ import java.lang.annotation.*;
 
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Repeatable(value = FieldIgnoreSettings.class )
-public @interface FieldIgnoreSetting {
+@Repeatable(value = FieldFilterSettings.class )
+public @interface FieldFilterSetting {
     /**
      *
      * @return {@link Class} class name of filterable class

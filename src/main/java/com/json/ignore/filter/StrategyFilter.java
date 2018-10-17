@@ -1,7 +1,8 @@
-package com.json.ignore.strategy;
+package com.json.ignore.filter;
 
 import com.json.ignore.AnnotationUtil;
-import com.json.ignore.FieldIgnoreProcessor;
+import com.json.ignore.strategy.SessionStrategies;
+import com.json.ignore.strategy.SessionStrategy;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 
@@ -9,7 +10,7 @@ import org.springframework.http.server.ServerHttpRequest;
  * This class used for strategy filtration of object's fields based on SessionStrategy configuration
  *
  */
-public class StrategyIgnore extends Ignore {
+public class StrategyFilter extends Filter {
     /**
      * Array of {@link SessionStrategy} configuration annotations
      */
@@ -20,11 +21,11 @@ public class StrategyIgnore extends Ignore {
      * @param serverHttpRequest {@link ServerHttpRequest} servlet request
      * @param methodParameter {@link MethodParameter} Rest method of Rest controller
      */
-    public StrategyIgnore(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
+    public StrategyFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
         super(serverHttpRequest);
 
         /*
-         * Attempt to retrieve all FieldIgnoreSetting annotations from method
+         * Attempt to retrieve all FieldFilterSetting annotations from method
          */
         config = AnnotationUtil.getStrategyAnnotations(methodParameter.getMethod());
     }
@@ -45,7 +46,7 @@ public class StrategyIgnore extends Ignore {
                  * and value in session and strategy is equals
                  */
                 if (sessionObject != null && sessionObject.equals(strategy.attributeValue())) {
-                    FieldIgnoreProcessor jsonIgnore = new FieldIgnoreProcessor(strategy.ignoreFields());
+                    FieldFilterProcessor jsonIgnore = new FieldFilterProcessor(strategy.ignoreFields());
                     jsonIgnore.ignoreFields(object);
                 }
             }

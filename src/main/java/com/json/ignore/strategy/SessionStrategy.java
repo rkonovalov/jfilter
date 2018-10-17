@@ -1,6 +1,7 @@
 package com.json.ignore.strategy;
 
-import com.json.ignore.FieldIgnoreSetting;
+import com.json.ignore.filter.FieldFilterSetting;
+
 import java.lang.annotation.*;
 
 /**
@@ -28,7 +29,7 @@ public @interface SessionStrategy {
 
     /**
      *
-     * @return array of {@link FieldIgnoreSetting}  which configures of field filtering
+     * @return array of {@link FieldFilterSetting}  which configures of field filtering
      */
-    FieldIgnoreSetting[] ignoreFields() default {};
+    FieldFilterSetting[] ignoreFields() default {};
 }
