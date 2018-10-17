@@ -2,7 +2,6 @@ package com.json.ignore;
 
 import com.json.ignore.strategy.JsonSessionStrategies;
 import com.json.ignore.strategy.JsonSessionStrategy;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
