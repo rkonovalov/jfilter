@@ -6,10 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="jsonignore" />
+        <module name="json-ignore" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="json-filter" target="1.8" />
       <module name="jsonignore" target="1.8" />
     </bytecodeTargetLevel>
   </component>

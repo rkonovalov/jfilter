@@ -6,23 +6,22 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jsonignore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jsonignore&amp;utm_campaign=Badge_Grade)
 
 # Json ignore module
-Json ignore module for Spring Framework can be used in Spring MVC Rest project for filtering(excluding) of json response.
+Json ignore module for Spring Framework can be used in Spring MVC Rest project for filter(exclude) of fields in json response.
 
 # Getting started
 For using this module need to follow for next steps
 
 ## Importing dependency
-If you are using Maven you need add next dependecy
+If you are using Maven you need add next dependency
 
 ```xml
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
-If you are using another build automation tool, you can find configuration string by this URL:
-https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.2/jar
+* If you are using another build automation tool, you can find configuration string by this link: https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.3/jar
 
 ## ControllerAdvice class example
 For handling response from Rest controller we should to create ControllerAdvice class
@@ -30,28 +29,34 @@ For handling response from Rest controller we should to create ControllerAdvice 
 ```java
 @ControllerAdvice
 public class IgnoreAdvice implements ResponseBodyAdvice<Serializable> {
-    public static final Logger logger = Logger.getLogger(IgnoreAdvice.class);
+    public static final AdvancedLogger logger = AdvancedLogger.getLogger(IgnoreAdvice.class);
 
     @Override
-    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {        
-        return JsonIgnoreFields.annotationFound(methodParameter);
+    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
+        return FilterFactory.isAccept(methodParameter);
     }
 
     @Override
     public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
-                                        Class<? extends HttpMessageConverter<?>> aClass, 
-                                        ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {        
-        JsonIgnoreFields ignoreFields = new JsonIgnoreFields(methodParameter);
-        try {
-            ignoreFields.ignoreFields(obj);
-        } catch (IllegalAccessException e) {
-            if(logger.isEnabledFor(Level.ERROR))
-                logger.error(e);
+                                        Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
+                                        ServerHttpResponse serverHttpResponse) {
+
+        Filter filter = FilterFactory.getIgnore(serverHttpRequest, methodParameter);
+        if(filter != null) {
+            try {
+                filter.jsonIgnore(obj);
+            } catch (IllegalAccessException e) {
+                logger.error(() -> e);
+            }
         }
+
         return obj;
     }
 }
 ```
+### Notes
+* in this example has been used AdvancedLogger for logging instead of Log4J logger, but this is unnecessarily
+* Link to AdvancedLogger https://github.com/rkonovalov/advancedlogger
 
 ## RestController class example
 This example Rest class provides user authentication process. 
@@ -62,7 +67,7 @@ public class SessionService {
     @Autowired
     private UserController userController;   
 
-    @JsonIgnoreSetting(className = User.class, fields = {"password", "secretKey"})
+    @FieldFilterSetting(className = User.class, fields = {"password", "secretKey"})
     @RequestMapping(value = "/users/signIn",
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
@@ -245,7 +250,7 @@ By using JsonIgnoreSetting you can flexible configure of Json response result. Y
 
 ## Filtration(exclusion) of fields on specific class
 ```text
- @JsonIgnoreSetting(className = User.class, fields = {"password", "secretKey"})
+ @FieldFilterSetting(className = User.class, fields = {"password", "secretKey"})
 ```
 Where: className specific class, fields - fields which we need to exclude from response
 ### Result
@@ -268,9 +273,9 @@ Where: className specific class, fields - fields which we need to exclude from r
 
 ## Filtration(exclusion) of fields on subclasses
 ```text
- @JsonIgnoreSetting(className = User.class, fields = {"id", "password", "secretKey"})
- @JsonIgnoreSetting(className = Address.class, fields = {"id", "apartmentNumber"})
- @JsonIgnoreSetting(className = Street.class, fields = {"id", "streetNumber"})
+ @FieldFilterSetting(className = User.class, fields = {"id", "password", "secretKey"})
+ @FieldFilterSetting(className = Address.class, fields = {"id", "apartmentNumber"})
+ @FieldFilterSetting(className = Street.class, fields = {"id", "streetNumber"})
  ...
 ```
 In this example we declared multiple settings. If module finds next classes in response next fields will be excluded:
@@ -290,9 +295,9 @@ In this example we declared multiple settings. If module finds next classes in r
 }
 ```
 
-## Filtration(exclusion) of fields on whole object
+## Filter of fields on whole object
 ```text
- @JsonIgnoreSetting(fields = {"id"})
+ @FieldFilterSetting(fields = {"id"})
  ...
 ```
 If you need to exclude some fields in class and subclasses, you shouldn't specify className parameter
@@ -312,7 +317,50 @@ If you need to exclude some fields in class and subclasses, you shouldn't specif
   }
 }
 ```
+## Session strategy filtering
+Sometimes you need to use different filtration at same response. As example: user can have different previlegies like: USER, ADMIN...
+And for admin you can provide system critical fields. Next example shows how can do it
+
+```java
+@RestController
+public class SessionService {
+    @Autowired
+    private UserController userController;   
+
+
+    //Check if session has attribute ROLE with value USER
+    @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
+            @FieldFilterSetting(fields = {"id", "password"})
+    })
+
+    //Check if session has attribute ROLE with value ADMIN
+    @SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
+            @FieldFilterSetting(className = Customer.class, fields = {"id", "email"})
+    })
+    
+    @JsonIgnoreSetting(className = User.class, fields = {"password", "secretKey"})
+    @RequestMapping(value = "/users/signIn",
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})            
+    public User signIn(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return userController.signInUser(email, password);
+    }
+}
+```
+As you can see we have added two session strategies. How it works?
+* Filter algorith attempts to find in session attributes attribute with name "ROLE"
+* If attribute found, then algorithm compares session attribute value with "USER"
+* If strings is equal, then algorithm attempts to filter fields specified in ignoreFields
+
+So you can specify different filtering strategies depending of attributes in session
+
+
 # Release notes
+
+## Version 1.0.3
+Added session strategy filtering
+
 ## Version 1.0.2
 Added additional constructors
 
