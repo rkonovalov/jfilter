@@ -69,15 +69,11 @@ public class JsonIgnoreFields {
     }
 
     @SuppressWarnings("unchecked")
-    private void process(Map map) throws RuntimeException {
-        map.forEach((k, v) -> {
-            try {
-                ignoreFields(k);
-                ignoreFields(v);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    private void process(Map map) throws IllegalAccessException {
+        for(Object k : map.keySet()) {
+            ignoreFields(k);
+            ignoreFields(map.get(k));
+        }
     }
 
     private void process(Collection items) throws IllegalAccessException {
@@ -126,7 +122,6 @@ public class JsonIgnoreFields {
             default:
                 field.set(object, null);
         }
-
     }
 
     private boolean fieldAcceptable(Field field) {
