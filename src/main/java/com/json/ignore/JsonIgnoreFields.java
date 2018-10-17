@@ -61,7 +61,7 @@ public class JsonIgnoreFields {
 
     private boolean fieldHasGetter(Field field, Class clazz) {
         for (Method method : clazz.getDeclaredMethods()) {
-            if (method.getName().toLowerCase().equals("get" + field.getName().toLowerCase())) {
+            if (method.getName().equalsIgnoreCase("get" + field.getName())) {
                 return true;
             }
         }
@@ -85,8 +85,7 @@ public class JsonIgnoreFields {
         for (Class cl : ignore.keySet()) {
             List<String> items = ignore.get(cl);
             if (items.contains(field.getName())) {
-                if (clazz.equals(cl) || void.class.equals(cl))
-                    return true;
+                return (clazz.equals(cl) || void.class.equals(cl));
             }
         }
         return false;
@@ -121,6 +120,7 @@ public class JsonIgnoreFields {
                 break;
             default:
                 field.set(object, null);
+                break;
         }
     }
 
