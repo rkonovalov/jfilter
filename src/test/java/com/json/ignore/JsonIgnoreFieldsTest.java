@@ -13,7 +13,6 @@ import java.lang.reflect.Method;
 import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 public class JsonIgnoreFieldsTest {
     private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\"," +

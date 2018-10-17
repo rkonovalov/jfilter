@@ -1,16 +1,12 @@
 package com.json.ignore.strategy;
 
-import com.json.ignore.JsonIgnoreSetting;
 import mock.MockMethods;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
-
 import java.lang.reflect.Method;
-
 import static org.junit.Assert.*;
 
 public class JsonIgnoreFactoryTest {
-
 
     @Test
     public void testIgnoreSettingMethod() {
@@ -55,6 +51,4 @@ public class JsonIgnoreFactoryTest {
 
         assertEquals(ignore.getClass(), StrategyIgnore.class);
     }
-
-
 }
