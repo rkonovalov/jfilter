@@ -55,7 +55,7 @@ public class AnnotationUtilTest {
 
     @Test
     public void testGetStrategiesAnnotations() {
-        Method method = MockMethods.findMethodByName("mockIgnoreStrategyMethod");
+        Method method = MockMethods.findMethodByName("mockIgnoreStrategiesMethod");
         assertNotNull(method);
 
         JsonSessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(method);
