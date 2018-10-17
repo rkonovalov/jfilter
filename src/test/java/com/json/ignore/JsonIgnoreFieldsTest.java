@@ -85,9 +85,9 @@ public class JsonIgnoreFieldsTest {
         Method[] methods = this.getClass().getDeclaredMethods();
 
         for (Method method : methods) {
-            if (method.getName().equals(methodName))
-                if (method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null ||
-                        method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null)
+                if (method.getName().equals(methodName) &&
+                        (method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null ||
+                        method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null))
                     return method;
         }
         return null;
