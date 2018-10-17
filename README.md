@@ -337,8 +337,7 @@ public class SessionService {
     @SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
             @FieldFilterSetting(className = Customer.class, fields = {"id", "email"})
     })
-    
-    @JsonIgnoreSetting(className = User.class, fields = {"password", "secretKey"})
+  
     @RequestMapping(value = "/users/signIn",
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
