@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/rkonovalov/jsonignore.svg?branch=master)](https://travis-ci.org/rkonovalov/jsonignore)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/json-filter/badge.svg?style=blue)](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/json-filter/)
-[![Javadocs](http://www.javadoc.io/badge/com.github.rkonovalov/json-filter.svg)](http://www.javadoc.io/doc/com.github.rkonovalov/json-filter)
+[![Javadocs](http://www.javadoc.io/badge/com.github.rkonovalov/jsonignore.svg)](http://www.javadoc.io/doc/com.github.rkonovalov/jsonignore)
 [![codecov](https://codecov.io/gh/rkonovalov/jsonignore/branch/master/graph/badge.svg)](https://codecov.io/gh/rkonovalov/jsonignore)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jsonignore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jsonignore&amp;utm_campaign=Badge_Grade)
 
@@ -33,16 +33,14 @@ public class IgnoreAdvice implements ResponseBodyAdvice<Serializable> {
     public static final Logger logger = Logger.getLogger(IgnoreAdvice.class);
 
     @Override
-    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        FieldIgnoreSetting
+    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {        
         return JsonIgnoreFields.annotationFound(methodParameter);
     }
 
     @Override
     public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
                                         Class<? extends HttpMessageConverter<?>> aClass, 
-                                        ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        FieldIgnoreSetting
+                                        ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {        
         JsonIgnoreFields ignoreFields = new JsonIgnoreFields(methodParameter);
         try {
             ignoreFields.ignoreFields(obj);
