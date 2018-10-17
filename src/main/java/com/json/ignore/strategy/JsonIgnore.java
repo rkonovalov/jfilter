@@ -1,9 +1,7 @@
 package com.json.ignore.strategy;
 
-import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
-
 import javax.servlet.http.HttpSession;
 
 public abstract class JsonIgnore {
