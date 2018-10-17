@@ -95,12 +95,12 @@ public class JsonIgnoreFieldsTest {
 
     @Test
     public void testJsonIgnoreFieldsExists() {
-        Assert.notNull(jsonIgnoreFields);
+        assertNotNull(jsonIgnoreFields);
     }
 
     @Test
     public void testMapperExists() {
-        Assert.notNull(mapper);
+        assertNotNull(mapper);
     }
 
     @Test
