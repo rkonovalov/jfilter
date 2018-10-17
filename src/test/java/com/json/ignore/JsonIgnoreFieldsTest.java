@@ -69,7 +69,7 @@ public class JsonIgnoreFieldsTest {
     }
 
     @JsonIgnoreSetting(fields = {"id"})
-    private void singleAnnotation() {
+    public void singleAnnotation() {
 
     }
 
@@ -77,7 +77,7 @@ public class JsonIgnoreFieldsTest {
     @JsonIgnoreSetting(className = UserMock.class, fields = {"password", "intValue", "collectionValue"})
     @JsonIgnoreSetting(className = UserMock.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
     @JsonIgnoreSetting(className = UserMock.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
-    private void multipleAnnotation() {
+    public void multipleAnnotation() {
 
     }
 

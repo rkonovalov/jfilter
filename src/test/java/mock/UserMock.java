@@ -21,9 +21,6 @@ public class UserMock implements Serializable {
     private long longValue;
     private short shortValue;
 
-    public UserMock() {
-    }
-
     public Integer getId() {
         return id;
     }
