@@ -1,6 +1,6 @@
 package com.json.ignore;
 
-import com.json.ignore.strategy.JsonSessionStrategy;
+import com.json.ignore.strategy.SessionStrategy;
 import mock.MockMethods;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -13,7 +13,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("multipleAnnotation");
         assertNotNull(method);
 
-        JsonIgnoreSetting[] annotations = AnnotationUtil.getDeclaredAnnotations(method, JsonIgnoreSetting.class);
+        FieldIgnoreSetting[] annotations = AnnotationUtil.getDeclaredAnnotations(method, FieldIgnoreSetting.class);
         assertTrue(annotations.length > 0);
     }
 
@@ -22,7 +22,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("mockIgnoreSettingsMethod");
         assertNotNull(method);
 
-        JsonIgnoreSetting annotation = AnnotationUtil.getDeclaredAnnotation(method, JsonIgnoreSetting.class);
+        FieldIgnoreSetting annotation = AnnotationUtil.getDeclaredAnnotation(method, FieldIgnoreSetting.class);
         assertNotNull(annotation);
     }
 
@@ -31,7 +31,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("mockIgnoreSettingsMethod");
         assertNotNull(method);
 
-        boolean result = AnnotationUtil.isAnnotationExists(method, JsonIgnoreSetting.class);
+        boolean result = AnnotationUtil.isAnnotationExists(method, FieldIgnoreSetting.class);
         assertTrue(result);
     }
 
@@ -40,7 +40,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("multipleAnnotation");
         assertNotNull(method);
 
-        JsonIgnoreSetting[] annotations = AnnotationUtil.getSettingAnnotations(method);
+        FieldIgnoreSetting[] annotations = AnnotationUtil.getSettingAnnotations(method);
         assertTrue(annotations.length > 0);
     }
 
@@ -49,7 +49,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("mockIgnoreStrategiesMethod");
         assertNotNull(method);
 
-        JsonSessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(method);
+        SessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(method);
         assertTrue(annotations.length > 0);
     }
 
@@ -58,7 +58,7 @@ public class AnnotationUtilTest {
         Method method = MockMethods.findMethodByName("mockIgnoreStrategiesMethod");
         assertNotNull(method);
 
-        JsonSessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(method);
+        SessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(method);
         assertTrue(annotations.length > 0);
     }
 

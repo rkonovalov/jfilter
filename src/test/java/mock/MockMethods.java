@@ -1,22 +1,22 @@
 package mock;
 
-import com.json.ignore.JsonIgnoreSetting;
-import com.json.ignore.strategy.JsonSessionStrategies;
-import com.json.ignore.strategy.JsonSessionStrategy;
+import com.json.ignore.FieldIgnoreSetting;
+import com.json.ignore.strategy.SessionStrategies;
+import com.json.ignore.strategy.SessionStrategy;
 
 import java.lang.reflect.Method;
 
 
 public class MockMethods {
 
-    @JsonIgnoreSetting(fields = {"id", "password"})
+    @FieldIgnoreSetting(fields = {"id", "password"})
     public boolean mockIgnoreSettingsMethod() {
         return false;
     }
 
-    @JsonSessionStrategies({
-            @JsonSessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
-                    @JsonIgnoreSetting(fields = {"id", "password"})
+    @SessionStrategies({
+            @SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
+                    @FieldIgnoreSetting(fields = {"id", "password"})
             })
     })
     public boolean mockIgnoreStrategiesMethod() {
@@ -25,23 +25,23 @@ public class MockMethods {
 
 
 
-    @JsonSessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
-            @JsonIgnoreSetting(fields = {"id", "password"})
+    @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
+            @FieldIgnoreSetting(fields = {"id", "password"})
     })
     public boolean mockIgnoreStrategyMethod() {
         return false;
     }
 
 
-    @JsonIgnoreSetting(fields = {"id"})
+    @FieldIgnoreSetting(fields = {"id"})
     public boolean singleAnnotation() {
         return false;
     }
 
-    @JsonIgnoreSetting(className = MockUser.class, fields = {"id", "email", "fullName"})
-    @JsonIgnoreSetting(className = MockUser.class, fields = {"password", "intValue", "collectionValue"})
-    @JsonIgnoreSetting(className = MockUser.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
-    @JsonIgnoreSetting(className = MockUser.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
+    @FieldIgnoreSetting(className = MockUser.class, fields = {"id", "email", "fullName"})
+    @FieldIgnoreSetting(className = MockUser.class, fields = {"password", "intValue", "collectionValue"})
+    @FieldIgnoreSetting(className = MockUser.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
+    @FieldIgnoreSetting(className = MockUser.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
     public boolean multipleAnnotation() {
         return false;
     }

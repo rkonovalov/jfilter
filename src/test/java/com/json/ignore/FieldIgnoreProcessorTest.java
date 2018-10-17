@@ -14,7 +14,7 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class JsonIgnoreFieldsTest {
+public class FieldIgnoreProcessorTest {
     private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\"," +
             "\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"}," +
             "\"boolValue\":true,\"byteValue\":100,\"charValue\":\"c\",\"doubleValue\":5.5,\"floatValue\":5.5,\"longValue\":100500,\"shortValue\":15}";
@@ -30,19 +30,19 @@ public class JsonIgnoreFieldsTest {
             "mapValue", "boolValue", "byteValue", "charValue", "doubleValue", "floatValue", "longValue", "shortValue");
 
     private ObjectMapper mapper;
-    private JsonIgnoreFields jsonIgnoreFields;
+    private FieldIgnoreProcessor fieldIgnoreProcessor;
 
 
     @Before
     public void init() {
         mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        jsonIgnoreFields = new JsonIgnoreFields();
+        fieldIgnoreProcessor = new FieldIgnoreProcessor();
     }
 
     @Test
     public void testJsonIgnoreFieldsExists() {
-        assertNotNull(jsonIgnoreFields);
+        assertNotNull(fieldIgnoreProcessor);
     }
 
     @Test
@@ -60,8 +60,8 @@ public class JsonIgnoreFieldsTest {
     @Test
     public void testUserIgnoreId() throws JsonProcessingException, IllegalAccessException {
         MockUser user = MockClasses.getUserMock();
-        jsonIgnoreFields = new JsonIgnoreFields(MockUser.class, LIST_ID);
-        jsonIgnoreFields.ignoreFields(user);
+        fieldIgnoreProcessor = new FieldIgnoreProcessor(MockUser.class, LIST_ID);
+        fieldIgnoreProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_WITHOUT_ID, strUser);
     }
@@ -71,8 +71,8 @@ public class JsonIgnoreFieldsTest {
         MockUser user = MockClasses.getUserMock();
         Map<Class, List<String>> ignores = new HashMap<>();
         ignores.put(MockUser.class, LIST_ALL);
-        jsonIgnoreFields = new JsonIgnoreFields(ignores);
-        jsonIgnoreFields.ignoreFields(user);
+        fieldIgnoreProcessor = new FieldIgnoreProcessor(ignores);
+        fieldIgnoreProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_EMPTY, strUser);
     }
@@ -83,8 +83,8 @@ public class JsonIgnoreFieldsTest {
         assertNotNull(method);
 
         MockUser user = MockClasses.getUserMock();
-        jsonIgnoreFields = new JsonIgnoreFields(method);
-        jsonIgnoreFields.ignoreFields(user);
+        fieldIgnoreProcessor = new FieldIgnoreProcessor(method);
+        fieldIgnoreProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_WITHOUT_ID, (strUser));
     }
@@ -95,8 +95,8 @@ public class JsonIgnoreFieldsTest {
         assertNotNull(method);
 
         MockUser user = MockClasses.getUserMock();
-        jsonIgnoreFields = new JsonIgnoreFields(method);
-        jsonIgnoreFields.ignoreFields(user);
+        fieldIgnoreProcessor = new FieldIgnoreProcessor(method);
+        fieldIgnoreProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_EMPTY, (strUser));
     }
@@ -108,8 +108,8 @@ public class JsonIgnoreFieldsTest {
 
         MockUser user = MockClasses.getUserMock();
         MethodParameter methodParameter = new MethodParameter(method, 0);
-        jsonIgnoreFields = new JsonIgnoreFields(methodParameter);
-        jsonIgnoreFields.ignoreFields(user);
+        fieldIgnoreProcessor = new FieldIgnoreProcessor(methodParameter);
+        fieldIgnoreProcessor.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
 
         assertEquals(USER_WITHOUT_ID, (strUser));

@@ -34,7 +34,7 @@ public class IgnoreAdvice implements ResponseBodyAdvice<Serializable> {
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        //Check if JsonIgnoreSetting annotation exists in method
+        FieldIgnoreSetting
         return JsonIgnoreFields.annotationFound(methodParameter);
     }
 
@@ -42,7 +42,7 @@ public class IgnoreAdvice implements ResponseBodyAdvice<Serializable> {
     public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
                                         Class<? extends HttpMessageConverter<?>> aClass, 
                                         ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        //Parse JsonIgnoreSetting annotation in string and try to filter(exclude) fields of Json response                               
+        FieldIgnoreSetting
         JsonIgnoreFields ignoreFields = new JsonIgnoreFields(methodParameter);
         try {
             ignoreFields.ignoreFields(obj);

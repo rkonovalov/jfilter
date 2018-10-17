@@ -1,7 +1,7 @@
 package com.json.ignore;
 
-import com.json.ignore.strategy.JsonSessionStrategies;
-import com.json.ignore.strategy.JsonSessionStrategy;
+import com.json.ignore.strategy.SessionStrategies;
+import com.json.ignore.strategy.SessionStrategy;
 import java.lang.reflect.Method;
 
 public class AnnotationUtil {
@@ -24,19 +24,19 @@ public class AnnotationUtil {
         return false;
     }
 
-    public static JsonIgnoreSetting[] getSettingAnnotations(Method method) {
-        JsonIgnoreSettings settings = AnnotationUtil.getDeclaredAnnotation(method, JsonIgnoreSettings.class);
+    public static FieldIgnoreSetting[] getSettingAnnotations(Method method) {
+        FieldIgnoreSettings settings = AnnotationUtil.getDeclaredAnnotation(method, FieldIgnoreSettings.class);
         if (settings != null) {
             return  settings.value();
         } else
-            return AnnotationUtil.getDeclaredAnnotations(method, JsonIgnoreSetting.class);
+            return AnnotationUtil.getDeclaredAnnotations(method, FieldIgnoreSetting.class);
     }
 
-    public static JsonSessionStrategy[] getStrategyAnnotations(Method method) {
-        JsonSessionStrategies strategies = AnnotationUtil.getDeclaredAnnotation(method, JsonSessionStrategies.class);
+    public static SessionStrategy[] getStrategyAnnotations(Method method) {
+        SessionStrategies strategies = AnnotationUtil.getDeclaredAnnotation(method, SessionStrategies.class);
         if(strategies != null) {
             return strategies.value();
         } else
-            return  AnnotationUtil.getDeclaredAnnotation(method, JsonSessionStrategy.class);
+            return  AnnotationUtil.getDeclaredAnnotation(method, SessionStrategy.class);
     }
 }

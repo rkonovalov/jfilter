@@ -4,10 +4,10 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
 import javax.servlet.http.HttpSession;
 
-public abstract class JsonIgnore {
+public abstract class Ignore {
     private HttpSession session;
 
-    public JsonIgnore(ServerHttpRequest serverHttpRequest) {
+    public Ignore(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
             this.session = servletRequest.getServletRequest().getSession();

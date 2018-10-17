@@ -4,8 +4,8 @@ import java.lang.annotation.*;
 
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Repeatable(value = JsonIgnoreSettings.class )
-public @interface JsonIgnoreSetting {
+@Repeatable(value = FieldIgnoreSettings.class )
+public @interface FieldIgnoreSetting {
     Class className() default void.class;
     String[] fields() default {};
 }

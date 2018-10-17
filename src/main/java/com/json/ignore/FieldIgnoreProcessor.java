@@ -6,35 +6,35 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 
-public class JsonIgnoreFields {
+public class FieldIgnoreProcessor {
     private static final List<String> ignoredNames = Arrays.asList("CASE_INSENSITIVE_ORDER", "LOGGER");
 
     private Map<Class, List<String>> ignore;
     private List<String> fieldNames;
 
-    public JsonIgnoreFields() {
+    public FieldIgnoreProcessor() {
         this.fieldNames = new ArrayList<>();
     }
 
-    public JsonIgnoreFields(Map<Class, List<String>> ignore) {
+    public FieldIgnoreProcessor(Map<Class, List<String>> ignore) {
         this();
         this.ignore = ignore;
     }
 
-    public JsonIgnoreFields(MethodParameter methodParameter) {
+    public FieldIgnoreProcessor(MethodParameter methodParameter) {
         this(getAnnotations(methodParameter.getMethod()));
     }
 
-    public JsonIgnoreFields(List<JsonIgnoreSetting> annotations) {
+    public FieldIgnoreProcessor(List<FieldIgnoreSetting> annotations) {
         this();
         this.ignore = parseSettingAnnotation(annotations);
     }
 
-    public JsonIgnoreFields(Method method) {
+    public FieldIgnoreProcessor(Method method) {
         this(getAnnotations(method));
     }
 
-    public JsonIgnoreFields(Class clazz, List<String> ignoreFields) {
+    public FieldIgnoreProcessor(Class clazz, List<String> ignoreFields) {
         this();
         this.ignore = new HashMap<>();
         this.ignore.put(clazz, ignoreFields);
@@ -133,10 +133,10 @@ public class JsonIgnoreFields {
         }
     }
 
-    private Map<Class, List<String>> parseSettingAnnotation(List<JsonIgnoreSetting> settings) {
+    private Map<Class, List<String>> parseSettingAnnotation(List<FieldIgnoreSetting> settings) {
         Map<Class, List<String>> items = new HashMap<>();
         if (settings != null)
-            for (JsonIgnoreSetting setting : settings) {
+            for (FieldIgnoreSetting setting : settings) {
                 List<String> fields = new ArrayList<>(Arrays.asList(setting.fields()));
                 fieldNames.addAll(fields);
                 if (items.containsKey(setting.className())) {
@@ -150,7 +150,7 @@ public class JsonIgnoreFields {
         return items;
     }
 
-    private static List<JsonIgnoreSetting> getAnnotations(Method method) {
+    private static List<FieldIgnoreSetting> getAnnotations(Method method) {
         return Arrays.asList(AnnotationUtil.getSettingAnnotations(method));
     }
 

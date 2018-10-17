@@ -6,7 +6,7 @@ import org.springframework.core.MethodParameter;
 import java.lang.reflect.Method;
 import static org.junit.Assert.*;
 
-public class JsonIgnoreFactoryTest {
+public class IgnoreFactoryTest {
 
     @Test
     public void testIgnoreSettingMethod() {
@@ -14,7 +14,7 @@ public class JsonIgnoreFactoryTest {
         assertNotNull(method);
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
-        assertTrue(JsonIgnoreFactory.isAccept(methodParameter));
+        assertTrue(IgnoreFactory.isAccept(methodParameter));
     }
 
     @Test
@@ -23,7 +23,7 @@ public class JsonIgnoreFactoryTest {
         assertNotNull(method);
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
-        assertTrue(JsonIgnoreFactory.isAccept(methodParameter));
+        assertTrue(IgnoreFactory.isAccept(methodParameter));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class JsonIgnoreFactoryTest {
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
 
-        JsonIgnore ignore = JsonIgnoreFactory.getIgnore(null, methodParameter);
+        Ignore ignore = IgnoreFactory.getIgnore(null, methodParameter);
         assertNotNull(ignore);
 
         assertEquals(ignore.getClass(), FieldIgnore.class);
@@ -46,7 +46,7 @@ public class JsonIgnoreFactoryTest {
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
 
-        JsonIgnore ignore = JsonIgnoreFactory.getIgnore(null, methodParameter);
+        Ignore ignore = IgnoreFactory.getIgnore(null, methodParameter);
         assertNotNull(ignore);
 
         assertEquals(ignore.getClass(), StrategyIgnore.class);
