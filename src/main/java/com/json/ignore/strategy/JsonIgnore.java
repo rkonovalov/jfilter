@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 public abstract class JsonIgnore {
     private HttpSession session;
 
-    public JsonIgnore(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
+    public JsonIgnore(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
             this.session = servletRequest.getServletRequest().getSession();

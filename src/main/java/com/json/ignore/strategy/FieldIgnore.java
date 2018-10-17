@@ -13,7 +13,7 @@ public class FieldIgnore extends JsonIgnore {
     private JsonIgnoreSetting[] setting;
 
     public FieldIgnore(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
-        super(serverHttpRequest, methodParameter);
+        super(serverHttpRequest);
         setting = AnnotationUtil.getSettingAnnotations(methodParameter.getMethod());
     }
 

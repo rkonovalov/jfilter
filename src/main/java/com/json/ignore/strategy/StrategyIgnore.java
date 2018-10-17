@@ -11,7 +11,7 @@ public class StrategyIgnore extends JsonIgnore {
     private JsonSessionStrategy[] jsonStrategies;
 
     public StrategyIgnore(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
-        super(serverHttpRequest, methodParameter);
+        super(serverHttpRequest);
         jsonStrategies = AnnotationUtil.getStrategyAnnotations(methodParameter.getMethod());
     }
 
