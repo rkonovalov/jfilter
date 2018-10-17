@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.rkonovalov</groupId>
-    <artifactId>json-filter</artifactId>
+    <artifactId>json-ignore</artifactId>
     <version>1.0.2</version>
     <packaging>jar</packaging>
 
@@ -58,7 +58,6 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-
 
         <dependency>
             <groupId>junit</groupId>
