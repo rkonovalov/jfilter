@@ -2,14 +2,9 @@ package com.json.ignore;
 
 import com.json.ignore.strategy.JsonSessionStrategies;
 import com.json.ignore.strategy.JsonSessionStrategy;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class AnnotationUtil {
-
-    public static Annotation[] getDeclaredAnnotation(Class clazz, Class annotationClass) {
-        return clazz.getDeclaredAnnotationsByType(annotationClass);
-    }
 
     @SuppressWarnings("unchecked")
     public static <T> T[] getDeclaredAnnotations(Method method, Class annotationClass) {

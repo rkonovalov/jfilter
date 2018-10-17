@@ -3,11 +3,7 @@ package com.json.ignore;
 import com.json.ignore.strategy.JsonSessionStrategy;
 import mock.MockMethods;
 import org.junit.Test;
-
-import static com.json.ignore.AnnotationUtil.getDeclaredAnnotations;
 import static org.junit.Assert.*;
-
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class AnnotationUtilTest {
