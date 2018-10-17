@@ -10,5 +10,8 @@
         <module name="jsonignore" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jsonignore" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
-public class UserMock implements Serializable {
+public class MockUser implements Serializable {
     private Integer id;
     private String email;
     private String fullName;
@@ -25,7 +25,7 @@ public class UserMock implements Serializable {
         return id;
     }
 
-    public UserMock setId(Integer id) {
+    public MockUser setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -34,7 +34,7 @@ public class UserMock implements Serializable {
         return email;
     }
 
-    public UserMock setEmail(String email) {
+    public MockUser setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -43,7 +43,7 @@ public class UserMock implements Serializable {
         return fullName;
     }
 
-    public UserMock setFullName(String fullName) {
+    public MockUser setFullName(String fullName) {
         this.fullName = fullName;
         return this;
     }
@@ -52,7 +52,7 @@ public class UserMock implements Serializable {
         return password;
     }
 
-    public UserMock setPassword(String password) {
+    public MockUser setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -61,7 +61,7 @@ public class UserMock implements Serializable {
         return intValue;
     }
 
-    public UserMock setIntValue(int intValue) {
+    public MockUser setIntValue(int intValue) {
         this.intValue = intValue;
         return this;
     }
@@ -70,7 +70,7 @@ public class UserMock implements Serializable {
         return collectionValue;
     }
 
-    public UserMock setCollectionValue(Collection<String> collectionValue) {
+    public MockUser setCollectionValue(Collection<String> collectionValue) {
         this.collectionValue = collectionValue;
         return this;
     }
@@ -79,7 +79,7 @@ public class UserMock implements Serializable {
         return mapValue;
     }
 
-    public UserMock setMapValue(Map<String, String> mapValue) {
+    public MockUser setMapValue(Map<String, String> mapValue) {
         this.mapValue = mapValue;
         return this;
     }
@@ -88,7 +88,7 @@ public class UserMock implements Serializable {
         return boolValue;
     }
 
-    public UserMock setBoolValue(boolean boolValue) {
+    public MockUser setBoolValue(boolean boolValue) {
         this.boolValue = boolValue;
         return this;
     }
@@ -97,7 +97,7 @@ public class UserMock implements Serializable {
         return byteValue;
     }
 
-    public UserMock setByteValue(byte byteValue) {
+    public MockUser setByteValue(byte byteValue) {
         this.byteValue = byteValue;
         return this;
     }
@@ -106,7 +106,7 @@ public class UserMock implements Serializable {
         return charValue;
     }
 
-    public UserMock setCharValue(char charValue) {
+    public MockUser setCharValue(char charValue) {
         this.charValue = charValue;
         return this;
     }
@@ -115,7 +115,7 @@ public class UserMock implements Serializable {
         return doubleValue;
     }
 
-    public UserMock setDoubleValue(double doubleValue) {
+    public MockUser setDoubleValue(double doubleValue) {
         this.doubleValue = doubleValue;
         return this;
     }
@@ -124,7 +124,7 @@ public class UserMock implements Serializable {
         return floatValue;
     }
 
-    public UserMock setFloatValue(float floatValue) {
+    public MockUser setFloatValue(float floatValue) {
         this.floatValue = floatValue;
         return this;
     }
@@ -133,7 +133,7 @@ public class UserMock implements Serializable {
         return longValue;
     }
 
-    public UserMock setLongValue(long longValue) {
+    public MockUser setLongValue(long longValue) {
         this.longValue = longValue;
         return this;
     }
@@ -142,7 +142,7 @@ public class UserMock implements Serializable {
         return shortValue;
     }
 
-    public UserMock setShortValue(short shortValue) {
+    public MockUser setShortValue(short shortValue) {
         this.shortValue = shortValue;
         return this;
     }

@@ -169,26 +169,8 @@ public class JsonIgnoreFields {
         return items;
     }
 
-    public static boolean annotationFound(MethodParameter methodParameter) {
-        Method method = methodParameter.getMethod();
-        return method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null ||
-                method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null;
-    }
-
     private static List<JsonIgnoreSetting> getAnnotations(Method method) {
-        List<JsonIgnoreSetting> annotations = new ArrayList<>();
-
-        if (method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null) {
-            JsonIgnoreSettings ignoreSettings = method.getDeclaredAnnotation(JsonIgnoreSettings.class);
-            annotations.addAll(new ArrayList<>(Arrays.asList(ignoreSettings.value())));
-        }
-
-        if (method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null) {
-            JsonIgnoreSetting ignoreSetting = method.getDeclaredAnnotation(JsonIgnoreSetting.class);
-            annotations.add(ignoreSetting);
-        }
-
-        return annotations;
+        return Arrays.asList(AnnotationUtil.getSettingAnnotations(method));
     }
 
 }

@@ -3,7 +3,9 @@ package com.json.ignore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mock.UserMock;
+import mock.MockClasses;
+import mock.MockMethods;
+import mock.MockUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
@@ -39,57 +41,6 @@ public class JsonIgnoreFieldsTest {
         jsonIgnoreFields = new JsonIgnoreFields();
     }
 
-    private UserMock getUserMock() {
-        UserMock userMock = new UserMock();
-
-        Map<String, String> values = new HashMap<>();
-        values.put("name", "value");
-
-        List<String> collection = new ArrayList<>(Arrays.asList("Hello", "World"));
-
-        userMock.setId(100)
-                .setEmail("mail@mail.com")
-                .setFullName("Jane Doe")
-                .setPassword("1234567")
-                .setId(100)
-                .setCollectionValue(collection)
-                .setMapValue(values)
-                .setBoolValue(true)
-                .setByteValue((byte) 100)
-                .setCharValue('c')
-                .setDoubleValue(5.5)
-                .setFloatValue(5.5f)
-                .setLongValue(100500)
-                .setShortValue((short) 15);
-
-        return userMock;
-    }
-
-    @JsonIgnoreSetting(fields = {"id"})
-    public boolean singleAnnotation() {
-        return false;
-    }
-
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"id", "email", "fullName"})
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"password", "intValue", "collectionValue"})
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
-    @JsonIgnoreSetting(className = UserMock.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
-    public boolean multipleAnnotation() {
-        return false;
-    }
-
-    private Method findDeclaredMethod(String methodName) {
-        Method[] methods = this.getClass().getDeclaredMethods();
-
-        for (Method method : methods) {
-                if (method.getName().equals(methodName) &&
-                        (method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null ||
-                        method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null))
-                    return method;
-        }
-        return null;
-    }
-
     @Test
     public void testJsonIgnoreFieldsExists() {
         assertNotNull(jsonIgnoreFields);
@@ -102,15 +53,15 @@ public class JsonIgnoreFieldsTest {
 
     @Test
     public void testUserSerialization() throws JsonProcessingException {
-        UserMock user = getUserMock();
+        MockUser user = MockClasses.getUserMock();
         String strUser = mapper.writeValueAsString(user);
         assertEquals(SERIALIZED_USER, strUser);
     }
 
     @Test
     public void testUserIgnoreId() throws JsonProcessingException, IllegalAccessException {
-        UserMock user = getUserMock();
-        jsonIgnoreFields = new JsonIgnoreFields(UserMock.class, LIST_ID);
+        MockUser user = MockClasses.getUserMock();
+        jsonIgnoreFields = new JsonIgnoreFields(MockUser.class, LIST_ID);
         jsonIgnoreFields.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_WITHOUT_ID, strUser);
@@ -118,9 +69,9 @@ public class JsonIgnoreFieldsTest {
 
     @Test
     public void testConstructorMap() throws JsonProcessingException, IllegalAccessException {
-        UserMock user = getUserMock();
+        MockUser user = MockClasses.getUserMock();
         Map<Class, List<String>> ignores = new HashMap<>();
-        ignores.put(UserMock.class, LIST_ALL);
+        ignores.put(MockUser.class, LIST_ALL);
         jsonIgnoreFields = new JsonIgnoreFields(ignores);
         jsonIgnoreFields.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
@@ -129,10 +80,10 @@ public class JsonIgnoreFieldsTest {
 
     @Test
     public void testSingleAnnotationMethod() throws JsonProcessingException, IllegalAccessException {
-        Method method = findDeclaredMethod("singleAnnotation");
+        Method method = MockMethods.findMethodByName("singleAnnotation");
         assertNotNull(method);
 
-        UserMock user = getUserMock();
+        MockUser user = MockClasses.getUserMock();
         jsonIgnoreFields = new JsonIgnoreFields(method);
         jsonIgnoreFields.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
@@ -141,10 +92,10 @@ public class JsonIgnoreFieldsTest {
 
     @Test
     public void testMultipleAnnotationMethod() throws JsonProcessingException, IllegalAccessException {
-        Method method = findDeclaredMethod("multipleAnnotation");
+        Method method = MockMethods.findMethodByName("multipleAnnotation");
         assertNotNull(method);
 
-        UserMock user = getUserMock();
+        MockUser user = MockClasses.getUserMock();
         jsonIgnoreFields = new JsonIgnoreFields(method);
         jsonIgnoreFields.ignoreFields(user);
         String strUser = mapper.writeValueAsString(user);
@@ -153,10 +104,10 @@ public class JsonIgnoreFieldsTest {
 
     @Test
     public void testByMethodParameter() throws JsonProcessingException, IllegalAccessException {
-        Method method = findDeclaredMethod("singleAnnotation");
+        Method method = MockMethods.findMethodByName("singleAnnotation");
         assertNotNull(method);
 
-        UserMock user = getUserMock();
+        MockUser user = MockClasses.getUserMock();
         MethodParameter methodParameter = new MethodParameter(method, 0);
         jsonIgnoreFields = new JsonIgnoreFields(methodParameter);
         jsonIgnoreFields.ignoreFields(user);
@@ -164,17 +115,4 @@ public class JsonIgnoreFieldsTest {
 
         assertEquals(USER_WITHOUT_ID, (strUser));
     }
-
-    @Test
-    public void testAnnotationFound() {
-        Method method = findDeclaredMethod("singleAnnotation");
-        assertNotNull(method);
-
-        MethodParameter methodParameter = new MethodParameter(method, 0);
-        boolean result = JsonIgnoreFields.annotationFound(methodParameter);
-
-        assertTrue(result);
-    }
-
-
 }
