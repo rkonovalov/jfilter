@@ -53,4 +53,13 @@ public class AnnotationUtilTest {
         assertTrue(annotations.length > 0);
     }
 
+    @Test
+    public void testGetStrategiesAnnotations() {
+        Method method = MockMethods.findMethodByName("mockIgnoreStrategyMethod");
+        assertNotNull(method);
+
+        JsonSessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(method);
+        assertTrue(annotations.length > 0);
+    }
+
 }

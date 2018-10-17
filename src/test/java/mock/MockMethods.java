@@ -24,6 +24,19 @@ public class MockMethods {
     }
 
 
+    @JsonSessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
+            @JsonIgnoreSetting(fields = {"id"})
+    })
+
+    @JsonSessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
+            @JsonIgnoreSetting(fields = {"id", "password"})
+    })
+
+    public boolean mockIgnoreStrategyMethod() {
+        return false;
+    }
+
+
     @JsonIgnoreSetting(fields = {"id"})
     public boolean singleAnnotation() {
         return false;
