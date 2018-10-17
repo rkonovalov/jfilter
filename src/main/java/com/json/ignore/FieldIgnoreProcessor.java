@@ -5,41 +5,91 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 
-
+/**
+ * This class used to filter fields in object
+ */
 public class FieldIgnoreProcessor {
+    /**
+     * list of object name which will be ignored by filter algorithm
+     */
     private static final List<String> ignoredNames = Arrays.asList("CASE_INSENSITIVE_ORDER", "LOGGER");
 
+    /**
+     * Map of classes and fields which should be filtered
+     */
     private Map<Class, List<String>> ignore;
+
+    /**
+     * list of field name which should be filtered
+     */
     private List<String> fieldNames;
 
+    /**
+     * Constructor
+     */
     public FieldIgnoreProcessor() {
         this.fieldNames = new ArrayList<>();
     }
 
+    /**
+     * Constructor
+     * @param ignore map of classes and fields which should be filtered
+     */
     public FieldIgnoreProcessor(Map<Class, List<String>> ignore) {
         this();
         this.ignore = ignore;
     }
 
+    /**
+     * Constructor
+     * @param methodParameter {@link MethodParameter} Rest method of Rest controller
+     */
     public FieldIgnoreProcessor(MethodParameter methodParameter) {
         this(getAnnotations(methodParameter.getMethod()));
     }
 
+    /**
+     * Constructor
+     * @param annotations array of {@link FieldIgnoreSetting}
+     */
+    public FieldIgnoreProcessor(FieldIgnoreSetting[] annotations) {
+        this(Arrays.asList(annotations));
+    }
+
+    /**
+     * Constructor
+     * @param annotations list of {@link FieldIgnoreSetting}
+     */
     public FieldIgnoreProcessor(List<FieldIgnoreSetting> annotations) {
         this();
         this.ignore = parseSettingAnnotation(annotations);
     }
 
+    /**
+     * Constructor
+     * @param method {@link Method} object's method which may have annotation
+     */
     public FieldIgnoreProcessor(Method method) {
         this(getAnnotations(method));
     }
 
+    /**
+     * Constructor
+     * @param clazz {@link Class} class name of filterable class
+     * @param ignoreFields array of filterable items
+     */
     public FieldIgnoreProcessor(Class clazz, List<String> ignoreFields) {
         this();
         this.ignore = new HashMap<>();
         this.ignore.put(clazz, ignoreFields);
     }
 
+    /**
+     * Check if specified class has getter method of field
+     * @param field {@link Field}
+     * @param clazz {@link Class}
+     * @return true if getter is found, else false
+     */
     private boolean fieldHasGetter(Field field, Class clazz) {
         for (Method method : clazz.getDeclaredMethods()) {
             if (method.getName().equalsIgnoreCase("get" + field.getName())) {
@@ -49,6 +99,11 @@ public class FieldIgnoreProcessor {
         return false;
     }
 
+    /**
+     * Filter field which has value of Map, enumerate all objects in Map if exists
+     * @param map {@link Map}
+     * @throws IllegalAccessException exception of illegal access
+     */
     @SuppressWarnings("unchecked")
     private void process(Map map) throws IllegalAccessException {
         for(Object k : map.keySet()) {
@@ -57,11 +112,22 @@ public class FieldIgnoreProcessor {
         }
     }
 
+    /**
+     * Filter field which has value of Collection, enumerate all objects in collection if exists
+     * @param items {@link Collection} collection of items
+     * @throws IllegalAccessException exception of illegal access
+     */
     private void process(Collection items) throws IllegalAccessException {
         for (Object item : items)
             ignoreFields(item);
     }
 
+    /**
+     * Check if field should be filtered
+     * @param field {@link Field} field
+     * @param clazz {@link Class} class
+     * @return true if field should be ignored, else false
+     */
     private boolean isFieldIgnored(Field field, Class clazz) {
         for (Class cl : ignore.keySet()) {
             List<String> items = ignore.get(cl);
@@ -72,6 +138,13 @@ public class FieldIgnoreProcessor {
         return false;
     }
 
+    /**
+     * Attempt to filter item. This method clears value of field by setting null value if field is object
+     * or setting system defined MIN value if object is primitive
+     * @param field {@link Field} field
+     * @param object {@link Object} object
+     * @throws IllegalAccessException exception of illegal access
+     */
     private void clearField(Field field, Object object) throws IllegalAccessException {
         field.setAccessible(true);
         switch (field.getType().getName()) {
@@ -105,10 +178,20 @@ public class FieldIgnoreProcessor {
         }
     }
 
+    /**
+     * This method used to filter not defined by user fields or not ignorable fields in object
+     * @param field {@link Field} field
+     * @return true if field may be processed by filter algorithm
+     */
     private boolean fieldAcceptable(Field field) {
         return /*field.getType().isPrimitive() ||*/ field.getType().isArray() || ignoredNames.contains(field.getName());
     }
 
+    /**
+     * Filter algorithm, finds fields which should be ignored and filters them
+     * @param object {@link Object} object
+     * @throws IllegalAccessException exception of illegal access
+     */
     public void ignoreFields(Object object) throws IllegalAccessException {
         Class clazz = object.getClass().getDeclaredFields().length > 0 ? object.getClass() : object.getClass().getSuperclass();
         Class currentClass = object.getClass();
@@ -133,6 +216,11 @@ public class FieldIgnoreProcessor {
         }
     }
 
+    /**
+     * Convert list of {@link FieldIgnoreSetting} to Map of classes and fields
+     * @param settings list of {@link FieldIgnoreSetting}
+     * @return Map of classes and fields if settings has more than one item, else returns Map with zero length
+     */
     private Map<Class, List<String>> parseSettingAnnotation(List<FieldIgnoreSetting> settings) {
         Map<Class, List<String>> items = new HashMap<>();
         if (settings != null)
@@ -150,6 +238,11 @@ public class FieldIgnoreProcessor {
         return items;
     }
 
+    /**
+     * Get list of {@link FieldIgnoreSetting} annotations
+     * @param method {@link Method} object's method which may have annotation
+     * @return list of {@link FieldIgnoreSetting} items if method has annotations, else returns list with zero length
+     */
     private static List<FieldIgnoreSetting> getAnnotations(Method method) {
         return Arrays.asList(AnnotationUtil.getSettingAnnotations(method));
     }
