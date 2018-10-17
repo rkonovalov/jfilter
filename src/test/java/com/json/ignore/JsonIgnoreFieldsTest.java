@@ -23,7 +23,7 @@ public class JsonIgnoreFieldsTest {
     private static final String USER_WITHOUT_ID = "{\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\",\"password\":\"1234567\"," +
             "\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"},\"boolValue\":true,\"byteValue\":100," +
             "\"charValue\":\"c\",\"doubleValue\":5.5,\"floatValue\":5.5,\"longValue\":100500,\"shortValue\":15}";
-    private static final String USER_EMPTY = "{\"intValue\":" + Integer.MIN_VALUE + ",\"boolValue\":false,\"byteValue\":"+ Byte.MIN_VALUE + "," +
+    private static final String USER_EMPTY = "{\"intValue\":" + Integer.MIN_VALUE + ",\"boolValue\":false,\"byteValue\":" + Byte.MIN_VALUE + "," +
             "\"charValue\":\"\\u0000\",\"doubleValue\":" + Double.MIN_VALUE + ",\"floatValue\":" + Float.MIN_VALUE + "," +
             "\"longValue\":" + Long.MIN_VALUE + ",\"shortValue\":" + Short.MIN_VALUE + "}";
 
@@ -69,26 +69,26 @@ public class JsonIgnoreFieldsTest {
     }
 
     @JsonIgnoreSetting(fields = {"id"})
-    public void singleAnnotation() {
-
+    public boolean singleAnnotation() {
+        return false;
     }
 
     @JsonIgnoreSetting(className = UserMock.class, fields = {"id", "email", "fullName"})
     @JsonIgnoreSetting(className = UserMock.class, fields = {"password", "intValue", "collectionValue"})
     @JsonIgnoreSetting(className = UserMock.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
     @JsonIgnoreSetting(className = UserMock.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
-    public void multipleAnnotation() {
-
+    public boolean multipleAnnotation() {
+        return false;
     }
 
     private Method findDeclaredMethod(String methodName) {
         Method[] methods = this.getClass().getDeclaredMethods();
 
-        for(Method method : methods) {
-            if(method.getName().equals(methodName))
-            if (method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null ||
-                    method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null)
-                return method;
+        for (Method method : methods) {
+            if (method.getName().equals(methodName))
+                if (method.getDeclaredAnnotation(JsonIgnoreSettings.class) != null ||
+                        method.getDeclaredAnnotation(JsonIgnoreSetting.class) != null)
+                    return method;
         }
         return null;
     }
