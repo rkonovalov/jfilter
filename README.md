@@ -1,12 +1,12 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/rkonovalov/jsonignore.svg?branch=master)](https://travis-ci.org/rkonovalov/jsonignore)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/json-filter/badge.svg?style=blue)](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/json-filter/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/jsonignore/badge.svg?style=blue)](https://search.maven.org/search?q=a:json-ignore)
 [![Javadocs](http://www.javadoc.io/badge/com.github.rkonovalov/jsonignore.svg)](http://www.javadoc.io/doc/com.github.rkonovalov/jsonignore)
 [![codecov](https://codecov.io/gh/rkonovalov/jsonignore/branch/master/graph/badge.svg)](https://codecov.io/gh/rkonovalov/jsonignore)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jsonignore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jsonignore&amp;utm_campaign=Badge_Grade)
 
-# Json filter module
-Json filter module for Spring Framework can be used in Spring MVC Rest project for filtering(excluding) of json response.
+# Json ignore module
+Json ignore module for Spring Framework can be used in Spring MVC Rest project for filtering(excluding) of json response.
 
 # Getting started
 For using this module need to follow for next steps
@@ -17,12 +17,12 @@ If you are using Maven you need add next dependecy
 ```xml
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
-    <artifactId>json-filter</artifactId>
+    <artifactId>json-ignore</artifactId>
     <version>1.0.2</version>
 </dependency>
 ```
 If you are using another build automation tool, you can find configuration string by this URL:
-https://search.maven.org/artifact/com.github.rkonovalov/json-filter/1.0.2/jar
+https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.2/jar
 
 ## ControllerAdvice class example
 For handling response from Rest controller we should to create ControllerAdvice class
