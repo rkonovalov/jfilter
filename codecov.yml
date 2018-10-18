@@ -1,2 +1,3 @@
 ignore:
   - "/src/main/java/com/json/ignore/filter/FilterFactory.java"
+  - "/src/main/java/com/json/ignore/AnnotationUtil.java"

@@ -3,8 +3,6 @@ package com.json.ignore.filter;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 
-import java.io.Serializable;
-
 /**
  * Filtration method factory
  */
