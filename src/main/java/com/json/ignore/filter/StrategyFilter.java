@@ -6,6 +6,8 @@ import com.json.ignore.strategy.SessionStrategy;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * This class used for strategy filtration of object's fields based on SessionStrategy configuration
  *
@@ -27,6 +29,16 @@ public class StrategyFilter extends Filter {
         /*
          * Attempt to retrieve all FieldFilterSetting annotations from method
          */
+        config = AnnotationUtil.getStrategyAnnotations(methodParameter.getMethod());
+    }
+
+    /**
+     * Constructor
+     * @param session {@link HttpSession} session
+     * @param methodParameter {@link MethodParameter} Rest method of Rest controller
+     */
+    public StrategyFilter(HttpSession session, MethodParameter methodParameter) {
+        super(session);
         config = AnnotationUtil.getStrategyAnnotations(methodParameter.getMethod());
     }
 

@@ -27,6 +27,14 @@ public abstract class Filter {
     }
 
     /**
+     * Constructor
+     * @param session session
+     */
+    public Filter(HttpSession session) {
+        this.session = session;
+    }
+
+    /**
      *
      * @param object {@link Object} object which fields will be filtrated
      * @throws IllegalAccessException exception of illegal access

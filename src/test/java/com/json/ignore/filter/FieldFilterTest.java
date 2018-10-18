@@ -22,6 +22,7 @@ import mock.MockMethods;
 import mock.MockUser;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
+import org.springframework.mock.web.MockHttpServletRequest;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -38,7 +39,10 @@ public class FieldFilterTest {
         MethodParameter methodParameter = MockMethods.findMethodParameterByName("singleAnnotation");
         assertNotNull(methodParameter);
 
-        FieldFilter fieldFilter = new FieldFilter(null, methodParameter);
+        MockHttpServletRequest request = new MockHttpServletRequest("GET", "");
+        assertNotNull(request);
+
+        FieldFilter fieldFilter = new FieldFilter(request.getSession(), methodParameter);
         fieldFilter.jsonIgnore(user);
         assertNotNull(user);
     }
