@@ -107,8 +107,8 @@ public class FieldFilterProcessor {
      */
     private void process(Map map) throws IllegalAccessException {
         for(Object k : map.keySet()) {
-            ignoreFields(k);
-            ignoreFields(map.get(k));
+            filterFields(k);
+            filterFields(map.get(k));
         }
     }
 
@@ -119,7 +119,7 @@ public class FieldFilterProcessor {
      */
     private void process(Collection items) throws IllegalAccessException {
         for (Object item : items)
-            ignoreFields(item);
+            filterFields(item);
     }
 
     /**
@@ -192,7 +192,7 @@ public class FieldFilterProcessor {
      * @param object {@link Object} object
      * @throws IllegalAccessException exception of illegal access
      */
-    public void ignoreFields(Object object) throws IllegalAccessException {
+    public void filterFields(Object object) throws IllegalAccessException {
         Class clazz = object.getClass().getDeclaredFields().length > 0 ? object.getClass() : object.getClass().getSuperclass();
         Class currentClass = object.getClass();
 
@@ -209,7 +209,7 @@ public class FieldFilterProcessor {
                         } else if (value instanceof Map) {
                             process((Map) value);
                         } else
-                            ignoreFields(value);
+                            filterFields(value);
                     }
                 }
             }

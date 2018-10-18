@@ -3,7 +3,6 @@ package com.json.ignore.filter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.json.ignore.filter.FieldFilterProcessor;
 import mock.MockClasses;
 import mock.MockMethods;
 import mock.MockUser;
@@ -62,7 +61,7 @@ public class FieldFilterProcessorTest {
     public void testUserIgnoreId() throws JsonProcessingException, IllegalAccessException {
         MockUser user = MockClasses.getUserMock();
         fieldFilterProcessor = new FieldFilterProcessor(MockUser.class, LIST_ID);
-        fieldFilterProcessor.ignoreFields(user);
+        fieldFilterProcessor.filterFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_WITHOUT_ID, strUser);
     }
@@ -73,7 +72,7 @@ public class FieldFilterProcessorTest {
         Map<Class, List<String>> ignores = new HashMap<>();
         ignores.put(MockUser.class, LIST_ALL);
         fieldFilterProcessor = new FieldFilterProcessor(ignores);
-        fieldFilterProcessor.ignoreFields(user);
+        fieldFilterProcessor.filterFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_EMPTY, strUser);
     }
@@ -85,7 +84,7 @@ public class FieldFilterProcessorTest {
 
         MockUser user = MockClasses.getUserMock();
         fieldFilterProcessor = new FieldFilterProcessor(method);
-        fieldFilterProcessor.ignoreFields(user);
+        fieldFilterProcessor.filterFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_WITHOUT_ID, (strUser));
     }
@@ -97,7 +96,7 @@ public class FieldFilterProcessorTest {
 
         MockUser user = MockClasses.getUserMock();
         fieldFilterProcessor = new FieldFilterProcessor(method);
-        fieldFilterProcessor.ignoreFields(user);
+        fieldFilterProcessor.filterFields(user);
         String strUser = mapper.writeValueAsString(user);
         assertEquals(USER_EMPTY, (strUser));
     }
@@ -110,7 +109,7 @@ public class FieldFilterProcessorTest {
         MockUser user = MockClasses.getUserMock();
         MethodParameter methodParameter = new MethodParameter(method, 0);
         fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
-        fieldFilterProcessor.ignoreFields(user);
+        fieldFilterProcessor.filterFields(user);
         String strUser = mapper.writeValueAsString(user);
 
         assertEquals(USER_WITHOUT_ID, (strUser));

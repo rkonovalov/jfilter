@@ -59,8 +59,8 @@ public class StrategyFilter extends Filter {
                  * and value in session and strategy is equals
                  */
                 if (Objects.equals(sessionObject, strategy.attributeValue())) {
-                    FieldFilterProcessor jsonIgnore = new FieldFilterProcessor(strategy.ignoreFields());
-                    jsonIgnore.ignoreFields(object);
+                    FieldFilterProcessor processor = new FieldFilterProcessor(strategy.ignoreFields());
+                    processor.filterFields(object);
                 }
             }
         }
