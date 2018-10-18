@@ -3,6 +3,7 @@ package mock;
 import com.json.ignore.filter.FieldFilterSetting;
 import com.json.ignore.strategy.SessionStrategies;
 import com.json.ignore.strategy.SessionStrategy;
+import org.springframework.core.MethodParameter;
 
 import java.lang.reflect.Method;
 
@@ -22,7 +23,6 @@ public class MockMethods {
     public boolean mockIgnoreStrategiesMethod() {
         return false;
     }
-
 
 
     @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
@@ -58,6 +58,14 @@ public class MockMethods {
                 return method;
         }
         return null;
+    }
+
+    public static MethodParameter findMethodParameterByName(String methodName) {
+        Method method = findMethodByName(methodName);
+        if (method != null) {
+            return new MethodParameter(method, 0);
+        } else
+            return null;
     }
 
 
