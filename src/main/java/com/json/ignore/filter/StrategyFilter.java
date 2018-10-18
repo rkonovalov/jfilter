@@ -26,11 +26,7 @@ public class StrategyFilter extends Filter {
      */
     public StrategyFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
         super(serverHttpRequest);
-
-        /*
-         * Attempt to retrieve all FieldFilterSetting annotations from method
-         */
-        config = AnnotationUtil.getStrategyAnnotations(methodParameter.getMethod());
+        setConfig(methodParameter);
     }
 
     /**
@@ -40,6 +36,15 @@ public class StrategyFilter extends Filter {
      */
     public StrategyFilter(HttpSession session, MethodParameter methodParameter) {
         super(session);
+        setConfig(methodParameter);
+    }
+
+    /**
+     * Attempt to retrieve all FieldFilterSetting annotations from method
+     * @param methodParameter {@link MethodParameter} method parameter
+     */
+    @Override
+    public void setConfig(MethodParameter methodParameter) {
         config = AnnotationUtil.getStrategyAnnotations(methodParameter.getMethod());
     }
 

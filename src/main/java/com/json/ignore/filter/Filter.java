@@ -1,5 +1,6 @@
 package com.json.ignore.filter;
 
+import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
 import javax.servlet.http.HttpSession;
@@ -44,4 +45,5 @@ public abstract class Filter {
     public HttpSession getSession() {
         return session;
     }
+    public abstract void setConfig(MethodParameter methodParameter);
 }

@@ -23,10 +23,7 @@ public class FieldFilter extends Filter {
      */
     public FieldFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
         super(serverHttpRequest);
-        /*
-         * Attempt to retrieve all FieldFilterSetting annotations from method
-         */
-        config = AnnotationUtil.getSettingAnnotations(methodParameter.getMethod());
+        setConfig(methodParameter);
     }
 
     /**
@@ -36,6 +33,15 @@ public class FieldFilter extends Filter {
      */
     public FieldFilter(HttpSession session, MethodParameter methodParameter) {
         super(session);
+        setConfig(methodParameter);
+    }
+
+    /**
+     * Attempt to retrieve all FieldFilterSetting annotations from method
+     * @param methodParameter {@link MethodParameter} method parameter
+     */
+    @Override
+    public void setConfig(MethodParameter methodParameter) {
         config = AnnotationUtil.getSettingAnnotations(methodParameter.getMethod());
     }
 

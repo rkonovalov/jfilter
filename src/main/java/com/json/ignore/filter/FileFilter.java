@@ -18,7 +18,12 @@ public class FileFilter extends Filter {
         setConfig(methodParameter);
     }
 
-    private void setConfig(MethodParameter methodParameter) {
+    /**
+     * Attempt to retrieve all FieldFilterSetting annotations from method
+     * @param methodParameter {@link MethodParameter} method parameter
+     */
+    @Override
+    public void setConfig(MethodParameter methodParameter) {
         config = AnnotationUtil.getDeclaredAnnotation(methodParameter.getMethod(), FileFilterSetting.class);
     }
 
