@@ -56,7 +56,7 @@ public class StrategyFilterTest {
         assertNotNull(methodParameter);
 
         StrategyFilter strategyFilter = new StrategyFilter(this.session, methodParameter);
-        strategyFilter.jsonIgnore(user);
+        strategyFilter.filter(user);
 
         assertNull(user.getId());
     }
@@ -69,7 +69,7 @@ public class StrategyFilterTest {
         assertNotNull(methodParameter);
 
         StrategyFilter strategyFilter = new StrategyFilter(this.session, methodParameter);
-        strategyFilter.jsonIgnore(user);
+        strategyFilter.filter(user);
 
         assertNotNull(user.getId());
     }
@@ -82,7 +82,7 @@ public class StrategyFilterTest {
         assertNotNull(methodParameter);
 
         StrategyFilter strategyFilter = new StrategyFilter(this.serverHttpRequest, methodParameter);
-        strategyFilter.jsonIgnore(user);
+        strategyFilter.filter(user);
 
         assertNotNull(user.getId());
     }

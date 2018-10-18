@@ -39,7 +39,7 @@ public abstract class Filter {
      * @param object {@link Object} object which fields will be filtrated
      * @throws IllegalAccessException exception of illegal access
      */
-    public abstract void jsonIgnore(Object object) throws IllegalAccessException;
+    public abstract void filter(Object object) throws IllegalAccessException;
 
     public HttpSession getSession() {
         return session;

@@ -53,7 +53,7 @@ public class FieldFilterTest {
         assertNotNull(methodParameter);
 
         FieldFilter fieldFilter = new FieldFilter(serverHttpRequest, methodParameter);
-        fieldFilter.jsonIgnore(user);
+        fieldFilter.filter(user);
         assertNotNull(user);
     }
 
@@ -63,7 +63,7 @@ public class FieldFilterTest {
         MethodParameter methodParameter = MockMethods.findMethodParameterByName("singleAnnotation");
         assertNotNull(methodParameter);
         FieldFilter fieldFilter = new FieldFilter(session, methodParameter);
-        fieldFilter.jsonIgnore(user);
+        fieldFilter.filter(user);
         assertNotNull(user);
     }
 }

@@ -49,7 +49,7 @@ public class StrategyFilter extends Filter {
      * @throws IllegalAccessException exception of illegal access
      */
     @Override
-    public void jsonIgnore(Object object) throws IllegalAccessException {
+    public void filter(Object object) throws IllegalAccessException {
         if (this.getSession() != null) {
             for (SessionStrategy strategy : config) {
                 Object sessionObject = getSession().getAttribute(strategy.attributeName());

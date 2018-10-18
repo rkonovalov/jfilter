@@ -45,7 +45,7 @@ public class FieldFilter extends Filter {
      * @throws IllegalAccessException exception of illegal access
      */
     @Override
-    public void jsonIgnore(Object object) throws IllegalAccessException {
+    public void filter(Object object) throws IllegalAccessException {
         FieldFilterProcessor jsonIgnore = new FieldFilterProcessor(config);
         jsonIgnore.ignoreFields(object);
     }
