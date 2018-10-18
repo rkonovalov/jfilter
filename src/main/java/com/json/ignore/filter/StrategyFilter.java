@@ -7,6 +7,7 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 /**
  * This class used for strategy filtration of object's fields based on SessionStrategy configuration
@@ -57,7 +58,7 @@ public class StrategyFilter extends Filter {
                  * Attempt to filter object's fields if attribute in session is found
                  * and value in session and strategy is equals
                  */
-                if (sessionObject != null && sessionObject.equals(strategy.attributeValue())) {
+                if (Objects.equals(sessionObject, strategy.attributeValue())) {
                     FieldFilterProcessor jsonIgnore = new FieldFilterProcessor(strategy.ignoreFields());
                     jsonIgnore.ignoreFields(object);
                 }
