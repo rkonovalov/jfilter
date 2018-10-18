@@ -46,6 +46,9 @@ public class MockMethods {
         return false;
     }
 
+    public boolean methodWithoutAnnotations() {
+        return false;
+    }
 
     public static Method findMethodByName(String methodName) {
         Method[] methods = MockMethods.class.getDeclaredMethods();

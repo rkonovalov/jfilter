@@ -55,4 +55,13 @@ public class FilterFactoryTest {
 
         assertEquals(filter.getClass(), StrategyFilter.class);
     }
+
+    @Test
+    public void testFactoryNull() {
+        Method method = MockMethods.findMethodByName("methodWithoutAnnotations");
+        assertNotNull(method);
+        MethodParameter methodParameter = new MethodParameter(method, 0);
+        Filter filter = FilterFactory.getIgnore(null, methodParameter);
+        assertNull(filter);
+    }
 }
