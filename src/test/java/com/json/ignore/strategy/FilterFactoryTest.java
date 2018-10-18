@@ -63,5 +63,7 @@ public class FilterFactoryTest {
         MethodParameter methodParameter = new MethodParameter(method, 0);
         Filter filter = FilterFactory.getIgnore(null, methodParameter);
         assertNull(filter);
+
+
     }
 }

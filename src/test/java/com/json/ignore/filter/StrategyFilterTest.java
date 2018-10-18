@@ -18,11 +18,14 @@
 
 package com.json.ignore.filter;
 
+import mock.MockHttpRequest;
 import mock.MockMethods;
 import mock.MockUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 import javax.servlet.http.HttpSession;
@@ -36,13 +39,15 @@ import static org.junit.Assert.*;
 
 public class StrategyFilterTest {
     private HttpSession session;
+    private ServletServerHttpRequest serverHttpRequest;
 
     @Before
     public void initSession() {
-        MockHttpServletRequest request = new MockHttpServletRequest("GET", "");
-        assertNotNull(request);
-        request.getSession().setAttribute("ROLE", "ADMIN");
-        this.session = request.getSession();
+        serverHttpRequest = MockHttpRequest.getMockAdminRequest();
+        assertNotNull(serverHttpRequest);
+
+        session = serverHttpRequest.getServletRequest().getSession();
+        assertNotNull(session);
     }
 
     @Test
@@ -66,6 +71,19 @@ public class StrategyFilterTest {
         assertNotNull(methodParameter);
 
         StrategyFilter strategyFilter = new StrategyFilter(this.session, methodParameter);
+        strategyFilter.jsonIgnore(user);
+
+        assertNotNull(user.getId());
+    }
+
+    @Test
+    public void ignoreRequestFieldsWithoutAnnotations() throws IllegalAccessException {
+        MockUser user = new MockUser();
+        user.setId(100);
+        MethodParameter methodParameter = MockMethods.findMethodParameterByName("methodWithoutAnnotations");
+        assertNotNull(methodParameter);
+
+        StrategyFilter strategyFilter = new StrategyFilter(this.serverHttpRequest, methodParameter);
         strategyFilter.jsonIgnore(user);
 
         assertNotNull(user.getId());
