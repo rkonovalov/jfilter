@@ -24,9 +24,7 @@ import mock.MockUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
-import org.springframework.mock.web.MockHttpServletRequest;
 
 import javax.servlet.http.HttpSession;
 

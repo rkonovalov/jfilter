@@ -18,12 +18,14 @@
 
 package com.json.ignore.filter;
 
+import mock.MockHttpRequest;
 import mock.MockMethods;
 import mock.MockUser;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
-import org.springframework.mock.web.MockHttpServletRequest;
-
+import org.springframework.http.server.ServletServerHttpRequest;
+import javax.servlet.http.HttpSession;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -32,17 +34,36 @@ import static org.junit.Assert.assertNotNull;
  */
 
 public class FieldFilterTest {
+    private HttpSession session;
+    private ServletServerHttpRequest serverHttpRequest;
+
+    @Before
+    public void initSession() {
+        serverHttpRequest = MockHttpRequest.getMockAdminRequest();
+        assertNotNull(serverHttpRequest);
+
+        session = serverHttpRequest.getServletRequest().getSession();
+        assertNotNull(session);
+    }
 
     @Test
-    public void testJsonIgnore() throws IllegalAccessException {
+    public void testFieldFilterWithRequest() throws IllegalAccessException {
         MockUser user = new MockUser();
         MethodParameter methodParameter = MockMethods.findMethodParameterByName("singleAnnotation");
         assertNotNull(methodParameter);
 
-        MockHttpServletRequest request = new MockHttpServletRequest("GET", "");
-        assertNotNull(request);
+        FieldFilter fieldFilter = new FieldFilter(serverHttpRequest, methodParameter);
+        fieldFilter.jsonIgnore(user);
+        assertNotNull(user);
+    }
 
-        FieldFilter fieldFilter = new FieldFilter(request.getSession(), methodParameter);
+    @Test
+    public void testFieldFilterWithSession() throws IllegalAccessException {
+        MockUser user = new MockUser();
+        MethodParameter methodParameter = MockMethods.findMethodParameterByName("singleAnnotation");
+        assertNotNull(methodParameter);
+
+        FieldFilter fieldFilter = new FieldFilter(serverHttpRequest.getServletRequest().getSession(), methodParameter);
         fieldFilter.jsonIgnore(user);
         assertNotNull(user);
     }
