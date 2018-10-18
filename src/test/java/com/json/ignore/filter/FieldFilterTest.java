@@ -62,8 +62,7 @@ public class FieldFilterTest {
         MockUser user = new MockUser();
         MethodParameter methodParameter = MockMethods.findMethodParameterByName("singleAnnotation");
         assertNotNull(methodParameter);
-
-        FieldFilter fieldFilter = new FieldFilter(serverHttpRequest.getServletRequest().getSession(), methodParameter);
+        FieldFilter fieldFilter = new FieldFilter(session, methodParameter);
         fieldFilter.jsonIgnore(user);
         assertNotNull(user);
     }
