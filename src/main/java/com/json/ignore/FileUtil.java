@@ -18,6 +18,9 @@
 
 package com.json.ignore;
 
+import java.io.*;
+import java.net.URL;
+
 /**
  * @author Ruslan {@literal <rkonovalov86@gmail.com>}
  * @version 1.0
@@ -26,12 +29,66 @@ package com.json.ignore;
 public class FileUtil {
 
     public static Class getClassByName(String className) throws FieldClassNotFoundException {
-        if(className != null && !className.isEmpty()) {
+        if (className != null && !className.isEmpty()) {
             try {
                 return Class.forName(className);
             } catch (ClassNotFoundException e) {
                 throw new FieldClassNotFoundException(e);
             }
+        } else
+            return null;
+    }
+
+    public static File resourceFile(String fileName) {
+        ClassLoader classLoader = FileUtil.class.getClassLoader();
+        URL url = classLoader.getResource(fileName);
+        if (url != null) {
+            String pathName = url.getFile();
+            if (pathName != null) {
+                return new File(pathName);
+            }
+        }
+        return null;
+    }
+
+    public static FileInputStream fileToInputStream(File file) {
+        if (file != null) {
+            try {
+                return new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public static String fileToString(File file) {
+        FileInputStream inputStream = fileToInputStream(file);
+        if(inputStream != null) {
+            return inputStreamToString(inputStream);
+        } else
+            return null;
+    }
+
+    public static String inputStreamToString(File file) throws FileIOException {
+        return inputStreamToString(fileToInputStream(file));
+    }
+
+    public static String inputStreamToString(InputStream is) throws FileIOException {
+        if (is != null) {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            try {
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+                br.close();
+            } catch (IOException e) {
+                throw new FileIOException(e);
+            }
+            return sb.toString();
         } else
             return null;
     }

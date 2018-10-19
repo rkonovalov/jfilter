@@ -33,31 +33,14 @@ public class FileFilter extends BaseFilter {
         setConfig(methodParameter);
     }
 
-    private String inputStreamToString(InputStream is) throws FileIOException {
-        if (is != null) {
-            StringBuilder sb = new StringBuilder();
-            String line;
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            try {
-                while ((line = br.readLine()) != null) {
-                    sb.append(line);
-                }
-                br.close();
-            } catch (IOException e) {
-                throw new FileIOException(e);
-            }
-            return sb.toString();
-        } else
-            return null;
-    }
 
     private FileConfig parseFile(File file) {
         if (file != null) {
             try {
                 XmlMapper xmlMapper = new XmlMapper();
                 xmlMapper.setDefaultUseWrapper(false);
-                String xml = inputStreamToString(new FileInputStream(file));
+                String xml = FileUtil.inputStreamToString(file);
                 if (xml != null) {
                     return xmlMapper.readValue(xml, FileConfig.class);
                 }
