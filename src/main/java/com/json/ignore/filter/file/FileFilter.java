@@ -54,22 +54,19 @@ public class FileFilter extends BaseFilter {
 
         if (strategy != null) {
             strategy.getFilters().forEach(filter -> {
-                try {
-                    Class clazz = FileUtil.getClassByName(filter.getClassName());
-                    List<String> items;
 
-                    if (fields.containsKey(clazz)) {
-                        items = fields.get(clazz);
-                    } else
-                        items = new ArrayList<>();
+                Class clazz = FileUtil.getClassByName(filter.getClassName());
+                List<String> items;
 
-                    filter.getFields().forEach(field -> items.add(field.getName()));
+                if (fields.containsKey(clazz)) {
+                    items = fields.get(clazz);
+                } else
+                    items = new ArrayList<>();
 
-                    fields.put(clazz, items);
-                } catch (FieldClassNotFoundException e) {
-                    //todo
-                    e.printStackTrace();
-                }
+                filter.getFields().forEach(field -> items.add(field.getName()));
+
+                fields.put(clazz, items);
+
             });
         }
         return fields;
