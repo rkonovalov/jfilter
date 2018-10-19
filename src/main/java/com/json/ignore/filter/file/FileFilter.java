@@ -12,6 +12,7 @@ import org.springframework.http.server.ServerHttpRequest;
 
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 
 /**
@@ -68,9 +69,15 @@ public class FileFilter extends BaseFilter {
 
     public FileConfig parseFile(String fileName) throws FileIOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        String pathName = Objects.requireNonNull(classLoader.getResource(fileName)).getFile();
-        File file = new File(pathName);
-        return parseFile(file);
+        URL url = classLoader.getResource(fileName);
+        if (url != null) {
+            String pathName = url.getFile();
+            if (pathName != null) {
+                File file = new File(pathName);
+                return parseFile(file);
+            }
+        }
+        return null;
     }
 
     /**
