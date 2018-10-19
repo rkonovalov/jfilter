@@ -1,6 +1,7 @@
 package com.json.ignore;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
 import java.io.*;
 import java.net.URL;
 
@@ -17,21 +18,24 @@ public class FileUtil {
             return null;
     }
 
-    public static File resourceFile(String fileName) {
-        if (fileName != null) {
+    public static String getFileName(String resourceName) {
+        if (resourceName != null && !resourceName.isEmpty()) {
             ClassLoader classLoader = FileUtil.class.getClassLoader();
-            URL url = classLoader.getResource(fileName);
+            URL url = classLoader.getResource(resourceName);
 
             try {
-                String pathName = url.getFile();
-                if(pathName != null) {
-                    return new File(pathName);
-                }
-
+                return url != null ? url.getFile() : null;
             } catch (NullPointerException e) {
                 return null;
             }
+        }
+        return null;
+    }
 
+    public static File resourceFile(String resourceName) {
+        String fileName = getFileName(resourceName);
+        if (fileName != null) {
+            return new File(fileName);
         }
         return null;
     }
