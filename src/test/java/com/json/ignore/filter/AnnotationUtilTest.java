@@ -5,8 +5,6 @@ import com.json.ignore.filter.strategy.SessionStrategy;
 import mock.MockMethods;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class AnnotationUtilTest {

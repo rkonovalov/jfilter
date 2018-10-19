@@ -20,9 +20,9 @@ public class FileConfig implements Serializable {
         @JacksonXmlElementWrapper(useWrapping = false)
         private List<Strategy> strategies;
 
-        /*public Controller() {
+        public Controller() {
             this.strategies = new ArrayList<>();
-        }*/
+        }
 
         public String getClassName() {
             return className;
