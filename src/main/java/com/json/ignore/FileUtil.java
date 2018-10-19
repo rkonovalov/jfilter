@@ -55,14 +55,11 @@ public class FileUtil {
     }
 
     public static FileInputStream fileToInputStream(File file) {
-        if (file != null) {
-            try {
-                return new FileInputStream(file);
-            } catch (FileNotFoundException e) {
-                return null;
-            }
+        try {
+            return new FileInputStream(file);
+        } catch (FileNotFoundException | NullPointerException e) {
+            return null;
         }
-        return null;
     }
 
     public static String fileToString(File file) {

@@ -77,14 +77,13 @@ public class FileUtilTest {
     public void testFileToInputStreamNotNull() {
         File file = FileUtil.resourceFile(EXISTED_FILE);
         FileInputStream inputStream = FileUtil.fileToInputStream(file);
-        assertNotNull(file);
+        assertNotNull(inputStream);
     }
 
     @Test
     public void testFileToInputStreamNull() {
-        File file = FileUtil.resourceFile(UN_EXISTED_FILE);
-        FileInputStream inputStream = FileUtil.fileToInputStream(file);
-        assertNull(file);
+        FileInputStream inputStream = FileUtil.fileToInputStream(null);
+        assertNull(inputStream);
     }
 
     @Test
