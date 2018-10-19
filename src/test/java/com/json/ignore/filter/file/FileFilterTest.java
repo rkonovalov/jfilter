@@ -8,32 +8,54 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class FileFilterTest {
     private ServletServerHttpRequest request;
-
+    private MethodParameter methodParameter;
+    private MockUser defaultMockUser;
 
     @Before
     public void init() {
         request = MockHttpRequest.getMockAdminRequest();
+        methodParameter = MockMethods.findMethodParameterByName("fileAnnotation");
+        assertNotNull(methodParameter);
+
+        defaultMockUser = MockClasses.getUserMock();
+        assertNotNull(defaultMockUser);
     }
 
     @Test
-    public void testFileFilter() {
+    public void testRequest() {
         MockUser user = MockClasses.getUserMock();
-        MethodParameter methodParameter = MockMethods.findMethodParameterByName("fileAnnotation");
-        assertNotNull(methodParameter);
         FileFilter filter = new FileFilter(request, methodParameter);
-        filter.filter(user);
         assertNotNull(filter);
     }
 
     @Test
     public void testSession() {
-        MethodParameter methodParameter = MockMethods.findMethodParameterByName("fileAnnotation");
-        assertNotNull(methodParameter);
         FileFilter filter = new FileFilter(request.getServletRequest().getSession(), methodParameter);
         assertNotNull(filter);
+    }
+
+    @Test
+    public void testFilterEqual() {
+        MockUser user = MockClasses.getUserMock();
+        FileFilter filter = new FileFilter(request, methodParameter);
+        filter.filter(user);
+        assertEquals(defaultMockUser, user);
+    }
+
+    @Test
+    public void testFilterNotEqual() {
+        MockUser user = MockClasses.getUserMock();
+        FileFilter filter = new FileFilter(request, methodParameter);
+        //Change class name where method is exists, just for test
+        filter.setControllerClass(FileFilterTest.class);
+        filter.filter(user);
+        assertNotEquals(defaultMockUser, user);
     }
 }

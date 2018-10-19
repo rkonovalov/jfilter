@@ -104,6 +104,15 @@ public class FileFilter extends BaseFilter {
         return fields;
     }
 
+    public Class getControllerClass() {
+        return controllerClass;
+    }
+
+    public FileFilter setControllerClass(Class controllerClass) {
+        this.controllerClass = controllerClass;
+        return this;
+    }
+
     @Override
     public void filter(Object object) throws FieldAccessException {
         if (object != null && fileConfig != null) {
