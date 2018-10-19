@@ -128,5 +128,12 @@ public class FileUtilTest {
         assertNull(config);
     }
 
+    @Test
+    public void testXmlFileToClassBadFile() {
+        File file = FileUtil.resourceFile("bad_config.xml");
+        FileUtilTest config = FileUtil.xmlFileToClass(file, FileUtilTest.class);
+        assertNull(config);
+    }
+
 
 }
