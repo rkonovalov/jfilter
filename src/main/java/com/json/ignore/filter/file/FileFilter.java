@@ -50,27 +50,27 @@ public class FileFilter extends BaseFilter {
             return null;
     }
 
-    private FileConfig parseFile(File file) throws IOException {
+    private FileConfig parseFile(File file) {
         if (file != null) {
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.setDefaultUseWrapper(false);
-            String xml = inputStreamToString(new FileInputStream(file));
-            if (xml != null) {
-                return xmlMapper.readValue(xml, FileConfig.class);
+            try {
+                XmlMapper xmlMapper = new XmlMapper();
+                xmlMapper.setDefaultUseWrapper(false);
+                String xml = inputStreamToString(new FileInputStream(file));
+                if (xml != null) {
+                    return xmlMapper.readValue(xml, FileConfig.class);
+                }
+            } catch (IOException e) {
+                throw new FileIOException(e);
             }
         }
         return null;
     }
 
-    public FileConfig parseFile(String fileName) {
+    public FileConfig parseFile(String fileName) throws FileIOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        try {
-            String pathName = Objects.requireNonNull(classLoader.getResource(fileName)).getFile();
-            File file = new File(pathName);
-            return parseFile(file);
-        } catch (IOException e) {
-            throw new FileIOException(e);
-        }
+        String pathName = Objects.requireNonNull(classLoader.getResource(fileName)).getFile();
+        File file = new File(pathName);
+        return parseFile(file);
     }
 
     /**
