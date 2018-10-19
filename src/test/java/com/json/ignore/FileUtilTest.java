@@ -18,8 +18,10 @@
 
 package com.json.ignore;
 
+import com.json.ignore.filter.file.FileConfig;
 import org.junit.Test;
 
+import javax.servlet.FilterConfig;
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -41,10 +43,10 @@ public class FileUtilTest {
         assertNotNull(clazz);
     }
 
-    @Test(expected = FieldClassNotFoundException.class)
+    @Test
     public void testClassNotExists() {
         Class clazz = FileUtil.getClassByName("com.json.ignore.NotExistedClass");
-        assertNotNull(clazz);
+        assertNull(clazz);
     }
 
     @Test
@@ -127,6 +129,26 @@ public class FileUtilTest {
         File file = FileUtil.resourceFile(UN_EXISTED_FILE);
         String xml = FileUtil.inputStreamToString(file);
         assertNull(xml);
+    }
+
+    @Test
+    public void testXmlFileToClassNotNull() {
+        File file = FileUtil.resourceFile(EXISTED_FILE);
+        FileConfig config = FileUtil.xmlFileToClass(file, FileConfig.class);
+        assertNotNull(config);
+    }
+
+    @Test
+    public void testXmlFileToClassNull() {
+        FileConfig config = FileUtil.xmlFileToClass(null, FileConfig.class);
+        assertNull(config);
+    }
+
+    @Test
+    public void testXmlFileToClassIncorrectClass() {
+        File file = FileUtil.resourceFile(EXISTED_FILE);
+        FileUtilTest config = FileUtil.xmlFileToClass(file, FileUtilTest.class);
+        assertNull(config);
     }
 
 

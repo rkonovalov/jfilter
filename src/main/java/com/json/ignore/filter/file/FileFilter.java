@@ -13,7 +13,6 @@ import org.springframework.http.server.ServerHttpRequest;
 
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.net.URL;
 import java.util.*;
 
 /**
@@ -33,24 +32,8 @@ public class FileFilter extends BaseFilter {
         setConfig(methodParameter);
     }
 
-    private FileConfig parseFile(File file) {
-        if (file != null) {
-            try {
-                XmlMapper xmlMapper = new XmlMapper();
-                xmlMapper.setDefaultUseWrapper(false);
-                String xml = FileUtil.inputStreamToString(file);
-                if (xml != null) {
-                    return xmlMapper.readValue(xml, FileConfig.class);
-                }
-            } catch (IOException e) {
-                throw new FileIOException(e);
-            }
-        }
-        return null;
-    }
-
     private FileConfig parseFile(String fileName) {
-        return parseFile(FileUtil.resourceFile(fileName));
+        return FileUtil.xmlFileToClass(FileUtil.resourceFile(fileName), FileConfig.class);
     }
 
     /**

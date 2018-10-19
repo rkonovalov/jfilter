@@ -18,6 +18,9 @@
 
 package com.json.ignore;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.json.ignore.filter.file.FileConfig;
+
 import java.io.*;
 import java.net.URL;
 
@@ -91,5 +94,22 @@ public class FileUtil {
             return sb.toString();
         } else
             return null;
+    }
+
+    public static <T> T xmlFileToClass(File file, Class<T> clazz) {
+        if (file != null) {
+            try {
+                XmlMapper xmlMapper = new XmlMapper();
+                xmlMapper.setDefaultUseWrapper(false);
+
+                String xml = FileUtil.inputStreamToString(file);
+                if (xml != null) {
+                    return xmlMapper.readValue(xml, clazz);
+                }
+            } catch (IOException e) {
+                return null;
+            }
+        }
+        return null;
     }
 }
