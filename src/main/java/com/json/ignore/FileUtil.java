@@ -47,7 +47,7 @@ public class FileUtil {
         URL url = classLoader.getResource(fileName);
         if (url != null) {
             String pathName = url.getFile();
-            if (pathName != null) {
+            if (!pathName.isEmpty()) {
                 return new File(pathName);
             }
         }
