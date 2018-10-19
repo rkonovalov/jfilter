@@ -3,64 +3,76 @@ package com.json.ignore.filter;
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import mock.MockMethods;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.lang.reflect.Method;
 
 public class AnnotationUtilTest {
+    private Method mockIgnoreSettingsMethod;
+    private Method multipleAnnotation;
+    private Method mockIgnoreStrategiesMethod;
+
+    @Before
+    public void init() {
+        mockIgnoreSettingsMethod = MockMethods.findMethodByName("mockIgnoreSettingsMethod");
+        assertNotNull(mockIgnoreSettingsMethod);
+
+        multipleAnnotation = MockMethods.findMethodByName("multipleAnnotation");
+        assertNotNull(multipleAnnotation);
+
+        mockIgnoreStrategiesMethod = MockMethods.findMethodByName("mockIgnoreStrategiesMethod");
+        assertNotNull(mockIgnoreStrategiesMethod);
+    }
 
     @Test
     public void testGetDeclaredAnnotations() {
-        Method method = MockMethods.findMethodByName("multipleAnnotation");
-        assertNotNull(method);
-
-        FieldFilterSetting[] annotations = AnnotationUtil.getDeclaredAnnotations(method, FieldFilterSetting.class);
+        FieldFilterSetting[] annotations = AnnotationUtil.getDeclaredAnnotations(multipleAnnotation, FieldFilterSetting.class);
         assertTrue(annotations.length > 0);
     }
 
     @Test
     public void testGetDeclaredAnnotation() {
-        Method method = MockMethods.findMethodByName("mockIgnoreSettingsMethod");
-        assertNotNull(method);
-
-        FieldFilterSetting annotation = AnnotationUtil.getDeclaredAnnotation(method, FieldFilterSetting.class);
+        FieldFilterSetting annotation = AnnotationUtil.getDeclaredAnnotation(mockIgnoreSettingsMethod, FieldFilterSetting.class);
         assertNotNull(annotation);
     }
 
     @Test
     public void testIsAnnotationExists() {
-        Method method = MockMethods.findMethodByName("mockIgnoreSettingsMethod");
-        assertNotNull(method);
-
-        boolean result = AnnotationUtil.isAnnotationExists(method, FieldFilterSetting.class);
+        boolean result = AnnotationUtil.isAnnotationExists(mockIgnoreSettingsMethod, FieldFilterSetting.class);
         assertTrue(result);
     }
 
     @Test
-    public void testGetSettingAnnotations() {
-        Method method = MockMethods.findMethodByName("multipleAnnotation");
-        assertNotNull(method);
+    public void testIsAnnotationExistsNull() {
+        boolean result = AnnotationUtil.isAnnotationExists(mockIgnoreSettingsMethod, null);
+        assertFalse(result);
+    }
 
-        FieldFilterSetting[] annotations = AnnotationUtil.getSettingAnnotations(method);
+    @Test
+    public void testIsAnnotationExistsZeroLength() {
+        boolean result = AnnotationUtil.isAnnotationExists(mockIgnoreSettingsMethod);
+        assertFalse(result);
+    }
+
+    @Test
+    public void testGetSettingAnnotations() {
+        FieldFilterSetting[] annotations = AnnotationUtil.getSettingAnnotations(multipleAnnotation);
         assertTrue(annotations.length > 0);
     }
 
     @Test
     public void testGetStrategyAnnotations() {
-        Method method = MockMethods.findMethodByName("mockIgnoreStrategiesMethod");
-        assertNotNull(method);
-
-        SessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(method);
+        SessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(mockIgnoreStrategiesMethod);
         assertTrue(annotations.length > 0);
     }
 
     @Test
     public void testGetStrategiesAnnotations() {
-        Method method = MockMethods.findMethodByName("mockIgnoreStrategiesMethod");
-        assertNotNull(method);
-
-        SessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(method);
+        SessionStrategy[] annotations = AnnotationUtil.getStrategyAnnotations(mockIgnoreStrategiesMethod);
         assertTrue(annotations.length > 0);
     }
+
+
 
 }
