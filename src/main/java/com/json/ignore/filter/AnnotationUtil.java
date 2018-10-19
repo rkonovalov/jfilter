@@ -1,12 +1,18 @@
 package com.json.ignore.filter;
 
+import com.json.ignore.FileUtil;
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.field.FieldFilterSettings;
+import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This is util class used to help find annotations in class or method
@@ -81,6 +87,26 @@ public class AnnotationUtil {
             return strategies.value();
         } else
             return AnnotationUtil.getDeclaredAnnotations(method, SessionStrategy.class);
+    }
+
+    public static Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
+        Map<Class, List<String>> fields = new HashMap<>();
+
+        if (strategy != null) {
+            strategy.getFilters().forEach(filter -> {
+                Class clazz = FileUtil.getClassByName(filter.getClassName());
+                List<String> items;
+
+                if (fields.containsKey(clazz)) {
+                    items = fields.get(clazz);
+                } else
+                    items = new ArrayList<>();
+
+                filter.getFields().forEach(field -> items.add(field.getName()));
+                fields.put(clazz, items);
+            });
+        }
+        return fields;
     }
 
 
