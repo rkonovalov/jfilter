@@ -92,8 +92,8 @@ public class FileFilter extends BaseFilter {
         fileConfig = parseFile(config.fileName());
     }
 
-    private Class getClassByName(String className) {
-        if(className != null) {
+    private Class getClassByName(String className) throws FieldClassNotFoundException {
+        if(className != null && !className.isEmpty()) {
             try {
                 return Class.forName(className);
             } catch (ClassNotFoundException e) {
@@ -108,17 +108,22 @@ public class FileFilter extends BaseFilter {
 
         if (strategy != null) {
             strategy.getFilters().forEach(filter -> {
-                Class clazz = getClassByName(filter.getClassName());
-                List<String> items;
+                try {
+                    Class clazz = getClassByName(filter.getClassName());
+                    List<String> items;
 
-                if (fields.containsKey(clazz)) {
-                    items = fields.get(clazz);
-                } else
-                    items = new ArrayList<>();
+                    if (fields.containsKey(clazz)) {
+                        items = fields.get(clazz);
+                    } else
+                        items = new ArrayList<>();
 
-                filter.getFields().forEach(field -> items.add(field.getName()));
+                    filter.getFields().forEach(field -> items.add(field.getName()));
 
-                fields.put(clazz, items);
+                    fields.put(clazz, items);
+                } catch (FieldClassNotFoundException e) {
+                    //todo
+                    e.printStackTrace();
+                }
             });
         }
         return fields;
