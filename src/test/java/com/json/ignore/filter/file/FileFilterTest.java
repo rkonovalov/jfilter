@@ -9,9 +9,7 @@ import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class FileFilterTest {
     private ServletServerHttpRequest request;
@@ -57,5 +55,14 @@ public class FileFilterTest {
         filter.setControllerClass(FileFilterTest.class);
         filter.filter(user);
         assertNotEquals(defaultMockUser, user);
+    }
+
+    @Test
+    public void testFilterNullObject() {
+        FileFilter filter = new FileFilter(request, methodParameter);
+        //Change class name where method is exists, just for test
+        filter.setControllerClass(FileFilterTest.class);
+        filter.filter(null);
+        assertNotNull(filter.getControllerClass());
     }
 }
