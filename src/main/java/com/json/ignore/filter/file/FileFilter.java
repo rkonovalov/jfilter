@@ -4,6 +4,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.FieldClassNotFoundException;
 import com.json.ignore.FileIOException;
+import com.json.ignore.FileUtil;
 import com.json.ignore.filter.AnnotationUtil;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.field.FieldFilterProcessor;
@@ -92,16 +93,7 @@ public class FileFilter extends BaseFilter {
         fileConfig = parseFile(config.fileName());
     }
 
-    private Class getClassByName(String className) throws FieldClassNotFoundException {
-        if(className != null && !className.isEmpty()) {
-            try {
-                return Class.forName(className);
-            } catch (ClassNotFoundException e) {
-                throw new FieldClassNotFoundException(e);
-            }
-        } else
-            return null;
-    }
+
 
     private Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
         Map<Class, List<String>> fields = new HashMap<>();
@@ -109,7 +101,7 @@ public class FileFilter extends BaseFilter {
         if (strategy != null) {
             strategy.getFilters().forEach(filter -> {
                 try {
-                    Class clazz = getClassByName(filter.getClassName());
+                    Class clazz = FileUtil.getClassByName(filter.getClassName());
                     List<String> items;
 
                     if (fields.containsKey(clazz)) {
