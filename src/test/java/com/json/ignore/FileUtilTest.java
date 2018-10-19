@@ -20,8 +20,11 @@ package com.json.ignore;
 
 import com.json.ignore.filter.file.FileConfig;
 import org.junit.Test;
+
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -121,14 +124,14 @@ public class FileUtilTest {
         assertNull(config);
     }
 
-    @Test
+    @Test(expected = FieldAccessException.class)
     public void testXmlFileToClassIncorrectClass() {
         File file = FileUtil.resourceFile(EXISTED_FILE);
         FileUtilTest config = FileUtil.xmlFileToClass(file, FileUtilTest.class);
         assertNull(config);
     }
 
-    @Test
+    @Test(expected = FieldAccessException.class)
     public void testXmlFileToClassBadFile() {
         File file = FileUtil.resourceFile("bad_config.xml");
         FileUtilTest config = FileUtil.xmlFileToClass(file, FileUtilTest.class);
