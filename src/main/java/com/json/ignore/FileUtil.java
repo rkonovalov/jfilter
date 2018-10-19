@@ -50,11 +50,12 @@ public class FileUtil {
         return inputStreamToString(fileToInputStream(file));
     }
 
-    public static String inputStreamToString(InputStream is) {
-        if (is != null) {
+    public static String inputStreamToString(InputStream inputStream) {
+        if (inputStream != null) {
             StringBuilder sb = new StringBuilder();
             String line;
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            BufferedReader br = new BufferedReader(reader);
 
             try {
                 while ((line = br.readLine()) != null) {
@@ -70,16 +71,16 @@ public class FileUtil {
     }
 
     public static <T> T xmlFileToClass(File file, Class<T> clazz) {
-        if (file != null) {
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.setDefaultUseWrapper(false);
-            String xml = FileUtil.inputStreamToString(file);
-            try {
-                return xml != null ? xmlMapper.readValue(xml, clazz) : null;
-            } catch (IOException e) {
-                return null;
-            }
+        if (file == null)
+            return null;
+
+        XmlMapper xmlMapper = new XmlMapper();
+        xmlMapper.setDefaultUseWrapper(false);
+        String xml = FileUtil.inputStreamToString(file);
+        try {
+            return xml != null ? xmlMapper.readValue(xml, clazz) : null;
+        } catch (IOException e) {
+            return null;
         }
-        return null;
     }
 }
