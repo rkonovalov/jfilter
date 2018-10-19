@@ -33,8 +33,6 @@ public class FileFilter extends BaseFilter {
         setConfig(methodParameter);
     }
 
-
-
     private FileConfig parseFile(File file) {
         if (file != null) {
             try {
@@ -51,17 +49,8 @@ public class FileFilter extends BaseFilter {
         return null;
     }
 
-    private FileConfig parseFile(String fileName) throws FileIOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL url = classLoader.getResource(fileName);
-        if (url != null) {
-            String pathName = url.getFile();
-            if (pathName != null) {
-                File file = new File(pathName);
-                return parseFile(file);
-            }
-        }
-        return null;
+    private FileConfig parseFile(String fileName) {
+        return parseFile(FileUtil.resourceFile(fileName));
     }
 
     /**
@@ -75,7 +64,6 @@ public class FileFilter extends BaseFilter {
         FileFilterSetting config = AnnotationUtil.getDeclaredAnnotation(methodParameter.getMethod(), FileFilterSetting.class);
         fileConfig = parseFile(config.fileName());
     }
-
 
 
     private Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
