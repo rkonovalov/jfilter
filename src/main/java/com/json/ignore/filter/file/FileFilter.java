@@ -96,19 +96,21 @@ public class FileFilter extends BaseFilter {
     private Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
         Map<Class, List<String>> fields = new HashMap<>();
 
-        strategy.getFilters().forEach(filter -> {
-            Class clazz = getClassByName(filter.getClassName());
-            List<String> items;
+        if (strategy != null) {
+            strategy.getFilters().forEach(filter -> {
+                Class clazz = getClassByName(filter.getClassName());
+                List<String> items;
 
-            if (fields.containsKey(clazz)) {
-                items = fields.get(clazz);
-            } else
-                items = new ArrayList<>();
+                if (fields.containsKey(clazz)) {
+                    items = fields.get(clazz);
+                } else
+                    items = new ArrayList<>();
 
-            filter.getFields().forEach(field -> items.add(field.getName()));
+                filter.getFields().forEach(field -> items.add(field.getName()));
 
-            fields.put(clazz, items);
-        });
+                fields.put(clazz, items);
+            });
+        }
         return fields;
     }
 
