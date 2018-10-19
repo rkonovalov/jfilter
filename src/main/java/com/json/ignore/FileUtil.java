@@ -54,7 +54,10 @@ public class FileUtil {
 
     public static String inputStreamToString(InputStream inputStream) {
         if (inputStream != null) {
-            return new BufferedReader(new InputStreamReader(inputStream))
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            return bufferedReader
                     .lines()
                     .collect(Collectors.joining(""));
         } else
