@@ -2,9 +2,11 @@ package com.json.ignore;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import sun.misc.IOUtils;
 
 import java.io.*;
 import java.net.URL;
+import java.util.stream.Collectors;
 
 public class FileUtil {
 
@@ -52,6 +54,13 @@ public class FileUtil {
 
     public static String inputStreamToString(InputStream inputStream) {
         if (inputStream != null) {
+            return new BufferedReader(new InputStreamReader(inputStream))
+                    .lines()
+                    .collect(Collectors.joining(""));
+        } else
+            return null;
+
+       /* if (inputStream != null) {
             StringBuilder sb = new StringBuilder();
             String line;
             InputStreamReader reader = new InputStreamReader(inputStream);
@@ -67,7 +76,7 @@ public class FileUtil {
             }
             return sb.toString();
         } else
-            return null;
+            return null;*/
     }
 
     public static <T> T xmlFileToClass(File file, Class<T> clazz) {
