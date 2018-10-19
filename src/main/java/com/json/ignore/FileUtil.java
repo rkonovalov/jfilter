@@ -19,15 +19,10 @@ public class FileUtil {
     }
 
     public static String getFileName(String resourceName) {
-        if (resourceName != null && !resourceName.isEmpty()) {
+        if (resourceName != null) {
             ClassLoader classLoader = FileUtil.class.getClassLoader();
             URL url = classLoader.getResource(resourceName);
-
-            try {
-                return url != null ? url.getFile() : null;
-            } catch (NullPointerException e) {
-                return null;
-            }
+            return url != null ? url.getFile() : null;
         }
         return null;
     }
