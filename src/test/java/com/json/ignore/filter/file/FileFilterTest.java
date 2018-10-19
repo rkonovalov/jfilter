@@ -10,11 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
-
-import java.io.IOException;
-
 import static org.junit.Assert.assertNotNull;
-
 
 public class FileFilterTest {
     private ServletServerHttpRequest request;

@@ -16,7 +16,6 @@ import java.util.*;
  * This class used for filtration of object's fields based on xml file configuration
  */
 public class FileFilter extends BaseFilter {
-    private FileFilterSetting config;
     private FileConfig fileConfig;
     private Class controllerClass;
 
@@ -74,7 +73,7 @@ public class FileFilter extends BaseFilter {
     @Override
     public void setConfig(MethodParameter methodParameter) {
         controllerClass = methodParameter.getContainingClass();
-        config = AnnotationUtil.getDeclaredAnnotation(methodParameter.getMethod(), FileFilterSetting.class);
+        FileFilterSetting config = AnnotationUtil.getDeclaredAnnotation(methodParameter.getMethod(), FileFilterSetting.class);
         fileConfig = parseFile(config.fileName());
     }
 

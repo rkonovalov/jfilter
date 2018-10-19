@@ -14,6 +14,23 @@ import java.util.List;
 @JacksonXmlRootElement(localName = "config")
 public class FileConfig implements Serializable {
 
+    @JacksonXmlProperty(localName = "controller")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    private List<Controller> controllers;
+
+    public FileConfig() {
+        this.controllers = new ArrayList<>();
+    }
+
+    public List<FileConfig.Controller> getControllers() {
+        return controllers;
+    }
+
+    public FileConfig setControllers(List<FileConfig.Controller> controllers) {
+        this.controllers = controllers;
+        return this;
+    }
+
     @JacksonXmlRootElement(localName = "controller")
     public static class Controller {
         @JacksonXmlProperty(localName = "class-name", isAttribute = true)
@@ -139,27 +156,5 @@ public class FileConfig implements Serializable {
             return this;
         }
     }
-
-
-
-    @JacksonXmlProperty(localName = "controller")
-    @JacksonXmlElementWrapper(useWrapping = false)
-    private List<Controller> controllers;
-
-    public FileConfig() {
-        this.controllers = new ArrayList<>();
-    }
-
-    public List<FileConfig.Controller> getControllers() {
-        return controllers;
-    }
-
-    public FileConfig setControllers(List<FileConfig.Controller> controllers) {
-        this.controllers = controllers;
-        return this;
-    }
-
-
-
 
 }
