@@ -67,7 +67,7 @@ public class FileFilter extends BaseFilter {
         return null;
     }
 
-    public FileConfig parseFile(String fileName) throws FileIOException {
+    private FileConfig parseFile(String fileName) throws FileIOException {
         ClassLoader classLoader = getClass().getClassLoader();
         URL url = classLoader.getResource(fileName);
         if (url != null) {
@@ -93,11 +93,14 @@ public class FileFilter extends BaseFilter {
     }
 
     private Class getClassByName(String className) {
-        try {
-            return Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            throw new FieldClassNotFoundException(e);
-        }
+        if(className != null) {
+            try {
+                return Class.forName(className);
+            } catch (ClassNotFoundException e) {
+                throw new FieldClassNotFoundException(e);
+            }
+        } else
+            return null;
     }
 
     private Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
