@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 
+import javax.servlet.http.HttpSession;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -34,8 +36,24 @@ public class BaseFilterTest {
 
     @Test
     public void testSessionAttributeNotExists() {
-        BaseFilter baseFilter = new FieldFilter(request, methodParameter);
+        BaseFilter baseFilter = new FieldFilter(request.getServletRequest().getSession(), methodParameter);
         boolean result = baseFilter.isSessionPropertyExists("ROLE", "SOME VALUE");
+        assertFalse(result);
+    }
+
+    @Test
+    public void testNullRequest() {
+        ServletServerHttpRequest nullRequest = null;
+        BaseFilter baseFilter = new FieldFilter(nullRequest, methodParameter);
+        boolean result = baseFilter.isSessionPropertyExists("ROLE", "ADMIN");
+        assertFalse(result);
+    }
+
+    @Test
+    public void testNullSession() {
+        HttpSession nullSession = null;
+        BaseFilter baseFilter = new FieldFilter(nullSession, methodParameter);
+        boolean result = baseFilter.isSessionPropertyExists("ROLE", "ADMIN");
         assertFalse(result);
     }
 }
