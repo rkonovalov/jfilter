@@ -29,10 +29,7 @@ public class FileUtil {
 
     public static File resourceFile(String resourceName) {
         String fileName = getFileName(resourceName);
-        if (fileName != null) {
-            return new File(fileName);
-        }
-        return null;
+        return fileName != null ? new File(fileName) : null;
     }
 
     public static FileInputStream fileToInputStream(File file) {
