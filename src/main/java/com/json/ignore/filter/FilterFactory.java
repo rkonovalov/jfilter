@@ -9,7 +9,6 @@ import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import com.json.ignore.filter.strategy.StrategyFilter;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
@@ -57,7 +56,4 @@ public class FilterFactory {
         return false;
     }
 
-    public static <T extends BaseFilter> T init(T clazz) {
-        return (T) BaseFilter.build();
-    }
 }

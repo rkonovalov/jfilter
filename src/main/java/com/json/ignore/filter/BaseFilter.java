@@ -51,10 +51,6 @@ public abstract class BaseFilter {
 
     public abstract void setConfig(MethodParameter methodParameter);
 
-    public static BaseFilter build() {
-        return null;
-    }
-
     protected boolean isSessionPropertyExists(String attributeName, String attributeValue) {
         if (session != null) {
             Object sessionObject = session.getAttribute(attributeName);
