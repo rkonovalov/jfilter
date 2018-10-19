@@ -101,10 +101,13 @@ public class FileFilterTest {
 
     @Test
     public void testFilterClassesDuplicated() {
+        MockUser user = MockClasses.getUserMock();
+        assertNotNull(user);
+
         FileFilter filter = new FileFilter(request, fileAnnotationClassDuplicated);
         //Change class name where method is exists, just for test
         filter.setControllerClass(FileFilterTest.class);
-        filter.filter(null);
+        filter.filter(user);
         assertNotNull(filter.getControllerClass());
     }
 }
