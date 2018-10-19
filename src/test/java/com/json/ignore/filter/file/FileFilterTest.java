@@ -14,13 +14,22 @@ import static org.junit.Assert.*;
 public class FileFilterTest {
     private ServletServerHttpRequest request;
     private MethodParameter methodParameter;
+    private MethodParameter fileAnnotationNoControllers;
+    private MethodParameter fileAnnotationNoStrategies;
     private MockUser defaultMockUser;
 
     @Before
     public void init() {
         request = MockHttpRequest.getMockAdminRequest();
+
         methodParameter = MockMethods.findMethodParameterByName("fileAnnotation");
         assertNotNull(methodParameter);
+
+        fileAnnotationNoControllers = MockMethods.findMethodParameterByName("fileAnnotationNoControllers");
+        assertNotNull(fileAnnotationNoControllers);
+
+        fileAnnotationNoStrategies = MockMethods.findMethodParameterByName("fileAnnotationNoStrategies");
+        assertNotNull(fileAnnotationNoStrategies);
 
         defaultMockUser = MockClasses.getUserMock();
         assertNotNull(defaultMockUser);
@@ -64,5 +73,27 @@ public class FileFilterTest {
         filter.setControllerClass(FileFilterTest.class);
         filter.filter(null);
         assertNotNull(filter.getControllerClass());
+    }
+
+    @Test
+    public void testFilterNoControllers() {
+
+        FileFilter filter = new FileFilter(request, fileAnnotationNoControllers);
+        //Change class name where method is exists, just for test
+        filter.setControllerClass(FileFilterTest.class);
+        filter.filter(null);
+        assertNotNull(filter.getControllerClass());
+
+    }
+
+    @Test
+    public void testFilterNoStrategies() {
+
+        FileFilter filter = new FileFilter(request, fileAnnotationNoStrategies);
+        //Change class name where method is exists, just for test
+        filter.setControllerClass(FileFilterTest.class);
+        filter.filter(null);
+        assertNotNull(filter.getControllerClass());
+
     }
 }

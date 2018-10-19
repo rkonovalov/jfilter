@@ -55,6 +55,17 @@ public class MockMethods {
         return false;
     }
 
+    @FileFilterSetting(fileName = "config_no_controllers.xml")
+    public boolean fileAnnotationNoControllers() {
+        return false;
+    }
+
+    @FileFilterSetting(fileName = "config_no_strategies.xml")
+    public boolean fileAnnotationNoStrategies() {
+        return false;
+    }
+
+
     public static Method findMethodByName(String methodName) {
         Method[] methods = MockMethods.class.getDeclaredMethods();
 

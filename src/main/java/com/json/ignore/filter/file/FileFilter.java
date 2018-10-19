@@ -48,9 +48,6 @@ public class FileFilter extends BaseFilter {
         fileConfig = parseFile(config.fileName());
     }
 
-
-
-
     public Class getControllerClass() {
         return controllerClass;
     }
