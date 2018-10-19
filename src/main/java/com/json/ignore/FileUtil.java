@@ -1,5 +1,6 @@
 package com.json.ignore;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.*;
@@ -73,11 +74,8 @@ public class FileUtil {
             try {
                 XmlMapper xmlMapper = new XmlMapper();
                 xmlMapper.setDefaultUseWrapper(false);
-
                 String xml = FileUtil.inputStreamToString(file);
-                if (xml != null) {
-                    return xmlMapper.readValue(xml, clazz);
-                }
+                return xml != null ? xmlMapper.readValue(xml, clazz) : null;
             } catch (IOException e) {
                 return null;
             }
