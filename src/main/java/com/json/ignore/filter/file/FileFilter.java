@@ -83,7 +83,7 @@ public class FileFilter extends BaseFilter {
 
     @Override
     public void filter(Object object) throws FieldAccessException {
-        if (object != null && fileConfig != null) {
+        if (object != null) {
             for (FileConfig.Controller controller : fileConfig.getControllers()) {
                 if (controllerClass.getName().equals(controller.getClassName())) {
 
