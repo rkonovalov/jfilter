@@ -1,8 +1,5 @@
 package com.json.ignore.filter.file;
 
-import com.json.ignore.FileIOException;
-import com.json.ignore.filter.BaseFilter;
-import com.json.ignore.filter.FilterFactory;
 import mock.MockClasses;
 import mock.MockHttpRequest;
 import mock.MockMethods;
@@ -11,9 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
-
-import java.io.File;
-
 import static org.junit.Assert.assertNotNull;
 
 public class FileFilterTest {

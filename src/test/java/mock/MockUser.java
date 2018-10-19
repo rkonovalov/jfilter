@@ -3,6 +3,7 @@ package mock;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 public class MockUser implements Serializable {
     private Integer id;
@@ -145,5 +146,32 @@ public class MockUser implements Serializable {
     public MockUser setShortValue(short shortValue) {
         this.shortValue = shortValue;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MockUser)) return false;
+        MockUser user = (MockUser) o;
+        return intValue == user.intValue &&
+                boolValue == user.boolValue &&
+                byteValue == user.byteValue &&
+                charValue == user.charValue &&
+                Double.compare(user.doubleValue, doubleValue) == 0 &&
+                Float.compare(user.floatValue, floatValue) == 0 &&
+                longValue == user.longValue &&
+                shortValue == user.shortValue &&
+                Objects.equals(id, user.id) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(fullName, user.fullName) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(collectionValue, user.collectionValue) &&
+                Objects.equals(mapValue, user.mapValue);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, email, fullName, password, intValue, collectionValue, mapValue, boolValue, byteValue, charValue, doubleValue, floatValue, longValue, shortValue);
     }
 }
