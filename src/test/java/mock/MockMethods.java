@@ -64,6 +64,10 @@ public class MockMethods {
     public boolean fileAnnotationNoStrategies() {
         return false;
     }
+    @FileFilterSetting(fileName = "config_class_duplicated.xml")
+    public boolean fileAnnotationClassDuplicated() {
+        return false;
+    }
 
 
     public static Method findMethodByName(String methodName) {

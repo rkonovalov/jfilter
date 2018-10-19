@@ -16,6 +16,7 @@ public class FileFilterTest {
     private MethodParameter methodParameter;
     private MethodParameter fileAnnotationNoControllers;
     private MethodParameter fileAnnotationNoStrategies;
+    private MethodParameter fileAnnotationClassDuplicated;
     private MockUser defaultMockUser;
 
     @Before
@@ -30,6 +31,9 @@ public class FileFilterTest {
 
         fileAnnotationNoStrategies = MockMethods.findMethodParameterByName("fileAnnotationNoStrategies");
         assertNotNull(fileAnnotationNoStrategies);
+
+        fileAnnotationClassDuplicated = MockMethods.findMethodParameterByName("fileAnnotationClassDuplicated");
+        assertNotNull(fileAnnotationClassDuplicated);
 
         defaultMockUser = MockClasses.getUserMock();
         assertNotNull(defaultMockUser);
@@ -88,12 +92,19 @@ public class FileFilterTest {
 
     @Test
     public void testFilterNoStrategies() {
-
         FileFilter filter = new FileFilter(request, fileAnnotationNoStrategies);
         //Change class name where method is exists, just for test
         filter.setControllerClass(FileFilterTest.class);
         filter.filter(null);
         assertNotNull(filter.getControllerClass());
+    }
 
+    @Test
+    public void testFilterClassesDuplicated() {
+        FileFilter filter = new FileFilter(request, fileAnnotationClassDuplicated);
+        //Change class name where method is exists, just for test
+        filter.setControllerClass(FileFilterTest.class);
+        filter.filter(null);
+        assertNotNull(filter.getControllerClass());
     }
 }
