@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE fileConfig PUBLIC
+        "-//json/json-ignore mapping DTD 1.0//EN"
+        "https://rkonovalov.github.io/json-ignore-schema-1.0.dtd">
+<config>
+    <controller class-name="com.json.ignore.filter.file.FileFilterTest">
+
+    </controller>
+</config>
