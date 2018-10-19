@@ -41,8 +41,11 @@ public class FileUtil {
     }
 
     public static <T> T xmlFileToClass(File file, Class<T> clazz) {
+        if (file == null)
+            return null;
+
         try {
-            return file != null ? new XmlMapper().readValue(file, clazz) : null;
+            return new XmlMapper().readValue(file, clazz);
         } catch (IOException e) {
             return null;
         }
