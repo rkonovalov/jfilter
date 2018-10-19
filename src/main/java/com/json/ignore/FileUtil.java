@@ -43,12 +43,14 @@ public class FileUtil {
     }
 
     public static File resourceFile(String fileName) {
-        ClassLoader classLoader = FileUtil.class.getClassLoader();
-        URL url = classLoader.getResource(fileName);
-        if (url != null) {
-            String pathName = url.getFile();
-            if (!pathName.isEmpty()) {
-                return new File(pathName);
+        if (fileName != null) {
+            ClassLoader classLoader = FileUtil.class.getClassLoader();
+            URL url = classLoader.getResource(fileName);
+            if (url != null) {
+                String pathName = url.getFile();
+                if (!pathName.isEmpty()) {
+                    return new File(pathName);
+                }
             }
         }
         return null;

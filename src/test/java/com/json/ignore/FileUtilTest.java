@@ -68,8 +68,14 @@ public class FileUtilTest {
     }
 
     @Test
-    public void testResourceFileNull() {
+    public void testResourceFileUnExistFile() {
         File file = FileUtil.resourceFile(UN_EXISTED_FILE);
+        assertNull(file);
+    }
+
+    @Test
+    public void testResourceFileNull() {
+        File file = FileUtil.resourceFile(null);
         assertNull(file);
     }
 
