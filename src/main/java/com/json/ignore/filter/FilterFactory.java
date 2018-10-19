@@ -15,11 +15,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Filtration method factory
+ * Filters factory
  */
 public class FilterFactory {
+    /**
+     * List of available filters
+     */
     private static final Map<Class, FilterBuilder> filterList = initFilterList();
 
+    /**
+     * Filter list initialization
+     * @return {@link HashMap} map of filters which can process specified annotations
+     */
     private static Map<Class, FilterBuilder> initFilterList() {
         Map<Class, FilterBuilder> items = new HashMap<>();
         items.put(FieldFilterSetting.class, FieldFilter::new);
@@ -30,6 +37,12 @@ public class FilterFactory {
         return items;
     }
 
+    /**
+     * Retrieve filter from filter list by annotation defined in method
+     * @param request {@link ServletServerHttpRequest} http request
+     * @param methodParameter {@link MethodParameter} method
+     * @return object instance of inherited class from {@link BaseFilter}
+     */
     public static BaseFilter getFromFactory(ServletServerHttpRequest request, MethodParameter methodParameter) {
         for (Annotation annotation : methodParameter.getMethod().getDeclaredAnnotations()) {
             if (FilterFactory.filterList.containsKey(annotation.annotationType())) {

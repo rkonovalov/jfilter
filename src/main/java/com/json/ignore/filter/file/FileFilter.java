@@ -8,11 +8,13 @@ import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.field.FieldFilterProcessor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
-
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.*;
 
+/**
+ * This class used for filtration of object's fields based on xml file configuration
+ */
 public class FileFilter extends BaseFilter {
     private FileFilterSetting config;
     private FileConfig fileConfig;
