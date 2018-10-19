@@ -42,7 +42,7 @@ public class FieldFilter extends BaseFilter {
      * @param methodParameter {@link MethodParameter} method parameter
      */
     @Override
-    public void setConfig(MethodParameter methodParameter) {
+    protected void setConfig(MethodParameter methodParameter) {
         config = AnnotationUtil.getSettingAnnotations(methodParameter.getMethod());
     }
 

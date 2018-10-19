@@ -49,7 +49,7 @@ public abstract class BaseFilter {
         return session;
     }
 
-    public abstract void setConfig(MethodParameter methodParameter);
+    protected abstract void setConfig(MethodParameter methodParameter);
 
     public boolean isSessionPropertyExists(String attributeName, String attributeValue) {
         if (session != null) {
