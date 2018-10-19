@@ -46,12 +46,16 @@ public class FileUtil {
         if (fileName != null) {
             ClassLoader classLoader = FileUtil.class.getClassLoader();
             URL url = classLoader.getResource(fileName);
-            if (url != null) {
+
+            try {
                 String pathName = url.getFile();
                 if (!pathName.isEmpty()) {
                     return new File(pathName);
                 }
+            } catch (NullPointerException e) {
+                return null;
             }
+
         }
         return null;
     }
