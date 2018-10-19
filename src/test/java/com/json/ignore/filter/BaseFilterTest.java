@@ -11,9 +11,7 @@ import org.springframework.http.server.ServletServerHttpRequest;
 
 import javax.servlet.http.HttpSession;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class BaseFilterTest {
     private ServletServerHttpRequest request;
@@ -43,17 +41,27 @@ public class BaseFilterTest {
 
     @Test
     public void testNullRequest() {
-        ServletServerHttpRequest nullRequest = null;
-        BaseFilter baseFilter = new FieldFilter(nullRequest, methodParameter);
+        BaseFilter baseFilter = new FieldFilter((ServletServerHttpRequest) null, methodParameter);
         boolean result = baseFilter.isSessionPropertyExists("ROLE", "ADMIN");
         assertFalse(result);
     }
 
     @Test
     public void testNullSession() {
-        HttpSession nullSession = null;
-        BaseFilter baseFilter = new FieldFilter(nullSession, methodParameter);
+        BaseFilter baseFilter = new FieldFilter((HttpSession) null, methodParameter);
         boolean result = baseFilter.isSessionPropertyExists("ROLE", "ADMIN");
         assertFalse(result);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testNullMethod() {
+        BaseFilter baseFilter = new FieldFilter(request, null);
+        assertNotNull(baseFilter);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testNullAllParameters() {
+        BaseFilter baseFilter = new FieldFilter((HttpSession) null, null);
+        assertNotNull(baseFilter);
     }
 }
