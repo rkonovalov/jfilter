@@ -76,7 +76,7 @@ public class FileUtil {
                 xmlMapper.setDefaultUseWrapper(false);
                 String xml = FileUtil.inputStreamToString(file);
                 return xml != null ? xmlMapper.readValue(xml, clazz) : null;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 return null;
             }
         }
