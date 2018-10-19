@@ -1,4 +1,4 @@
-package com.json.ignore.filter;
+package com.json.ignore.filter.field;
 
 import java.lang.annotation.*;
 

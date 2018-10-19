@@ -1,16 +1,18 @@
 package com.json.ignore.filter;
 
+import com.json.ignore.FieldAccessException;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
+
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 /**
  * This class is base class strategy filtration
- *
  */
 
-public abstract class Filter {
+public abstract class BaseFilter {
     /**
      * Http session, may be null
      */
@@ -18,9 +20,10 @@ public abstract class Filter {
 
     /**
      * Default constructor
+     *
      * @param serverHttpRequest {@link ServerHttpRequest} servlet request
      */
-    public Filter(ServerHttpRequest serverHttpRequest) {
+    public BaseFilter(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
             this.session = servletRequest.getServletRequest().getSession();
@@ -29,21 +32,34 @@ public abstract class Filter {
 
     /**
      * Constructor
+     *
      * @param session session
      */
-    public Filter(HttpSession session) {
+    public BaseFilter(HttpSession session) {
         this.session = session;
     }
 
     /**
-     *
      * @param object {@link Object} object which fields will be filtrated
-     * @throws IllegalAccessException exception of illegal access
+     * @throws FieldAccessException exception of illegal access
      */
-    public abstract void filter(Object object) throws IllegalAccessException;
+    public abstract void filter(Object object) throws FieldAccessException;
 
-    public HttpSession getSession() {
+    protected HttpSession getSession() {
         return session;
     }
+
     public abstract void setConfig(MethodParameter methodParameter);
+
+    public static BaseFilter build() {
+        return null;
+    }
+
+    protected boolean isSessionPropertyExists(String attributeName, String attributeValue) {
+        if (session != null) {
+            Object sessionObject = session.getAttribute(attributeName);
+            return Objects.equals(sessionObject, attributeValue);
+        } else
+            return false;
+    }
 }

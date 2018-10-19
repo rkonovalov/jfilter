@@ -1,4 +1,4 @@
-package com.json.ignore.filter;
+package com.json.ignore.filter.field;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,7 +14,7 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class FieldFilterProcessorTest {
+public class FieldProcessorTest {
     private static final String SERIALIZED_USER = "{\"id\":100,\"email\":\"mail@mail.com\",\"fullName\":\"Jane Doe\"," +
             "\"password\":\"1234567\",\"intValue\":0,\"collectionValue\":[\"Hello\",\"World\"],\"mapValue\":{\"name\":\"value\"}," +
             "\"boolValue\":true,\"byteValue\":100,\"charValue\":\"c\",\"doubleValue\":5.5,\"floatValue\":5.5,\"longValue\":100500,\"shortValue\":15}";
@@ -58,7 +58,7 @@ public class FieldFilterProcessorTest {
     }
 
     @Test
-    public void testUserIgnoreId() throws JsonProcessingException, IllegalAccessException {
+    public void testUserIgnoreId() throws JsonProcessingException {
         MockUser user = MockClasses.getUserMock();
         fieldFilterProcessor = new FieldFilterProcessor(MockUser.class, LIST_ID);
         fieldFilterProcessor.filterFields(user);
@@ -67,7 +67,7 @@ public class FieldFilterProcessorTest {
     }
 
     @Test
-    public void testConstructorMap() throws JsonProcessingException, IllegalAccessException {
+    public void testConstructorMap() throws JsonProcessingException {
         MockUser user = MockClasses.getUserMock();
         Map<Class, List<String>> ignores = new HashMap<>();
         ignores.put(MockUser.class, LIST_ALL);
@@ -78,7 +78,7 @@ public class FieldFilterProcessorTest {
     }
 
     @Test
-    public void testSingleAnnotationMethod() throws JsonProcessingException, IllegalAccessException {
+    public void testSingleAnnotationMethod() throws JsonProcessingException {
         Method method = MockMethods.findMethodByName("singleAnnotation");
         assertNotNull(method);
 
@@ -90,7 +90,7 @@ public class FieldFilterProcessorTest {
     }
 
     @Test
-    public void testMultipleAnnotationMethod() throws JsonProcessingException, IllegalAccessException {
+    public void testMultipleAnnotationMethod() throws JsonProcessingException {
         Method method = MockMethods.findMethodByName("multipleAnnotation");
         assertNotNull(method);
 
@@ -102,7 +102,7 @@ public class FieldFilterProcessorTest {
     }
 
     @Test
-    public void testByMethodParameter() throws JsonProcessingException, IllegalAccessException {
+    public void testByMethodParameter() throws JsonProcessingException {
         Method method = MockMethods.findMethodByName("singleAnnotation");
         assertNotNull(method);
 

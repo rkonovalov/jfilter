@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.json.ignore.filter;
+package com.json.ignore.filter.strategy;
 
 import mock.MockHttpRequest;
 import mock.MockMethods;
@@ -49,7 +49,7 @@ public class StrategyFilterTest {
     }
 
     @Test
-    public void ignoreFields() throws IllegalAccessException {
+    public void ignoreFields() {
         MockUser user = new MockUser();
         user.setId(100);
         MethodParameter methodParameter = MockMethods.findMethodParameterByName("mockIgnoreStrategiesMethod");
@@ -62,7 +62,7 @@ public class StrategyFilterTest {
     }
 
     @Test
-    public void ignoreFieldsWithoutAnnotations() throws IllegalAccessException {
+    public void ignoreFieldsWithoutAnnotations() {
         MockUser user = new MockUser();
         user.setId(100);
         MethodParameter methodParameter = MockMethods.findMethodParameterByName("methodWithoutAnnotations");
@@ -75,7 +75,7 @@ public class StrategyFilterTest {
     }
 
     @Test
-    public void ignoreRequestFieldsWithoutAnnotations() throws IllegalAccessException {
+    public void ignoreRequestFieldsWithoutAnnotations() {
         MockUser user = new MockUser();
         user.setId(100);
         MethodParameter methodParameter = MockMethods.findMethodParameterByName("methodWithoutAnnotations");

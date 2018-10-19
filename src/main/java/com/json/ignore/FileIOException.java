@@ -16,17 +16,15 @@
  * limitations under the License.
  */
 
-package com.json.ignore.filter;
-
-import java.lang.annotation.*;
+package com.json.ignore;
 
 /**
  * @author Ruslan {@literal <rkonovalov86@gmail.com>}
  * @version 1.0
  */
 
-@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface FileFilterSetting {
-    String fileName() default "";
+public class FileIOException extends RuntimeException {
+    public FileIOException(Throwable cause) {
+        super(cause);
+    }
 }

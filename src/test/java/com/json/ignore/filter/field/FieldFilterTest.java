@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.json.ignore.filter;
+package com.json.ignore.filter.field;
 
 import mock.MockHttpRequest;
 import mock.MockMethods;
@@ -47,7 +47,7 @@ public class FieldFilterTest {
     }
 
     @Test
-    public void testFieldFilterWithRequest() throws IllegalAccessException {
+    public void testFieldFilterWithRequest() {
         MockUser user = new MockUser();
         MethodParameter methodParameter = MockMethods.findMethodParameterByName("singleAnnotation");
         assertNotNull(methodParameter);
@@ -58,7 +58,7 @@ public class FieldFilterTest {
     }
 
     @Test
-    public void testFieldFilterWithSession() throws IllegalAccessException {
+    public void testFieldFilterWithSession() {
         MockUser user = new MockUser();
         MethodParameter methodParameter = MockMethods.findMethodParameterByName("singleAnnotation");
         assertNotNull(methodParameter);

@@ -1,9 +1,7 @@
-package com.json.ignore.strategy;
+package com.json.ignore.filter;
 
-import com.json.ignore.filter.FieldFilter;
-import com.json.ignore.filter.Filter;
-import com.json.ignore.filter.FilterFactory;
-import com.json.ignore.filter.StrategyFilter;
+import com.json.ignore.filter.field.FieldFilter;
+import com.json.ignore.filter.strategy.StrategyFilter;
 import mock.MockMethods;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
@@ -37,7 +35,7 @@ public class FilterFactoryTest {
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
 
-        Filter filter = FilterFactory.getIgnore(null, methodParameter);
+        BaseFilter filter = FilterFactory.getFromFactory(null, methodParameter);
         assertNotNull(filter);
 
         assertEquals(filter.getClass(), FieldFilter.class);
@@ -50,7 +48,7 @@ public class FilterFactoryTest {
 
         MethodParameter methodParameter = new MethodParameter(method, 0);
 
-        Filter filter = FilterFactory.getIgnore(null, methodParameter);
+        BaseFilter filter = FilterFactory.getFromFactory(null, methodParameter);
         assertNotNull(filter);
 
         assertEquals(filter.getClass(), StrategyFilter.class);
@@ -61,7 +59,7 @@ public class FilterFactoryTest {
         Method method = MockMethods.findMethodByName("methodWithoutAnnotations");
         assertNotNull(method);
         MethodParameter methodParameter = new MethodParameter(method, 0);
-        Filter filter = FilterFactory.getIgnore(null, methodParameter);
+        BaseFilter filter = FilterFactory.getFromFactory(null, methodParameter);
         assertNull(filter);
 
 

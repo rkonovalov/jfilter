@@ -1,9 +1,10 @@
-package com.json.ignore;
+package com.json.ignore.filter;
 
-import com.json.ignore.filter.FieldFilterSetting;
-import com.json.ignore.filter.FieldFilterSettings;
-import com.json.ignore.strategy.SessionStrategies;
-import com.json.ignore.strategy.SessionStrategy;
+import com.json.ignore.filter.field.FieldFilterSetting;
+import com.json.ignore.filter.field.FieldFilterSettings;
+import com.json.ignore.filter.strategy.SessionStrategies;
+import com.json.ignore.filter.strategy.SessionStrategy;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
@@ -41,8 +42,8 @@ public class AnnotationUtil {
      * @param annotationClasses name of annotation to search
      * @return if one of specified annotation is found, else returns false
      */
-    public static boolean isAnnotationExists(Method method, Class... annotationClasses) {
-        for (Class clazz : annotationClasses) {
+    public static <T extends Annotation> boolean isAnnotationExists(Method method, Class<T>... annotationClasses) {
+        for (Class<T> clazz : annotationClasses) {
             if (getDeclaredAnnotations(method, clazz).length > 0)
                 return true;
         }

@@ -1,4 +1,4 @@
-package com.json.ignore.filter;
+package com.json.ignore.filter.strategy;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,16 +7,14 @@ import java.lang.annotation.Target;
 
 /**
  *
- * Repeatable annotation of {@link FieldFilterSetting} interface
+ * Repeatable annotation of {@link SessionStrategy} interface
  */
-
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FieldFilterSettings {
-
+public @interface SessionStrategies {
     /**
      *
-     * @return array of {@link FieldFilterSetting}
+     * @return array of {@link SessionStrategy}
      */
-    FieldFilterSetting[] value();
+    SessionStrategy[] value();
 }

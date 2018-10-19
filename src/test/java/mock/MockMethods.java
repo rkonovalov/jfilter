@@ -1,10 +1,10 @@
 package mock;
 
-import com.json.ignore.filter.FieldFilterSetting;
-import com.json.ignore.strategy.SessionStrategies;
-import com.json.ignore.strategy.SessionStrategy;
+import com.json.ignore.filter.field.FieldFilterSetting;
+import com.json.ignore.filter.file.FileFilterSetting;
+import com.json.ignore.filter.strategy.SessionStrategies;
+import com.json.ignore.filter.strategy.SessionStrategy;
 import org.springframework.core.MethodParameter;
-
 import java.lang.reflect.Method;
 
 
@@ -47,6 +47,11 @@ public class MockMethods {
     }
 
     public boolean methodWithoutAnnotations() {
+        return false;
+    }
+
+    @FileFilterSetting(fileName = "config.xml")
+    public boolean fileAnnotation() {
         return false;
     }
 

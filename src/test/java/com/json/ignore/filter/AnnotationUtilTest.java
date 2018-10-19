@@ -1,10 +1,12 @@
-package com.json.ignore;
+package com.json.ignore.filter;
 
-import com.json.ignore.filter.FieldFilterSetting;
-import com.json.ignore.strategy.SessionStrategy;
+import com.json.ignore.filter.field.FieldFilterSetting;
+import com.json.ignore.filter.strategy.SessionStrategy;
 import mock.MockMethods;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class AnnotationUtilTest {
