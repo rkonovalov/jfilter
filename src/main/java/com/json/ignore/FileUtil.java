@@ -1,6 +1,7 @@
 package com.json.ignore;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
 import java.io.*;
 import java.net.URL;
 
@@ -40,15 +41,10 @@ public class FileUtil {
     }
 
     public static <T> T xmlFileToClass(File file, Class<T> clazz) {
-        if (file != null) {
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.setDefaultUseWrapper(false);
-            try {
-                return xmlMapper.readValue(file, clazz);
-            } catch (IOException e) {
-                return null;
-            }
+        try {
+            return file != null ? new XmlMapper().readValue(file, clazz) : null;
+        } catch (IOException e) {
+            return null;
         }
-        return null;
     }
 }
