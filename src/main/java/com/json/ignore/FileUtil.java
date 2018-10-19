@@ -42,10 +42,7 @@ public class FileUtil {
 
     public static String fileToString(File file) {
         FileInputStream inputStream = fileToInputStream(file);
-        if (inputStream != null) {
-            return inputStreamToString(inputStream);
-        } else
-            return null;
+        return inputStream != null ? inputStreamToString(inputStream) : null;
     }
 
     public static String inputStreamToString(File file) {
