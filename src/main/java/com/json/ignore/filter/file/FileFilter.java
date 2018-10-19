@@ -2,6 +2,7 @@ package com.json.ignore.filter.file;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.FieldAccessException;
+import com.json.ignore.FieldClassNotFoundException;
 import com.json.ignore.FileIOException;
 import com.json.ignore.filter.AnnotationUtil;
 import com.json.ignore.filter.BaseFilter;
@@ -60,8 +61,7 @@ public class FileFilter extends BaseFilter {
             File file = new File(pathName);
             return parseFile(file);
         } catch (IOException e) {
-
-            return null;
+            throw new FileIOException(e);
         }
     }
 
@@ -81,7 +81,7 @@ public class FileFilter extends BaseFilter {
         try {
             return Class.forName(className);
         } catch (ClassNotFoundException e) {
-            return null;
+            throw new FieldClassNotFoundException(e);
         }
     }
 
