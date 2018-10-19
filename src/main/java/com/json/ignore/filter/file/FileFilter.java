@@ -30,7 +30,7 @@ public class FileFilter extends BaseFilter {
         setConfig(methodParameter);
     }
 
-    private static String inputStreamToString(InputStream is) throws FileIOException {
+    private String inputStreamToString(InputStream is) throws FileIOException {
         StringBuilder sb = new StringBuilder();
         String line;
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
