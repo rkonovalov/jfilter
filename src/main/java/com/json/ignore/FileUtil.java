@@ -1,12 +1,8 @@
 package com.json.ignore;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import sun.misc.IOUtils;
-
 import java.io.*;
 import java.net.URL;
-import java.util.stream.Collectors;
 
 public class FileUtil {
 
@@ -43,56 +39,16 @@ public class FileUtil {
         }
     }
 
-    public static String fileToString(File file) {
-        FileInputStream inputStream = fileToInputStream(file);
-        return inputStream != null ? inputStreamToString(inputStream) : null;
-    }
-
-    public static String inputStreamToString(File file) {
-        return inputStreamToString(fileToInputStream(file));
-    }
-
-    public static String inputStreamToString(InputStream inputStream) {
-        if (inputStream != null) {
-            InputStreamReader reader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(reader);
-
-            return bufferedReader
-                    .lines()
-                    .collect(Collectors.joining(""));
-        } else
-            return null;
-
-       /* if (inputStream != null) {
-            StringBuilder sb = new StringBuilder();
-            String line;
-            InputStreamReader reader = new InputStreamReader(inputStream);
-            BufferedReader br = new BufferedReader(reader);
-
+    public static <T> T xmlFileToClass(File file, Class<T> clazz) {
+        if (file != null) {
+            XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.setDefaultUseWrapper(false);
             try {
-                while ((line = br.readLine()) != null) {
-                    sb.append(line);
-                }
-                br.close();
+                return xmlMapper.readValue(file, clazz);
             } catch (IOException e) {
                 return null;
             }
-            return sb.toString();
-        } else
-            return null;*/
-    }
-
-    public static <T> T xmlFileToClass(File file, Class<T> clazz) {
-        if (file == null)
-            return null;
-
-        XmlMapper xmlMapper = new XmlMapper();
-        xmlMapper.setDefaultUseWrapper(false);
-        String xml = FileUtil.inputStreamToString(file);
-        try {
-            return xml != null ? xmlMapper.readValue(xml, clazz) : null;
-        } catch (IOException e) {
-            return null;
         }
+        return null;
     }
 }

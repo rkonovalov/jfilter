@@ -20,11 +20,8 @@ package com.json.ignore;
 
 import com.json.ignore.filter.file.FileConfig;
 import org.junit.Test;
-
-import javax.servlet.FilterConfig;
 import java.io.File;
 import java.io.FileInputStream;
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -109,50 +106,6 @@ public class FileUtilTest {
     public void testFileToInputStreamNull() {
         FileInputStream inputStream = FileUtil.fileToInputStream(null);
         assertNull(inputStream);
-    }
-
-    @Test
-    public void testFileToStringNotNull() {
-        File file = FileUtil.resourceFile(EXISTED_FILE);
-        String xml = FileUtil.fileToString(file);
-        assertNotNull(xml);
-    }
-
-    @Test
-    public void testFileToStringNull() {
-        File file = FileUtil.resourceFile(UN_EXISTED_FILE);
-        String xml = FileUtil.fileToString(file);
-        assertNull(xml);
-    }
-
-    @Test
-    public void testInputStreamToStringStreamNotNull() {
-        File file = FileUtil.resourceFile(EXISTED_FILE);
-        FileInputStream inputStream = FileUtil.fileToInputStream(file);
-        String xml = FileUtil.inputStreamToString(inputStream);
-        assertNotNull(xml);
-    }
-
-    @Test
-    public void testInputStreamToStringStreamNull() {
-        File file = FileUtil.resourceFile(UN_EXISTED_FILE);
-        FileInputStream inputStream = FileUtil.fileToInputStream(file);
-        String xml = FileUtil.inputStreamToString(inputStream);
-        assertNull(xml);
-    }
-
-    @Test
-    public void testInputStreamToStringFileNotNull() {
-        File file = FileUtil.resourceFile(EXISTED_FILE);
-        String xml = FileUtil.inputStreamToString(file);
-        assertNotNull(xml);
-    }
-
-    @Test
-    public void testInputStreamToStringFileNull() {
-        File file = FileUtil.resourceFile(UN_EXISTED_FILE);
-        String xml = FileUtil.inputStreamToString(file);
-        assertNull(xml);
     }
 
     @Test
