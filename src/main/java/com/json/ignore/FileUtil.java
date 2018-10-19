@@ -49,8 +49,10 @@ public class FileUtil {
 
             try {
                 String pathName = url.getFile();
-                if (!pathName.isEmpty()) {
+                try {
                     return new File(pathName);
+                } catch (NullPointerException e) {
+                    return null;
                 }
             } catch (NullPointerException e) {
                 return null;
