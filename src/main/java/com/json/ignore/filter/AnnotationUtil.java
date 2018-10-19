@@ -46,11 +46,12 @@ public class AnnotationUtil {
      */
     @SafeVarargs
     public static <T extends Annotation> boolean isAnnotationExists(Method method, Class<T>... annotationClasses) {
-        if (annotationClasses != null)
+        if (annotationClasses != null) {
             for (Class<T> clazz : annotationClasses) {
                 if (getDeclaredAnnotations(method, clazz).length > 0)
                     return true;
             }
+        }
         return false;
     }
 
