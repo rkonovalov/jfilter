@@ -28,12 +28,12 @@ import java.net.URL;
 
 public class FileUtil {
 
-    public static Class getClassByName(String className) throws FieldClassNotFoundException {
+    public static Class getClassByName(String className) {
         if (className != null && !className.isEmpty()) {
             try {
                 return Class.forName(className);
             } catch (ClassNotFoundException e) {
-                throw new FieldClassNotFoundException(e);
+                return null;
             }
         } else
             return null;
@@ -64,17 +64,17 @@ public class FileUtil {
 
     public static String fileToString(File file) {
         FileInputStream inputStream = fileToInputStream(file);
-        if(inputStream != null) {
+        if (inputStream != null) {
             return inputStreamToString(inputStream);
         } else
             return null;
     }
 
-    public static String inputStreamToString(File file) throws FileIOException {
+    public static String inputStreamToString(File file) {
         return inputStreamToString(fileToInputStream(file));
     }
 
-    public static String inputStreamToString(InputStream is) throws FileIOException {
+    public static String inputStreamToString(InputStream is) {
         if (is != null) {
             StringBuilder sb = new StringBuilder();
             String line;
@@ -86,7 +86,7 @@ public class FileUtil {
                 }
                 br.close();
             } catch (IOException e) {
-                throw new FileIOException(e);
+                return null;
             }
             return sb.toString();
         } else
