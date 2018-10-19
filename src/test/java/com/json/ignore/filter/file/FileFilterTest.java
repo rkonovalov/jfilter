@@ -40,7 +40,7 @@ public class FileFilterTest {
     }
 
     @Test
-    public void testFilterEqual() {
+    public void testFilteredObjectEqual() {
         MockUser user = MockClasses.getUserMock();
         FileFilter filter = new FileFilter(request, methodParameter);
         filter.filter(user);
@@ -48,7 +48,7 @@ public class FileFilterTest {
     }
 
     @Test
-    public void testFilterNotEqual() {
+    public void testFilteredObjectNotEqual() {
         MockUser user = MockClasses.getUserMock();
         FileFilter filter = new FileFilter(request, methodParameter);
         //Change class name where method is exists, just for test

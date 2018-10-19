@@ -9,6 +9,7 @@ import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.field.FieldFilterProcessor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
+
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.*;
@@ -31,27 +32,34 @@ public class FileFilter extends BaseFilter {
     }
 
     private String inputStreamToString(InputStream is) throws FileIOException {
-        StringBuilder sb = new StringBuilder();
-        String line;
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        if (is != null) {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-        try {
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
+            try {
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+                br.close();
+            } catch (IOException e) {
+                throw new FileIOException(e);
             }
-            br.close();
-        } catch (IOException e) {
-            throw new FileIOException(e);
-        }
-
-        return sb.toString();
+            return sb.toString();
+        } else
+            return null;
     }
 
     private FileConfig parseFile(File file) throws IOException {
-        XmlMapper xmlMapper = new XmlMapper();
-        xmlMapper.setDefaultUseWrapper(false);
-        String xml = inputStreamToString(new FileInputStream(file));
-        return xmlMapper.readValue(xml, FileConfig.class);
+        if (file != null) {
+            XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.setDefaultUseWrapper(false);
+            String xml = inputStreamToString(new FileInputStream(file));
+            if (xml != null) {
+                return xmlMapper.readValue(xml, FileConfig.class);
+            }
+        }
+        return null;
     }
 
     public FileConfig parseFile(String fileName) {
