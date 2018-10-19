@@ -71,12 +71,12 @@ public class FileUtil {
 
     public static <T> T xmlFileToClass(File file, Class<T> clazz) {
         if (file != null) {
+            XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.setDefaultUseWrapper(false);
+            String xml = FileUtil.inputStreamToString(file);
             try {
-                XmlMapper xmlMapper = new XmlMapper();
-                xmlMapper.setDefaultUseWrapper(false);
-                String xml = FileUtil.inputStreamToString(file);
                 return xml != null ? xmlMapper.readValue(xml, clazz) : null;
-            } catch (Exception e) {
+            } catch (IOException e) {
                 return null;
             }
         }
