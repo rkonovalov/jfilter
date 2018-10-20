@@ -41,7 +41,6 @@ public class FileFilterTest {
 
     @Test
     public void testRequest() {
-        MockUser user = MockClasses.getUserMock();
         FileFilter filter = new FileFilter(request, methodParameter);
         assertNotNull(filter);
     }
