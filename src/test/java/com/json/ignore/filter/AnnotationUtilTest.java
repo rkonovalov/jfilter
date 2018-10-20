@@ -9,8 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AnnotationUtilTest {
     private Method mockIgnoreSettingsMethod;
@@ -43,19 +42,13 @@ public class AnnotationUtilTest {
 
     @Test
     public void testIsAnnotationExists() {
-        boolean result = AnnotationUtil.isAnnotationExists(mockIgnoreSettingsMethod, FieldFilterSetting.class);
+        boolean result = AnnotationUtil.isAnnotationExists(mockIgnoreSettingsMethod, Collections.singletonList(FieldFilterSetting.class));
         assertTrue(result);
     }
 
     @Test
-    public void testIsAnnotationExistsNull() {
-        boolean result = AnnotationUtil.isAnnotationExists(mockIgnoreSettingsMethod, null);
-        assertFalse(result);
-    }
-
-    @Test
     public void testIsAnnotationExistsZeroLength() {
-        boolean result = AnnotationUtil.isAnnotationExists(mockIgnoreSettingsMethod);
+        boolean result = AnnotationUtil.isAnnotationExists(mockIgnoreSettingsMethod, new ArrayList<>());
         assertFalse(result);
     }
 

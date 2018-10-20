@@ -49,8 +49,8 @@ public class AnnotationUtil {
      * @param annotationClasses name of annotation to search
      * @return if one of specified annotation is found, else returns false
      */
-    @SafeVarargs
-    public static <T extends Annotation> boolean isAnnotationExists(Method method, Class<T>... annotationClasses) {
+    //@SafeVarargs
+    public static <T extends Annotation> boolean isAnnotationExists(Method method, List<Class<T>> annotationClasses) {
         if (annotationClasses != null) {
             for (Class<T> clazz : annotationClasses) {
                 if (getDeclaredAnnotations(method, clazz).length > 0)
