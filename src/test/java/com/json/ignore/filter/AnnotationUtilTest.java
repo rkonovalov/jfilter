@@ -8,9 +8,6 @@ import mock.MockClasses;
 import mock.MockMethods;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.jnlp.FileContents;
-
 import static org.junit.Assert.*;
 import java.lang.reflect.Method;
 import java.util.*;
