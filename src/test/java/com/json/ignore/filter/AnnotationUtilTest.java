@@ -2,11 +2,15 @@ package com.json.ignore.filter;
 
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.file.FileConfig;
+import com.json.ignore.filter.file.FileConfigTest;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import mock.MockClasses;
 import mock.MockMethods;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.jnlp.FileContents;
+
 import static org.junit.Assert.*;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -91,6 +95,26 @@ public class AnnotationUtilTest {
         FileConfig.Strategy strategy = new FileConfig.Strategy();
         Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(strategy);
         assertEquals(0, fields.keySet().size());
+    }
+
+    @Test
+    public void testGetStrategyFieldsMultiple() {
+        FileConfig mockConfig = MockClasses.getMockAdminFileConfig();
+
+        FileConfig.Strategy strategy = mockConfig.getControllers().get(0).getStrategies().get(0);
+
+        FileConfig.Filter filter = new FileConfig.Filter();
+        filter.setClassName(strategy.getFilters().get(0).getClassName());
+        filter.getFields().add(new FileConfig.Field().setName("password"));
+        filter.getFields().add(new FileConfig.Field().setName("email"));
+        filter.getFields().add(new FileConfig.Field().setName("email"));
+
+
+        strategy.getFilters().add(filter);
+        strategy.getFilters().add(filter);
+
+        Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(strategy);
+        assertEquals(3, fields.get(FileConfigTest.class).size());
     }
 
 

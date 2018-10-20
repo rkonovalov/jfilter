@@ -43,6 +43,6 @@ public class FileConfigTest {
         FileConfig.Strategy strategy = controller.getStrategies().get(0);
         FileConfig.Filter filter = strategy.getFilters().get(0);
         FileConfig.Field field = filter.getFields().get(0);
-        assertEquals(field.getName(), "password");
+        assertEquals(field.getName(), "id");
     }
 }

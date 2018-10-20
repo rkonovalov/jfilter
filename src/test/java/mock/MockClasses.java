@@ -33,17 +33,11 @@ public class MockClasses {
     }
 
     public static FileConfig getMockAdminFileConfig() {
-        FileConfig.Field idField = new FileConfig.Field();
-        idField.setName("id");
-
-        FileConfig.Field passwordField = new FileConfig.Field();
-        idField.setName("password");
-
 
         FileConfig.Filter filter = new FileConfig.Filter();
         filter.setClassName("com.json.ignore.filter.file.FileConfigTest");
-        filter.getFields().add(idField);
-        filter.getFields().add(passwordField);
+        filter.getFields().add(new FileConfig.Field().setName("id"));
+        filter.getFields().add(new FileConfig.Field().setName("password"));
 
         FileConfig.Strategy strategy = new FileConfig.Strategy();
         strategy.setAttributeName("ROLE")
