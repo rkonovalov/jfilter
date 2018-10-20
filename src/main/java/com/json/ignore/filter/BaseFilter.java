@@ -45,12 +45,22 @@ public abstract class BaseFilter {
      */
     public abstract void filter(Object object) throws FieldAccessException;
 
+    /**
+     * Get session from ServletRequest
+     * @return {@link HttpSession}
+     */
     protected HttpSession getSession() {
         return session;
     }
 
     protected abstract void setConfig(MethodParameter methodParameter);
 
+    /**
+     * Check for exist attribute name and value in session attributes
+     * @param attributeName {@link String} attribute name
+     * @param attributeValue {@link String} attribute value
+     * @return {@link Boolean} returns true if attribute name and value exist in session attributes, else false
+     */
     public boolean isSessionPropertyExists(String attributeName, String attributeValue) {
         if (session != null) {
             Object sessionObject = session.getAttribute(attributeName);
