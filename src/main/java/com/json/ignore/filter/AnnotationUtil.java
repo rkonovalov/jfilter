@@ -107,7 +107,10 @@ public class AnnotationUtil {
                 } else
                     items = new ArrayList<>();
 
-                filter.getFields().forEach(field -> items.add(field.getName()));
+                filter.getFields().forEach(field -> {
+                    if (!items.contains(field.getName()))
+                        items.add(field.getName());
+                });
                 fields.put(clazz, items);
             });
         }
