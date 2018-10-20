@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
-
 import static org.junit.Assert.*;
 
 public class FileFilterTest {
@@ -64,8 +63,6 @@ public class FileFilterTest {
     public void testFilteredObjectNotEqual() {
         MockUser user = MockClasses.getUserMock();
         FileFilter filter = new FileFilter(request, methodParameter);
-        //Change class name where method is exists, just for test
-        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(user);
         assertNotEquals(defaultMockUser, user);
     }
@@ -73,8 +70,6 @@ public class FileFilterTest {
     @Test
     public void testFilterNullObject() {
         FileFilter filter = new FileFilter(request, methodParameter);
-        //Change class name where method is exists, just for test
-        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(null);
         assertNotNull(filter.getControllerClass());
     }
@@ -83,8 +78,6 @@ public class FileFilterTest {
     public void testFilterNoControllers() {
 
         FileFilter filter = new FileFilter(request, fileAnnotationNoControllers);
-        //Change class name where method is exists, just for test
-        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(null);
         assertNotNull(filter.getControllerClass());
 
@@ -93,8 +86,6 @@ public class FileFilterTest {
     @Test
     public void testFilterNoStrategies() {
         FileFilter filter = new FileFilter(request, fileAnnotationNoStrategies);
-        //Change class name where method is exists, just for test
-        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(null);
         assertNotNull(filter.getControllerClass());
     }
@@ -105,8 +96,6 @@ public class FileFilterTest {
         assertNotNull(user);
 
         FileFilter filter = new FileFilter(request, fileAnnotationClassDuplicated);
-        //Change class name where method is exists, just for test
-        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(user);
         assertNotNull(filter.getControllerClass());
     }
