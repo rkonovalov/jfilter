@@ -9,6 +9,7 @@ import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import com.json.ignore.filter.strategy.StrategyFilter;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
@@ -52,6 +53,16 @@ public class FilterFactory {
             }
         }
         return null;
+    }
+
+    /**
+     * Retrieve filter from filter list by annotation defined in method
+     * @param request {@link ServerHttpRequest} http request
+     * @param methodParameter {@link MethodParameter} method
+     * @return object instance of inherited class from {@link BaseFilter}
+     */
+    public static BaseFilter getFromFactory(ServerHttpRequest request, MethodParameter methodParameter) {
+        return getFromFactory((ServletServerHttpRequest) request, methodParameter);
     }
 
     /**

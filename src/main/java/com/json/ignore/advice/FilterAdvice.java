@@ -21,6 +21,9 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
+        /*
+         * Attempt to find annotations in method and associated filter
+         */
         return FilterFactory.isAccept(methodParameter);
     }
 
@@ -28,8 +31,10 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
-
-        BaseFilter filter = FilterFactory.getFromFactory((ServletServerHttpRequest) serverHttpRequest, methodParameter);
+        /*
+         * Attempt to apply filter and filter/exclude fields from object
+         */
+        BaseFilter filter = FilterFactory.getFromFactory(serverHttpRequest, methodParameter);
         if (filter != null) {
             filter.filter(obj);
         }
