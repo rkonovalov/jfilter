@@ -24,8 +24,11 @@ public class FilterProvider {
             return items.get(key);
         } else {
             BaseFilter filter = FilterFactory.getFromFactory(serverHttpRequest, methodParameter);
-            items.put(key, filter);
-            return filter;
+            if (filter != null) {
+                items.put(key, filter);
+                return filter;
+            } else
+                return null;
         }
     }
 
