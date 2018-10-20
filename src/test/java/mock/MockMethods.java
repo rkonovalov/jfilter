@@ -86,6 +86,11 @@ public class MockMethods {
             return null;
     }
 
+    @FileFilterSetting(fileName = "config.xml")
+    public static MethodParameter methodWithParams(String email, String password) {
+        return findMethodParameterByName("methodWithParams");
+    }
+
 
 
 
