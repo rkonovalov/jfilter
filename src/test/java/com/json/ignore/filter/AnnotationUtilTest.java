@@ -54,6 +54,12 @@ public class AnnotationUtilTest {
     }
 
     @Test
+    public void testIsAnnotationExistsFalse() {
+        boolean result = AnnotationUtil.isAnnotationExists(MockMethods.methodWithoutAnnotations().getMethod(), new ArrayList<>());
+        assertFalse(result);
+    }
+
+    @Test
     public void testGetSettingAnnotations() {
         FieldFilterSetting[] annotations = AnnotationUtil.getSettingAnnotations(multipleAnnotation);
         assertTrue(annotations.length > 0);
