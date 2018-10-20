@@ -1,6 +1,7 @@
-package com.json.ignore;
+package com.json.ignore.filter;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.json.ignore.FieldAccessException;
 import java.io.*;
 import java.net.URL;
 

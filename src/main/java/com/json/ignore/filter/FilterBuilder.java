@@ -6,6 +6,7 @@ import org.springframework.http.server.ServletServerHttpRequest;
 /**
  * Interface used in FilterFactory for configuring list of filters
  */
+
 @FunctionalInterface
 public interface FilterBuilder {
     /**

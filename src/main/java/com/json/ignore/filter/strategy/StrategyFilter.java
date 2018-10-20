@@ -48,7 +48,7 @@ public class StrategyFilter extends BaseFilter {
     }
 
     /**
-     * BaseFilter object's fields if filtrating annotations and session is configured
+     * Attempt to filter/exclude object's fields if filter annotations is configured
      * @param object {@link Object} object which fields will be filtered
      * @throws FieldAccessException exception of illegal access
      */

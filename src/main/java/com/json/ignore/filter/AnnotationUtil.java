@@ -1,6 +1,5 @@
 package com.json.ignore.filter;
 
-import com.json.ignore.FileUtil;
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.field.FieldFilterSettings;
 import com.json.ignore.filter.file.FileConfig;
@@ -16,6 +15,7 @@ import java.util.Map;
 /**
  * This is util class used to help find annotations in class or method
  */
+
 public class AnnotationUtil {
 
     /**

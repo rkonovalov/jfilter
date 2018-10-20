@@ -18,6 +18,7 @@ import java.util.Map;
 /**
  * Filters factory
  */
+
 public class FilterFactory {
     /**
      * List of available filters

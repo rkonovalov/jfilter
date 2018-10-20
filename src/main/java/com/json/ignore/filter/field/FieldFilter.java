@@ -47,7 +47,7 @@ public class FieldFilter extends BaseFilter {
     }
 
     /**
-     * BaseFilter object's fields if filtrating annotations is configured
+     * Attempt to filter/exclude object's fields if filter annotations is configured
      * @param object {@link Object} object which fields will be filtered
      * @throws FieldAccessException exception of illegal access
      */
