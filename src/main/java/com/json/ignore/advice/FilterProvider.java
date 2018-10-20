@@ -32,10 +32,6 @@ public class FilterProvider {
         }
     }
 
-    public void clearCache() {
-        items.clear();
-    }
-
     public boolean isAccept(MethodParameter methodParameter) {
         return FilterFactory.isAccept(methodParameter);
     }
