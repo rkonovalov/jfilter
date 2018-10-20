@@ -41,6 +41,12 @@ public class FilterFactory {
         return items;
     }
 
+    /**
+     * Attempt to find equal annotation in method and in initialized filter list
+     *
+     * @param methodParameter {@link MethodParameter} method
+     * @return {@link Annotation} supported annotation, else null
+     */
     public static Annotation getFilterAnnotation(MethodParameter methodParameter) {
         for (Annotation annotation : methodParameter.getMethod().getDeclaredAnnotations()) {
             if (FilterFactory.filterList.containsKey(annotation.annotationType()))
@@ -65,16 +71,6 @@ public class FilterFactory {
                     .build(request, methodParameter);
         } else
             return null;
-
-
-        /*for (Annotation annotation : methodParameter.getMethod().getDeclaredAnnotations()) {
-            if (FilterFactory.filterList.containsKey(annotation.annotationType())) {
-                return FilterFactory.filterList
-                        .get(annotation.annotationType())
-                        .build(request, methodParameter);
-            }
-        }
-        return null;*/
     }
 
     /**
