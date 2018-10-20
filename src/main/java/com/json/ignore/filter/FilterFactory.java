@@ -11,6 +11,7 @@ import com.json.ignore.filter.strategy.StrategyFilter;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
+
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,7 @@ public class FilterFactory {
 
     /**
      * Filter list initialization
+     *
      * @return {@link HashMap} map of filters which can process specified annotations
      */
     private static Map<Class, FilterBuilder> initFilterList() {
@@ -39,26 +41,46 @@ public class FilterFactory {
         return items;
     }
 
-    /**
-     * Retrieve filter from filter list by annotation defined in method
-     * @param request {@link ServletServerHttpRequest} http request
-     * @param methodParameter {@link MethodParameter} method
-     * @return object instance of inherited class from {@link BaseFilter}
-     */
-    public static BaseFilter getFromFactory(ServletServerHttpRequest request, MethodParameter methodParameter) {
+    public static Annotation getFilterAnnotation(MethodParameter methodParameter) {
         for (Annotation annotation : methodParameter.getMethod().getDeclaredAnnotations()) {
-            if (FilterFactory.filterList.containsKey(annotation.annotationType())) {
-                return FilterFactory.filterList
-                        .get(annotation.annotationType())
-                        .build(request, methodParameter);
-            }
+            if (FilterFactory.filterList.containsKey(annotation.annotationType()))
+                return annotation;
         }
         return null;
     }
 
     /**
      * Retrieve filter from filter list by annotation defined in method
-     * @param request {@link ServerHttpRequest} http request
+     *
+     * @param request         {@link ServletServerHttpRequest} http request
+     * @param methodParameter {@link MethodParameter} method
+     * @return object instance of inherited class from {@link BaseFilter}
+     */
+    public static BaseFilter getFromFactory(ServletServerHttpRequest request, MethodParameter methodParameter) {
+        Annotation annotation = getFilterAnnotation(methodParameter);
+
+        if (annotation != null) {
+            return FilterFactory.filterList
+                    .get(annotation.annotationType())
+                    .build(request, methodParameter);
+        } else
+            return null;
+
+
+        /*for (Annotation annotation : methodParameter.getMethod().getDeclaredAnnotations()) {
+            if (FilterFactory.filterList.containsKey(annotation.annotationType())) {
+                return FilterFactory.filterList
+                        .get(annotation.annotationType())
+                        .build(request, methodParameter);
+            }
+        }
+        return null;*/
+    }
+
+    /**
+     * Retrieve filter from filter list by annotation defined in method
+     *
+     * @param request         {@link ServerHttpRequest} http request
      * @param methodParameter {@link MethodParameter} method
      * @return object instance of inherited class from {@link BaseFilter}
      */
