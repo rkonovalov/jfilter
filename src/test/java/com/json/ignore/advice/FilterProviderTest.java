@@ -15,29 +15,38 @@ public class FilterProviderTest {
     private FilterProvider filterProvider;
     private MockUser defaultUser;
     private ServletServerHttpRequest defaultRequest;
+    private MethodParameter fileAnnotationMethod;
+    private MethodParameter methodWithoutAnnotationsMethod;
+    private MethodParameter singleAnnotationMethod;
 
     @Before
     public void init() {
         filterProvider = new FilterProvider();
         defaultUser = MockClasses.getUserMock();
+        assertNotNull(defaultUser);
+
         defaultRequest = MockHttpRequest.getMockAdminRequest();
+        assertNotNull(defaultRequest);
+
+        fileAnnotationMethod = MockMethods.fileAnnotation();
+        assertNotNull(fileAnnotationMethod);
+
+        methodWithoutAnnotationsMethod = MockMethods.methodWithoutAnnotations();
+        assertNotNull(methodWithoutAnnotationsMethod);
+
+        singleAnnotationMethod = MockMethods.singleAnnotation();
+        assertNotNull(singleAnnotationMethod);
     }
 
     @Test
     public void testIsAccept() {
-        MethodParameter methodParameter = MockMethods.singleAnnotation();
-        assertNotNull(methodParameter);
-
-        boolean result = filterProvider.isAccept(methodParameter);
+        boolean result = filterProvider.isAccept(singleAnnotationMethod);
         assertTrue(result);
     }
 
     @Test
     public void testIsAcceptFalse() {
-        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
-        assertNotNull(methodParameter);
-
-        boolean result = filterProvider.isAccept(methodParameter);
+        boolean result = filterProvider.isAccept(methodWithoutAnnotationsMethod);
         assertFalse(result);
     }
 
@@ -46,10 +55,8 @@ public class FilterProviderTest {
         MockUser user = MockClasses.getUserMock();
         assertNotNull(user);
 
-        MethodParameter methodParameter = MockMethods.fileAnnotation();
-        assertNotNull(methodParameter);
 
-        filterProvider.filter(defaultRequest, methodParameter, user);
+        filterProvider.filter(defaultRequest, fileAnnotationMethod, user);
         assertNotEquals(defaultUser, user);
     }
 
@@ -58,20 +65,27 @@ public class FilterProviderTest {
         MockUser user = MockClasses.getUserMock();
         assertNotNull(user);
 
-        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
-        assertNotNull(methodParameter);
-
-        filterProvider.filter(defaultRequest, methodParameter, user);
+        filterProvider.filter(defaultRequest, methodWithoutAnnotationsMethod, user);
         assertEquals(defaultUser, user);
     }
 
     @Test
     public void testFilterNull() {
-        MethodParameter methodParameter = MockMethods.fileAnnotation();
-        assertNotNull(methodParameter);
-
-        Object result = filterProvider.filter(defaultRequest, methodParameter, null);
+        Object result = filterProvider.filter(defaultRequest, fileAnnotationMethod, null);
         assertNull(result);
+    }
+
+    @Test
+    public void testFilterTwice() {
+        MockUser user = MockClasses.getUserMock();
+        MockUser user2 = MockClasses.getUserMock();
+        assertNotNull(user);
+        assertNotNull(user2);
+
+        user = (MockUser) filterProvider.filter(defaultRequest, fileAnnotationMethod, user);
+        user2 = (MockUser) filterProvider.filter(defaultRequest, fileAnnotationMethod, user2);
+
+        assertEquals(user, user2);
     }
 
 
