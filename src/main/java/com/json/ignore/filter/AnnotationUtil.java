@@ -21,10 +21,10 @@ public class AnnotationUtil {
     /**
      * Search for specified type list of annotation
      *
-     * @param method          object's method which may have annotations
-     * @param annotationClass name of annotation to search
-     * @param <T>             generic class
-     * @return list of found annotations if found, else an array of length zero
+     * @param method {@link Method} object's method which may have annotations
+     * @param annotationClass {@link Annotation} name of annotation to search
+     * @param <T> {@link Annotation} generic class
+     * @return {@link Annotation} list of found annotations if found, else an array of length zero
      */
     public static <T extends Annotation> T[] getDeclaredAnnotations(Method method, Class<T> annotationClass) {
         return method.getDeclaredAnnotationsByType(annotationClass);
@@ -33,10 +33,10 @@ public class AnnotationUtil {
     /**
      * Search for specified type of annotation
      *
-     * @param method          object's method which may have annotation
-     * @param annotationClass name of annotation to search
-     * @param <T>             generic class
-     * @return annotation if found, else null
+     * @param method {@link Method} object's method which may have annotation
+     * @param annotationClass {@link Annotation} name of annotation to search
+     * @param <T> {@link Annotation} generic class
+     * @return {@link Annotation} annotation if found, else null
      */
     public static <T extends Annotation> T getDeclaredAnnotation(Method method, Class<T> annotationClass) {
         return method.getDeclaredAnnotation(annotationClass);
@@ -44,12 +44,11 @@ public class AnnotationUtil {
 
     /**
      * Check for annotations id declared in method
-     *
-     * @param method            object's method which may have annotation
-     * @param annotationClasses name of annotation to search
-     * @return if one of specified annotation is found, else returns false
+     * @param method {@link Method} object's method which may have annotation
+     * @param annotationClasses {@link Annotation} name of annotation to search
+     * @param <T> {@link Annotation}
+     * @return {@link Annotation} if one of specified annotation is found, else returns false
      */
-    //@SafeVarargs
     public static <T extends Annotation> boolean isAnnotationExists(Method method, List<Class<T>> annotationClasses) {
         if (annotationClasses != null) {
             for (Class<T> clazz : annotationClasses) {
@@ -63,7 +62,7 @@ public class AnnotationUtil {
     /**
      * Search for {@link FieldFilterSetting} in method
      *
-     * @param method object's method which may have annotation
+     * @param method {@link Method} object's method which may have annotation
      * @return list of {@link FieldFilterSetting} if this type of annotation declared in method
      */
     public static FieldFilterSetting[] getSettingAnnotations(Method method) {
@@ -77,7 +76,7 @@ public class AnnotationUtil {
     /**
      * Search for {@link SessionStrategy} in method
      *
-     * @param method bject's method which may have annotation
+     * @param method {@link Method} object's method which may have annotation
      * @return list of {@link SessionStrategy} if this type of annotation declared in method
      */
     public static SessionStrategy[] getStrategyAnnotations(Method method) {
@@ -88,6 +87,11 @@ public class AnnotationUtil {
             return AnnotationUtil.getDeclaredAnnotations(method, SessionStrategy.class);
     }
 
+    /**
+     * Convert strategy class in Map
+     * @param strategy {@link FileConfig.Strategy} filter strategy
+     * @return {@link HashMap} map of fields which should be filtered/excluded
+     */
     public static Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
         Map<Class, List<String>> fields = new HashMap<>();
 
