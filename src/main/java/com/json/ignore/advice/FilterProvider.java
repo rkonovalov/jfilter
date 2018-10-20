@@ -6,36 +6,41 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
+import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class FilterProvider {
-    private Map<String, BaseFilter> items;
+    private Map<Annotation, BaseFilter> items;
 
     public FilterProvider() {
         this.items = new ConcurrentHashMap<>();
     }
 
     private BaseFilter getBaseFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
-        String key = methodParameter.getMethod().toString();
+        //String key = methodParameter.getMethod().toString();
+        Annotation key = FilterFactory.getFilterAnnotation(methodParameter);
 
-        if (items.containsKey(key)) {
-            /*
-             * Retrieve filter from cache
-             */
-            return items.get(key);
-        } else {
-            /*
-             * Create and put filter in cache
-             */
-            BaseFilter filter = FilterFactory.getFromFactory(serverHttpRequest, methodParameter);
-            if (filter != null) {
-                items.put(key, filter);
-                return filter;
-            } else
-                return null;
-        }
+        if (key != null) {
+            if (items.containsKey(key)) {
+                /*
+                 * Retrieve filter from cache
+                 */
+                return items.get(key);
+            } else {
+                /*
+                 * Create and put filter in cache
+                 */
+                BaseFilter filter = FilterFactory.getFromFactory(serverHttpRequest, methodParameter);
+                if (filter != null) {
+                    items.put(key, filter);
+                    return filter;
+                } else
+                    return null;
+            }
+        } else
+            return null;
     }
 
     public boolean isAccept(MethodParameter methodParameter) {
@@ -48,5 +53,13 @@ public class FilterProvider {
             filter.filter(object);
         }
         return object;
+    }
+
+    public void clearCache() {
+        items.clear();
+    }
+
+    public int cacheSize() {
+        return items.size();
     }
 }
