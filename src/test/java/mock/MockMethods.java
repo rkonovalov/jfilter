@@ -36,6 +36,17 @@ public class MockMethods {
         return findMethodParameterByName("singleAnnotation");
     }
 
+    @FieldFilterSetting(fields = {"id"})
+    public static MethodParameter secondSingleAnnotation() {
+        return findMethodParameterByName("secondSingleAnnotation");
+    }
+
+    @FieldFilterSetting(fields = {"password"})
+    public static MethodParameter thirdSingleAnnotation() {
+        return findMethodParameterByName("thirdSingleAnnotation");
+    }
+
+
     @FieldFilterSetting(className = MockUser.class, fields = {"id", "email", "fullName"})
     @FieldFilterSetting(className = MockUser.class, fields = {"password", "intValue", "collectionValue"})
     @FieldFilterSetting(className = MockUser.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})

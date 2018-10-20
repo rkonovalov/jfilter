@@ -127,5 +127,36 @@ public class FilterProviderTest {
         assertTrue(result);
     }
 
+    @Test
+    public void testCacheSize1() {
+        filterProvider.clearCache();
+
+        MockUser user = MockClasses.getUserMock();
+        MockUser user2 = MockClasses.getUserMock();
+
+        filterProvider.filter(defaultRequest, MockMethods.singleAnnotation(), user);
+        filterProvider.filter(defaultRequest, MockMethods.secondSingleAnnotation(), user2);
+
+        assertEquals(1, filterProvider.cacheSize());
+
+    }
+
+    @Test
+    public void testCacheSize2() {
+        filterProvider.clearCache();
+
+        MockUser user = MockClasses.getUserMock();
+        MockUser user2 = MockClasses.getUserMock();
+
+        filterProvider.filter(defaultRequest, MockMethods.singleAnnotation(), user);
+        filterProvider.filter(defaultRequest, MockMethods.thirdSingleAnnotation(), user2);
+
+        filterProvider.filter(defaultRequest, MockMethods.singleAnnotation(), user);
+        filterProvider.filter(defaultRequest, MockMethods.thirdSingleAnnotation(), user2);
+
+        assertEquals(2, filterProvider.cacheSize());
+
+    }
+
 
 }
