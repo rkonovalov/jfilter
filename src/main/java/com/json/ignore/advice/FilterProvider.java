@@ -21,8 +21,14 @@ public class FilterProvider {
         String key = methodParameter.getMethod().toString();
 
         if (items.containsKey(key)) {
+            /*
+             * Retrieve filter from cache
+             */
             return items.get(key);
         } else {
+            /*
+             * Create and put filter in cache
+             */
             BaseFilter filter = FilterFactory.getFromFactory(serverHttpRequest, methodParameter);
             if (filter != null) {
                 items.put(key, filter);
