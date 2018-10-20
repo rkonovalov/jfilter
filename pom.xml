@@ -6,7 +6,7 @@
 
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <packaging>jar</packaging>
 
     <name>Json filter module</name>
@@ -104,15 +104,7 @@
         <profile>
             <id>release</id>
             <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <excludes>
-                            <exclude>*.xml</exclude>
-                        </excludes>
-                        <filtering>false</filtering>
-                    </resource>
-                </resources>
+
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -180,15 +172,7 @@
     </profiles>
 
     <build>
-     <!--  <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>*.xml</exclude>
-                </excludes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>-->
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
