@@ -18,45 +18,34 @@ If you are using Maven you need add next dependency
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 </dependency>
 ```
-* If you are using another build automation tool, you can find configuration string by this link: https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.3/jar
+* If you are using another build automation tool, you can find configuration string by this link: https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.4/jar
 
-## ControllerAdvice class example
-For handling response from Rest controller we should to create ControllerAdvice class
+## Activating of Spring Advice component
+You just need to add ComponentScan annotation which will find and activate filter advice class
+
+```text
+@ComponentScan({"com.json.ignore.advice"})
+```
+* Example 
 
 ```java
-@ControllerAdvice
-public class IgnoreAdvice implements ResponseBodyAdvice<Serializable> {
-    public static final AdvancedLogger logger = AdvancedLogger.getLogger(IgnoreAdvice.class);
-
-    @Override
-    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        return FilterFactory.isAccept(methodParameter);
-    }
-
-    @Override
-    public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
-                                        Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
-                                        ServerHttpResponse serverHttpResponse) {
-
-        Filter filter = FilterFactory.getIgnore(serverHttpRequest, methodParameter);
-        if(filter != null) {
-            try {
-                filter.jsonIgnore(obj);
-            } catch (IllegalAccessException e) {
-                logger.error(() -> e);
-            }
-        }
-
-        return obj;
-    }
+@Configuration
+@ComponentScan({"com.json.ignore.advice"})
+@EnableWebMvc
+@PropertySource("classpath:application.properties")
+public class AppConfig extends WebMvcConfigurerAdapter {
+    
 }
 ```
-### Notes
-* in this example has been used AdvancedLogger for logging instead of Log4J logger, but this is unnecessarily
-* Link to AdvancedLogger https://github.com/rkonovalov/advancedlogger
+
+If you are using XML Schema-based configuration, you can add next configuration
+
+```xml
+ <context:component-scan base-package="com.json.ignore.advice"/>
+```
 
 ## RestController class example
 This example Rest class provides user authentication process. 
@@ -354,8 +343,61 @@ As you can see we have added two session strategies. How it works?
 
 So you can specify different filtering strategies depending of attributes in session
 
+## File configuration
+Also you can configure filtration in xml Schema-based configuration
+
+* Example
+
+```java
+@RestController
+public class SessionService {
+    @Autowired
+    private UserController userController;   
+
+
+    //Check if session has attribute ROLE with value USER
+    @FileFilterSetting(fileName = "filter_configuration.xml")
+    @RequestMapping(value = "/users/signIn",
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})            
+    public User signIn(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return userController.signInUser(email, password);
+    }
+}
+```
+
+* And filter_configuration.xml example
+
+```xml
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE config PUBLIC
+        "-//json/json-ignore mapping DTD 1.0//EN"
+        "https://rkonovalov.github.io/json-ignore-schema-1.0.dtd">
+<config>
+    <controller class-name="com.SessionService">
+        <strategy attribute-name="ROLE" attribute-value="USER">
+                <filter class="com.User">
+                    <field name="id"/>
+                    <field name="password"/>
+                </filter>
+        </strategy>
+        <strategy attribute-name="ROLE" attribute-value="ADMIN">
+            <filter class="com.User">
+                <field name="id"/>
+            </filter>
+        </strategy>        
+    </controller>
+</config>
+```
+
+
 
 # Release notes
+
+## Version 1.0.4
+Added xml Schema-based configuration
+Fixed bugs 
 
 ## Version 1.0.3
 Added session strategy filtering
