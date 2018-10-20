@@ -89,20 +89,17 @@ public class FileFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object) throws FieldAccessException {
-        if (object != null) {
-            if (fileConfig.getControllers() != null)
-                for (FileConfig.Controller controller : fileConfig.getControllers()) {
-                    if (controllerClass.getName().equals(controller.getClassName())) {
-
-                        if (controller.getStrategies() != null)
-                            controller.getStrategies().forEach(strategy -> {
-                                if (isSessionPropertyExists(strategy.getAttributeName(), strategy.getAttributeValue())) {
-                                    FieldFilterProcessor processor = new FieldFilterProcessor(AnnotationUtil.getStrategyFields(strategy));
-                                    processor.filterFields(object);
-                                }
-                            });
-                    }
+        if (object != null && fileConfig.getControllers() != null) {
+            for (FileConfig.Controller controller : fileConfig.getControllers()) {
+                if (controllerClass.getName().equals(controller.getClassName()) && controller.getStrategies() != null) {
+                    controller.getStrategies().forEach(strategy -> {
+                        if (isSessionPropertyExists(strategy.getAttributeName(), strategy.getAttributeValue())) {
+                            FieldFilterProcessor processor = new FieldFilterProcessor(AnnotationUtil.getStrategyFields(strategy));
+                            processor.filterFields(object);
+                        }
+                    });
                 }
+            }
         }
     }
 
