@@ -32,7 +32,7 @@ public class FileConfig implements Serializable {
     }
 
     @JacksonXmlRootElement(localName = "controller")
-    public static class Controller {
+    public static class Controller implements Serializable {
         @JacksonXmlProperty(localName = "class-name", isAttribute = true)
         private String className;
 
