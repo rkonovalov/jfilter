@@ -5,6 +5,7 @@ import com.json.ignore.filter.field.FieldFilterSettings;
 import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ public class AnnotationUtil {
     /**
      * Search for specified type list of annotation
      *
-     * @param method {@link Method} object's method which may have annotations
+     * @param method          {@link Method} object's method which may have annotations
      * @param annotationClass {@link Annotation} name of annotation to search
-     * @param <T> {@link Annotation} generic class
+     * @param <T>             {@link Annotation} generic class
      * @return {@link Annotation} list of found annotations if found, else an array of length zero
      */
     public static <T extends Annotation> T[] getDeclaredAnnotations(Method method, Class<T> annotationClass) {
@@ -33,9 +34,9 @@ public class AnnotationUtil {
     /**
      * Search for specified type of annotation
      *
-     * @param method {@link Method} object's method which may have annotation
+     * @param method          {@link Method} object's method which may have annotation
      * @param annotationClass {@link Annotation} name of annotation to search
-     * @param <T> {@link Annotation} generic class
+     * @param <T>             {@link Annotation} generic class
      * @return {@link Annotation} annotation if found, else null
      */
     public static <T extends Annotation> T getDeclaredAnnotation(Method method, Class<T> annotationClass) {
@@ -44,18 +45,18 @@ public class AnnotationUtil {
 
     /**
      * Check for annotations id declared in method
-     * @param method {@link Method} object's method which may have annotation
+     *
+     * @param method            {@link Method} object's method which may have annotation
      * @param annotationClasses {@link Annotation} name of annotation to search
-     * @param <T> {@link Annotation}
+     * @param <T>               {@link Annotation}
      * @return {@link Annotation} if one of specified annotation is found, else returns false
      */
     public static <T extends Annotation> boolean isAnnotationExists(Method method, List<Class<T>> annotationClasses) {
-        if (annotationClasses != null) {
+        if (annotationClasses != null)
             for (Class<T> clazz : annotationClasses) {
                 if (getDeclaredAnnotations(method, clazz).length > 0)
                     return true;
             }
-        }
         return false;
     }
 
@@ -89,6 +90,7 @@ public class AnnotationUtil {
 
     /**
      * Convert strategy class in Map
+     *
      * @param strategy {@link FileConfig.Strategy} filter strategy
      * @return {@link HashMap} map of fields which should be filtered/excluded
      */

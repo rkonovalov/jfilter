@@ -36,11 +36,10 @@ public class FilterProvider {
                 if (filter != null) {
                     items.put(key, filter);
                     return filter;
-                } else
-                    return null;
+                }
             }
-        } else
-            return null;
+        }
+        return null;
     }
 
     public boolean isAccept(MethodParameter methodParameter) {
