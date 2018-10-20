@@ -20,7 +20,7 @@ public class BaseFilterTest {
     @Before
     public void init() {
         request = MockHttpRequest.getMockAdminRequest();
-        methodParameter = MockMethods.findMethodParameterByName("singleAnnotation");
+        methodParameter = MockMethods.singleAnnotation();
         assertNotNull(methodParameter);
     }
 

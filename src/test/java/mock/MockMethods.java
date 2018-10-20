@@ -11,8 +11,8 @@ import java.lang.reflect.Method;
 public class MockMethods {
 
     @FieldFilterSetting(fields = {"id", "password"})
-    public boolean mockIgnoreSettingsMethod() {
-        return false;
+    public static MethodParameter mockIgnoreSettingsMethod() {
+        return findMethodParameterByName("mockIgnoreSettingsMethod");
     }
 
     @SessionStrategies({
@@ -20,54 +20,52 @@ public class MockMethods {
                     @FieldFilterSetting(fields = {"id", "password"})
             })
     })
-    public boolean mockIgnoreStrategiesMethod() {
-        return false;
+    public static MethodParameter mockIgnoreStrategiesMethod() {
+        return findMethodParameterByName("mockIgnoreStrategiesMethod");
     }
-
 
     @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
             @FieldFilterSetting(fields = {"id", "password"})
     })
-    public boolean mockIgnoreStrategyMethod() {
-        return false;
+    public static MethodParameter mockIgnoreStrategyMethod() {
+        return findMethodParameterByName("mockIgnoreStrategyMethod");
     }
 
-
     @FieldFilterSetting(fields = {"id"})
-    public boolean singleAnnotation() {
-        return false;
+    public static MethodParameter singleAnnotation() {
+        return findMethodParameterByName("singleAnnotation");
     }
 
     @FieldFilterSetting(className = MockUser.class, fields = {"id", "email", "fullName"})
     @FieldFilterSetting(className = MockUser.class, fields = {"password", "intValue", "collectionValue"})
     @FieldFilterSetting(className = MockUser.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
     @FieldFilterSetting(className = MockUser.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
-    public boolean multipleAnnotation() {
-        return false;
+    public static MethodParameter multipleAnnotation() {
+        return findMethodParameterByName("multipleAnnotation");
     }
 
-    public boolean methodWithoutAnnotations() {
-        return false;
+    public static MethodParameter methodWithoutAnnotations() {
+        return findMethodParameterByName("methodWithoutAnnotations");
     }
 
     @FileFilterSetting(fileName = "config.xml")
-    public boolean fileAnnotation() {
-        return false;
+    public static MethodParameter fileAnnotation() {
+        return findMethodParameterByName("fileAnnotation");
     }
 
     @FileFilterSetting(fileName = "config_no_controllers.xml")
-    public boolean fileAnnotationNoControllers() {
-        return false;
+    public static MethodParameter fileAnnotationNoControllers() {
+        return findMethodParameterByName("fileAnnotationNoControllers");
     }
 
     @FileFilterSetting(fileName = "config_no_strategies.xml")
-    public boolean fileAnnotationNoStrategies() {
-        return false;
+    public static MethodParameter fileAnnotationNoStrategies() {
+        return findMethodParameterByName("fileAnnotationNoStrategies");
     }
 
     @FileFilterSetting(fileName = "config_class_duplicated.xml")
-    public boolean fileAnnotationClassDuplicated() {
-        return false;
+    public static MethodParameter fileAnnotationClassDuplicated() {
+        return findMethodParameterByName("fileAnnotationClassDuplicated");
     }
 
     public static Method findMethodByName(String methodName) {
@@ -80,7 +78,7 @@ public class MockMethods {
         return null;
     }
 
-    public static MethodParameter findMethodParameterByName(String methodName) {
+    private static MethodParameter findMethodParameterByName(String methodName) {
         Method method = findMethodByName(methodName);
         if (method != null) {
             return new MethodParameter(method, 0);

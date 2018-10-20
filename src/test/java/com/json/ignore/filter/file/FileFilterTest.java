@@ -23,16 +23,16 @@ public class FileFilterTest {
     public void init() {
         request = MockHttpRequest.getMockAdminRequest();
 
-        methodParameter = MockMethods.findMethodParameterByName("fileAnnotation");
+        methodParameter = MockMethods.fileAnnotation();
         assertNotNull(methodParameter);
 
-        fileAnnotationNoControllers = MockMethods.findMethodParameterByName("fileAnnotationNoControllers");
+        fileAnnotationNoControllers = MockMethods.fileAnnotationNoControllers();
         assertNotNull(fileAnnotationNoControllers);
 
-        fileAnnotationNoStrategies = MockMethods.findMethodParameterByName("fileAnnotationNoStrategies");
+        fileAnnotationNoStrategies = MockMethods.fileAnnotationNoStrategies();
         assertNotNull(fileAnnotationNoStrategies);
 
-        fileAnnotationClassDuplicated = MockMethods.findMethodParameterByName("fileAnnotationClassDuplicated");
+        fileAnnotationClassDuplicated = MockMethods.fileAnnotationClassDuplicated();
         assertNotNull(fileAnnotationClassDuplicated);
 
         defaultMockUser = MockClasses.getUserMock();

@@ -27,7 +27,7 @@ public class StrategyFilterTest {
     public void ignoreFields() {
         MockUser user = new MockUser();
         user.setId(100);
-        MethodParameter methodParameter = MockMethods.findMethodParameterByName("mockIgnoreStrategiesMethod");
+        MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod();
         assertNotNull(methodParameter);
 
         StrategyFilter strategyFilter = new StrategyFilter(this.session, methodParameter);
@@ -40,7 +40,7 @@ public class StrategyFilterTest {
     public void ignoreFieldsWithoutAnnotations() {
         MockUser user = new MockUser();
         user.setId(100);
-        MethodParameter methodParameter = MockMethods.findMethodParameterByName("methodWithoutAnnotations");
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
         assertNotNull(methodParameter);
 
         StrategyFilter strategyFilter = new StrategyFilter(this.session, methodParameter);
@@ -53,7 +53,7 @@ public class StrategyFilterTest {
     public void ignoreRequestFieldsWithoutAnnotations() {
         MockUser user = new MockUser();
         user.setId(100);
-        MethodParameter methodParameter = MockMethods.findMethodParameterByName("methodWithoutAnnotations");
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
         assertNotNull(methodParameter);
 
         StrategyFilter strategyFilter = new StrategyFilter(this.serverHttpRequest, methodParameter);

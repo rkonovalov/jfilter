@@ -26,7 +26,7 @@ public class FieldFilterTest {
         session = serverHttpRequest.getServletRequest().getSession();
         assertNotNull(session);
 
-        methodParameter = MockMethods.findMethodParameterByName("singleAnnotation");
+        methodParameter = MockMethods.singleAnnotation();
         assertNotNull(methodParameter);
 
         defaultMockUser = MockClasses.getUserMock();
