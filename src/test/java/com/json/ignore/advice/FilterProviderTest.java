@@ -88,5 +88,44 @@ public class FilterProviderTest {
         assertEquals(user, user2);
     }
 
+    @Test
+    public void testFilterRoleAdmin() {
+        MockUser user = MockClasses.getUserMock();
+        assertNotNull(user);
+
+        user = (MockUser) filterProvider.filter(defaultRequest, fileAnnotationMethod, user);
+        boolean result = user.getId() == null && user.getPassword() != null;
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void testFilterRoleUser() {
+        MockUser user = MockClasses.getUserMock();
+        assertNotNull(user);
+
+        defaultRequest.getServletRequest().getSession().setAttribute("ROLE", "USER");
+
+        user = (MockUser) filterProvider.filter(defaultRequest, fileAnnotationMethod, user);
+
+        boolean result = user.getId() == null && user.getPassword() == null;
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void testFilterRoleNull() {
+        MockUser user = MockClasses.getUserMock();
+        assertNotNull(user);
+
+        defaultRequest.getServletRequest().getSession().setAttribute("ROLE", null);
+
+        user = (MockUser) filterProvider.filter(defaultRequest, fileAnnotationMethod, user);
+
+        boolean result = user.getId() != null && user.getPassword() != null;
+
+        assertTrue(result);
+    }
+
 
 }
