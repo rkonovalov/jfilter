@@ -65,5 +65,14 @@ public class FilterProviderTest {
         assertEquals(defaultUser, user);
     }
 
+    @Test
+    public void testFilterNull() {
+        MethodParameter methodParameter = MockMethods.fileAnnotation();
+        assertNotNull(methodParameter);
+
+        Object result = filterProvider.filter(defaultRequest, methodParameter, null);
+        assertNull(result);
+    }
+
 
 }
