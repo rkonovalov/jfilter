@@ -55,6 +55,7 @@ public class FileFilterTest {
     public void testFilteredObjectEqual() {
         MockUser user = MockClasses.getUserMock();
         FileFilter filter = new FileFilter(request, methodParameter);
+        filter.setControllerClass(FileFilterTest.class);
         filter.filter(user);
         assertEquals(defaultMockUser, user);
     }
@@ -64,7 +65,7 @@ public class FileFilterTest {
         MockUser user = MockClasses.getUserMock();
         FileFilter filter = new FileFilter(request, methodParameter);
         //Change class name where method is exists, just for test
-        filter.setControllerClass(FileFilterTest.class);
+        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(user);
         assertNotEquals(defaultMockUser, user);
     }
@@ -73,7 +74,7 @@ public class FileFilterTest {
     public void testFilterNullObject() {
         FileFilter filter = new FileFilter(request, methodParameter);
         //Change class name where method is exists, just for test
-        filter.setControllerClass(FileFilterTest.class);
+        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(null);
         assertNotNull(filter.getControllerClass());
     }
@@ -83,7 +84,7 @@ public class FileFilterTest {
 
         FileFilter filter = new FileFilter(request, fileAnnotationNoControllers);
         //Change class name where method is exists, just for test
-        filter.setControllerClass(FileFilterTest.class);
+        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(null);
         assertNotNull(filter.getControllerClass());
 
@@ -93,7 +94,7 @@ public class FileFilterTest {
     public void testFilterNoStrategies() {
         FileFilter filter = new FileFilter(request, fileAnnotationNoStrategies);
         //Change class name where method is exists, just for test
-        filter.setControllerClass(FileFilterTest.class);
+        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(null);
         assertNotNull(filter.getControllerClass());
     }
@@ -105,7 +106,7 @@ public class FileFilterTest {
 
         FileFilter filter = new FileFilter(request, fileAnnotationClassDuplicated);
         //Change class name where method is exists, just for test
-        filter.setControllerClass(FileFilterTest.class);
+        //filter.setControllerClass(FileFilterTest.class);
         filter.filter(user);
         assertNotNull(filter.getControllerClass());
     }
