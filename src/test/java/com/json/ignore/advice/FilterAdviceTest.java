@@ -14,16 +14,13 @@ import static org.junit.Assert.*;
 
 public class FilterAdviceTest {
     private FilterAdvice filterAdvice;
-    private FilterProvider filterProvider;
     private ServerHttpResponse response;
     private ServletServerHttpRequest request;
 
     @Before
     public void init() {
         filterAdvice = new FilterAdvice();
-        filterProvider = new FilterProvider();
-
-        filterAdvice.setFilterProvider(filterProvider);
+        filterAdvice.setFilterProvider(new FilterProvider());
 
         response = new ServletServerHttpResponse(new MockHttpServletResponse());
         request = MockHttpRequest.getMockAdminRequest();
