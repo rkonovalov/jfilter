@@ -3,8 +3,6 @@ package com.json.ignore.filter;
 import com.json.ignore.FieldAccessException;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
-import org.springframework.http.server.ServletServerHttpRequest;
-
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
