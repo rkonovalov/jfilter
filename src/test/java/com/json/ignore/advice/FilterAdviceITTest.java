@@ -112,6 +112,8 @@ public class FilterAdviceITTest {
 
         String result = getContent(requestBuilder);
         assertEquals(user.toString(), result);
+
+
     }
 
     @Test

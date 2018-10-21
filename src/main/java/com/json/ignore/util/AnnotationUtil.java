@@ -17,7 +17,10 @@ import java.util.Map;
  * This is util class used to help find annotations in class or method
  */
 
-public interface AnnotationUtil {
+public abstract class AnnotationUtil {
+
+    private AnnotationUtil() {
+    }
 
     /**
      * Search for specified type list of annotation
@@ -27,7 +30,7 @@ public interface AnnotationUtil {
      * @param <T>             {@link Annotation} generic class
      * @return {@link Annotation} list of found annotations if found, else an array of length zero
      */
-    static <T extends Annotation> T[] getDeclaredAnnotations(Method method, Class<T> annotationClass) {
+    public static <T extends Annotation> T[] getDeclaredAnnotations(Method method, Class<T> annotationClass) {
         return method.getDeclaredAnnotationsByType(annotationClass);
     }
 
@@ -39,7 +42,7 @@ public interface AnnotationUtil {
      * @param <T>             {@link Annotation} generic class
      * @return {@link Annotation} annotation if found, else null
      */
-    static <T extends Annotation> T getDeclaredAnnotation(Method method, Class<T> annotationClass) {
+    public static <T extends Annotation> T getDeclaredAnnotation(Method method, Class<T> annotationClass) {
         return method.getDeclaredAnnotation(annotationClass);
     }
 
@@ -51,7 +54,7 @@ public interface AnnotationUtil {
      * @param <T>               {@link Annotation}
      * @return {@link Annotation} if one of specified annotation is found, else returns false
      */
-    static <T extends Annotation> boolean isAnnotationExists(Method method, List<Class<T>> annotationClasses) {
+    public static <T extends Annotation> boolean isAnnotationExists(Method method, List<Class<T>> annotationClasses) {
         if (annotationClasses != null)
             for (Class<T> clazz : annotationClasses) {
                 if (getDeclaredAnnotations(method, clazz).length > 0)
@@ -66,7 +69,7 @@ public interface AnnotationUtil {
      * @param method {@link Method} object's method which may have annotation
      * @return list of {@link FieldFilterSetting} if this type of annotation declared in method
      */
-    static FieldFilterSetting[] getSettingAnnotations(Method method) {
+    public static FieldFilterSetting[] getSettingAnnotations(Method method) {
         FieldFilterSettings settings = AnnotationUtil.getDeclaredAnnotation(method, FieldFilterSettings.class);
         if (settings != null) {
             return settings.value();
@@ -80,7 +83,7 @@ public interface AnnotationUtil {
      * @param method {@link Method} object's method which may have annotation
      * @return list of {@link SessionStrategy} if this type of annotation declared in method
      */
-    static SessionStrategy[] getStrategyAnnotations(Method method) {
+    public static SessionStrategy[] getStrategyAnnotations(Method method) {
         SessionStrategies strategies = AnnotationUtil.getDeclaredAnnotation(method, SessionStrategies.class);
         if (strategies != null) {
             return strategies.value();
@@ -94,7 +97,7 @@ public interface AnnotationUtil {
      * @param strategy {@link FileConfig.Strategy} filter strategy
      * @return {@link HashMap} map of fields which should be filtered/excluded
      */
-    static Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
+    public static Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
         Map<Class, List<String>> fields = new HashMap<>();
 
         if (strategy != null) {
