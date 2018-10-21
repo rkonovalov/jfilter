@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
  * @version 1.0
  */
 
-public class SessionUtil {
+public final class SessionUtil {
 
     private SessionUtil() {
     }
