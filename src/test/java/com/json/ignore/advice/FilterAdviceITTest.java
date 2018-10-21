@@ -2,7 +2,6 @@ package com.json.ignore.advice;
 
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockUser;
-import com.json.ignore.util.SessionUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,13 +16,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
 import javax.servlet.ServletContext;
-
 import static junit.framework.TestCase.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 
 @ContextConfiguration({"classpath:IntegrationTest-configuration.xml"})
 @RunWith(SpringRunner.class)
