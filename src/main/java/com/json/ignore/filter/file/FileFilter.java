@@ -8,7 +8,6 @@ import com.json.ignore.util.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
-
 import javax.servlet.http.HttpSession;
 
 /**
