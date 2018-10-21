@@ -5,7 +5,7 @@ import com.json.ignore.FieldAccessException;
 import java.io.*;
 import java.net.URL;
 
-public abstract class FileUtil {
+public final class FileUtil {
 
     private FileUtil() {
     }

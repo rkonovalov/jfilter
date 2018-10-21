@@ -17,7 +17,7 @@ import java.util.Map;
  * This is util class used to help find annotations in class or method
  */
 
-public abstract class AnnotationUtil {
+public final class AnnotationUtil {
 
     private AnnotationUtil() {
     }
