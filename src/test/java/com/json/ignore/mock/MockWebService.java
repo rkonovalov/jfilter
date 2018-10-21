@@ -3,6 +3,7 @@ package com.json.ignore.mock;
 
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.file.FileFilterSetting;
+import com.json.ignore.filter.strategy.SessionStrategy;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,16 @@ public class MockWebService {
         return MockClasses.getUserMock();
     }
 
+    @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
+            @FieldFilterSetting(fields = {"id", "password"})
+    })
+    @RequestMapping(value = "/customers/signInStrategyAnnotation",
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public MockUser signInStrategyAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return MockClasses.getUserMock();
+    }
 
 
 }

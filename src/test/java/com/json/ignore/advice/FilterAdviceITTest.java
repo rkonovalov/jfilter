@@ -113,4 +113,21 @@ public class FilterAdviceITTest {
         String result = getContent(requestBuilder);
         assertEquals(user.toString(), result);
     }
+
+    @Test
+    public void testSignInStrategyAnnotation() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInStrategyAnnotation");
+        requestBuilder.sessionAttr("ROLE", "USER")
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = getContent(requestBuilder);
+        assertEquals(user.toString(), result);
+    }
 }
