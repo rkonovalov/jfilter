@@ -79,7 +79,7 @@ public class StrategyFilter extends BaseFilter {
     public void filter(Object object, HttpSession session) throws FieldAccessException {
         if (object != null && this.getSession() != null) {
             for (SessionStrategy strategy : config) {
-                if(isSessionPropertyExists(session, strategy.attributeName(), strategy.attributeValue())) {
+                if(SessionUtil.isSessionPropertyExists(session, strategy.attributeName(), strategy.attributeValue())) {
                     FieldFilterProcessor processor = new FieldFilterProcessor(strategy.ignoreFields());
                     processor.filterFields(object);
                 }

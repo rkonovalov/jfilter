@@ -3,6 +3,7 @@ package com.json.ignore.util;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 /**
  * Session util class
@@ -27,5 +28,13 @@ public final class SessionUtil {
             return servletRequest.getServletRequest().getSession();
         } else
             return null;
+    }
+
+    public static boolean isSessionPropertyExists(HttpSession sessionParam, String attributeName, String attributeValue) {
+        if (sessionParam != null) {
+            Object sessionObject = sessionParam.getAttribute(attributeName);
+            return Objects.equals(sessionObject, attributeValue);
+        } else
+            return false;
     }
 }

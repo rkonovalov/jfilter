@@ -116,7 +116,7 @@ public class FileFilter extends BaseFilter {
             for (FileConfig.Controller controller : fileConfig.getControllers()) {
                 if (controllerClass.getName().equals(controller.getClassName()) && controller.getStrategies() != null) {
                     controller.getStrategies().forEach(strategy -> {
-                        if (isSessionPropertyExists(session, strategy.getAttributeName(), strategy.getAttributeValue())) {
+                        if (SessionUtil.isSessionPropertyExists(session, strategy.getAttributeName(), strategy.getAttributeValue())) {
                             FieldFilterProcessor processor = new FieldFilterProcessor(AnnotationUtil.getStrategyFields(strategy));
                             processor.filterFields(object);
                         }
