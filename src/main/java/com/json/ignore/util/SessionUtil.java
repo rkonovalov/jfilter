@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
 
 public final class SessionUtil {
 
-    protected SessionUtil() {
+    SessionUtil() {
     }
 
     public static HttpSession getSession(ServerHttpRequest serverHttpRequest) {
