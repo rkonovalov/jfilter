@@ -30,6 +30,9 @@ import javax.servlet.http.HttpSession;
 
 public class SessionUtil {
 
+    private SessionUtil() {
+    }
+
     public static HttpSession getSession(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;

@@ -18,6 +18,9 @@ import java.util.Map;
 
 public class AnnotationUtil {
 
+    private AnnotationUtil() {
+    }
+
     /**
      * Search for specified type list of annotation
      *

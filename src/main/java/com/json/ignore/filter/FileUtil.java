@@ -7,6 +7,9 @@ import java.net.URL;
 
 public class FileUtil {
 
+    private FileUtil() {
+    }
+
     public static Class getClassByName(String className) {
         if (className != null && !className.isEmpty()) {
             try {
