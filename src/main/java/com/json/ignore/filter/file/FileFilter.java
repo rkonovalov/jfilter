@@ -112,7 +112,7 @@ public class FileFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, HttpSession session) throws FieldAccessException {
-        if (object != null && fileConfig.getControllers() != null) {
+        if (object != null && fileConfig != null) {
             for (FileConfig.Controller controller : fileConfig.getControllers()) {
                 if (controllerClass.getName().equals(controller.getClassName()) && controller.getStrategies() != null) {
                     controller.getStrategies().forEach(strategy -> {
