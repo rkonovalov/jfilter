@@ -19,7 +19,7 @@ import java.util.Map;
 
 public final class AnnotationUtil {
 
-    private AnnotationUtil() {
+    protected AnnotationUtil() {
     }
 
     /**

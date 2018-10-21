@@ -7,7 +7,7 @@ import java.net.URL;
 
 public final class FileUtil {
 
-    private FileUtil() {
+    protected FileUtil() {
     }
 
     public static Class getClassByName(String className) {
