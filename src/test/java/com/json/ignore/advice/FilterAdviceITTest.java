@@ -16,7 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 import javax.servlet.ServletContext;
+
 import static junit.framework.TestCase.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -32,8 +34,20 @@ public class FilterAdviceITTest {
     private WebApplicationContext wac;
 
     @Before
-    public void setup() {
+    public void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
+
+    private String getContent(MockHttpServletRequestBuilder requestBuilder) {
+        final StringBuilder result = new StringBuilder();
+        try {
+            mockMvc.perform(requestBuilder)
+                    .andDo(print())
+                    .andExpect(mvcResult -> result.append(mvcResult.getResponse().getContentAsString()));
+        } catch (Exception e) {
+            return result.toString();
+        }
+        return result.toString();
     }
 
     @Test
@@ -50,7 +64,7 @@ public class FilterAdviceITTest {
     }
 
     @Test
-    public void testSignInSingleAnnotation() throws Exception {
+    public void testSignInSingleAnnotation() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
         user.setPassword(null);
@@ -61,16 +75,14 @@ public class FilterAdviceITTest {
                 .param("password", "password")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        mockMvc.perform(requestBuilder)
-                .andDo(print())
-                .andExpect(mvcResult -> {
-                    String result = mvcResult.getResponse().getContentAsString();
-                    assertEquals(user.toString(), result);
-                });
+        String result = getContent(requestBuilder);
+        assertEquals(user.toString(), result);
     }
 
+
+
     @Test
-    public void testSignInFileAnnotationAdmin() throws Exception {
+    public void testSignInFileAnnotationAdmin() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
 
@@ -81,16 +93,12 @@ public class FilterAdviceITTest {
                 .param("password", "password")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        mockMvc.perform(requestBuilder)
-                .andDo(print())
-                .andExpect(mvcResult -> {
-                    String result = mvcResult.getResponse().getContentAsString();
-                    assertEquals(user.toString(), result);
-                });
+        String result = getContent(requestBuilder);
+        assertEquals(user.toString(), result);
     }
 
     @Test
-    public void testSignInFileAnnotationUser() throws Exception {
+    public void testSignInFileAnnotationUser() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
         user.setPassword(null);
@@ -102,11 +110,7 @@ public class FilterAdviceITTest {
                 .param("password", "password")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        mockMvc.perform(requestBuilder)
-                .andDo(print())
-                .andExpect(mvcResult -> {
-                    String result = mvcResult.getResponse().getContentAsString();
-                    assertEquals(user.toString(), result);
-                });
+        String result = getContent(requestBuilder);
+        assertEquals(user.toString(), result);
     }
 }
