@@ -73,7 +73,6 @@ public class FilterAdviceITTest {
     public void testSignInFileAnnotationAdmin() throws Exception {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
-        user.setPassword(null);
 
         //Build mock request
         MockHttpServletRequestBuilder requestBuilder = post("/customers/signInFileAnnotation");

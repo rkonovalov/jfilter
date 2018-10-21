@@ -2,6 +2,7 @@ package com.json.ignore.advice;
 
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.FilterFactory;
+import com.json.ignore.filter.SessionUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,7 @@ public class FilterProvider {
                 /*
                  * Retrieve filter from cache
                  */
+
                 return items.get(key);
             } else {
                 /*
@@ -69,7 +71,7 @@ public class FilterProvider {
     public Object filter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter, Object object) {
         BaseFilter filter = getBaseFilter(serverHttpRequest, methodParameter);
         if (filter != null) {
-            filter.filter(object);
+            filter.filter(object, serverHttpRequest);
         }
         return object;
     }

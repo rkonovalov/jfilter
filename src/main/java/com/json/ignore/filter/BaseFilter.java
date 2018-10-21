@@ -24,10 +24,7 @@ public abstract class BaseFilter {
      * @param serverHttpRequest {@link ServerHttpRequest} servlet request
      */
     public BaseFilter(ServerHttpRequest serverHttpRequest) {
-        if (serverHttpRequest instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
-            this.session = servletRequest.getServletRequest().getSession();
-        }
+        this.session = SessionUtil.getSession(serverHttpRequest);
     }
 
     /**
@@ -44,6 +41,8 @@ public abstract class BaseFilter {
      * @throws FieldAccessException exception of illegal access
      */
     public abstract void filter(Object object) throws FieldAccessException;
+    public abstract void filter(Object object, HttpSession session) throws FieldAccessException;
+    public abstract void filter(Object object, ServerHttpRequest request) throws FieldAccessException;
 
     /**
      * Get session from ServletRequest
@@ -62,8 +61,12 @@ public abstract class BaseFilter {
      * @return {@link Boolean} returns true if attribute name and value exist in session attributes, else false
      */
     protected boolean isSessionPropertyExists(String attributeName, String attributeValue) {
-        if (session != null) {
-            Object sessionObject = session.getAttribute(attributeName);
+        return isSessionPropertyExists(this.session, attributeName, attributeValue);
+    }
+
+    protected boolean isSessionPropertyExists(HttpSession sessionParam, String attributeName, String attributeValue) {
+        if (sessionParam != null) {
+            Object sessionObject = sessionParam.getAttribute(attributeName);
             return Objects.equals(sessionObject, attributeValue);
         } else
             return false;

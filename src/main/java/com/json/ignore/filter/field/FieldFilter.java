@@ -3,6 +3,7 @@ package com.json.ignore.filter.field;
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.AnnotationUtil;
 import com.json.ignore.filter.BaseFilter;
+import com.json.ignore.filter.SessionUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import javax.servlet.http.HttpSession;
@@ -57,5 +58,15 @@ public class FieldFilter extends BaseFilter {
             FieldFilterProcessor processor = new FieldFilterProcessor(config);
             processor.filterFields(object);
         }
+    }
+
+    @Override
+    public void filter(Object object, HttpSession session) throws FieldAccessException {
+        filter(object);
+    }
+
+    @Override
+    public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
+        filter(object, SessionUtil.getSession(request));
     }
 }

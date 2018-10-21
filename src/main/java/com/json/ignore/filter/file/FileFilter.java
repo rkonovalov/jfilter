@@ -4,6 +4,7 @@ import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.FileUtil;
 import com.json.ignore.filter.AnnotationUtil;
 import com.json.ignore.filter.BaseFilter;
+import com.json.ignore.filter.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -89,11 +90,21 @@ public class FileFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object) throws FieldAccessException {
+        filter(object, this.getSession());
+    }
+
+    @Override
+    public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
+        filter(object, SessionUtil.getSession(request));
+    }
+
+    @Override
+    public void filter(Object object, HttpSession session) throws FieldAccessException {
         if (object != null && fileConfig.getControllers() != null) {
             for (FileConfig.Controller controller : fileConfig.getControllers()) {
                 if (controllerClass.getName().equals(controller.getClassName()) && controller.getStrategies() != null) {
                     controller.getStrategies().forEach(strategy -> {
-                        if (isSessionPropertyExists(strategy.getAttributeName(), strategy.getAttributeValue())) {
+                        if (isSessionPropertyExists(session, strategy.getAttributeName(), strategy.getAttributeValue())) {
                             FieldFilterProcessor processor = new FieldFilterProcessor(AnnotationUtil.getStrategyFields(strategy));
                             processor.filterFields(object);
                         }
