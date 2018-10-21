@@ -2,6 +2,7 @@ package com.json.ignore.advice;
 
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockUser;
+import com.json.ignore.util.SessionUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,8 +79,6 @@ public class FilterAdviceITTest {
         String result = getContent(requestBuilder);
         assertEquals(user.toString(), result);
     }
-
-
 
     @Test
     public void testSignInFileAnnotationAdmin() {
