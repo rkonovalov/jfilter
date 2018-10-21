@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * This class used for deserialization of xml annotated strategy files
  */
-
 @JacksonXmlRootElement(localName = "config")
 public class FileConfig implements Serializable {
 

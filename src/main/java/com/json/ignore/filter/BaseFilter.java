@@ -10,7 +10,6 @@ import java.util.Objects;
 /**
  * This class is base class strategy filtration
  */
-
 public abstract class BaseFilter {
     /**
      * Http session, may be null

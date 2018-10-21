@@ -7,7 +7,6 @@ import java.lang.annotation.*;
  *
  * This annotation used for configuring of strategy of filtering
  */
-
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(SessionStrategies.class)
