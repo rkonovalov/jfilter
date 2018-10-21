@@ -7,7 +7,6 @@ import com.json.ignore.filter.strategy.SessionStrategy;
 import org.springframework.core.MethodParameter;
 import java.lang.reflect.Method;
 
-
 public class MockMethods {
 
     @FieldFilterSetting(fields = {"id", "password"})
