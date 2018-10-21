@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/rkonovalov/jsonignore.svg?branch=master)](https://travis-ci.org/rkonovalov/jsonignore)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/json-ignore/badge.svg?style=blue)](https://search.maven.org/search?q=a:json-ignore)
-[![Javadocs](http://www.javadoc.io/badge/com.github.rkonovalov/json-ignore.svg?1.0.3)](http://www.javadoc.io/doc/com.github.rkonovalov/json-ignore)
+[![Javadocs](http://www.javadoc.io/badge/com.github.rkonovalov/json-ignore.svg?1.0.5)](http://www.javadoc.io/doc/com.github.rkonovalov/json-ignore)
 [![codecov](https://codecov.io/gh/rkonovalov/jsonignore/branch/master/graph/badge.svg)](https://codecov.io/gh/rkonovalov/jsonignore)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jsonignore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jsonignore&amp;utm_campaign=Badge_Grade)
 
@@ -18,10 +18,10 @@ If you are using Maven you need add next dependency
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 ```
-* If you are using another build automation tool, you can find configuration string by this link: https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.4/jar
+* If you are using another build automation tool, you can find configuration string by this link: https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.5/jar
 
 ## Activating of Spring Advice component
 You just need to add ComponentScan annotation which will find and activate filter advice class
@@ -394,6 +394,10 @@ public class SessionService {
 
 
 # Release notes
+
+## Version 1.0.5
+Added Filter provider for improving execution speed
+Fixed bugs 
 
 ## Version 1.0.4
 Added xml Schema-based configuration
