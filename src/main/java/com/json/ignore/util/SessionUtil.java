@@ -28,9 +28,13 @@ import javax.servlet.http.HttpSession;
  * @version 1.0
  */
 
-public interface SessionUtil {
+public abstract class SessionUtil {
 
-    static HttpSession getSession(ServerHttpRequest serverHttpRequest) {
+    private SessionUtil() {
+
+    }
+
+    public static HttpSession getSession(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
             return servletRequest.getServletRequest().getSession();

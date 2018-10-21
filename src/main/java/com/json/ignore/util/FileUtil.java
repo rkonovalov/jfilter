@@ -5,9 +5,12 @@ import com.json.ignore.FieldAccessException;
 import java.io.*;
 import java.net.URL;
 
-public interface FileUtil {
+public abstract class FileUtil {
 
-    static Class getClassByName(String className) {
+    private FileUtil() {
+    }
+
+    public static Class getClassByName(String className) {
         if (className != null && !className.isEmpty()) {
             try {
                 return Class.forName(className);
@@ -18,7 +21,7 @@ public interface FileUtil {
             return null;
     }
 
-    static String getFileName(String resourceName) {
+    public static String getFileName(String resourceName) {
         if (resourceName != null) {
             ClassLoader classLoader = FileUtil.class.getClassLoader();
             URL url = classLoader.getResource(resourceName);
@@ -27,12 +30,12 @@ public interface FileUtil {
         return null;
     }
 
-    static File resourceFile(String resourceName) {
+    public static File resourceFile(String resourceName) {
         String fileName = getFileName(resourceName);
         return fileName != null ? new File(fileName) : null;
     }
 
-    static FileInputStream fileToInputStream(File file) {
+    public  static FileInputStream fileToInputStream(File file) {
         try {
             return new FileInputStream(file);
         } catch (FileNotFoundException | NullPointerException e) {
@@ -40,7 +43,7 @@ public interface FileUtil {
         }
     }
 
-    static <T> T xmlFileToClass(File file, Class<T> clazz) {
+    public static <T> T xmlFileToClass(File file, Class<T> clazz) {
         try {
             return file != null ? new XmlMapper().readValue(file, clazz) : null;
         } catch (IOException e) {
