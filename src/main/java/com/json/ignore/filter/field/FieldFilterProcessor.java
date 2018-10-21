@@ -1,7 +1,7 @@
 package com.json.ignore.filter.field;
 
 import com.json.ignore.FieldAccessException;
-import com.json.ignore.filter.AnnotationUtil;
+import com.json.ignore.util.AnnotationUtil;
 import org.springframework.core.MethodParameter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

@@ -6,6 +6,7 @@ import com.json.ignore.filter.file.FileConfigTest;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockMethods;
+import com.json.ignore.util.AnnotationUtil;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

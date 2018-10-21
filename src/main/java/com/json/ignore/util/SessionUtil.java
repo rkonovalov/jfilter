@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.json.ignore.filter;
+package com.json.ignore.util;
 
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;

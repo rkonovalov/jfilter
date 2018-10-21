@@ -1,16 +1,13 @@
-package com.json.ignore.filter;
+package com.json.ignore.util;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.FieldAccessException;
 import java.io.*;
 import java.net.URL;
 
-public class FileUtil {
+public interface FileUtil {
 
-    private FileUtil() {
-    }
-
-    public static Class getClassByName(String className) {
+    static Class getClassByName(String className) {
         if (className != null && !className.isEmpty()) {
             try {
                 return Class.forName(className);
@@ -21,7 +18,7 @@ public class FileUtil {
             return null;
     }
 
-    public static String getFileName(String resourceName) {
+    static String getFileName(String resourceName) {
         if (resourceName != null) {
             ClassLoader classLoader = FileUtil.class.getClassLoader();
             URL url = classLoader.getResource(resourceName);
@@ -30,12 +27,12 @@ public class FileUtil {
         return null;
     }
 
-    public static File resourceFile(String resourceName) {
+    static File resourceFile(String resourceName) {
         String fileName = getFileName(resourceName);
         return fileName != null ? new File(fileName) : null;
     }
 
-    public static FileInputStream fileToInputStream(File file) {
+    static FileInputStream fileToInputStream(File file) {
         try {
             return new FileInputStream(file);
         } catch (FileNotFoundException | NullPointerException e) {
@@ -43,7 +40,7 @@ public class FileUtil {
         }
     }
 
-    public static <T> T xmlFileToClass(File file, Class<T> clazz) {
+    static <T> T xmlFileToClass(File file, Class<T> clazz) {
         try {
             return file != null ? new XmlMapper().readValue(file, clazz) : null;
         } catch (IOException e) {

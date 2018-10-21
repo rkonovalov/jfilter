@@ -2,6 +2,7 @@ package com.json.ignore.filter;
 
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.file.FileConfig;
+import com.json.ignore.util.FileUtil;
 import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
