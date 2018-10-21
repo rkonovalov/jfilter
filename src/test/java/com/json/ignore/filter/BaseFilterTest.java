@@ -2,8 +2,8 @@ package com.json.ignore.filter;
 
 
 import com.json.ignore.filter.field.FieldFilter;
-import mock.MockHttpRequest;
-import mock.MockMethods;
+import com.json.ignore.mock.MockHttpRequest;
+import com.json.ignore.mock.MockMethods;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;

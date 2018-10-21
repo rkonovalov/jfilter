@@ -1,9 +1,9 @@
 package com.json.ignore.advice;
 
-import mock.MockClasses;
-import mock.MockHttpRequest;
-import mock.MockMethods;
-import mock.MockUser;
+import com.json.ignore.mock.MockClasses;
+import com.json.ignore.mock.MockHttpRequest;
+import com.json.ignore.mock.MockMethods;
+import com.json.ignore.mock.MockUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -33,6 +33,7 @@ public class FilterAdviceTest {
     public void testSupports() {
         boolean result = filterAdvice.supports(MockMethods.fileAnnotation(), null);
         assertTrue(result);
+
     }
 
     @Test

@@ -1,4 +1,4 @@
-package mock;
+package com.json.ignore.mock;
 
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.mock.web.MockHttpServletRequest;

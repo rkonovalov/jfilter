@@ -61,7 +61,7 @@ public abstract class BaseFilter {
      * @param attributeValue {@link String} attribute value
      * @return {@link Boolean} returns true if attribute name and value exist in session attributes, else false
      */
-    public boolean isSessionPropertyExists(String attributeName, String attributeValue) {
+    protected boolean isSessionPropertyExists(String attributeName, String attributeValue) {
         if (session != null) {
             Object sessionObject = session.getAttribute(attributeName);
             return Objects.equals(sessionObject, attributeValue);

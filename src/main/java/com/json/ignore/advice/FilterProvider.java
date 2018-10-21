@@ -10,10 +10,16 @@ import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * The type Filter provider.
+ */
 @Component
 public class FilterProvider {
     private Map<Annotation, BaseFilter> items;
 
+    /**
+     * Instantiates a new Filter provider.
+     */
     public FilterProvider() {
         this.items = new ConcurrentHashMap<>();
     }
@@ -42,10 +48,24 @@ public class FilterProvider {
         return null;
     }
 
+    /**
+     * Is accept boolean.
+     *
+     * @param methodParameter the method parameter
+     * @return the boolean
+     */
     public boolean isAccept(MethodParameter methodParameter) {
         return FilterFactory.isAccept(methodParameter);
     }
 
+    /**
+     * Filter object.
+     *
+     * @param serverHttpRequest the server http request
+     * @param methodParameter   the method parameter
+     * @param object            the object
+     * @return the object
+     */
     public Object filter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter, Object object) {
         BaseFilter filter = getBaseFilter(serverHttpRequest, methodParameter);
         if (filter != null) {
@@ -54,10 +74,18 @@ public class FilterProvider {
         return object;
     }
 
+    /**
+     * Clear cache.
+     */
     public void clearCache() {
         items.clear();
     }
 
+    /**
+     * Cache size int.
+     *
+     * @return the int
+     */
     public int cacheSize() {
         return items.size();
     }

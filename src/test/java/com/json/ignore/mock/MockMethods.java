@@ -1,4 +1,4 @@
-package mock;
+package com.json.ignore.mock;
 
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.file.FileFilterSetting;

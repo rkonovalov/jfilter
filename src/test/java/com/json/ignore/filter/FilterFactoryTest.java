@@ -2,7 +2,7 @@ package com.json.ignore.filter;
 
 import com.json.ignore.filter.field.FieldFilter;
 import com.json.ignore.filter.strategy.StrategyFilter;
-import mock.MockMethods;
+import com.json.ignore.mock.MockMethods;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import java.lang.reflect.Method;
