@@ -93,6 +93,21 @@ public class FilterAdviceITTest {
     }
 
     @Test
+    public void testSignInUnExistedFile() {
+        MockUser user = MockClasses.getUserMock();
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInUnExistedFile");
+        requestBuilder.sessionAttr("ROLE", "ADMIN")
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = getContent(requestBuilder);
+        assertEquals(user.toString(), result);
+    }
+
+    @Test
     public void testSignInFileAnnotationUser() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);

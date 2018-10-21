@@ -40,13 +40,12 @@ public class MockWebService {
     }
 
     @FileFilterSetting(fileName = "unexistedFile.xml")
-    @RequestMapping(value = "/customers/signInSingleAnnotation",
+    @RequestMapping(value = "/customers/signInUnExistedFile",
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInUnExistedFile(@RequestParam("email") String email, @RequestParam("password") String password) {
         return MockClasses.getUserMock();
     }
-
 
 }
