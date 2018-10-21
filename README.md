@@ -268,9 +268,9 @@ Where: className specific class, fields - fields which we need to exclude from r
  ...
 ```
 In this example we declared multiple settings. If module finds next classes in response next fields will be excluded:
-1) On User.class, fields: id, password, secretKey
-2) On Address.class, fields: id, apartmentNumber
-3) On Street.class, fields: id, streetNumber
+* On User.class, fields: id, password, secretKey
+* On Address.class, fields: id, apartmentNumber
+* On Street.class, fields: id, streetNumber
 ### Result:
 ```json
 {
