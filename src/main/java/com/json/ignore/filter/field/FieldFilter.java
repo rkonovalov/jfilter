@@ -48,9 +48,9 @@ public class FieldFilter extends BaseFilter {
     }
 
     /**
-     * Attempt to filter/exclude object's fields if filter annotations is configured
+     * Attempt to filter object fields if filter annotations is configured
      * @param object {@link Object} object which fields will be filtered
-     * @throws FieldAccessException exception of illegal access
+     * @throws FieldAccessException exception throws on {@link IllegalAccessException}
      */
     @Override
     public void filter(Object object) throws FieldAccessException {
@@ -60,11 +60,23 @@ public class FieldFilter extends BaseFilter {
         }
     }
 
+    /**
+     * Attempt to filter object fields if filter annotations is configured
+     * @param object {@link Object} object which fields will be filtered
+     * @param session {@link HttpSession} session
+     * @throws FieldAccessException exception throws on {@link IllegalAccessException}
+     */
     @Override
     public void filter(Object object, HttpSession session) throws FieldAccessException {
         filter(object);
     }
 
+    /**
+     * Attempt to filter object fields if filter annotations is configured
+     * @param object {@link Object} object which fields will be filtered
+     * @param request {@link ServerHttpRequest} http request
+     * @throws FieldAccessException exception throws on {@link IllegalAccessException}
+     */
     @Override
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
         filter(object, SessionUtil.getSession(request));

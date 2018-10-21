@@ -11,7 +11,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * The type Filter provider.
+ * Object filter provide bean
+ * <p>
+ * This class will be detected and instantiated automatically by Spring Framework
+ * <p>
+ * The main task of this class is: getting from http request session information, getting annotations from methodParam and
+ * trying to find filter associated with annotation.
+ * <p>
+ * This class also has cache for caching already found filter for better productivity
  */
 @Component
 public class FilterProvider {

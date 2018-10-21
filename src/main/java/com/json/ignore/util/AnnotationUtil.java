@@ -14,9 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Annotation util class
+ * <p>
  * This is util class used to help find annotations in class or method
  */
-
 public final class AnnotationUtil {
 
     protected AnnotationUtil() {

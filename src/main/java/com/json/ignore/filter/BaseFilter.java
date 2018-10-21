@@ -35,10 +35,6 @@ public abstract class BaseFilter {
         this.session = session;
     }
 
-    /**
-     * @param object {@link Object} object which fields will be filtrated
-     * @throws FieldAccessException exception of illegal access
-     */
     public abstract void filter(Object object) throws FieldAccessException;
     public abstract void filter(Object object, HttpSession session) throws FieldAccessException;
     public abstract void filter(Object object, ServerHttpRequest request) throws FieldAccessException;

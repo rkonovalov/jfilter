@@ -12,7 +12,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import java.io.Serializable;
 
 /**
- * Spring controller advice
+ * Class which handle all responses from web service and tries to filter it
+ * <p>
+ * This class will be detected and instantiated automatically by Spring Framework
+ * The main task of this class is checking if response method has filter annotation and try to apply filters
  */
 @ControllerAdvice
 public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
