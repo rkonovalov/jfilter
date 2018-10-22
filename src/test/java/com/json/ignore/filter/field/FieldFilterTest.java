@@ -13,7 +13,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class FieldFilterTest {
-    private HttpSession session;
     private ServletServerHttpRequest serverHttpRequest;
     private MethodParameter methodParameter;
     private MockUser defaultMockUser;
@@ -23,9 +22,6 @@ public class FieldFilterTest {
         serverHttpRequest = MockHttpRequest.getMockAdminRequest();
         assertNotNull(serverHttpRequest);
 
-        session = serverHttpRequest.getServletRequest().getSession();
-        assertNotNull(session);
-
         methodParameter = MockMethods.singleAnnotation();
         assertNotNull(methodParameter);
 
@@ -34,18 +30,10 @@ public class FieldFilterTest {
     }
 
     @Test
-    public void testFieldFilterWithRequest() {
+    public void testFieldFilter() {
         MockUser user = MockClasses.getUserMock();
-        FieldFilter fieldFilter = new FieldFilter(serverHttpRequest, methodParameter);
-        fieldFilter.filter(user);
-        assertNotEquals(user, defaultMockUser);
-    }
-
-    @Test
-    public void testFieldFilterWithSession() {
-        MockUser user = new MockUser();
-        FieldFilter fieldFilter = new FieldFilter(session, methodParameter);
-        fieldFilter.filter(user);
+        FieldFilter fieldFilter = new FieldFilter(methodParameter);
+        fieldFilter.filter(user, serverHttpRequest);
         assertNotEquals(user, defaultMockUser);
     }
 }
