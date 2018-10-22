@@ -40,6 +40,9 @@ public class FilterProvider {
     public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
         this.webApplicationContext = webApplicationContext;
 
+        /*
+         * Important! For enabling filtration, should be specified one of application bean with EnableJsonFilter annotation
+         */
         enabled = webApplicationContext.getBeansWithAnnotation(EnableJsonFilter.class).size() > 0;
     }
 
