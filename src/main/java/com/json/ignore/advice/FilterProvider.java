@@ -44,20 +44,14 @@ public class FilterProvider {
     }
 
     private BaseFilter getBaseFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
-        //String key = methodParameter.getMethod().toString();
         Annotation key = FilterFactory.getFilterAnnotation(methodParameter);
 
         if (key != null) {
             if (items.containsKey(key)) {
-                /*
-                 * Retrieve filter from cache
-                 */
-
+                //Retrieve filter from cache
                 return items.get(key);
             } else {
-                /*
-                 * Create and put filter in cache
-                 */
+                //Create and put filter in cache
                 BaseFilter filter = FilterFactory.getFromFactory(serverHttpRequest, methodParameter);
                 if (filter != null) {
                     items.put(key, filter);
