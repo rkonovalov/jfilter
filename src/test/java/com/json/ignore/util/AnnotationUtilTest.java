@@ -19,6 +19,15 @@ public class AnnotationUtilTest {
     }
 
     @Test
+    public void testGetStrategyNull() {
+        FileConfig config = MockClasses.getMockAdminFileConfig();
+        assertNotNull(config);
+
+        Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(null);
+        assertEquals(0, fields.keySet().size());
+    }
+
+    @Test
     public void testGetStrategyFieldsEmptyStrategy() {
         FileConfig.Strategy strategy = new FileConfig.Strategy();
         Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(strategy);
