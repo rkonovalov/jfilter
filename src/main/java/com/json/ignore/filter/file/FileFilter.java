@@ -36,7 +36,7 @@ public class FileFilter extends BaseFilter {
      * @return {@link FileConfig} config
      */
     private FileConfig parseFile(String fileName) {
-        return xmlFileToClass(resourceFile(fileName), FileConfig.class);
+        return load(resourceFile(fileName));
     }
 
     /**
@@ -44,14 +44,12 @@ public class FileFilter extends BaseFilter {
      * <p>
      * Deserialize xml file to Class
      * @param file {@link File} file from resource name if file exist
-     * @param clazz  {@link Class} class type
-     * @param <T> the type of the value being boxed
      * @return {@link Object} returns instantiated object type of specified class
      * @throws FieldAccessException {@link FieldAccessException} when caught {@link IOException}
      */
-    private <T> T xmlFileToClass(File file, Class<T> clazz) throws FieldAccessException {
+    private FileConfig load(File file) throws FieldAccessException {
         try {
-            return file != null ? new XmlMapper().readValue(file, clazz) : null;
+            return file != null ? new XmlMapper().readValue(file, FileConfig.class) : null;
         } catch (IOException e) {
             throw new FieldAccessException(e);
         }
