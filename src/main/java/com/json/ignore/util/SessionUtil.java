@@ -11,7 +11,6 @@ import java.util.Objects;
  * This is util class used to help working with Http Session
  */
 public class SessionUtil {
-    private ServerHttpRequest request;
     private HttpSession session;
 
     public SessionUtil(ServerHttpRequest request) {
