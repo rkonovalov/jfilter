@@ -90,36 +90,7 @@ public class AnnotationUtil {
             return null;
     }
 
-    /**
-     * Convert strategy class in Map
-     *
-     * @param strategy {@link FileConfig.Strategy} filter strategy
-     * @return {@link HashMap} map of fields which should be filtered/excluded
-     */
-    public static Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
-        Map<Class, List<String>> fields = new HashMap<>();
 
-
-        if (strategy != null) {
-            strategy.getFilters().forEach(filter -> {
-                Class clazz = getClassByName(filter.getClassName());
-                List<String> items;
-
-                if (fields.containsKey(clazz)) {
-                    items = fields.get(clazz);
-                } else
-                    items = new ArrayList<>();
-
-                filter.getFields().forEach(field -> {
-                    //filter duplicates of field names
-                    if (!items.contains(field.getName()))
-                        items.add(field.getName());
-                });
-                fields.put(clazz, items);
-            });
-        }
-        return fields;
-    }
 
 
 }

@@ -3,9 +3,14 @@ package com.json.ignore.filter.file;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.json.ignore.util.AnnotationUtil.getClassByName;
 
 /**
  * This class used for deserialization of xml annotated strategy files
@@ -119,6 +124,34 @@ public class FileConfig implements Serializable {
         public Strategy setFilters(List<Filter> filters) {
             this.filters = filters;
             return this;
+        }
+
+        /**
+         * Convert strategy class in Map
+         *
+         * @return {@link HashMap} map of fields which should be filtered/excluded
+         */
+        public Map<Class, List<String>> getStrategyFields() {
+            Map<Class, List<String>> fields = new HashMap<>();
+
+            this.getFilters().forEach(filter -> {
+                Class clazz = getClassByName(filter.getClassName());
+                List<String> items;
+
+                if (fields.containsKey(clazz)) {
+                    items = fields.get(clazz);
+                } else
+                    items = new ArrayList<>();
+
+                filter.getFields().forEach(field -> {
+                    //filter duplicates of field names
+                    if (!items.contains(field.getName()))
+                        items.add(field.getName());
+                });
+                fields.put(clazz, items);
+            });
+
+            return fields;
         }
     }
 

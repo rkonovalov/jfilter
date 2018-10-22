@@ -38,32 +38,24 @@ public class AnnotationUtilTest {
         FileConfig config = MockClasses.getMockAdminFileConfig();
         assertNotNull(config);
 
-        Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(config.getControllers().get(0).getStrategies().get(0));
+        FileConfig.Strategy strategy = config.getControllers().get(0).getStrategies().get(0);
+        assertNotNull(strategy);
+
+        Map<Class, List<String>> fields = strategy.getStrategyFields();
         assertTrue(fields.keySet().size() > 0);
-    }
-
-    @Test
-    public void testGetStrategyNull() {
-        FileConfig config = MockClasses.getMockAdminFileConfig();
-        assertNotNull(config);
-
-        Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(null);
-        assertEquals(0, fields.keySet().size());
     }
 
     @Test
     public void testGetStrategyFieldsEmptyStrategy() {
         FileConfig.Strategy strategy = new FileConfig.Strategy();
-        Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(strategy);
+        Map<Class, List<String>> fields = strategy.getStrategyFields();
         assertEquals(0, fields.keySet().size());
-
-
     }
 
     @Test
     public void testGetStrategyFieldsNull() {
         FileConfig.Strategy strategy = new FileConfig.Strategy();
-        Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(strategy);
+        Map<Class, List<String>> fields = strategy.getStrategyFields();
         assertEquals(0, fields.keySet().size());
     }
 
@@ -83,7 +75,7 @@ public class AnnotationUtilTest {
         strategy.getFilters().add(filter);
         strategy.getFilters().add(filter);
 
-        Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(strategy);
+        Map<Class, List<String>> fields = strategy.getStrategyFields();
         assertEquals(3, fields.get(FileConfigTest.class).size());
     }
 
