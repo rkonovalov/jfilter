@@ -239,7 +239,6 @@ public class FieldFilterProcessor  {
         if (settings != null)
             for (FieldFilterSetting setting : settings) {
                 List<String> fields = new ArrayList<>(Arrays.asList(setting.fields()));
-              //  fieldNames.addAll(fields);
                 if (items.containsKey(setting.className())) {
                     List<String> existFields = items.get(setting.className());
                     existFields.addAll(fields);

@@ -35,7 +35,7 @@ public class RequestSession {
      * @param serverHttpRequest {@link ServerHttpRequest} http request
      * @return {@link HttpSession} session, else null
      */
-    public HttpSession getSession(ServerHttpRequest serverHttpRequest) {
+    private HttpSession getSession(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
             return servletRequest.getServletRequest().getSession();
