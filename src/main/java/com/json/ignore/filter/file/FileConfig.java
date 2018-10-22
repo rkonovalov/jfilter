@@ -3,8 +3,6 @@ package com.json.ignore.filter.file;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.json.ignore.request.RequestMethodParameter;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
