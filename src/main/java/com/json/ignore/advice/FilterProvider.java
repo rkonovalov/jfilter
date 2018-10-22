@@ -1,10 +1,13 @@
 package com.json.ignore.advice;
 
+import com.json.ignore.EnableJsonFilter;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.FilterFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
@@ -23,12 +26,21 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class FilterProvider {
     private Map<Annotation, BaseFilter> items;
+    private WebApplicationContext webApplicationContext;
+    private boolean enabled;
 
     /**
      * Instantiates a new Filter provider.
      */
     public FilterProvider() {
         this.items = new ConcurrentHashMap<>();
+    }
+
+    @Autowired
+    public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
+        this.webApplicationContext = webApplicationContext;
+
+        enabled = webApplicationContext.getBeansWithAnnotation(EnableJsonFilter.class).size() > 0;
     }
 
     private BaseFilter getBaseFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
@@ -63,7 +75,7 @@ public class FilterProvider {
      * @return the boolean
      */
     public boolean isAccept(MethodParameter methodParameter) {
-        return FilterFactory.isAccept(methodParameter);
+        return enabled && FilterFactory.isAccept(methodParameter);
     }
 
     /**
