@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WSClassFieldSingle {
 
 
-    @RequestMapping(value = "/single/customers/signIn",
+    @RequestMapping(value = "/field-single/customers/signIn",
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})

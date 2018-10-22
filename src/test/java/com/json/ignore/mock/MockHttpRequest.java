@@ -2,6 +2,11 @@ package com.json.ignore.mock;
 
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.web.context.WebApplicationContext;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class MockHttpRequest {
 
@@ -22,5 +27,17 @@ public class MockHttpRequest {
 
     public static ServletServerHttpRequest getMockClearRequest() {
         return getMocRequest("", "");
+    }
+
+    public static String getContent(MockMvc mockMvc, MockHttpServletRequestBuilder requestBuilder) {
+        final StringBuilder result = new StringBuilder();
+        try {
+            mockMvc.perform(requestBuilder)
+                    .andDo(print())
+                    .andExpect(mvcResult -> result.append(mvcResult.getResponse().getContentAsString()));
+        } catch (Exception e) {
+            return result.toString();
+        }
+        return result.toString();
     }
 }

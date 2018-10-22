@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ContextConfiguration({"classpath:IntegrationTest-configuration.xml"})
 @RunWith(SpringRunner.class)
 @WebAppConfiguration("src/main/resources")
-public class FilterAdviceITTest {
+public class WSITTest {
     private MockMvc mockMvc;
 
     @Autowired
@@ -38,43 +38,13 @@ public class FilterAdviceITTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
-
     @Test
-    public void testWebContext() {
-        ServletContext servletContext = wac.getServletContext();
-        Assert.assertNotNull(servletContext);
-    }
-
-    @Test
-    public void testWebContextIsMockServletContext() {
-        ServletContext servletContext = wac.getServletContext();
-        Assert.assertNotNull(servletContext);
-        Assert.assertTrue(servletContext instanceof MockServletContext);
-    }
-
-    @Test
-    public void testSignInSingleAnnotation() {
-        MockUser user = MockClasses.getUserMock();
-        user.setId(null);
-        user.setPassword(null);
-
-        //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInSingleAnnotation");
-        requestBuilder.param("email", "email")
-                .param("password", "password")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        String result = MockHttpRequest.getContent(mockMvc, requestBuilder);
-        assertEquals(user.toString(), result);
-    }
-
-    @Test
-    public void testSignInFileAnnotationAdmin() {
+    public void testWSClassFieldSingle() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInFileAnnotation");
+        MockHttpServletRequestBuilder requestBuilder = post("/field-single/customers/signIn");
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -85,11 +55,13 @@ public class FilterAdviceITTest {
     }
 
     @Test
-    public void testSignInUnExistedFile() {
+    public void testWSClassFieldMultiple() {
         MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInUnExistedFile");
+        MockHttpServletRequestBuilder requestBuilder = post("/field-multiple/customers/signIn");
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -100,49 +72,13 @@ public class FilterAdviceITTest {
     }
 
     @Test
-    public void testSignInFileAnnotationUser() {
+    public void testWSClassStrategySingle() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
         user.setPassword(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInFileAnnotation");
-        requestBuilder.sessionAttr("ROLE", "USER")
-                .param("email", "email")
-                .param("password", "password")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        String result = MockHttpRequest.getContent(mockMvc, requestBuilder);
-        assertEquals(user.toString(), result);
-
-
-    }
-
-    @Test
-    public void testSignInStrategyAnnotation() {
-        MockUser user = MockClasses.getUserMock();
-        user.setId(null);
-        user.setPassword(null);
-
-        //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInStrategyAnnotation");
-        requestBuilder.sessionAttr("ROLE", "USER")
-                .param("email", "email")
-                .param("password", "password")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        String result = MockHttpRequest.getContent(mockMvc, requestBuilder);
-        assertEquals(user.toString(), result);
-    }
-
-
-    @Test
-    public void testSignInFileClassAnnotationAdmin() {
-        MockUser user = MockClasses.getUserMock();
-        user.setId(null);
-
-        //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/file/customers/signIn");
+        MockHttpServletRequestBuilder requestBuilder = post("/strategy-single/customers/signIn");
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -151,4 +87,42 @@ public class FilterAdviceITTest {
         String result = MockHttpRequest.getContent(mockMvc, requestBuilder);
         assertEquals(user.toString(), result);
     }
+
+    @Test
+    public void testWSClassStrategyMultiple() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
+        user.setEmail(null);
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post("/strategy-multiple/customers/signIn");
+        requestBuilder.sessionAttr("ROLE", "ADMIN")
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = MockHttpRequest.getContent(mockMvc, requestBuilder);
+        assertEquals(user.toString(), result);
+    }
+
+    @Test
+    public void testWSClassStrategies() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
+        user.setEmail(null);
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post("/strategies/customers/signIn");
+        requestBuilder.sessionAttr("ROLE", "ADMIN")
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = MockHttpRequest.getContent(mockMvc, requestBuilder);
+        assertEquals(user.toString(), result);
+    }
+
+
 }

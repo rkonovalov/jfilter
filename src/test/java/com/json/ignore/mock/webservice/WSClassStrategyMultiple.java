@@ -1,7 +1,8 @@
 package com.json.ignore.mock.webservice;
 
 import com.json.ignore.filter.field.FieldFilterSetting;
-import com.json.ignore.filter.file.FileFilterSetting;
+import com.json.ignore.filter.strategy.SessionStrategies;
+import com.json.ignore.filter.strategy.SessionStrategy;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockUser;
 import org.springframework.http.MediaType;
@@ -11,12 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@FieldFilterSetting(fields = {"id"})
-@FieldFilterSetting(fields = {"password"})
-public class WSClassFieldMultiple {
+
+@SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
+        @FieldFilterSetting(fields = {"id", "password"})
+})
+
+@SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
+        @FieldFilterSetting(fields = {"email"})
+})
+public class WSClassStrategyMultiple {
 
 
-    @RequestMapping(value = "/field-multiple/customers/signIn",
+    @RequestMapping(value = "/strategy-multiple/customers/signIn",
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})

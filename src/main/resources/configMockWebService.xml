@@ -3,7 +3,7 @@
         "-//json/json-ignore mapping DTD 1.0//EN"
         "https://rkonovalov.github.io/json-ignore-schema-1.0.dtd">
 <config>
-    <controller class-name="com.json.ignore.mock.webservice.MockWS">
+    <controller class-name="com.json.ignore.mock.webservice.WSMethod">
         <strategy attribute-name="ROLE" attribute-value="ADMIN">
             <filter class="com.json.ignore.mock.MockUser">
                 <field name="id"/>
@@ -17,7 +17,7 @@
         </strategy>
     </controller>
 
-    <controller class-name="com.json.ignore.mock.webservice.MockWSClassAnnotated">
+    <controller class-name="com.json.ignore.mock.webservice.WSClassFile">
         <strategy attribute-name="ROLE" attribute-value="ADMIN">
             <filter class="com.json.ignore.mock.MockUser">
                 <field name="id"/>
@@ -30,4 +30,5 @@
             </filter>
         </strategy>
     </controller>
+
 </config>
