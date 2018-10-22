@@ -72,7 +72,9 @@ public class FilterProvider {
     }
 
     /**
-     * Is accept boolean.
+     * Check if provider supports processing method
+     * <p>
+     * Condition checks if provider is enabled and FilterFactory accepts method, else returns false
      *
      * @param methodParameter the method parameter
      * @return the boolean
