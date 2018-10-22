@@ -44,7 +44,11 @@ public class FilterProvider {
     }
 
     private BaseFilter getBaseFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
+        //search annotations in method
         Annotation key = FilterFactory.getFilterAnnotation(methodParameter);
+
+        //search annotations in class
+        //key = FilterFactory.getFilterAnnotation(methodParameter);
 
         if (key != null) {
             if (items.containsKey(key)) {

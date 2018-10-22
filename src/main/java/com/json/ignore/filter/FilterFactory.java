@@ -47,12 +47,20 @@ public class FilterFactory {
      * @return {@link Annotation} supported annotation, else null
      */
     public static Annotation getFilterAnnotation(MethodParameter methodParameter) {
+        //Search annotation in method
         for (Annotation annotation : methodParameter.getMethod().getDeclaredAnnotations()) {
+            if (FilterFactory.filterList.containsKey(annotation.annotationType()))
+                return annotation;
+        }
+
+        //Search annotation in containing class
+        for (Annotation annotation : methodParameter.getContainingClass().getDeclaredAnnotations()) {
             if (FilterFactory.filterList.containsKey(annotation.annotationType()))
                 return annotation;
         }
         return null;
     }
+
 
     /**
      * Retrieve filter from filter list by annotation defined in method

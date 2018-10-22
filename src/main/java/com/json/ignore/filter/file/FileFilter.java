@@ -57,7 +57,7 @@ public class FileFilter extends BaseFilter {
     @Override
     protected void setConfig(MethodParameter methodParameter) {
         controllerClass = methodParameter.getContainingClass();
-        FileFilterSetting config = AnnotationUtil.getDeclaredAnnotation(methodParameter.getMethod(), FileFilterSetting.class);
+        FileFilterSetting config = AnnotationUtil.getDeclaredAnnotation(methodParameter, FileFilterSetting.class);
         fileConfig = parseFile(config.fileName());
     }
 

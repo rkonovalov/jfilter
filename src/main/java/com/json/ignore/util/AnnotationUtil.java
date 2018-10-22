@@ -5,6 +5,7 @@ import com.json.ignore.filter.field.FieldFilterSettings;
 import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
+import org.springframework.core.MethodParameter;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -45,6 +46,15 @@ public final class AnnotationUtil {
      */
     public static <T extends Annotation> T getDeclaredAnnotation(Method method, Class<T> annotationClass) {
         return method.getDeclaredAnnotation(annotationClass);
+    }
+
+    public static <T extends Annotation> T getDeclaredAnnotation(MethodParameter methodParameter, Class<T> annotationClass) {
+        //Get annotation from method
+        T annotation = methodParameter.getMethod().getDeclaredAnnotation(annotationClass);
+        //If annotation is null try to get annotation from containing class
+        annotation = annotation != null ? annotation : methodParameter.getContainingClass().getDeclaredAnnotation(annotationClass);
+
+        return annotation;
     }
 
     /**
