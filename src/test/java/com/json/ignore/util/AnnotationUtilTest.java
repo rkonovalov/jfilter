@@ -10,6 +10,30 @@ import java.util.*;
 public class AnnotationUtilTest {
 
     @Test
+    public void testClassExists() {
+        Class clazz = AnnotationUtil.getClassByName("com.json.ignore.util.FileUtilTest");
+        assertNotNull(clazz);
+    }
+
+    @Test
+    public void testClassNotExists() {
+        Class clazz = AnnotationUtil.getClassByName("com.json.ignore.NotExistedClass");
+        assertNull(clazz);
+    }
+
+    @Test
+    public void testClassEmpty() {
+        Class clazz = AnnotationUtil.getClassByName("");
+        assertNull(clazz);
+    }
+
+    @Test
+    public void testClassNull() {
+        Class clazz = AnnotationUtil.getClassByName(null);
+        assertNull(clazz);
+    }
+
+    @Test
     public void testGetStrategyFieldsNotNull() {
         FileConfig config = MockClasses.getMockAdminFileConfig();
         assertNotNull(config);

@@ -12,30 +12,6 @@ public class FileUtilTest {
     private static final String UN_EXISTED_FILE = "unexisted_config.xml";
 
     @Test
-    public void testClassExists() {
-        Class clazz = FileUtil.getClassByName("com.json.ignore.util.FileUtilTest");
-        assertNotNull(clazz);
-    }
-
-    @Test
-    public void testClassNotExists() {
-        Class clazz = FileUtil.getClassByName("com.json.ignore.NotExistedClass");
-        assertNull(clazz);
-    }
-
-    @Test
-    public void testClassEmpty() {
-        Class clazz = FileUtil.getClassByName("");
-        assertNull(clazz);
-    }
-
-    @Test
-    public void testClassNull() {
-        Class clazz = FileUtil.getClassByName(null);
-        assertNull(clazz);
-    }
-
-    @Test
     public void testResourceFileNotNull() {
         File file = FileUtil.resourceFile(EXISTED_FILE);
         assertNotNull(file);
