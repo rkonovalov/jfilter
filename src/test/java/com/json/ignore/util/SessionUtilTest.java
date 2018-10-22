@@ -3,10 +3,6 @@ package com.json.ignore.util;
 import com.json.ignore.mock.MockHttpRequest;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.http.server.ServletServerHttpRequest;
-
-import javax.servlet.http.HttpSession;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
