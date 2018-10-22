@@ -113,7 +113,7 @@ public class FileFilter extends BaseFilter {
     public void filter(Object object, HttpSession session) throws FieldAccessException {
         if (object != null && fileConfig != null) {
             for (FileConfig.Controller controller : fileConfig.getControllers()) {
-                if (controllerClass.getName().equalsIgnoreCase(controller.getClassName()) && controller.getStrategies() != null) {
+                if (controllerClass.getName().equalsIgnoreCase(controller.getClassName())) {
                     controller.getStrategies().forEach(strategy -> {
                         if (SessionUtil.isSessionPropertyExists(session, strategy.getAttributeName(), strategy.getAttributeValue())) {
                             FieldFilterProcessor processor = new FieldFilterProcessor(AnnotationUtil.getStrategyFields(strategy));
