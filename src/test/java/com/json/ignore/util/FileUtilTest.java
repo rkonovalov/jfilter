@@ -4,7 +4,6 @@ import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.file.FileConfig;
 import org.junit.Test;
 import java.io.File;
-import java.io.FileInputStream;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -71,19 +70,6 @@ public class FileUtilTest {
     public void testResourceFileNull() {
         File file = FileUtil.resourceFile(null);
         assertNull(file);
-    }
-
-    @Test
-    public void testFileToInputStreamNotNull() {
-        File file = FileUtil.resourceFile(EXISTED_FILE);
-        FileInputStream inputStream = FileUtil.fileToInputStream(file);
-        assertNotNull(inputStream);
-    }
-
-    @Test
-    public void testFileToInputStreamNull() {
-        FileInputStream inputStream = FileUtil.fileToInputStream(null);
-        assertNull(inputStream);
     }
 
     @Test

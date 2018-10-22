@@ -63,20 +63,6 @@ public final class FileUtil {
     }
 
     /**
-     * Convert File to FileInputStream
-     * @param file {@link File}
-     * @return {@link FileInputStream} return stream, else null
-     */
-    public static FileInputStream fileToInputStream(File file) {
-        try {
-            return new FileInputStream(file);
-        } catch (FileNotFoundException | NullPointerException e) {
-            return null;
-        }
-    }
-
-
-    /**
      * Convert cml file to Class
      * <p>
      * Deserialize xml file to Class
