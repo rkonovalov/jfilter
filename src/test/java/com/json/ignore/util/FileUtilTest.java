@@ -36,25 +36,6 @@ public class FileUtilTest {
     }
 
     @Test
-    public void testGetFileNameExist() {
-        String fileName = FileUtil.getFileName(EXISTED_FILE);
-        assertNotNull(fileName);
-    }
-
-    @Test
-    public void testGetFileNameNotExist() {
-        String fileName = FileUtil.getFileName(UN_EXISTED_FILE);
-        assertNull(fileName);
-    }
-
-    @Test
-    public void testGetFileNameNull() {
-        String fileName = FileUtil.getFileName(null);
-        assertNull(fileName);
-    }
-
-
-    @Test
     public void testResourceFileNotNull() {
         File file = FileUtil.resourceFile(EXISTED_FILE);
         assertNotNull(file);

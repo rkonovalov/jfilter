@@ -41,7 +41,7 @@ public final class FileUtil {
      * @param resourceName {@link String} resource name
      * @return {@link String} local file name, else null
      */
-    public static String getFileName(String resourceName) {
+    private static String getFileName(String resourceName) {
         if (resourceName != null) {
             ClassLoader classLoader = FileUtil.class.getClassLoader();
             URL url = classLoader.getResource(resourceName);
