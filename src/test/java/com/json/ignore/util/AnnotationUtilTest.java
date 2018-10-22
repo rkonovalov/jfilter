@@ -32,6 +32,8 @@ public class AnnotationUtilTest {
         FileConfig.Strategy strategy = new FileConfig.Strategy();
         Map<Class, List<String>> fields = AnnotationUtil.getStrategyFields(strategy);
         assertEquals(0, fields.keySet().size());
+
+
     }
 
     @Test

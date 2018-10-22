@@ -18,7 +18,9 @@ import java.util.Map;
 /**
  * Filters factory
  */
-public class FilterFactory {
+public abstract class FilterFactory {
+
+
     /**
      * List of available filters
      */

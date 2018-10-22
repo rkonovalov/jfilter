@@ -12,7 +12,8 @@ import java.net.URL;
  */
 public final class FileUtil {
 
-    protected FileUtil() {
+    private FileUtil() {
+        throw new UnsupportedOperationException();
     }
 
     /**

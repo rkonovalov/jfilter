@@ -10,10 +10,8 @@ import java.util.Objects;
  * <p>
  * This is util class used to help working with Http Session
  */
-public final class SessionUtil {
+public abstract class SessionUtil {
 
-    protected SessionUtil() {
-    }
 
     /**
      * Gets session from request
