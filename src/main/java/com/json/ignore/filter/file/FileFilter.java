@@ -131,8 +131,7 @@ public class FileFilter extends BaseFilter {
                 if (controllerClass.getName().equalsIgnoreCase(controller.getClassName())) {
                     controller.getStrategies().forEach(strategy -> {
                         if (requestSession.isSessionPropertyExists(requestSession.getSession(), strategy.getAttributeName(), strategy.getAttributeValue())) {
-                            FieldFilterProcessor processor = new FieldFilterProcessor(strategy.getStrategyFields());
-                            processor.filterFields(object);
+                            filter(object, new FieldFilterProcessor(strategy.getStrategyFields()));
                         }
                     });
                 }

@@ -42,8 +42,7 @@ public class FieldFilter extends BaseFilter {
     @Override
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
         if(object != null) {
-            FieldFilterProcessor processor = new FieldFilterProcessor(config);
-            processor.filterFields(object);
+            filter(object, new FieldFilterProcessor(config));
         }
     }
 }

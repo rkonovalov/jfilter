@@ -1,6 +1,7 @@
 package com.json.ignore.filter;
 
 import com.json.ignore.FieldAccessException;
+import com.json.ignore.filter.field.FieldFilterProcessor;
 import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -22,4 +23,8 @@ public abstract class BaseFilter {
     protected abstract void setConfig(MethodParameter methodParameter);
 
     public abstract void filter(Object object, ServerHttpRequest request) throws FieldAccessException;
+
+    public void filter(Object object, FieldFilterProcessor filterProcessor) throws FieldAccessException {
+        filterProcessor.filterFields(object);
+    }
 }
