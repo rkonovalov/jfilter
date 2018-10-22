@@ -69,22 +69,4 @@ public class RequestMethodParameter extends MethodParameter {
         } else
             return getDeclaredAnnotations(SessionStrategy.class);
     }
-
-    /**
-     * Gets class by name
-     * <P>
-     * Try to get class by it full name. If class couldn't be found, returns null
-     * @param className {@link String} class name. Example: java.io.File
-     * @return {@link Class} return class, else null
-     */
-    public static Class getClassByName(String className) {
-        if (className != null && !className.isEmpty()) {
-            try {
-                return Class.forName(className);
-            } catch (ClassNotFoundException e) {
-                return null;
-            }
-        } else
-            return null;
-    }
 }

@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class RequestMethodParameterTest {
 
-    @Test
+   /* @Test
     public void testClassExists() {
         Class clazz = RequestMethodParameter.getClassByName("com.json.ignore.filter.BaseFilter");
         assertNotNull(clazz);
@@ -34,7 +34,7 @@ public class RequestMethodParameterTest {
     public void testClassNull() {
         Class clazz = RequestMethodParameter.getClassByName("");
         assertNull(clazz);
-    }
+    }*/
 
     @Test
     public void testGetStrategyFieldsNotNull() {

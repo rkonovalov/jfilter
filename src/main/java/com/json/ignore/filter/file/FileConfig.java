@@ -3,12 +3,13 @@ package com.json.ignore.filter.file;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.json.ignore.request.RequestMethodParameter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static com.json.ignore.request.RequestMethodParameter.getClassByName;
 
 /**
  * This class used for deserialization of xml annotated strategy files
@@ -123,6 +124,25 @@ public class FileConfig implements Serializable {
             this.filters = filters;
             return this;
         }
+
+        /**
+         * Gets class by name
+         * <P>
+         * Try to get class by it full name. If class couldn't be found, returns null
+         * @param className {@link String} class name. Example: java.io.File
+         * @return {@link Class} return class, else null
+         */
+        private Class getClassByName(String className) {
+            if (className != null && !className.isEmpty()) {
+                try {
+                    return Class.forName(className);
+                } catch (ClassNotFoundException e) {
+                    return null;
+                }
+            } else
+                return null;
+        }
+
 
         /**
          * Convert strategy class in Map
