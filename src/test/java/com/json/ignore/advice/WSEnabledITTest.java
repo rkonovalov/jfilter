@@ -3,6 +3,7 @@ package com.json.ignore.advice;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
 import com.json.ignore.mock.MockUser;
+import com.json.ignore.mock.config.WSConfigurationEnabled;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +19,10 @@ import org.springframework.web.context.WebApplicationContext;
 import static junit.framework.TestCase.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@ContextConfiguration({"classpath:IntegrationTest-configuration.xml"})
+@ContextConfiguration(classes = WSConfigurationEnabled.class)
 @RunWith(SpringRunner.class)
 @WebAppConfiguration("src/main/resources")
-public class WSITTest {
+public class WSEnabledITTest {
     private MockMvc mockMvc;
 
     @Autowired

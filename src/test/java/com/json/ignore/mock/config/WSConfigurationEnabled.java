@@ -1,4 +1,4 @@
-package com.json.ignore.mock.webservice;
+package com.json.ignore.mock.config;
   
 import com.json.ignore.EnableJsonFilter;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,6 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan({"com.json.ignore", "com.json.ignore.mock.webservice"})
 @EnableWebMvc
 @EnableJsonFilter
-public class WSConfiguration extends WebMvcConfigurerAdapter {
+public class WSConfigurationEnabled extends WebMvcConfigurerAdapter {
 
 }
