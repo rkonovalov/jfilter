@@ -27,13 +27,6 @@ public class FilterAdviceTest {
     }
 
     @Test
-    public void testSupports() {
-        boolean result = filterAdvice.supports(MockMethods.fileAnnotation(), null);
-        assertTrue(result);
-
-    }
-
-    @Test
     public void testSupportsFalse() {
         boolean result = filterAdvice.supports(MockMethods.methodWithoutAnnotations(), null);
         assertFalse(result);

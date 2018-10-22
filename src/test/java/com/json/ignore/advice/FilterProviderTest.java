@@ -39,12 +39,6 @@ public class FilterProviderTest {
     }
 
     @Test
-    public void testIsAccept() {
-        boolean result = filterProvider.isAccept(singleAnnotationMethod);
-        assertTrue(result);
-    }
-
-    @Test
     public void testIsAcceptFalse() {
         boolean result = filterProvider.isAccept(methodWithoutAnnotationsMethod);
         assertFalse(result);
