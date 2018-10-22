@@ -48,23 +48,6 @@ public final class AnnotationUtil {
     }
 
     /**
-     * Check for annotations id declared in method
-     *
-     * @param methodParameter   {@link MethodParameter} object's method which may have annotation
-     * @param annotationClasses {@link Annotation} name of annotation to search
-     * @param <T>               {@link Annotation}
-     * @return {@link Annotation} if one of specified annotation is found, else returns false
-     */
-    public static <T extends Annotation> boolean isAnnotationExists(MethodParameter methodParameter, List<Class<T>> annotationClasses) {
-        if (annotationClasses != null)
-            for (Class<T> clazz : annotationClasses) {
-                if (getDeclaredAnnotations(methodParameter, clazz).length > 0)
-                    return true;
-            }
-        return false;
-    }
-
-    /**
      * Search for {@link FieldFilterSetting} in method
      *
      * @param methodParameter {@link MethodParameter} object's method which may have annotation
