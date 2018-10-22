@@ -8,34 +8,21 @@ import com.json.ignore.util.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * This class used for filtration of object's fields based on xml file configuration
  */
 public class FileFilter extends BaseFilter {
-    private FileConfig fileConfig;
+    private FileConfig config;
     private Class controllerClass;
 
     /**
      * Constructor
      *
-     * @param serverHttpRequest {@link ServerHttpRequest} http request
-     * @param methodParameter   {@link MethodParameter} method
-     */
-    public FileFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
-        super(serverHttpRequest);
-        setConfig(methodParameter);
-    }
-
-    /**
-     * Constructor
-     *
-     * @param session         {@link HttpSession} http session
      * @param methodParameter {@link MethodParameter} method
      */
-    public FileFilter(HttpSession session, MethodParameter methodParameter) {
-        super(session);
+    public FileFilter(MethodParameter methodParameter) {
+        super(methodParameter);
         setConfig(methodParameter);
     }
 
@@ -57,8 +44,8 @@ public class FileFilter extends BaseFilter {
     @Override
     protected void setConfig(MethodParameter methodParameter) {
         controllerClass = methodParameter.getContainingClass();
-        FileFilterSetting config = AnnotationUtil.getDeclaredAnnotation(methodParameter, FileFilterSetting.class);
-        fileConfig = parseFile(config.fileName());
+        FileFilterSetting fileFilterSetting = AnnotationUtil.getDeclaredAnnotation(methodParameter, FileFilterSetting.class);
+        config = parseFile(fileFilterSetting.fileName());
     }
 
     /**
@@ -83,39 +70,18 @@ public class FileFilter extends BaseFilter {
 
     /**
      * Attempt to filter object fields if filter annotations is configured
-     *
      * @param object {@link Object} object which fields will be filtered
-     * @throws FieldAccessException exception throws on {@link IllegalAccessException}
-     */
-    @Override
-    public void filter(Object object) throws FieldAccessException {
-        filter(object, this.getSession());
-    }
-
-    /**
-     * Attempt to filter object fields if filter annotations is configured
-     * @param object {@link Object} object which fields will be filtered
-     * @param request {@link ServerHttpRequest} http request
      * @throws FieldAccessException exception throws on {@link IllegalAccessException}
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
-        filter(object, getSessionUtil().getSession(request));
-    }
+        SessionUtil sessionUtil = new SessionUtil(request);
 
-    /**
-     * Attempt to filter object fields if filter annotations is configured
-     * @param object {@link Object} object which fields will be filtered
-     * @param session {@link HttpSession} session
-     * @throws FieldAccessException exception throws on {@link IllegalAccessException}
-     */
-    @Override
-    public void filter(Object object, HttpSession session) throws FieldAccessException {
-        if (object != null && fileConfig != null) {
-            for (FileConfig.Controller controller : fileConfig.getControllers()) {
+        if (object != null && config != null) {
+            for (FileConfig.Controller controller : config.getControllers()) {
                 if (controllerClass.getName().equalsIgnoreCase(controller.getClassName())) {
                     controller.getStrategies().forEach(strategy -> {
-                        if (getSessionUtil().isSessionPropertyExists(session, strategy.getAttributeName(), strategy.getAttributeValue())) {
+                        if (sessionUtil.isSessionPropertyExists(sessionUtil.getSession(), strategy.getAttributeName(), strategy.getAttributeValue())) {
                             FieldFilterProcessor processor = new FieldFilterProcessor(AnnotationUtil.getStrategyFields(strategy));
                             processor.filterFields(object);
                         }

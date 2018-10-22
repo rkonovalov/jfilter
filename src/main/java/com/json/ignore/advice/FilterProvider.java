@@ -44,11 +44,7 @@ public class FilterProvider {
     }
 
     private BaseFilter getBaseFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
-        //search annotations in method
         Annotation key = FilterFactory.getFilterAnnotation(methodParameter);
-
-        //search annotations in class
-        //key = FilterFactory.getFilterAnnotation(methodParameter);
 
         if (key != null) {
             if (items.containsKey(key)) {
@@ -56,7 +52,7 @@ public class FilterProvider {
                 return items.get(key);
             } else {
                 //Create and put filter in cache
-                BaseFilter filter = FilterFactory.getFromFactory(serverHttpRequest, methodParameter);
+                BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
                 if (filter != null) {
                     items.put(key, filter);
                     return filter;

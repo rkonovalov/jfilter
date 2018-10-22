@@ -66,30 +66,18 @@ public abstract class FilterFactory {
     /**
      * Retrieve filter from filter list by annotation defined in method
      *
-     * @param request         {@link ServletServerHttpRequest} http request
      * @param methodParameter {@link MethodParameter} method
      * @return object instance of inherited class from {@link BaseFilter}
      */
-    public static BaseFilter getFromFactory(ServletServerHttpRequest request, MethodParameter methodParameter) {
+    public static BaseFilter getFromFactory(MethodParameter methodParameter) {
         Annotation annotation = getFilterAnnotation(methodParameter);
 
         if (annotation != null) {
             return FilterFactory.filterList
                     .get(annotation.annotationType())
-                    .build(request, methodParameter);
+                    .build(methodParameter);
         } else
             return null;
-    }
-
-    /**
-     * Retrieve filter from filter list by annotation defined in method
-     *
-     * @param request         {@link ServerHttpRequest} http request
-     * @param methodParameter {@link MethodParameter} method
-     * @return object instance of inherited class from {@link BaseFilter}
-     */
-    public static BaseFilter getFromFactory(ServerHttpRequest request, MethodParameter methodParameter) {
-        return getFromFactory((ServletServerHttpRequest) request, methodParameter);
     }
 
     /**
