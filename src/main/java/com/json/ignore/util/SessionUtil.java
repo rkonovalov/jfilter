@@ -2,7 +2,6 @@ package com.json.ignore.util;
 
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
-
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 

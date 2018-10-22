@@ -1,7 +1,6 @@
 package com.json.ignore.mock.webservice;
 
 import com.json.ignore.filter.field.FieldFilterSetting;
-import com.json.ignore.filter.file.FileFilterSetting;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockUser;
 import org.springframework.http.MediaType;

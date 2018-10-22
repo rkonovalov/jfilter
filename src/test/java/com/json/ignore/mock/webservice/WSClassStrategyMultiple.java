@@ -1,7 +1,6 @@
 package com.json.ignore.mock.webservice;
 
 import com.json.ignore.filter.field.FieldFilterSetting;
-import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockUser;
