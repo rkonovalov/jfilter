@@ -43,7 +43,7 @@ public class FilterProvider {
         enabled = webApplicationContext.getBeansWithAnnotation(EnableJsonFilter.class).size() > 0;
     }
 
-    private BaseFilter getBaseFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
+    private BaseFilter getBaseFilter(MethodParameter methodParameter) {
         Annotation key = FilterFactory.getFilterAnnotation(methodParameter);
 
         if (key != null) {
@@ -83,7 +83,7 @@ public class FilterProvider {
      * @return the object
      */
     public Object filter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter, Object object) {
-        BaseFilter filter = getBaseFilter(serverHttpRequest, methodParameter);
+        BaseFilter filter = getBaseFilter(methodParameter);
         if (filter != null) {
             filter.filter(object, serverHttpRequest);
         }
