@@ -41,22 +41,4 @@ public final class FileUtil {
         String fileName = getFileName(resourceName);
         return fileName != null ? new File(fileName) : null;
     }
-
-    /**
-     * Convert cml file to Class
-     * <p>
-     * Deserialize xml file to Class
-     * @param file {@link File} file from resource name if file exist
-     * @param clazz  {@link Class} class type
-     * @param <T> the type of the value being boxed
-     * @return {@link Object} returns instantiated object type of specified class
-     * @throws FieldAccessException {@link FieldAccessException} when caught {@link IOException}
-     */
-    public static <T> T xmlFileToClass(File file, Class<T> clazz) throws FieldAccessException {
-        try {
-            return file != null ? new XmlMapper().readValue(file, clazz) : null;
-        } catch (IOException e) {
-            throw new FieldAccessException(e);
-        }
-    }
 }

@@ -1,7 +1,5 @@
 package com.json.ignore.util;
 
-import com.json.ignore.FieldAccessException;
-import com.json.ignore.filter.file.FileConfig;
 import org.junit.Test;
 import java.io.File;
 import static org.junit.Assert.assertNotNull;
@@ -28,33 +26,4 @@ public class FileUtilTest {
         File file = FileUtil.resourceFile(null);
         assertNull(file);
     }
-
-    @Test
-    public void testXmlFileToClassNotNull() {
-        File file = FileUtil.resourceFile(EXISTED_FILE);
-        FileConfig config = FileUtil.xmlFileToClass(file, FileConfig.class);
-        assertNotNull(config);
-    }
-
-    @Test
-    public void testXmlFileToClassNull() {
-        FileConfig config = FileUtil.xmlFileToClass(null, FileConfig.class);
-        assertNull(config);
-    }
-
-    @Test(expected = FieldAccessException.class)
-    public void testXmlFileToClassIncorrectClass() {
-        File file = FileUtil.resourceFile(EXISTED_FILE);
-        FileUtilTest config = FileUtil.xmlFileToClass(file, FileUtilTest.class);
-        assertNull(config);
-    }
-
-    @Test(expected = FieldAccessException.class)
-    public void testXmlFileToClassBadFile() {
-        File file = FileUtil.resourceFile("bad_config.xml");
-        FileUtilTest config = FileUtil.xmlFileToClass(file, FileUtilTest.class);
-        assertNull(config);
-    }
-
-
 }

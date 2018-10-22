@@ -1,5 +1,6 @@
 package com.json.ignore.filter.file;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.util.FileUtil;
 import com.json.ignore.util.AnnotationUtil;
@@ -8,6 +9,9 @@ import com.json.ignore.util.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * This class used for filtration of object's fields based on xml file configuration
@@ -33,7 +37,25 @@ public class FileFilter extends BaseFilter {
      * @return {@link FileConfig} config
      */
     private FileConfig parseFile(String fileName) {
-        return FileUtil.xmlFileToClass(FileUtil.resourceFile(fileName), FileConfig.class);
+        return xmlFileToClass(FileUtil.resourceFile(fileName), FileConfig.class);
+    }
+
+    /**
+     * Convert cml file to Class
+     * <p>
+     * Deserialize xml file to Class
+     * @param file {@link File} file from resource name if file exist
+     * @param clazz  {@link Class} class type
+     * @param <T> the type of the value being boxed
+     * @return {@link Object} returns instantiated object type of specified class
+     * @throws FieldAccessException {@link FieldAccessException} when caught {@link IOException}
+     */
+    private <T> T xmlFileToClass(File file, Class<T> clazz) throws FieldAccessException {
+        try {
+            return file != null ? new XmlMapper().readValue(file, clazz) : null;
+        } catch (IOException e) {
+            throw new FieldAccessException(e);
+        }
     }
 
     /**
