@@ -17,7 +17,7 @@ public class FilterProviderTest {
     private ServletServerHttpRequest defaultRequest;
     private MethodParameter fileAnnotationMethod;
     private MethodParameter methodWithoutAnnotationsMethod;
-    private MethodParameter singleAnnotationMethod;
+
 
     @Before
     public void init() {
@@ -33,9 +33,6 @@ public class FilterProviderTest {
 
         methodWithoutAnnotationsMethod = MockMethods.methodWithoutAnnotations();
         assertNotNull(methodWithoutAnnotationsMethod);
-
-        singleAnnotationMethod = MockMethods.singleAnnotation();
-        assertNotNull(singleAnnotationMethod);
     }
 
     @Test
