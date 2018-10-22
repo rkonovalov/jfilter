@@ -2,7 +2,6 @@ package com.json.ignore.filter.file;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.FieldAccessException;
-import com.json.ignore.util.FileUtil;
 import com.json.ignore.util.AnnotationUtil;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.util.SessionUtil;
@@ -12,6 +11,7 @@ import org.springframework.http.server.ServerHttpRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * This class used for filtration of object's fields based on xml file configuration
@@ -37,7 +37,7 @@ public class FileFilter extends BaseFilter {
      * @return {@link FileConfig} config
      */
     private FileConfig parseFile(String fileName) {
-        return xmlFileToClass(FileUtil.resourceFile(fileName), FileConfig.class);
+        return xmlFileToClass(resourceFile(fileName), FileConfig.class);
     }
 
     /**
@@ -56,6 +56,36 @@ public class FileFilter extends BaseFilter {
         } catch (IOException e) {
             throw new FieldAccessException(e);
         }
+    }
+
+    /**
+     * Get file name from resource name
+     * <p>
+     * Returns local file name of resource
+     * <p>
+     * Example: resource name config.xml, return local file .../resources/config.xml
+     * @param resourceName {@link String} resource name
+     * @return {@link String} local file name, else null
+     */
+    private String getFileName(String resourceName) {
+        if (resourceName != null) {
+            ClassLoader classLoader = FileFilter.class.getClassLoader();
+            URL url = classLoader.getResource(resourceName);
+            return url != null ? url.getFile() : null;
+        }
+        return null;
+    }
+
+    /**
+     * Get file from resource
+     * <p>
+     * Returns {@link File} file from resource name if file exist
+     * @param resourceName {@link String} resource name
+     * @return {@link File} if file exists, else null
+     */
+    private File resourceFile(String resourceName) {
+        String fileName = getFileName(resourceName);
+        return fileName != null ? new File(fileName) : null;
     }
 
     /**

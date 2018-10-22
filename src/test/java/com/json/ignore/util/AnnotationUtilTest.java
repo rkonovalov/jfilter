@@ -11,7 +11,7 @@ public class AnnotationUtilTest {
 
     @Test
     public void testClassExists() {
-        Class clazz = AnnotationUtil.getClassByName("com.json.ignore.util.FileUtilTest");
+        Class clazz = AnnotationUtil.getClassByName("com.json.ignore.filter.BaseFilter");
         assertNotNull(clazz);
     }
 
