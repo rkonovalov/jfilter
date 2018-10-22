@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * Repeatable annotation of {@link FieldFilterSetting} interface
  */
 
-@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
+@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldFilterSettings {
 

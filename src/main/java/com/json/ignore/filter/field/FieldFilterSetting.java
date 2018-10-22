@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  *
  * This annotation used for configuring of field ignoring
  */
-@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
+@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(value = FieldFilterSettings.class )
 public @interface FieldFilterSetting {
