@@ -1,9 +1,8 @@
 package com.json.ignore.filter.field;
 
 import com.json.ignore.FieldAccessException;
-import com.json.ignore.util.AnnotationUtil;
+import com.json.ignore.util.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -66,11 +65,12 @@ public class FieldFilterProcessor  {
     /**
      * Constructor
      *
-     * @param method {@link MethodParameter} object's method which may have annotation
+     * @param methodParameter {@link MethodParameter} object's method which may have annotation
      */
-    public FieldFilterProcessor(MethodParameter method) {
+    public FieldFilterProcessor(MethodParameter methodParameter) {
         this();
-        this.ignore = parseSettingAnnotation(Arrays.asList(AnnotationUtil.getSettingAnnotations(method)));
+        RequestMethodParameter requestMethodParameter = new RequestMethodParameter(methodParameter);
+        this.ignore = parseSettingAnnotation(Arrays.asList(requestMethodParameter.getSettingAnnotations()));
 
     }
 

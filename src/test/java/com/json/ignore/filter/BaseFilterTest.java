@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class BaseFilterTest {
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testNullMethod() {
         BaseFilter baseFilter = new FieldFilter( null);
         assertNotNull(baseFilter);

@@ -6,40 +6,39 @@ import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import org.springframework.core.MethodParameter;
-
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 /**
  * Annotation util class
  * <p>
  * This is util class used to help find annotations in class or method
  */
-public class AnnotationUtil {
+public class RequestMethodParameter extends MethodParameter {
+
+    public RequestMethodParameter(MethodParameter methodParameter) {
+        super(methodParameter);
+    }
 
     /**
      * Search for specified type list of annotation
      *
-     * @param methodParameter {@link MethodParameter} object's method which may have annotations
      * @param annotationClass {@link Annotation} name of annotation to search
      * @param <T>             {@link Annotation} generic class
      * @return {@link Annotation} list of found annotations if found, else an array of length zero
      */
-    public static <T extends Annotation> T[] getDeclaredAnnotations(MethodParameter methodParameter, Class<T> annotationClass) {
-        T[] annotations = methodParameter.getMethod().getDeclaredAnnotationsByType(annotationClass);
-        Class<?> containingClass = methodParameter.getContainingClass();
+    public <T extends Annotation> T[] getDeclaredAnnotations(Class<T> annotationClass) {
+        T[] annotations = getMethod().getDeclaredAnnotationsByType(annotationClass);
+        Class<?> containingClass = getContainingClass();
         annotations = annotations.length != 0 ? annotations : containingClass.getDeclaredAnnotationsByType(annotationClass);
         return annotations;
     }
 
-    public static <T extends Annotation> T getDeclaredAnnotation(MethodParameter methodParameter, Class<T> annotationClass) {
+    public <T extends Annotation> T getDeclaredAnnotation(Class<T> annotationClass) {
         //Get annotation from method
-        T annotation = methodParameter.getMethod().getDeclaredAnnotation(annotationClass);
+        T annotation = getMethod().getDeclaredAnnotation(annotationClass);
         //If annotation is null try to get annotation from containing class
-        annotation = annotation != null ? annotation : methodParameter.getContainingClass().getDeclaredAnnotation(annotationClass);
+        annotation = annotation != null ? annotation : getContainingClass().getDeclaredAnnotation(annotationClass);
 
         return annotation;
     }
@@ -47,15 +46,14 @@ public class AnnotationUtil {
     /**
      * Search for {@link FieldFilterSetting} in method
      *
-     * @param methodParameter {@link MethodParameter} object's method which may have annotation
      * @return list of {@link FieldFilterSetting} if this type of annotation declared in method
      */
-    public static FieldFilterSetting[] getSettingAnnotations(MethodParameter methodParameter) {
-        FieldFilterSettings settings = getDeclaredAnnotation(methodParameter, FieldFilterSettings.class);
+    public FieldFilterSetting[] getSettingAnnotations() {
+        FieldFilterSettings settings = getDeclaredAnnotation(FieldFilterSettings.class);
         if (settings != null) {
             return settings.value();
         } else
-            return getDeclaredAnnotations(methodParameter, FieldFilterSetting.class);
+            return getDeclaredAnnotations(FieldFilterSetting.class);
     }
 
     /**
@@ -64,12 +62,12 @@ public class AnnotationUtil {
      * @param methodParameter {@link MethodParameter} object's method which may have annotation
      * @return list of {@link SessionStrategy} if this type of annotation declared in method
      */
-    public static SessionStrategy[] getStrategyAnnotations(MethodParameter methodParameter) {
-        SessionStrategies strategies = getDeclaredAnnotation(methodParameter, SessionStrategies.class);
+    public SessionStrategy[] getStrategyAnnotations(MethodParameter methodParameter) {
+        SessionStrategies strategies = getDeclaredAnnotation(SessionStrategies.class);
         if (strategies != null) {
             return strategies.value();
         } else
-            return getDeclaredAnnotations(methodParameter, SessionStrategy.class);
+            return getDeclaredAnnotations(SessionStrategy.class);
     }
 
     /**
@@ -89,8 +87,4 @@ public class AnnotationUtil {
         } else
             return null;
     }
-
-
-
-
 }

@@ -1,7 +1,6 @@
 package com.json.ignore.filter.strategy;
 
 import com.json.ignore.FieldAccessException;
-import com.json.ignore.util.AnnotationUtil;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.util.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
@@ -33,7 +32,7 @@ public class StrategyFilter extends BaseFilter {
      */
     @Override
     protected void setConfig(MethodParameter methodParameter) {
-        config = AnnotationUtil.getStrategyAnnotations(methodParameter);
+        config = getRequestMethodParameter().getStrategyAnnotations(methodParameter);
     }
 
     /**

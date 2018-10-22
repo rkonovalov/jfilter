@@ -7,29 +7,29 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.*;
 
-public class AnnotationUtilTest {
+public class RequestMethodParameterTest {
 
     @Test
     public void testClassExists() {
-        Class clazz = AnnotationUtil.getClassByName("com.json.ignore.filter.BaseFilter");
+        Class clazz = RequestMethodParameter.getClassByName("com.json.ignore.filter.BaseFilter");
         assertNotNull(clazz);
     }
 
     @Test
     public void testClassNotExists() {
-        Class clazz = AnnotationUtil.getClassByName("com.json.ignore.NotExistedClass");
+        Class clazz = RequestMethodParameter.getClassByName("com.json.ignore.NotExistedClass");
         assertNull(clazz);
     }
 
     @Test
     public void testClassEmpty() {
-        Class clazz = AnnotationUtil.getClassByName("");
+        Class clazz = RequestMethodParameter.getClassByName("");
         assertNull(clazz);
     }
 
     @Test
     public void testClassNull() {
-        Class clazz = AnnotationUtil.getClassByName(null);
+        Class clazz = RequestMethodParameter.getClassByName(null);
         assertNull(clazz);
     }
 

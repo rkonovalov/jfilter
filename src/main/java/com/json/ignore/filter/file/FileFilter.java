@@ -2,7 +2,6 @@ package com.json.ignore.filter.file;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.FieldAccessException;
-import com.json.ignore.util.AnnotationUtil;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.util.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
@@ -96,7 +95,7 @@ public class FileFilter extends BaseFilter {
     @Override
     protected void setConfig(MethodParameter methodParameter) {
         controllerClass = methodParameter.getContainingClass();
-        FileFilterSetting fileFilterSetting = AnnotationUtil.getDeclaredAnnotation(methodParameter, FileFilterSetting.class);
+        FileFilterSetting fileFilterSetting = getRequestMethodParameter().getDeclaredAnnotation(FileFilterSetting.class);
         config = parseFile(fileFilterSetting.fileName());
     }
 

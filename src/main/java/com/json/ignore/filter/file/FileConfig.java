@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.json.ignore.util.AnnotationUtil.getClassByName;
+import static com.json.ignore.util.RequestMethodParameter.getClassByName;
 
 /**
  * This class used for deserialization of xml annotated strategy files

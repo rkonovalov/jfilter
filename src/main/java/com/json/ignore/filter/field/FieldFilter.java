@@ -1,7 +1,6 @@
 package com.json.ignore.filter.field;
 
 import com.json.ignore.FieldAccessException;
-import com.json.ignore.util.AnnotationUtil;
 import com.json.ignore.filter.BaseFilter;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -31,7 +30,7 @@ public class FieldFilter extends BaseFilter {
      */
     @Override
     protected void setConfig(MethodParameter methodParameter) {
-        config = AnnotationUtil.getSettingAnnotations(methodParameter);
+        config = getRequestMethodParameter().getSettingAnnotations();
     }
 
     /**
