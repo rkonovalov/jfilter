@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
-import javax.servlet.http.HttpSession;
 import static org.junit.Assert.*;
 
 public class BaseFilterTest {
@@ -22,44 +21,9 @@ public class BaseFilterTest {
         assertNotNull(methodParameter);
     }
 
-
-    /*@Test
-    public void testSessionAttributeExists() {
-        BaseFilter baseFilter = new FieldFilter(request, methodParameter);
-        boolean result = baseFilter.isSessionPropertyExists("ROLE", "ADMIN");
-        assertTrue(result);
-    }
-
-    @Test
-    public void testSessionAttributeNotExists() {
-        BaseFilter baseFilter = new FieldFilter(request.getServletRequest().getSession(), methodParameter);
-        boolean result = baseFilter.isSessionPropertyExists("ROLE", "SOME VALUE");
-        assertFalse(result);
-    }
-
-    @Test
-    public void testNullRequest() {
-        BaseFilter baseFilter = new FieldFilter((ServletServerHttpRequest) null, methodParameter);
-        boolean result = baseFilter.isSessionPropertyExists("ROLE", "ADMIN");
-        assertFalse(result);
-    }
-
-    @Test
-    public void testNullSession() {
-        BaseFilter baseFilter = new FieldFilter((HttpSession) null, methodParameter);
-        boolean result = baseFilter.isSessionPropertyExists("ROLE", "ADMIN");
-        assertFalse(result);
-    }*/
-
     @Test(expected = NullPointerException.class)
     public void testNullMethod() {
-        BaseFilter baseFilter = new FieldFilter(request, null);
-        assertNotNull(baseFilter);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testNullAllParameters() {
-        BaseFilter baseFilter = new FieldFilter((HttpSession) null, null);
+        BaseFilter baseFilter = new FieldFilter( null);
         assertNotNull(baseFilter);
     }
 }

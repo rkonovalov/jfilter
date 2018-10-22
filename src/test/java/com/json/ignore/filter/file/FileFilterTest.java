@@ -38,55 +38,44 @@ public class FileFilterTest {
         assertNotNull(defaultMockUser);
     }
 
-    @Test
-    public void testRequest() {
-        FileFilter filter = new FileFilter(request, methodParameter);
-        assertNotNull(filter);
-    }
-
-    @Test
-    public void testSession() {
-        FileFilter filter = new FileFilter(request.getServletRequest().getSession(), methodParameter);
-        assertNotNull(filter);
-    }
 
     @Test
     public void testFilteredObjectEqual() {
         MockUser user = MockClasses.getUserMock();
-        FileFilter filter = new FileFilter(request, methodParameter);
+        FileFilter filter = new FileFilter(methodParameter);
         filter.setControllerClass(FileFilterTest.class);
-        filter.filter(user);
+        filter.filter(user, request);
         assertEquals(defaultMockUser, user);
     }
 
     @Test
     public void testFilteredObjectNotEqual() {
         MockUser user = MockClasses.getUserMock();
-        FileFilter filter = new FileFilter(request, methodParameter);
-        filter.filter(user);
+        FileFilter filter = new FileFilter(methodParameter);
+        filter.filter(user, request);
         assertNotEquals(defaultMockUser, user);
     }
 
     @Test
     public void testFilterNullObject() {
-        FileFilter filter = new FileFilter(request, methodParameter);
-        filter.filter(null);
+        FileFilter filter = new FileFilter(methodParameter);
+        filter.filter(null, request);
         assertNotNull(filter.getControllerClass());
     }
 
     @Test
     public void testFilterNoControllers() {
 
-        FileFilter filter = new FileFilter(request, fileAnnotationNoControllers);
-        filter.filter(null);
+        FileFilter filter = new FileFilter(fileAnnotationNoControllers);
+        filter.filter(null, request);
         assertNotNull(filter.getControllerClass());
 
     }
 
     @Test
     public void testFilterNoStrategies() {
-        FileFilter filter = new FileFilter(request, fileAnnotationNoStrategies);
-        filter.filter(null);
+        FileFilter filter = new FileFilter(fileAnnotationNoStrategies);
+        filter.filter(null, request);
         assertNotNull(filter.getControllerClass());
     }
 
@@ -95,8 +84,8 @@ public class FileFilterTest {
         MockUser user = MockClasses.getUserMock();
         assertNotNull(user);
 
-        FileFilter filter = new FileFilter(request, fileAnnotationClassDuplicated);
-        filter.filter(user);
+        FileFilter filter = new FileFilter(fileAnnotationClassDuplicated);
+        filter.filter(user, request);
         assertNotNull(filter.getControllerClass());
     }
 }

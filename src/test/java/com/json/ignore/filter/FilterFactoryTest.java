@@ -5,37 +5,28 @@ import com.json.ignore.filter.strategy.StrategyFilter;
 import com.json.ignore.mock.MockMethods;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
-import java.lang.reflect.Method;
 import static org.junit.Assert.*;
 
 public class FilterFactoryTest {
 
     @Test
     public void testIgnoreSettingMethod() {
-        Method method = MockMethods.findMethodByName("mockIgnoreSettingsMethod");
-        assertNotNull(method);
-
-        MethodParameter methodParameter = new MethodParameter(method, 0);
+        MethodParameter methodParameter = MockMethods.mockIgnoreSettingsMethod();
         assertTrue(FilterFactory.isAccept(methodParameter));
     }
 
     @Test
     public void testStrategiesMethod() {
-        Method method = MockMethods.findMethodByName("mockIgnoreStrategiesMethod");
-        assertNotNull(method);
-
-        MethodParameter methodParameter = new MethodParameter(method, 0);
+        MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod();
         assertTrue(FilterFactory.isAccept(methodParameter));
     }
 
     @Test
     public void testFactoryFieldIgnore() {
-        Method method = MockMethods.findMethodByName("mockIgnoreSettingsMethod");
-        assertNotNull(method);
+        MethodParameter methodParameter = MockMethods.mockIgnoreSettingsMethod();
+        assertNotNull(methodParameter);
 
-        MethodParameter methodParameter = new MethodParameter(method, 0);
-
-        BaseFilter filter = FilterFactory.getFromFactory(null, methodParameter);
+        BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
         assertNotNull(filter);
 
         assertEquals(filter.getClass(), FieldFilter.class);
@@ -43,12 +34,10 @@ public class FilterFactoryTest {
 
     @Test
     public void testFactoryStrategyIgnore() {
-        Method method = MockMethods.findMethodByName("mockIgnoreStrategiesMethod");
-        assertNotNull(method);
+        MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod();
+        assertNotNull(methodParameter);
 
-        MethodParameter methodParameter = new MethodParameter(method, 0);
-
-        BaseFilter filter = FilterFactory.getFromFactory(null, methodParameter);
+        BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
         assertNotNull(filter);
 
         assertEquals(filter.getClass(), StrategyFilter.class);
@@ -56,12 +45,9 @@ public class FilterFactoryTest {
 
     @Test
     public void testFactoryNull() {
-        Method method = MockMethods.findMethodByName("methodWithoutAnnotations");
-        assertNotNull(method);
-        MethodParameter methodParameter = new MethodParameter(method, 0);
-        BaseFilter filter = FilterFactory.getFromFactory(null, methodParameter);
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
+        assertNotNull(methodParameter);
+        BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
         assertNull(filter);
-
-
     }
 }

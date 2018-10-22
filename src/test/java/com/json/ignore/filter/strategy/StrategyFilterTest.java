@@ -7,20 +7,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
-import javax.servlet.http.HttpSession;
 import static org.junit.Assert.*;
 
 public class StrategyFilterTest {
-    private HttpSession session;
-    private ServletServerHttpRequest serverHttpRequest;
+    private ServletServerHttpRequest request;
 
     @Before
     public void initSession() {
-        serverHttpRequest = MockHttpRequest.getMockAdminRequest();
-        assertNotNull(serverHttpRequest);
-
-        session = serverHttpRequest.getServletRequest().getSession();
-        assertNotNull(session);
+        request = MockHttpRequest.getMockAdminRequest();
+        assertNotNull(request);
     }
 
     @Test
@@ -30,9 +25,8 @@ public class StrategyFilterTest {
         MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod();
         assertNotNull(methodParameter);
 
-        StrategyFilter strategyFilter = new StrategyFilter(this.session, methodParameter);
-        strategyFilter.filter(user);
-
+        StrategyFilter strategyFilter = new StrategyFilter(methodParameter);
+        strategyFilter.filter(user, request);
         assertNull(user.getId());
     }
 
@@ -43,21 +37,8 @@ public class StrategyFilterTest {
         MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
         assertNotNull(methodParameter);
 
-        StrategyFilter strategyFilter = new StrategyFilter(this.session, methodParameter);
-        strategyFilter.filter(user);
-
-        assertNotNull(user.getId());
-    }
-
-    @Test
-    public void ignoreRequestFieldsWithoutAnnotations() {
-        MockUser user = new MockUser();
-        user.setId(100);
-        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
-        assertNotNull(methodParameter);
-
-        StrategyFilter strategyFilter = new StrategyFilter(this.serverHttpRequest, methodParameter);
-        strategyFilter.filter(user);
+        StrategyFilter strategyFilter = new StrategyFilter(methodParameter);
+        strategyFilter.filter(user, request);
 
         assertNotNull(user.getId());
     }
