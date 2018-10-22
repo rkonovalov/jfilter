@@ -6,7 +6,7 @@ import org.springframework.core.MethodParameter;
  * Interface used in FilterFactory for configuring list of filters
  */
 @FunctionalInterface
-public interface FilterBuilder {
+public interface FilterEvent {
     /**
      *
      * @param methodParameter {@link MethodParameter} method parameter

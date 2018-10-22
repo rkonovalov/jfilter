@@ -51,5 +51,4 @@ public class WSMethod {
     public MockUser signInUnExistedFile(@RequestParam("email") String email, @RequestParam("password") String password) {
         return MockClasses.getUserMock();
     }
-
 }
