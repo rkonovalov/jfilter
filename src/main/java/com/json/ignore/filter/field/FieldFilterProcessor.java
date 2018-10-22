@@ -23,15 +23,10 @@ public class FieldFilterProcessor  {
     private Map<Class, List<String>> ignore;
 
     /**
-     * list of field name which should be filtered
-     */
-    private List<String> fieldNames;
-
-    /**
      * Constructor
      */
     public FieldFilterProcessor() {
-        this.fieldNames = new ArrayList<>();
+
     }
 
     /**
@@ -244,7 +239,7 @@ public class FieldFilterProcessor  {
         if (settings != null)
             for (FieldFilterSetting setting : settings) {
                 List<String> fields = new ArrayList<>(Arrays.asList(setting.fields()));
-                fieldNames.addAll(fields);
+              //  fieldNames.addAll(fields);
                 if (items.containsKey(setting.className())) {
                     List<String> existFields = items.get(setting.className());
                     existFields.addAll(fields);
