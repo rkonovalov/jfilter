@@ -32,7 +32,7 @@ public class RequestMethodParameterTest {
 
     @Test
     public void testClassNull() {
-        Class clazz = RequestMethodParameter.getClassByName(null);
+        Class clazz = RequestMethodParameter.getClassByName("");
         assertNull(clazz);
     }
 
