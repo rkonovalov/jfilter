@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/rkonovalov/jsonignore.svg?branch=master)](https://travis-ci.org/rkonovalov/jsonignore)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/json-ignore/badge.svg?style=blue)](https://search.maven.org/search?q=a:json-ignore)
-[![Javadocs](http://www.javadoc.io/badge/com.github.rkonovalov/json-ignore.svg?1.0.5)](http://www.javadoc.io/doc/com.github.rkonovalov/json-ignore)
+[![Javadocs](http://www.javadoc.io/badge/com.github.rkonovalov/json-ignore.svg?1.0.6)](http://www.javadoc.io/doc/com.github.rkonovalov/json-ignore)
 [![codecov](https://codecov.io/gh/rkonovalov/jsonignore/branch/master/graph/badge.svg)](https://codecov.io/gh/rkonovalov/jsonignore)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jsonignore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jsonignore&amp;utm_campaign=Badge_Grade)
 
@@ -18,10 +18,10 @@ If you are using Maven you need add next dependency
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 </dependency>
 ```
-* If you are using another build automation tool, you can find configuration string by this link: https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.5/jar
+* If you are using another build automation tool, you can find configuration string by this link: https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.6/jar
 
 ## Activating of Spring Advice component
 You just need to add ComponentScan annotation which will find and activate filter advice class
@@ -45,6 +45,21 @@ If you are using XML Schema-based configuration, you can add next configuration
 
 ```xml
  <context:component-scan base-package="com.json.ignore.advice"/>
+```
+
+## Enabling/disabling module
+Also is necessarily to add *@EnableJsonFilter* annotation on configuration 
+* Example 
+
+```java
+@Configuration
+@ComponentScan({"com.json.ignore.advice"})
+@EnableWebMvc
+@EnableJsonFilter
+@PropertySource("classpath:application.properties")
+public class AppConfig extends WebMvcConfigurerAdapter {
+    
+}
 ```
 
 ## RestController class example
@@ -391,23 +406,48 @@ public class SessionService {
 </config>
 ```
 
+## Spring Rest controller annotation configuration
+If you need to apply filter on whole Rest controller class without configuring each method, better way to specify filter annotations on controller.
 
+```java
+//Filter applied on whole class methods
+@FileFilterSetting(fileName = "filter_configuration.xml")
+@RestController
+public class SessionService {
+    @Autowired
+    private UserController userController;  
+    
+    @RequestMapping(value = "/users/signIn",
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})            
+    public User signIn(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return userController.signInUser(email, password);
+    }
+}
+```
+Certainly, you can specify another filter annotations which were given above. 
 
 # Release notes
 
+## Version 1.0.6
+* Added EnableJsonFilter annotation for enabling/disabling filters
+* Added ability to appy filter annotations on whole Spring Rest controller
+* Fixed bugs
+
 ## Version 1.0.5
-Added Filter provider for improving execution speed
-Fixed bugs 
+* Added Filter provider for improving execution speed
+* Fixed bugs 
 
 ## Version 1.0.4
-Added xml Schema-based configuration
-Fixed bugs 
+* Added xml Schema-based configuration
+* Fixed bugs 
 
 ## Version 1.0.3
-Added session strategy filtering
+* Added session strategy filtering
 
 ## Version 1.0.2
-Added additional constructors
+* Added additional constructors
 
 ## Version 1.0.0
-Initial release
+* Initial release
