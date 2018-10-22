@@ -11,7 +11,7 @@ import org.springframework.http.server.ServerHttpRequest;
 public abstract class BaseFilter {
     private RequestMethodParameter requestMethodParameter;
 
-    public BaseFilter(MethodParameter methodParameter) {
+    protected BaseFilter(MethodParameter methodParameter) {
         this.requestMethodParameter = new RequestMethodParameter(methodParameter);
     }
 
