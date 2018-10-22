@@ -26,7 +26,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class FilterProvider {
     private Map<Annotation, BaseFilter> items;
-    private WebApplicationContext webApplicationContext;
     private boolean enabled;
 
     /**
@@ -38,8 +37,6 @@ public class FilterProvider {
 
     @Autowired
     public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
-        this.webApplicationContext = webApplicationContext;
-
         /*
          * Important! For enabling filtration, should be specified one of application bean with EnableJsonFilter annotation
          */
