@@ -1,6 +1,7 @@
 package com.json.ignore.filter.strategy;
 
 import com.json.ignore.filter.field.FieldFilterSetting;
+
 import java.lang.annotation.*;
 
 /**

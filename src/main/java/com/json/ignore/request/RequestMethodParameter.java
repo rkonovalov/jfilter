@@ -1,18 +1,18 @@
-package com.json.ignore.util;
+package com.json.ignore.request;
 
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.field.FieldFilterSettings;
-import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import org.springframework.core.MethodParameter;
+
 import java.lang.annotation.Annotation;
 
 
 /**
- * Annotation util class
+ * Annotation request class
  * <p>
- * This is util class used to help find annotations in class or method
+ * This is request class used to help find annotations in class or method
  */
 public class RequestMethodParameter extends MethodParameter {
 

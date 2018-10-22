@@ -2,8 +2,8 @@ package com.json.ignore.filter.strategy;
 
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.BaseFilter;
-import com.json.ignore.util.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
+import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 
@@ -42,11 +42,11 @@ public class StrategyFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
-        SessionUtil sessionUtil = new SessionUtil(request);
+        RequestSession requestSession = new RequestSession(request);
 
         if (object != null && config != null) {
             for (SessionStrategy strategy : config) {
-                if(sessionUtil.isSessionPropertyExists(sessionUtil.getSession(), strategy.attributeName(), strategy.attributeValue())) {
+                if(requestSession.isSessionPropertyExists(requestSession.getSession(), strategy.attributeName(), strategy.attributeValue())) {
                     FieldFilterProcessor processor = new FieldFilterProcessor(strategy.ignoreFields());
                     processor.filterFields(object);
                 }

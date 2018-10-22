@@ -3,6 +3,7 @@ package com.json.ignore.filter.file;
 import com.json.ignore.mock.MockClasses;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

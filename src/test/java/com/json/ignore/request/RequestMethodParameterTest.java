@@ -1,11 +1,14 @@
-package com.json.ignore.util;
+package com.json.ignore.request;
 
 import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.filter.file.FileConfigTest;
 import com.json.ignore.mock.MockClasses;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.*;
-import java.util.*;
 
 public class RequestMethodParameterTest {
 

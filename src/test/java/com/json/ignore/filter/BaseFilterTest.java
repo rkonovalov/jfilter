@@ -2,7 +2,8 @@ package com.json.ignore.filter;
 
 import com.json.ignore.filter.field.FieldFilter;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
 
 public class BaseFilterTest {
 

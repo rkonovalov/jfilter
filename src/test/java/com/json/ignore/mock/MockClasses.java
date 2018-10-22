@@ -1,6 +1,7 @@
 package com.json.ignore.mock;
 
 import com.json.ignore.filter.file.FileConfig;
+
 import java.util.*;
 
 public class MockClasses {

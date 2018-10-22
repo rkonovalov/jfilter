@@ -1,7 +1,7 @@
 package com.json.ignore.filter;
 
 import com.json.ignore.FieldAccessException;
-import com.json.ignore.util.RequestMethodParameter;
+import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 

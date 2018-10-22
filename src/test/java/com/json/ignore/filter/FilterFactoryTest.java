@@ -5,6 +5,7 @@ import com.json.ignore.filter.strategy.StrategyFilter;
 import com.json.ignore.mock.MockMethods;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
+
 import static org.junit.Assert.*;
 
 public class FilterFactoryTest {

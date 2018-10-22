@@ -3,8 +3,8 @@ package com.json.ignore.filter.file;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.BaseFilter;
-import com.json.ignore.util.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
+import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 
@@ -126,13 +126,13 @@ public class FileFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
-        SessionUtil sessionUtil = new SessionUtil(request);
+        RequestSession requestSession = new RequestSession(request);
 
         if (object != null && config != null) {
             for (FileConfig.Controller controller : config.getControllers()) {
                 if (controllerClass.getName().equalsIgnoreCase(controller.getClassName())) {
                     controller.getStrategies().forEach(strategy -> {
-                        if (sessionUtil.isSessionPropertyExists(sessionUtil.getSession(), strategy.getAttributeName(), strategy.getAttributeValue())) {
+                        if (requestSession.isSessionPropertyExists(requestSession.getSession(), strategy.getAttributeName(), strategy.getAttributeValue())) {
                             FieldFilterProcessor processor = new FieldFilterProcessor(strategy.getStrategyFields());
                             processor.filterFields(object);
                         }
