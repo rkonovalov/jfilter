@@ -6,6 +6,7 @@ import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import org.springframework.core.MethodParameter;
+
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,13 +26,13 @@ public final class AnnotationUtil {
     /**
      * Search for specified type list of annotation
      *
-     * @param methodParameter          {@link MethodParameter} object's method which may have annotations
+     * @param methodParameter {@link MethodParameter} object's method which may have annotations
      * @param annotationClass {@link Annotation} name of annotation to search
      * @param <T>             {@link Annotation} generic class
      * @return {@link Annotation} list of found annotations if found, else an array of length zero
      */
     public static <T extends Annotation> T[] getDeclaredAnnotations(MethodParameter methodParameter, Class<T> annotationClass) {
-        T[] annotations =  methodParameter.getMethod().getDeclaredAnnotationsByType(annotationClass);
+        T[] annotations = methodParameter.getMethod().getDeclaredAnnotationsByType(annotationClass);
         Class<?> containingClass = methodParameter.getContainingClass();
         annotations = annotations.length != 0 ? annotations : containingClass.getDeclaredAnnotationsByType(annotationClass);
         return annotations;
@@ -49,15 +50,15 @@ public final class AnnotationUtil {
     /**
      * Check for annotations id declared in method
      *
-     * @param method            {@link MethodParameter} object's method which may have annotation
+     * @param methodParameter   {@link MethodParameter} object's method which may have annotation
      * @param annotationClasses {@link Annotation} name of annotation to search
      * @param <T>               {@link Annotation}
      * @return {@link Annotation} if one of specified annotation is found, else returns false
      */
-    public static <T extends Annotation> boolean isAnnotationExists(MethodParameter method, List<Class<T>> annotationClasses) {
+    public static <T extends Annotation> boolean isAnnotationExists(MethodParameter methodParameter, List<Class<T>> annotationClasses) {
         if (annotationClasses != null)
             for (Class<T> clazz : annotationClasses) {
-                if (getDeclaredAnnotations(method, clazz).length > 0)
+                if (getDeclaredAnnotations(methodParameter, clazz).length > 0)
                     return true;
             }
         return false;
@@ -80,15 +81,15 @@ public final class AnnotationUtil {
     /**
      * Search for {@link SessionStrategy} in method
      *
-     * @param method {@link MethodParameter} object's method which may have annotation
+     * @param methodParameter {@link MethodParameter} object's method which may have annotation
      * @return list of {@link SessionStrategy} if this type of annotation declared in method
      */
-    public static SessionStrategy[] getStrategyAnnotations(MethodParameter method) {
-        SessionStrategies strategies = AnnotationUtil.getDeclaredAnnotation(method, SessionStrategies.class);
+    public static SessionStrategy[] getStrategyAnnotations(MethodParameter methodParameter) {
+        SessionStrategies strategies = AnnotationUtil.getDeclaredAnnotation(methodParameter, SessionStrategies.class);
         if (strategies != null) {
             return strategies.value();
         } else
-            return AnnotationUtil.getDeclaredAnnotations(method, SessionStrategy.class);
+            return AnnotationUtil.getDeclaredAnnotations(methodParameter, SessionStrategy.class);
     }
 
     /**
