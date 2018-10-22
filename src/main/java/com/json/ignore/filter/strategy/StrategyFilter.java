@@ -77,7 +77,7 @@ public class StrategyFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, HttpSession session) throws FieldAccessException {
-        if (object != null) {
+        if (session != null) {
             for (SessionStrategy strategy : config) {
                 if(SessionUtil.isSessionPropertyExists(session, strategy.attributeName(), strategy.attributeValue())) {
                     FieldFilterProcessor processor = new FieldFilterProcessor(strategy.ignoreFields());
