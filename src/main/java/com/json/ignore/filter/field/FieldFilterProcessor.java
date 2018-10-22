@@ -53,7 +53,7 @@ public class FieldFilterProcessor  {
      *
      * @param annotations list of {@link FieldFilterSetting}
      */
-    public FieldFilterProcessor(List<FieldFilterSetting> annotations) {
+    private FieldFilterProcessor(List<FieldFilterSetting> annotations) {
         this();
         this.ignore = parseSettingAnnotation(annotations);
     }

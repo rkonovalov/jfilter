@@ -27,7 +27,7 @@ public class RequestMethodParameter extends MethodParameter {
      * @param <T>             {@link Annotation} generic class
      * @return {@link Annotation} list of found annotations if found, else an array of length zero
      */
-    public <T extends Annotation> T[] getDeclaredAnnotations(Class<T> annotationClass) {
+    private  <T extends Annotation> T[] getDeclaredAnnotations(Class<T> annotationClass) {
         T[] annotations = getMethod().getDeclaredAnnotationsByType(annotationClass);
         Class<?> containingClass = getContainingClass();
         annotations = annotations.length != 0 ? annotations : containingClass.getDeclaredAnnotationsByType(annotationClass);
