@@ -7,11 +7,11 @@ import com.json.ignore.util.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
+
 import javax.servlet.http.HttpSession;
 
 /**
  * This class used for strategy filtration of object's fields based on SessionStrategy configuration
- *
  */
 public class StrategyFilter extends BaseFilter {
     /**
@@ -21,8 +21,9 @@ public class StrategyFilter extends BaseFilter {
 
     /**
      * Constructor
+     *
      * @param serverHttpRequest {@link ServerHttpRequest} servlet request
-     * @param methodParameter {@link MethodParameter} Rest method of Rest controller
+     * @param methodParameter   {@link MethodParameter} Rest method of Rest controller
      */
     public StrategyFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
         super(serverHttpRequest);
@@ -31,7 +32,8 @@ public class StrategyFilter extends BaseFilter {
 
     /**
      * Constructor
-     * @param session {@link HttpSession} session
+     *
+     * @param session         {@link HttpSession} session
      * @param methodParameter {@link MethodParameter} Rest method of Rest controller
      */
     public StrategyFilter(HttpSession session, MethodParameter methodParameter) {
@@ -41,6 +43,7 @@ public class StrategyFilter extends BaseFilter {
 
     /**
      * Attempt to retrieve all FieldFilterSetting annotations from method
+     *
      * @param methodParameter {@link MethodParameter} method parameter
      */
     @Override
@@ -50,6 +53,7 @@ public class StrategyFilter extends BaseFilter {
 
     /**
      * Attempt to filter/exclude object fields if filter annotations is configured
+     *
      * @param object {@link Object} object which fields will be filtered
      * @throws FieldAccessException exception throws on {@link IllegalAccessException}
      */
@@ -60,7 +64,8 @@ public class StrategyFilter extends BaseFilter {
 
     /**
      * Attempt to filter object fields if filter annotations is configured
-     * @param object {@link Object} object which fields will be filtered
+     *
+     * @param object  {@link Object} object which fields will be filtered
      * @param request {@link ServerHttpRequest} http request
      * @throws FieldAccessException exception throws on {@link IllegalAccessException}
      */
@@ -71,19 +76,20 @@ public class StrategyFilter extends BaseFilter {
 
     /**
      * Attempt to filter object fields if filter annotations is configured
-     * @param object {@link Object} object which fields will be filtered
+     *
+     * @param object  {@link Object} object which fields will be filtered
      * @param session {@link HttpSession} session
      * @throws FieldAccessException exception throws on {@link IllegalAccessException}
      */
     @Override
     public void filter(Object object, HttpSession session) throws FieldAccessException {
-        if (session != null) {
-            for (SessionStrategy strategy : config) {
-                if(SessionUtil.isSessionPropertyExists(session, strategy.attributeName(), strategy.attributeValue())) {
-                    FieldFilterProcessor processor = new FieldFilterProcessor(strategy.ignoreFields());
-                    processor.filterFields(object);
-                }
+
+        for (SessionStrategy strategy : config) {
+            if (SessionUtil.isSessionPropertyExists(session, strategy.attributeName(), strategy.attributeValue())) {
+                FieldFilterProcessor processor = new FieldFilterProcessor(strategy.ignoreFields());
+                processor.filterFields(object);
             }
         }
     }
+
 }
