@@ -46,15 +46,6 @@ public class FieldFilterProcessor {
     /**
      * Constructor
      *
-     * @param methodParameter {@link MethodParameter} Rest method of Rest controller
-     */
-    public FieldFilterProcessor(MethodParameter methodParameter) {
-        this(getAnnotations(methodParameter.getMethod()));
-    }
-
-    /**
-     * Constructor
-     *
      * @param annotations array of {@link FieldFilterSetting}
      */
     public FieldFilterProcessor(FieldFilterSetting[] annotations) {
@@ -74,9 +65,9 @@ public class FieldFilterProcessor {
     /**
      * Constructor
      *
-     * @param method {@link Method} object's method which may have annotation
+     * @param method {@link MethodParameter} object's method which may have annotation
      */
-    public FieldFilterProcessor(Method method) {
+    public FieldFilterProcessor(MethodParameter method) {
         this(getAnnotations(method));
     }
 
@@ -264,10 +255,10 @@ public class FieldFilterProcessor {
     /**
      * Get list of {@link FieldFilterSetting} annotations
      *
-     * @param method {@link Method} object's method which may have annotation
+     * @param method {@link MethodParameter} object's method which may have annotation
      * @return list of {@link FieldFilterSetting} items if method has annotations, else returns list with zero length
      */
-    private static List<FieldFilterSetting> getAnnotations(Method method) {
+    private static List<FieldFilterSetting> getAnnotations(MethodParameter method) {
         return Arrays.asList(AnnotationUtil.getSettingAnnotations(method));
     }
 

@@ -79,7 +79,7 @@ public class FieldProcessorTest {
 
     @Test
     public void testSingleAnnotationMethod() throws JsonProcessingException {
-        Method method = MockMethods.findMethodByName("singleAnnotation");
+        MethodParameter method = MockMethods.findMethodParameterByName("singleAnnotation");
         assertNotNull(method);
 
         MockUser user = MockClasses.getUserMock();
@@ -91,7 +91,7 @@ public class FieldProcessorTest {
 
     @Test
     public void testMultipleAnnotationMethod() throws JsonProcessingException {
-        Method method = MockMethods.findMethodByName("multipleAnnotation");
+        MethodParameter method = MockMethods.findMethodParameterByName("multipleAnnotation");
         assertNotNull(method);
 
         MockUser user = MockClasses.getUserMock();

@@ -45,7 +45,7 @@ public class StrategyFilter extends BaseFilter {
      */
     @Override
     protected void setConfig(MethodParameter methodParameter) {
-        config = AnnotationUtil.getStrategyAnnotations(methodParameter.getMethod());
+        config = AnnotationUtil.getStrategyAnnotations(methodParameter);
     }
 
     /**

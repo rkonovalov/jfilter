@@ -27,25 +27,16 @@ public final class AnnotationUtil {
     /**
      * Search for specified type list of annotation
      *
-     * @param method          {@link Method} object's method which may have annotations
+     * @param methodParameter          {@link MethodParameter} object's method which may have annotations
      * @param annotationClass {@link Annotation} name of annotation to search
      * @param <T>             {@link Annotation} generic class
      * @return {@link Annotation} list of found annotations if found, else an array of length zero
      */
-    public static <T extends Annotation> T[] getDeclaredAnnotations(Method method, Class<T> annotationClass) {
-        return method.getDeclaredAnnotationsByType(annotationClass);
-    }
-
-    /**
-     * Search for specified type of annotation
-     *
-     * @param method          {@link Method} object's method which may have annotation
-     * @param annotationClass {@link Annotation} name of annotation to search
-     * @param <T>             {@link Annotation} generic class
-     * @return {@link Annotation} annotation if found, else null
-     */
-    public static <T extends Annotation> T getDeclaredAnnotation(Method method, Class<T> annotationClass) {
-        return method.getDeclaredAnnotation(annotationClass);
+    public static <T extends Annotation> T[] getDeclaredAnnotations(MethodParameter methodParameter, Class<T> annotationClass) {
+        T[] annotations =  methodParameter.getMethod().getDeclaredAnnotationsByType(annotationClass);
+        Class<?> containingClass = methodParameter.getContainingClass();
+        annotations = annotations.length != 0 ? annotations : containingClass.getDeclaredAnnotationsByType(annotationClass);
+        return annotations;
     }
 
     public static <T extends Annotation> T getDeclaredAnnotation(MethodParameter methodParameter, Class<T> annotationClass) {
@@ -60,12 +51,12 @@ public final class AnnotationUtil {
     /**
      * Check for annotations id declared in method
      *
-     * @param method            {@link Method} object's method which may have annotation
+     * @param method            {@link MethodParameter} object's method which may have annotation
      * @param annotationClasses {@link Annotation} name of annotation to search
      * @param <T>               {@link Annotation}
      * @return {@link Annotation} if one of specified annotation is found, else returns false
      */
-    public static <T extends Annotation> boolean isAnnotationExists(Method method, List<Class<T>> annotationClasses) {
+    public static <T extends Annotation> boolean isAnnotationExists(MethodParameter method, List<Class<T>> annotationClasses) {
         if (annotationClasses != null)
             for (Class<T> clazz : annotationClasses) {
                 if (getDeclaredAnnotations(method, clazz).length > 0)
@@ -77,24 +68,24 @@ public final class AnnotationUtil {
     /**
      * Search for {@link FieldFilterSetting} in method
      *
-     * @param method {@link Method} object's method which may have annotation
+     * @param methodParameter {@link MethodParameter} object's method which may have annotation
      * @return list of {@link FieldFilterSetting} if this type of annotation declared in method
      */
-    public static FieldFilterSetting[] getSettingAnnotations(Method method) {
-        FieldFilterSettings settings = AnnotationUtil.getDeclaredAnnotation(method, FieldFilterSettings.class);
+    public static FieldFilterSetting[] getSettingAnnotations(MethodParameter methodParameter) {
+        FieldFilterSettings settings = AnnotationUtil.getDeclaredAnnotation(methodParameter, FieldFilterSettings.class);
         if (settings != null) {
             return settings.value();
         } else
-            return AnnotationUtil.getDeclaredAnnotations(method, FieldFilterSetting.class);
+            return AnnotationUtil.getDeclaredAnnotations(methodParameter, FieldFilterSetting.class);
     }
 
     /**
      * Search for {@link SessionStrategy} in method
      *
-     * @param method {@link Method} object's method which may have annotation
+     * @param method {@link MethodParameter} object's method which may have annotation
      * @return list of {@link SessionStrategy} if this type of annotation declared in method
      */
-    public static SessionStrategy[] getStrategyAnnotations(Method method) {
+    public static SessionStrategy[] getStrategyAnnotations(MethodParameter method) {
         SessionStrategies strategies = AnnotationUtil.getDeclaredAnnotation(method, SessionStrategies.class);
         if (strategies != null) {
             return strategies.value();

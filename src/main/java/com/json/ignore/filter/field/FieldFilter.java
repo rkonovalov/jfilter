@@ -44,7 +44,7 @@ public class FieldFilter extends BaseFilter {
      */
     @Override
     protected void setConfig(MethodParameter methodParameter) {
-        config = AnnotationUtil.getSettingAnnotations(methodParameter.getMethod());
+        config = AnnotationUtil.getSettingAnnotations(methodParameter);
     }
 
     /**

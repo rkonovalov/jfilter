@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.ServletContext;
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -151,7 +150,7 @@ public class FilterAdviceITTest {
         user.setId(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/class-annotated/customers/signInFileAnnotation");
+        MockHttpServletRequestBuilder requestBuilder = post("/file/customers/signIn");
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -160,4 +159,39 @@ public class FilterAdviceITTest {
         String result = getContent(requestBuilder);
         assertEquals(user.toString(), result);
     }
+
+    @Test
+    public void testSignInFileClassSingleAnnotationAdmin() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post("/single/customers/signIn");
+        requestBuilder.sessionAttr("ROLE", "ADMIN")
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = getContent(requestBuilder);
+        assertEquals(user.toString(), result);
+    }
+
+    @Test
+    public void testSignInFileClassMultipleAnnotationAdmin() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post("/multiple/customers/signIn");
+        requestBuilder.sessionAttr("ROLE", "ADMIN")
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = getContent(requestBuilder);
+        assertEquals(user.toString(), result);
+    }
+
+
 }
