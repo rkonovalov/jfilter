@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.ServletContext;
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -135,6 +136,23 @@ public class FilterAdviceITTest {
         //Build mock request
         MockHttpServletRequestBuilder requestBuilder = post("/customers/signInStrategyAnnotation");
         requestBuilder.sessionAttr("ROLE", "USER")
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = getContent(requestBuilder);
+        assertEquals(user.toString(), result);
+    }
+
+
+    @Test
+    public void testSignInFileClassAnnotationAdmin() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post("/class-annotated/customers/signInFileAnnotation");
+        requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED);

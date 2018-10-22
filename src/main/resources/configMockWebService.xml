@@ -16,4 +16,18 @@
             </filter>
         </strategy>
     </controller>
+
+    <controller class-name="com.json.ignore.mock.MockWebServiceClassAnnotated">
+        <strategy attribute-name="ROLE" attribute-value="ADMIN">
+            <filter class="com.json.ignore.mock.MockUser">
+                <field name="id"/>
+            </filter>
+        </strategy>
+        <strategy attribute-name="ROLE" attribute-value="USER">
+            <filter class="com.json.ignore.mock.MockUser">
+                <field name="id"/>
+                <field name="password"/>
+            </filter>
+        </strategy>
+    </controller>
 </config>
