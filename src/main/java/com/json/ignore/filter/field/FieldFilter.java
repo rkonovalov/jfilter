@@ -7,6 +7,7 @@ import com.json.ignore.util.SessionUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.annotation.Annotation;
 
 /**
  * This class used for simple filtration of object's fields based on FieldFilterSetting configuration
@@ -79,6 +80,6 @@ public class FieldFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
-        filter(object, SessionUtil.getSession(request));
+        filter(object, getSessionUtil().getSession(request));
     }
 }

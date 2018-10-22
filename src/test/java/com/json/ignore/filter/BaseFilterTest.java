@@ -23,7 +23,7 @@ public class BaseFilterTest {
     }
 
 
-    @Test
+    /*@Test
     public void testSessionAttributeExists() {
         BaseFilter baseFilter = new FieldFilter(request, methodParameter);
         boolean result = baseFilter.isSessionPropertyExists("ROLE", "ADMIN");
@@ -49,7 +49,7 @@ public class BaseFilterTest {
         BaseFilter baseFilter = new FieldFilter((HttpSession) null, methodParameter);
         boolean result = baseFilter.isSessionPropertyExists("ROLE", "ADMIN");
         assertFalse(result);
-    }
+    }*/
 
     @Test(expected = NullPointerException.class)
     public void testNullMethod() {

@@ -3,6 +3,7 @@ package com.json.ignore.filter.field;
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.util.AnnotationUtil;
 import org.springframework.core.MethodParameter;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -10,7 +11,7 @@ import java.util.*;
 /**
  * This class used to filter fields in object
  */
-public class FieldFilterProcessor {
+public class FieldFilterProcessor  {
     /**
      * list of object name which will be ignored by filter algorithm
      */
@@ -68,7 +69,9 @@ public class FieldFilterProcessor {
      * @param method {@link MethodParameter} object's method which may have annotation
      */
     public FieldFilterProcessor(MethodParameter method) {
-        this(getAnnotations(method));
+        this();
+        this.ignore = parseSettingAnnotation(Arrays.asList(AnnotationUtil.getSettingAnnotations(method)));
+
     }
 
     /**
@@ -250,16 +253,6 @@ public class FieldFilterProcessor {
             }
 
         return items;
-    }
-
-    /**
-     * Get list of {@link FieldFilterSetting} annotations
-     *
-     * @param method {@link MethodParameter} object's method which may have annotation
-     * @return list of {@link FieldFilterSetting} items if method has annotations, else returns list with zero length
-     */
-    private static List<FieldFilterSetting> getAnnotations(MethodParameter method) {
-        return Arrays.asList(AnnotationUtil.getSettingAnnotations(method));
     }
 
 }

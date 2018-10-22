@@ -10,7 +10,22 @@ import java.util.Objects;
  * <p>
  * This is util class used to help working with Http Session
  */
-public abstract class SessionUtil {
+public class SessionUtil {
+    private ServerHttpRequest request;
+    private HttpSession session;
+
+    public SessionUtil(ServerHttpRequest request) {
+        this.session = getSession(request);
+    }
+
+    public SessionUtil(HttpSession session) {
+        this.session = session;
+    }
+
+    public HttpSession getSession() {
+        return session;
+    }
+
 
 
     /**
@@ -21,7 +36,7 @@ public abstract class SessionUtil {
      * @param serverHttpRequest {@link ServerHttpRequest} http request
      * @return {@link HttpSession} session, else null
      */
-    public static HttpSession getSession(ServerHttpRequest serverHttpRequest) {
+    public HttpSession getSession(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
             return servletRequest.getServletRequest().getSession();
@@ -31,11 +46,10 @@ public abstract class SessionUtil {
 
     /**
      * Get attribute value from session attributes
-     * @param session {@link HttpSession} session
      * @param attributeName {@link String} attribute name
      * @return {@link Object} attribute value if exists, else null
      */
-    public static Object getSessionProperty(HttpSession session, String attributeName) {
+    public Object getSessionProperty(HttpSession session, String attributeName) {
         if (session != null) {
             return session.getAttribute(attributeName);
         } else
@@ -46,12 +60,11 @@ public abstract class SessionUtil {
      * Check if session properties has property
      * <p>
      * Find property with name and value specified in method params
-     * @param session {@link HttpSession} session
      * @param attributeName {@link String} attribute name
      * @param attributeValue {@link String} expected attribute value
      * @return {@link Boolean} true if property with name and value is exist, else false
      */
-    public static boolean isSessionPropertyExists(HttpSession session, String attributeName, String attributeValue) {
+    public boolean isSessionPropertyExists(HttpSession session, String attributeName, String attributeValue) {
         if (session != null) {
             Object sessionObject = getSessionProperty(session, attributeName);
             return Objects.equals(sessionObject, attributeValue);

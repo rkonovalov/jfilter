@@ -18,8 +18,7 @@ import java.util.Map;
  * <p>
  * This is util class used to help find annotations in class or method
  */
-public abstract class AnnotationUtil {
-
+public class AnnotationUtil {
 
     /**
      * Search for specified type list of annotation
@@ -52,11 +51,11 @@ public abstract class AnnotationUtil {
      * @return list of {@link FieldFilterSetting} if this type of annotation declared in method
      */
     public static FieldFilterSetting[] getSettingAnnotations(MethodParameter methodParameter) {
-        FieldFilterSettings settings = AnnotationUtil.getDeclaredAnnotation(methodParameter, FieldFilterSettings.class);
+        FieldFilterSettings settings = getDeclaredAnnotation(methodParameter, FieldFilterSettings.class);
         if (settings != null) {
             return settings.value();
         } else
-            return AnnotationUtil.getDeclaredAnnotations(methodParameter, FieldFilterSetting.class);
+            return getDeclaredAnnotations(methodParameter, FieldFilterSetting.class);
     }
 
     /**
@@ -66,11 +65,11 @@ public abstract class AnnotationUtil {
      * @return list of {@link SessionStrategy} if this type of annotation declared in method
      */
     public static SessionStrategy[] getStrategyAnnotations(MethodParameter methodParameter) {
-        SessionStrategies strategies = AnnotationUtil.getDeclaredAnnotation(methodParameter, SessionStrategies.class);
+        SessionStrategies strategies = getDeclaredAnnotation(methodParameter, SessionStrategies.class);
         if (strategies != null) {
             return strategies.value();
         } else
-            return AnnotationUtil.getDeclaredAnnotations(methodParameter, SessionStrategy.class);
+            return getDeclaredAnnotations(methodParameter, SessionStrategy.class);
     }
 
     /**
@@ -81,6 +80,7 @@ public abstract class AnnotationUtil {
      */
     public static Map<Class, List<String>> getStrategyFields(FileConfig.Strategy strategy) {
         Map<Class, List<String>> fields = new HashMap<>();
+
 
         if (strategy != null) {
             strategy.getFilters().forEach(filter -> {

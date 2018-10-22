@@ -3,6 +3,7 @@ package com.json.ignore.filter.strategy;
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.util.AnnotationUtil;
 import com.json.ignore.filter.BaseFilter;
+import com.json.ignore.util.FileUtil;
 import com.json.ignore.util.SessionUtil;
 import com.json.ignore.filter.field.FieldFilterProcessor;
 import org.springframework.core.MethodParameter;
@@ -66,7 +67,7 @@ public class StrategyFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
-        filter(object, SessionUtil.getSession(request));
+        filter(object, getSessionUtil().getSession(request));
     }
 
     /**
@@ -79,7 +80,7 @@ public class StrategyFilter extends BaseFilter {
     public void filter(Object object, HttpSession session) throws FieldAccessException {
         if (object != null && this.getSession() != null) {
             for (SessionStrategy strategy : config) {
-                if(SessionUtil.isSessionPropertyExists(session, strategy.attributeName(), strategy.attributeValue())) {
+                if(getSessionUtil().isSessionPropertyExists(session, strategy.attributeName(), strategy.attributeValue())) {
                     FieldFilterProcessor processor = new FieldFilterProcessor(strategy.ignoreFields());
                     processor.filterFields(object);
                 }

@@ -100,7 +100,7 @@ public class FileFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
-        filter(object, SessionUtil.getSession(request));
+        filter(object, getSessionUtil().getSession(request));
     }
 
     /**
@@ -115,7 +115,7 @@ public class FileFilter extends BaseFilter {
             for (FileConfig.Controller controller : fileConfig.getControllers()) {
                 if (controllerClass.getName().equalsIgnoreCase(controller.getClassName())) {
                     controller.getStrategies().forEach(strategy -> {
-                        if (SessionUtil.isSessionPropertyExists(session, strategy.getAttributeName(), strategy.getAttributeValue())) {
+                        if (getSessionUtil().isSessionPropertyExists(session, strategy.getAttributeName(), strategy.getAttributeValue())) {
                             FieldFilterProcessor processor = new FieldFilterProcessor(AnnotationUtil.getStrategyFields(strategy));
                             processor.filterFields(object);
                         }

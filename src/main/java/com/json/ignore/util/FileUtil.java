@@ -12,9 +12,7 @@ import java.net.URL;
  */
 public final class FileUtil {
 
-    private FileUtil() {
-        throw new UnsupportedOperationException();
-    }
+
 
     /**
      * Gets class by name
@@ -69,7 +67,7 @@ public final class FileUtil {
      * @param file {@link File}
      * @return {@link FileInputStream} return stream, else null
      */
-    public  static FileInputStream fileToInputStream(File file) {
+    public static FileInputStream fileToInputStream(File file) {
         try {
             return new FileInputStream(file);
         } catch (FileNotFoundException | NullPointerException e) {
