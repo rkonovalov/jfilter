@@ -90,7 +90,15 @@ public class FilterFactory {
      * @return true if specified annotations is found
      */
     public static boolean isAccept(MethodParameter methodParameter) {
+        //search annotations on method
         for (Annotation annotation : methodParameter.getMethod().getDeclaredAnnotations()) {
+            if (FilterFactory.filterList.containsKey(annotation.annotationType())) {
+                return true;
+            }
+        }
+
+        //search annotations on containing class
+        for (Annotation annotation : methodParameter.getContainingClass().getDeclaredAnnotations()) {
             if (FilterFactory.filterList.containsKey(annotation.annotationType())) {
                 return true;
             }
