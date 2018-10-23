@@ -3,6 +3,7 @@ package com.json.ignore.filter.field;
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -10,7 +11,7 @@ import java.util.*;
 /**
  * This class used to filter fields in object
  */
-public class FieldFilterProcessor  {
+public class FieldFilterProcessor {
     /**
      * list of object name which will be ignored by filter algorithm
      */
@@ -200,27 +201,29 @@ public class FieldFilterProcessor  {
      * @throws FieldAccessException exception of illegal access
      */
     public void filterFields(Object object) throws FieldAccessException {
-        Class clazz = object.getClass().getDeclaredFields().length > 0 ? object.getClass() : object.getClass().getSuperclass();
-        Class currentClass = object.getClass();
+        if (object != null) {
+            Class clazz = object.getClass().getDeclaredFields().length > 0 ? object.getClass() : object.getClass().getSuperclass();
+            Class currentClass = object.getClass();
 
-        for (Field field : clazz.getDeclaredFields()) {
-            if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
-                field.setAccessible(true);
-                if (isFieldIgnored(field, currentClass)) {
-                    clearField(field, object);
-                } else {
-                    try {
-                        Object value = field.get(object);
-                        if (value != null) {
-                            if (value instanceof Collection) {
-                                process((Collection) value);
-                            } else if (value instanceof Map) {
-                                process((Map) value);
-                            } else
-                                filterFields(value);
+            for (Field field : clazz.getDeclaredFields()) {
+                if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
+                    field.setAccessible(true);
+                    if (isFieldIgnored(field, currentClass)) {
+                        clearField(field, object);
+                    } else {
+                        try {
+                            Object value = field.get(object);
+                            if (value != null) {
+                                if (value instanceof Collection) {
+                                    process((Collection) value);
+                                } else if (value instanceof Map) {
+                                    process((Map) value);
+                                } else
+                                    filterFields(value);
+                            }
+                        } catch (IllegalAccessException e) {
+                            throw new FieldAccessException(e);
                         }
-                    } catch (IllegalAccessException e) {
-                        throw new FieldAccessException(e);
                     }
                 }
             }

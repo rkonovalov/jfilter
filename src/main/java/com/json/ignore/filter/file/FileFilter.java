@@ -43,6 +43,7 @@ public class FileFilter extends BaseFilter {
      * Convert cml file to Class
      * <p>
      * Deserialize xml file to Class
+     *
      * @param file {@link File} file from resource name if file exist
      * @return {@link Object} returns instantiated object type of specified class
      * @throws FieldAccessException {@link FieldAccessException} when caught {@link IOException}
@@ -61,6 +62,7 @@ public class FileFilter extends BaseFilter {
      * Returns local file name of resource
      * <p>
      * Example: resource name config.xml, return local file .../resources/config.xml
+     *
      * @param resourceName {@link String} resource name
      * @return {@link String} local file name, else null
      */
@@ -77,6 +79,7 @@ public class FileFilter extends BaseFilter {
      * Get file from resource
      * <p>
      * Returns {@link File} file from resource name if file exist
+     *
      * @param resourceName {@link String} resource name
      * @return {@link File} if file exists, else null
      */
@@ -119,6 +122,7 @@ public class FileFilter extends BaseFilter {
 
     /**
      * Attempt to filter object fields if filter annotations is configured
+     *
      * @param object {@link Object} object which fields will be filtered
      * @throws FieldAccessException exception throws on {@link IllegalAccessException}
      */
@@ -126,7 +130,7 @@ public class FileFilter extends BaseFilter {
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
         RequestSession requestSession = new RequestSession(request);
 
-        if (object != null && config != null) {
+        if (config != null) {
             for (FileConfig.Controller controller : config.getControllers()) {
                 if (controllerClass.getName().equalsIgnoreCase(controller.getClassName())) {
                     controller.getStrategies().forEach(strategy -> {

@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -35,5 +36,13 @@ public class FieldFilterTest {
         FieldFilter fieldFilter = new FieldFilter(methodParameter);
         fieldFilter.filter(user, serverHttpRequest);
         assertNotEquals(user, defaultMockUser);
+    }
+
+    @Test
+    public void testFieldFilterNull() {
+        MockUser user = MockClasses.getUserMock();
+        FieldFilter fieldFilter = new FieldFilter(methodParameter);
+        fieldFilter.filter(null, serverHttpRequest);
+        assertEquals(user, defaultMockUser);
     }
 }

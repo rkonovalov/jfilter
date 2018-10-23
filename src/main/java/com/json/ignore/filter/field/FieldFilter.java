@@ -17,6 +17,7 @@ public class FieldFilter extends BaseFilter {
 
     /**
      * Constructor
+     *
      * @param methodParameter {@link MethodParameter} Rest method of Rest controller
      */
     public FieldFilter(MethodParameter methodParameter) {
@@ -26,6 +27,7 @@ public class FieldFilter extends BaseFilter {
 
     /**
      * Attempt to retrieve all FieldFilterSetting annotations from method
+     *
      * @param methodParameter {@link MethodParameter} method parameter
      */
     @Override
@@ -35,14 +37,13 @@ public class FieldFilter extends BaseFilter {
 
     /**
      * Attempt to filter object fields if filter annotations is configured
-     * @param object {@link Object} object which fields will be filtered
+     *
+     * @param object  {@link Object} object which fields will be filtered
      * @param request {@link ServerHttpRequest} http request
      * @throws FieldAccessException exception throws on {@link IllegalAccessException}
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
-        if(object != null) {
-            filter(object, new FieldFilterProcessor(config));
-        }
+        filter(object, new FieldFilterProcessor(config));
     }
 }

@@ -46,7 +46,7 @@ public class StrategyFilter extends BaseFilter {
     public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
         RequestSession requestSession = new RequestSession(request);
 
-        if (object != null && config != null) {
+        if (config != null) {
             for (SessionStrategy strategy : config) {
                 if (requestSession.isSessionPropertyExists(strategy.attributeName(),
                         strategy.attributeValue())) {
