@@ -41,7 +41,7 @@ jobs:
       - run: mvn integration-test
 
 
- test:
+  test:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:9-jdk
