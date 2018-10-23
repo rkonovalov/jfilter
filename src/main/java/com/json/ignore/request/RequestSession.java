@@ -18,14 +18,9 @@ public class RequestSession {
         this.session = getSession(request);
     }
 
-    public RequestSession(HttpSession session) {
-        this.session = session;
-    }
-
     public HttpSession getSession() {
         return session;
     }
-
 
     /**
      * Gets session from request

@@ -26,4 +26,6 @@ public class RequestSessionTest {
         Object object = requestSession.getSessionProperty(requestSession.getSession(),"SOME_FIELD");
         assertNull(object);
     }
+
+
 }
