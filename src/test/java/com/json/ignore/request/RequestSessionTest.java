@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 public class RequestSessionTest {
@@ -25,6 +26,12 @@ public class RequestSessionTest {
     public void testClassExistsFalse() {
         Object object = requestSession.getSessionProperty(requestSession.getSession(),"SOME_FIELD");
         assertNull(object);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullSession() {
+        RequestSession requestSession = new RequestSession(null);
+        assertNotNull(requestSession);
     }
 
 

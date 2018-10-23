@@ -14,7 +14,7 @@ import java.util.Objects;
 public class RequestSession {
     private HttpSession session;
 
-    public RequestSession(ServerHttpRequest request) {
+    public RequestSession(ServerHttpRequest request) throws IllegalArgumentException {
         this.session = getSession(request);
     }
 
@@ -29,13 +29,14 @@ public class RequestSession {
      *
      * @param serverHttpRequest {@link ServerHttpRequest} http request
      * @return {@link HttpSession} session, else null
+     * @throws IllegalArgumentException when request doesn't have HttpSession
      */
-    private HttpSession getSession(ServerHttpRequest serverHttpRequest) {
+    private HttpSession getSession(ServerHttpRequest serverHttpRequest) throws IllegalArgumentException {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
             return servletRequest.getServletRequest().getSession();
         } else
-            return null;
+            throw new IllegalArgumentException();
     }
 
     /**
@@ -45,10 +46,7 @@ public class RequestSession {
      * @return {@link Object} attribute value if exists, else null
      */
     public Object getSessionProperty(HttpSession session, String attributeName) {
-        if (session != null) {
-            return session.getAttribute(attributeName);
-        } else
-            return null;
+        return session.getAttribute(attributeName);
     }
 
     /**
