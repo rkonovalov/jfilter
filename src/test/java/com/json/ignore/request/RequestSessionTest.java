@@ -34,5 +34,10 @@ public class RequestSessionTest {
         assertNotNull(requestSession);
     }
 
+    @Test
+    public void testGetSession() {
+        assertNotNull(requestSession.getSession());
+    }
+
 
 }
