@@ -48,7 +48,7 @@ public class StrategyFilter extends BaseFilter {
 
         if (object != null && config != null) {
             for (SessionStrategy strategy : config) {
-                if (requestSession.isSessionPropertyExists(requestSession.getSession(), strategy.attributeName(),
+                if (requestSession.isSessionPropertyExists(strategy.attributeName(),
                         strategy.attributeValue())) {
                     filter(object, new FieldFilterProcessor(strategy.ignoreFields()));
                 }

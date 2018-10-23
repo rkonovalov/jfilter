@@ -18,13 +18,13 @@ public class RequestSessionTest {
 
     @Test
     public void testClassExists() {
-        Object object = requestSession.getSessionProperty(requestSession.getSession(), "ROLE");
+        Object object = requestSession.getSessionProperty("ROLE");
         assertEquals("ADMIN", object);
     }
 
     @Test
     public void testClassExistsFalse() {
-        Object object = requestSession.getSessionProperty(requestSession.getSession(),"SOME_FIELD");
+        Object object = requestSession.getSessionProperty("SOME_FIELD");
         assertNull(object);
     }
 

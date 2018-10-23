@@ -45,7 +45,7 @@ public class RequestSession {
      * @param attributeName {@link String} attribute name
      * @return {@link Object} attribute value if exists, else null
      */
-    public Object getSessionProperty(HttpSession session, String attributeName) {
+    public Object getSessionProperty(String attributeName) {
         return session.getAttribute(attributeName);
     }
 
@@ -58,8 +58,8 @@ public class RequestSession {
      * @param attributeValue {@link String} expected attribute value
      * @return {@link Boolean} true if property with name and value is exist, else false
      */
-    public boolean isSessionPropertyExists(HttpSession session, String attributeName, String attributeValue) {
-        Object sessionObject = getSessionProperty(session, attributeName);
+    public boolean isSessionPropertyExists(String attributeName, String attributeValue) {
+        Object sessionObject = getSessionProperty(attributeName);
         return Objects.equals(sessionObject, attributeValue);
     }
 }
