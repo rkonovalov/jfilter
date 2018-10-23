@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -43,5 +44,17 @@ public class StrategyFilterTest {
         strategyFilter.filter(user, request);
 
         assertNotNull(user.getId());
+    }
+
+
+    @Test
+    public void testConfigNull() {
+        MockUser user = new MockUser();
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
+        assertNotNull(methodParameter);
+
+        StrategyFilter strategyFilter = new StrategyFilter(methodParameter);
+        strategyFilter.filter(user, request);
+        assertEquals(new MockUser(), user);
     }
 }
