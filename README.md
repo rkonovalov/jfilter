@@ -4,6 +4,7 @@
 [![Javadocs](http://www.javadoc.io/badge/com.github.rkonovalov/json-ignore.svg?1.0.6)](http://www.javadoc.io/doc/com.github.rkonovalov/json-ignore)
 [![codecov](https://codecov.io/gh/rkonovalov/jsonignore/branch/master/graph/badge.svg)](https://codecov.io/gh/rkonovalov/jsonignore)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jsonignore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jsonignore&amp;utm_campaign=Badge_Grade)
+[![CircleCI](https://circleci.com/gh/rkonovalov/jsonignore/tree/master.svg?style=svg)](https://circleci.com/gh/rkonovalov/jsonignore/tree/master)
 
 # Json ignore module
 Json ignore module for Spring Framework can be used in Spring MVC Rest project for filter(exclude) of fields in json response.
