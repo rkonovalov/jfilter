@@ -59,10 +59,7 @@ public class RequestSession {
      * @return {@link Boolean} true if property with name and value is exist, else false
      */
     public boolean isSessionPropertyExists(HttpSession session, String attributeName, String attributeValue) {
-        if (session != null) {
-            Object sessionObject = getSessionProperty(session, attributeName);
-            return Objects.equals(sessionObject, attributeValue);
-        } else
-            return false;
+        Object sessionObject = getSessionProperty(session, attributeName);
+        return Objects.equals(sessionObject, attributeValue);
     }
 }
