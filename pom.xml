@@ -207,7 +207,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
@@ -218,7 +218,7 @@
                     </formats>
                     <check />
                 </configuration>
-            </plugin>
+            </plugin>-->
 
         </plugins>
     </build>
