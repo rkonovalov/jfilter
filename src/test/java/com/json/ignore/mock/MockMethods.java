@@ -15,11 +15,14 @@ public class MockMethods {
         return findMethodParameterByName("mockIgnoreSettingsMethod");
     }
 
-    @SessionStrategies({
-            @SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
-                    @FieldFilterSetting(fields = {"id", "password"})
-            })
+    @SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
+            @FieldFilterSetting(fields = {"id"})
     })
+
+    @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
+            @FieldFilterSetting(fields = {"email", "password"})
+    })
+
     public static MethodParameter mockIgnoreStrategiesMethod() {
         return findMethodParameterByName("mockIgnoreStrategiesMethod");
     }
@@ -101,9 +104,6 @@ public class MockMethods {
     public static MethodParameter methodWithParams(String email, String password) {
         return findMethodParameterByName("methodWithParams");
     }
-
-
-
 
 
 }

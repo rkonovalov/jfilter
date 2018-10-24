@@ -1,5 +1,6 @@
 package com.json.ignore.filter.strategy;
 
+import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
 import com.json.ignore.mock.MockMethods;
 import com.json.ignore.mock.MockUser;
@@ -23,12 +24,12 @@ public class StrategyFilterTest {
 
     @Test
     public void ignoreFields() {
-        MockUser user = new MockUser();
-        user.setId(100);
+        MockUser user = MockClasses.getUserMock();
         MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod();
         assertNotNull(methodParameter);
 
         StrategyFilter strategyFilter = new StrategyFilter(methodParameter);
+        request.getServletRequest().getSession().setAttribute("ROLE", "USER");
         strategyFilter.filter(user, request);
         assertNull(user.getId());
     }

@@ -105,4 +105,5 @@ public class FilterProvider {
     public int cacheSize() {
         return items.size();
     }
+
 }

@@ -34,7 +34,7 @@ public class FilterFactoryTest {
     }
 
     @Test
-    public void testFactoryStrategyIgnore() {
+    public void testFactoryStrategyFilter() {
         MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod();
         assertNotNull(methodParameter);
 

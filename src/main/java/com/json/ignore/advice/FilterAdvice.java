@@ -17,6 +17,7 @@ import java.io.Serializable;
  * This class will be detected and instantiated automatically by Spring Framework
  * The main task of this class is checking if response method has filter annotation and try to apply filters
  */
+
 @ControllerAdvice
 public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     private FilterProvider filterProvider;
