@@ -10,7 +10,7 @@ import org.springframework.http.server.ServerHttpRequest;
  * This class is base class strategy filtration
  */
 public abstract class BaseFilter {
-    private RequestMethodParameter requestMethodParameter;
+    private final RequestMethodParameter requestMethodParameter;
 
     protected BaseFilter(MethodParameter methodParameter) {
         this.requestMethodParameter = new RequestMethodParameter(methodParameter);
@@ -24,7 +24,7 @@ public abstract class BaseFilter {
 
     public abstract void filter(Object object, ServerHttpRequest request) throws FieldAccessException;
 
-    public void filter(Object object, FieldFilterProcessor filterProcessor) throws FieldAccessException {
+    protected void filter(Object object, FieldFilterProcessor filterProcessor) throws FieldAccessException {
         filterProcessor.filterFields(object);
     }
 }

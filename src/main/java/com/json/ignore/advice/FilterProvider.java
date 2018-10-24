@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class FilterProvider {
-    private Map<Annotation, BaseFilter> items;
+    private final Map<Annotation, BaseFilter> items;
     private boolean enabled;
 
     /**

@@ -12,7 +12,7 @@ import java.util.Objects;
  * This is request class used to help working with Http Session
  */
 public class RequestSession {
-    private HttpSession session;
+    private final HttpSession session;
 
     public RequestSession(ServerHttpRequest request) throws IllegalArgumentException {
         this.session = getSession(request);

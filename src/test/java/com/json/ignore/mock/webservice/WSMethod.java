@@ -43,7 +43,7 @@ public class WSMethod {
         return MockClasses.getUserMock();
     }
 
-    @FileFilterSetting(fileName = "unxistFile.xml")
+    @FileFilterSetting(fileName = "unExistFile.xml")
     @RequestMapping(value = "/customers/signInUnExistedFile",
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
