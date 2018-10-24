@@ -31,7 +31,7 @@ public class StrategyFilterTest {
         StrategyFilter strategyFilter = new StrategyFilter(methodParameter);
         request.getServletRequest().getSession().setAttribute("ROLE", "USER");
         strategyFilter.filter(user, request);
-        assertNull(user.getId());
+        assertNull(user.getPassword());
     }
 
     @Test
