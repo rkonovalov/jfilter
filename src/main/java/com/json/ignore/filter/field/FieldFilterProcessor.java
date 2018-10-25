@@ -153,12 +153,12 @@ public class FieldFilterProcessor {
      * @param object {@link Object} object
      */
     private void clearField(Field field, Object object) {
-        try {
+        /*try {
             if (field.isAccessible())
                 field.setAccessible(true);
         } catch (SecurityException e) {
             return;
-        }
+        }*/
 
         try {
             switch (field.getType().getName()) {
