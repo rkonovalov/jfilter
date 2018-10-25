@@ -106,10 +106,19 @@ public class FieldFilterProcessor {
      * @throws FieldAccessException exception of illegal access
      */
     private void process(Map map) throws FieldAccessException {
-        for (Object k : map.keySet()) {
+
+        Iterator<Map.Entry<Object, Object>> iterator = map.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Map.Entry<Object, Object> entry = iterator.next();
+            filterFields(entry.getKey());
+            filterFields(entry.getValue());
+        }
+
+        /*for (Object k : map.keySet()) {
             filterFields(k);
             filterFields(map.get(k));
-        }
+        }*/
     }
 
     /**
