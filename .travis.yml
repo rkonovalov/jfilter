@@ -13,4 +13,5 @@ addons:
 
 script:
   "mvn cobertura:cobertura"
+  "mvn jacoco:report"
   - sonar-scanner
