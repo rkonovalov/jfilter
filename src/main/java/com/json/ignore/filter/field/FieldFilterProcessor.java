@@ -1,6 +1,7 @@
 package com.json.ignore.filter.field;
 
 import com.json.ignore.FieldAccessException;
+import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
 
@@ -202,6 +203,18 @@ public class FieldFilterProcessor {
             return null;
     }
 
+    private void processFields(Field field, Object object) throws IllegalAccessException {
+        Object value = field.get(object);
+        if (value != null) {
+            if (value instanceof Collection) {
+                process((Collection) value);
+            } else if (value instanceof Map) {
+                process((Map) value);
+            } else
+                filterFields(value);
+        }
+    }
+
     private void processField(Field field, Class clazz, Object object) {
         if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
             field.setAccessible(true);
@@ -209,15 +222,7 @@ public class FieldFilterProcessor {
                 clearField(field, object);
             } else {
                 try {
-                    Object value = field.get(object);
-                    if (value != null) {
-                        if (value instanceof Collection) {
-                            process((Collection) value);
-                        } else if (value instanceof Map) {
-                            process((Map) value);
-                        } else
-                            filterFields(value);
-                    }
+                    processFields(field, object);
                 } catch (IllegalAccessException e) {
                     throw new FieldAccessException(e);
                 }
