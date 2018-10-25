@@ -13,4 +13,4 @@ addons:
 
 script:
   - "mvn jacoco:report"
-  - sonar-scanner
+  - "mvn sonar:sonar -Dsonar.projectKey=rkonovalov_jsonignore -Dsonar.organization=rkonovalov-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=0511fe52d3e05be75412f7adca1e4916f53bd6e9"
