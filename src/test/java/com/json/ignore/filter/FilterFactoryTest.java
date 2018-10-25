@@ -17,6 +17,12 @@ public class FilterFactoryTest {
     }
 
     @Test
+    public void testIgnoreWithoutAnnotations() {
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
+        assertFalse(FilterFactory.isAccept(methodParameter));
+    }
+
+    @Test
     public void testStrategiesMethod() {
         MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod();
         assertTrue(FilterFactory.isAccept(methodParameter));
