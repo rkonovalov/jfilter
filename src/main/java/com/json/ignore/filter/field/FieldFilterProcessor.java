@@ -194,6 +194,37 @@ public class FieldFilterProcessor {
         return /*field.getType().isPrimitive() ||*/ field.getType().isArray() || ignoredNames.contains(field.getName());
     }
 
+    private Class getObjectClass(Object object) {
+        if (object != null) {
+            return object.getClass().getDeclaredFields().length > 0 ?
+                    object.getClass() : object.getClass().getSuperclass();
+        } else
+            return null;
+    }
+
+    private void processField(Field field, Class clazz, Object object) {
+        if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
+            field.setAccessible(true);
+            if (isFieldIgnored(field, object.getClass())) {
+                clearField(field, object);
+            } else {
+                try {
+                    Object value = field.get(object);
+                    if (value != null) {
+                        if (value instanceof Collection) {
+                            process((Collection) value);
+                        } else if (value instanceof Map) {
+                            process((Map) value);
+                        } else
+                            filterFields(value);
+                    }
+                } catch (IllegalAccessException e) {
+                    throw new FieldAccessException(e);
+                }
+            }
+        }
+    }
+
     /**
      * BaseFilter algorithm, finds fields which should be ignored and filters them
      *
@@ -201,31 +232,10 @@ public class FieldFilterProcessor {
      * @throws FieldAccessException exception of illegal access
      */
     public void filterFields(Object object) throws FieldAccessException {
-        if (object != null) {
-            Class clazz = object.getClass().getDeclaredFields().length > 0 ? object.getClass() : object.getClass().getSuperclass();
-            Class currentClass = object.getClass();
-
+        Class clazz = getObjectClass(object);
+        if (clazz != null) {
             for (Field field : clazz.getDeclaredFields()) {
-                if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
-                    field.setAccessible(true);
-                    if (isFieldIgnored(field, currentClass)) {
-                        clearField(field, object);
-                    } else {
-                        try {
-                            Object value = field.get(object);
-                            if (value != null) {
-                                if (value instanceof Collection) {
-                                    process((Collection) value);
-                                } else if (value instanceof Map) {
-                                    process((Map) value);
-                                } else
-                                    filterFields(value);
-                            }
-                        } catch (IllegalAccessException e) {
-                            throw new FieldAccessException(e);
-                        }
-                    }
-                }
+                processField(field, clazz, object);
             }
         }
     }
