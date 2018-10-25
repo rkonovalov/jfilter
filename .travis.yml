@@ -9,3 +9,12 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+
+addons:
+  sonarcloud:
+    organization: "rkonovalov-github" # the key of the org you chose at step #3
+
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
