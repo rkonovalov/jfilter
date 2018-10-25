@@ -5,6 +5,7 @@ import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -145,55 +146,57 @@ public class FieldFilterProcessor {
         return false;
     }
 
-    /**
-     * Attempt to filter item. This method clears value of field by setting null value if field is object
-     * or setting system defined MIN value if object is primitive
-     *
-     * @param field  {@link Field} field
-     * @param object {@link Object} object
-     */
-    private void clearField(Field field, Object object) {
-        /*try {
-            if (field.isAccessible())
-                field.setAccessible(true);
-        } catch (SecurityException e) {
-            return;
-        }*/
 
+    private String getSetMethodName(Field field) {
+        return "set" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
+    }
+
+    private Method getSetterMethod(Field field, Object object) {
         try {
-            switch (field.getType().getName()) {
-                case "boolean":
-                    field.setBoolean(object, Boolean.FALSE);
-                    break;
-                case "byte":
-                    field.setByte(object, Byte.MIN_VALUE);
-                    break;
-                case "char":
-                    field.setChar(object, Character.MIN_VALUE);
-                    break;
-                case "double":
-                    field.setDouble(object, Double.MIN_VALUE);
-                    break;
-                case "float":
-                    field.setFloat(object, Float.MIN_VALUE);
-                    break;
-                case "int":
-                    field.setInt(object, Integer.MIN_VALUE);
-                    break;
-                case "long":
-                    field.setLong(object, Long.MIN_VALUE);
-                    break;
-                case "short":
-                    field.setShort(object, Short.MIN_VALUE);
-                    break;
-                default:
-                    field.set(object, null);
-                    break;
-            }
-        } catch (IllegalAccessException | IllegalArgumentException e) {
-            throw new FieldAccessException(e);
+            return object.getClass().getDeclaredMethod(getSetMethodName(field), field.getType());
+        } catch (NoSuchMethodException e) {
+            return null;
         }
     }
+
+    private Object getDefaultValue(Field field) {
+        switch (field.getType().getName()) {
+            case "boolean":
+                return Boolean.FALSE;
+            case "byte":
+                return Byte.MIN_VALUE;
+            case "char":
+                return Character.MIN_VALUE;
+            case "double":
+                return Double.MIN_VALUE;
+            case "float":
+                return Float.MIN_VALUE;
+            case "int":
+                return Integer.MIN_VALUE;
+            case "long":
+                return Long.MIN_VALUE;
+            case "short":
+                return Short.MIN_VALUE;
+            default:
+                return null;
+        }
+    }
+
+    private void clearField(Field field, Object object) {
+        Method setterMethod = getSetterMethod(field, object);
+        if (setterMethod != null) {
+            try {
+                setterMethod.invoke(object, getDefaultValue(field));
+            } catch (IllegalAccessException e) {
+                throw new FieldAccessException(e);
+            } catch (InvocationTargetException e) {
+                throw new FieldAccessException(e);
+            }
+        }
+    }
+
+
+
 
     /**
      * This method used to filter not defined by user fields or not ignorable fields in object
