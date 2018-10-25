@@ -19,6 +19,9 @@ import java.util.Map;
  */
 public abstract class FilterFactory {
 
+    private FilterFactory() {
+        throw new IllegalStateException(FilterFactory.class.getName());
+    }
 
     /**
      * List of available filters
