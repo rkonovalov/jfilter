@@ -6,6 +6,7 @@ import com.json.ignore.mock.MockMethods;
 import com.json.ignore.mock.MockUser;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 
@@ -88,5 +89,15 @@ public class FileFilterTest {
         FileFilter filter = new FileFilter(fileAnnotationClassDuplicated);
         filter.filter(user, request);
         assertNotNull(filter.getControllerClass());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testNotExistFile() {
+        MockUser user = MockClasses.getUserMock();
+
+        FileFilter fileFilter = new FileFilter(MockMethods.methodWithoutAnnotations());
+        fileFilter.filter(user, MockHttpRequest.getMockAdminRequest());
+
+        assertEquals(MockClasses.getUserMock(), user);
     }
 }

@@ -10,6 +10,12 @@ import static org.junit.Assert.*;
 
 public class FilterFactoryTest {
 
+    @Test(expected = IllegalAccessException.class)
+    public void testInit() throws IllegalAccessException, InstantiationException {
+        FilterFactory filterFactory = FilterFactory.class.newInstance();
+        assertNotNull(filterFactory);
+    }
+
     @Test
     public void testIgnoreSettingMethod() {
         MethodParameter methodParameter = MockMethods.mockIgnoreSettingsMethod();

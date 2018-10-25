@@ -3,9 +3,8 @@ package com.json.ignore.filter.field;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.json.ignore.mock.MockClasses;
-import com.json.ignore.mock.MockMethods;
-import com.json.ignore.mock.MockUser;
+import com.json.ignore.FieldAccessException;
+import com.json.ignore.mock.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
@@ -81,7 +80,7 @@ public class FieldProcessorTest {
 
     @Test
     public void testSingleAnnotationMethod() throws JsonProcessingException {
-        MethodParameter method = MockMethods.findMethodParameterByName("singleAnnotation");
+        MethodParameter method = MockMethods.singleAnnotation();
         assertNotNull(method);
 
         MockUser user = MockClasses.getUserMock();
@@ -93,7 +92,7 @@ public class FieldProcessorTest {
 
     @Test
     public void testMultipleAnnotationMethod() throws JsonProcessingException {
-        MethodParameter method = MockMethods.findMethodParameterByName("multipleAnnotation");
+        MethodParameter method = MockMethods.multipleAnnotation();
         assertNotNull(method);
 
         MockUser user = MockClasses.getUserMock();
@@ -104,16 +103,86 @@ public class FieldProcessorTest {
     }
 
     @Test
-    public void testByMethodParameter() throws JsonProcessingException {
-        Method method = MockMethods.findMethodByName("singleAnnotation");
-        assertNotNull(method);
+    public void testMockWithoutGetters() {
+        MockWithoutGetters defaultMock = new MockWithoutGetters();
+        MockWithoutGetters checkMock = new MockWithoutGetters();
 
-        MockUser user = MockClasses.getUserMock();
-        MethodParameter methodParameter = new MethodParameter(method, 0);
-        fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
-        fieldFilterProcessor.filterFields(user);
-        String strUser = mapper.writeValueAsString(user);
+        MethodParameter methodParameter = MockMethods.mockClass();
+        assertNotNull(methodParameter);
 
-        assertEquals(USER_WITHOUT_ID, (strUser));
+        FieldFilterProcessor fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
+        fieldFilterProcessor.filterFields(checkMock);
+
+        assertEquals(defaultMock, checkMock);
+    }
+
+    @Test
+    public void testMockWithoutSetters() {
+        MockWithoutSetters defaultMock = new MockWithoutSetters();
+        MockWithoutSetters checkMock = new MockWithoutSetters();
+
+        MethodParameter methodParameter = MockMethods.mockClass();
+        assertNotNull(methodParameter);
+
+        FieldFilterProcessor fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
+        fieldFilterProcessor.filterFields(checkMock);
+
+        assertEquals(defaultMock, checkMock);
+    }
+
+    @Test(expected = FieldAccessException.class)
+    public void testMockPrivateGetterSetter() {
+        MockPrivateGetterSetter defaultMock = new MockPrivateGetterSetter();
+        MockPrivateGetterSetter checkMock = new MockPrivateGetterSetter();
+
+        MethodParameter methodParameter = MockMethods.mockClass();
+        assertNotNull(methodParameter);
+
+        FieldFilterProcessor fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
+        fieldFilterProcessor.filterFields(checkMock);
+
+        assertEquals(defaultMock, checkMock);
+    }
+
+    @Test
+    public void testMockWithoutGettersNull() {
+        MockWithoutGetters defaultMock = new MockWithoutGetters(null, null, null, null);
+        MockWithoutGetters checkMock = new MockWithoutGetters(null, null, null, null);
+
+        MethodParameter methodParameter = MockMethods.mockClass();
+        assertNotNull(methodParameter);
+
+        FieldFilterProcessor fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
+        fieldFilterProcessor.filterFields(checkMock);
+
+        assertEquals(defaultMock, checkMock);
+    }
+
+    @Test
+    public void testMockWithoutSettersNull() {
+        MockWithoutSetters defaultMock = new MockWithoutSetters(null, null, null, null);
+        MockWithoutSetters checkMock = new MockWithoutSetters(null, null, null, null);
+
+        MethodParameter methodParameter = MockMethods.mockClass();
+        assertNotNull(methodParameter);
+
+        FieldFilterProcessor fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
+        fieldFilterProcessor.filterFields(checkMock);
+
+        assertEquals(defaultMock, checkMock);
+    }
+
+    @Test(expected = FieldAccessException.class)
+    public void testMockPrivateGetterSetterNull() {
+        MockPrivateGetterSetter defaultMock = new MockPrivateGetterSetter(null, null, null, null);
+        MockPrivateGetterSetter checkMock = new MockPrivateGetterSetter(null, null, null, null);
+
+        MethodParameter methodParameter = MockMethods.mockClass();
+        assertNotNull(methodParameter);
+
+        FieldFilterProcessor fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
+        fieldFilterProcessor.filterFields(checkMock);
+
+        assertEquals(defaultMock, checkMock);
     }
 }

@@ -24,7 +24,6 @@ public abstract class FilterFactory {
     private static final Map<Class, FilterEvent> filterList = initFilterList();
 
     private FilterFactory() {
-        throw new IllegalStateException(FilterFactory.class.getName());
     }
 
     /**
