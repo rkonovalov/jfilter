@@ -190,7 +190,7 @@ public class FieldFilterProcessor {
                     field.set(object, null);
                     break;
             }
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException | IllegalArgumentException e) {
             throw new FieldAccessException(e);
         }
     }
