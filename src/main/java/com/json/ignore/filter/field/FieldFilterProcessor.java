@@ -112,11 +112,6 @@ public class FieldFilterProcessor {
             filterFields(entry.getKey());
             filterFields(entry.getValue());
         }
-
-        /*for (Object k : map.keySet()) {
-            filterFields(k);
-            filterFields(map.get(k));
-        }*/
     }
 
     /**
@@ -137,12 +132,16 @@ public class FieldFilterProcessor {
      * @return true if field should be ignored, else false
      */
     private boolean isFieldIgnored(Field field, Class clazz) {
-        for (Class cl : ignore.keySet()) {
-            List<String> items = ignore.get(cl);
-            if (items.contains(field.getName())) {
-                return (clazz.equals(cl) || void.class.equals(cl));
+
+        Iterator<Map.Entry<Class, List<String>>> iterator = ignore.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Map.Entry<Class, List<String>> entry = iterator.next();
+            if (entry.getValue().contains(field.getName())) {
+                return (clazz.equals(entry.getKey()) || void.class.equals(entry.getKey()));
             }
         }
+
         return false;
     }
 
