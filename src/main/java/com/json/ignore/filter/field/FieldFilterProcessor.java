@@ -237,7 +237,6 @@ public class FieldFilterProcessor {
 
     private void processField(Field field, Class clazz, Object object) {
         if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
-            //field.setAccessible(true);
             if (isFieldIgnored(field, object.getClass())) {
                 clearField(field, object);
             } else {
