@@ -6,10 +6,8 @@ import com.json.ignore.mock.MockMethods;
 import com.json.ignore.mock.MockUser;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
-
 import static org.junit.Assert.*;
 
 public class FileFilterTest {
