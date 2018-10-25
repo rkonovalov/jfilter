@@ -18,15 +18,14 @@ import java.util.Map;
  * Filters factory
  */
 public abstract class FilterFactory {
-
-    private FilterFactory() {
-        throw new IllegalStateException(FilterFactory.class.getName());
-    }
-
     /**
      * List of available filters
      */
     private static final Map<Class, FilterEvent> filterList = initFilterList();
+
+    private FilterFactory() {
+        throw new IllegalStateException(FilterFactory.class.getName());
+    }
 
     /**
      * Filter list initialization
