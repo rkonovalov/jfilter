@@ -147,17 +147,18 @@ public class FieldFilterProcessor {
     }
 
 
-    private String getSetMethodName(Field field) {
-        return "set" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
+    private String getSetMethodName(Field field, String prefix) {
+        return prefix + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
     }
 
-    private Method getSetterMethod(Field field, Object object) {
+    private Method getMethod(Field field, Object object, String prefix) {
         try {
-            return object.getClass().getDeclaredMethod(getSetMethodName(field), field.getType());
+            return object.getClass().getDeclaredMethod(getSetMethodName(field, prefix), field.getType());
         } catch (NoSuchMethodException e) {
             return null;
         }
     }
+
 
     private Object getDefaultValue(Field field) {
         switch (field.getType().getName()) {
@@ -183,19 +184,15 @@ public class FieldFilterProcessor {
     }
 
     private void clearField(Field field, Object object) {
-        Method setterMethod = getSetterMethod(field, object);
+        Method setterMethod = getMethod(field, object, "set");
         if (setterMethod != null) {
             try {
                 setterMethod.invoke(object, getDefaultValue(field));
-            } catch (IllegalAccessException e) {
-                throw new FieldAccessException(e);
-            } catch (InvocationTargetException e) {
+            } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new FieldAccessException(e);
             }
         }
     }
-
-
 
 
     /**
@@ -216,8 +213,18 @@ public class FieldFilterProcessor {
             return null;
     }
 
-    private void processFields(Field field, Object object) throws IllegalAccessException {
-        Object value = field.get(object);
+    private Object getFieldObject(Field field, Object object) {
+        Method method = getMethod(field, object, "get");
+        try {
+            return method != null ? method.invoke(object) : null;
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            return null;
+        }
+    }
+
+    private void processFields(Field field, Object object) {
+
+        Object value = getFieldObject(field, object);
         if (value != null) {
             if (value instanceof Collection) {
                 process((Collection) value);
@@ -230,15 +237,11 @@ public class FieldFilterProcessor {
 
     private void processField(Field field, Class clazz, Object object) {
         if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
-            field.setAccessible(true);
+            //field.setAccessible(true);
             if (isFieldIgnored(field, object.getClass())) {
                 clearField(field, object);
             } else {
-                try {
-                    processFields(field, object);
-                } catch (IllegalAccessException e) {
-                    throw new FieldAccessException(e);
-                }
+                processFields(field, object);
             }
         }
     }
