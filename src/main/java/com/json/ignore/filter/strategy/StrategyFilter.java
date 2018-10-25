@@ -1,6 +1,5 @@
 package com.json.ignore.filter.strategy;
 
-import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.field.FieldFilterProcessor;
 import com.json.ignore.request.RequestSession;
@@ -40,10 +39,9 @@ public class StrategyFilter extends BaseFilter {
      * Attempt to filter object fields if filter annotations is configured
      *
      * @param object {@link Object} object which fields will be filtered
-     * @throws FieldAccessException exception throws on {@link IllegalAccessException}
      */
     @Override
-    public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
+    public void filter(Object object, ServerHttpRequest request) {
         RequestSession requestSession = new RequestSession(request);
 
         if (config != null) {

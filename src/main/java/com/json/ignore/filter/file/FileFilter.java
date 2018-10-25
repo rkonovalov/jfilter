@@ -46,9 +46,8 @@ public class FileFilter extends BaseFilter {
      *
      * @param file {@link File} file from resource name if file exist
      * @return {@link Object} returns instantiated object type of specified class
-     * @throws FieldAccessException {@link FieldAccessException} when caught {@link IOException}
      */
-    private FileConfig load(File file) throws FieldAccessException {
+    private FileConfig load(File file)  {
         try {
             return file != null ? new XmlMapper().readValue(file, FileConfig.class) : null;
         } catch (IOException e) {
@@ -124,10 +123,9 @@ public class FileFilter extends BaseFilter {
      * Attempt to filter object fields if filter annotations is configured
      *
      * @param object {@link Object} object which fields will be filtered
-     * @throws FieldAccessException exception throws on {@link IllegalAccessException}
      */
     @Override
-    public void filter(Object object, ServerHttpRequest request) throws FieldAccessException {
+    public void filter(Object object, ServerHttpRequest request) {
         RequestSession requestSession = new RequestSession(request);
 
         if (config != null) {

@@ -22,9 +22,9 @@ public abstract class BaseFilter {
 
     protected abstract void setConfig(MethodParameter methodParameter);
 
-    public abstract void filter(Object object, ServerHttpRequest request) throws FieldAccessException;
+    public abstract void filter(Object object, ServerHttpRequest request);
 
-    protected void filter(Object object, FieldFilterProcessor filterProcessor) throws FieldAccessException {
+    protected void filter(Object object, FieldFilterProcessor filterProcessor) {
         filterProcessor.filterFields(object);
     }
 }

@@ -1,7 +1,6 @@
 package com.json.ignore.filter.field;
 
 import com.json.ignore.FieldAccessException;
-import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
 
@@ -103,9 +102,8 @@ public class FieldFilterProcessor {
      * BaseFilter field which has value of Map, enumerate all objects in Map if exists
      *
      * @param map {@link Map}
-     * @throws FieldAccessException exception of illegal access
      */
-    private void process(Map map) throws FieldAccessException {
+    private void process(Map map) {
 
         Iterator<Map.Entry<Object, Object>> iterator = map.entrySet().iterator();
 
@@ -125,9 +123,8 @@ public class FieldFilterProcessor {
      * BaseFilter field which has value of Collection, enumerate all objects in collection if exists
      *
      * @param items {@link Collection} collection of items
-     * @throws FieldAccessException exception of illegal access
      */
-    private void process(Collection items) throws FieldAccessException {
+    private void process(Collection items) {
         for (Object item : items)
             filterFields(item);
     }
@@ -155,9 +152,8 @@ public class FieldFilterProcessor {
      *
      * @param field  {@link Field} field
      * @param object {@link Object} object
-     * @throws FieldAccessException exception of illegal access
      */
-    private void clearField(Field field, Object object) throws FieldAccessException {
+    private void clearField(Field field, Object object) {
         field.setAccessible(true);
         try {
             switch (field.getType().getName()) {
@@ -243,9 +239,8 @@ public class FieldFilterProcessor {
      * BaseFilter algorithm, finds fields which should be ignored and filters them
      *
      * @param object {@link Object} object
-     * @throws FieldAccessException exception of illegal access
      */
-    public void filterFields(Object object) throws FieldAccessException {
+    public void filterFields(Object object) {
         Class clazz = getObjectClass(object);
         if (clazz != null) {
             for (Field field : clazz.getDeclaredFields()) {
