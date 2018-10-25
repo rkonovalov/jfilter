@@ -19,15 +19,15 @@ public class FileConfigTest {
     @Test
     public void testControllerClassName() {
         FileConfig.Controller controller = mockConfig.getControllers().get(0);
-        assertEquals(controller.getClassName(), "com.json.ignore.filter.file.FileConfigTest");
+        assertEquals("com.json.ignore.filter.file.FileConfigTest", controller.getClassName());
     }
 
     @Test
     public void testStrategy() {
         FileConfig.Controller controller = mockConfig.getControllers().get(0);
         FileConfig.Strategy strategy = controller.getStrategies().get(0);
-        assertEquals(strategy.getAttributeName(), "ROLE");
-        assertEquals(strategy.getAttributeValue(), "ADMIN");
+        assertEquals("ROLE", strategy.getAttributeName());
+        assertEquals("ADMIN", strategy.getAttributeValue());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class FileConfigTest {
         FileConfig.Controller controller = mockConfig.getControllers().get(0);
         FileConfig.Strategy strategy = controller.getStrategies().get(0);
         FileConfig.Filter filter = strategy.getFilters().get(0);
-        assertEquals(filter.getClassName(), "com.json.ignore.filter.file.FileConfigTest");
+        assertEquals("com.json.ignore.filter.file.FileConfigTest", filter.getClassName());
     }
 
     @Test
@@ -44,6 +44,6 @@ public class FileConfigTest {
         FileConfig.Strategy strategy = controller.getStrategies().get(0);
         FileConfig.Filter filter = strategy.getFilters().get(0);
         FileConfig.Field field = filter.getFields().get(0);
-        assertEquals(field.getName(), "id");
+        assertEquals("id", field.getName());
     }
 }
