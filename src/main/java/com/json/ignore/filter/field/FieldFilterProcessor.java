@@ -154,7 +154,8 @@ public class FieldFilterProcessor {
      */
     private void clearField(Field field, Object object) {
         try {
-            field.setAccessible(true);
+            if (field.isAccessible())
+                field.setAccessible(true);
         } catch (SecurityException e) {
             return;
         }
