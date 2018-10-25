@@ -12,6 +12,6 @@ addons:
     organization: "rkonovalov-github" # the key of the org you chose at step #3
 
 script:
-  "mvn cobertura:cobertura"
-  "mvn jacoco:report"
+  - "mvn cobertura:cobertura"
+  - "mvn jacoco:report"
   - sonar-scanner
