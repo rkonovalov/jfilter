@@ -16,5 +16,4 @@ cache:
     - '$HOME/.m2/repository'
 
 script:
-  - "mvn jacoco:report"
   - sonar-scanner
