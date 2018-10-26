@@ -4,7 +4,6 @@ import com.json.ignore.FieldAccessException;
 import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.*;
 
@@ -150,15 +149,20 @@ public class FieldFilterProcessor {
         return prefix + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
     }
 
-
-    private Method getMethod(Field field, Object object, String prefix) {
+    private Method findMethod(Field field, Object object, String prefix) {
         try {
             String methodName = getSetMethodName(field, prefix);
+            Class<?> clazz = object.getClass();
 
-            if(prefix.equals("get")) {
-                return object.getClass().getDeclaredMethod(methodName);
-            } else
-            return object.getClass().getDeclaredMethod(methodName, field.getType());
+            switch (prefix) {
+                case "get":
+                    return clazz.getDeclaredMethod(methodName);
+                case "set":
+                    return clazz.getDeclaredMethod(methodName, field.getType());
+                default:
+                    return null;
+            }
+
         } catch (NoSuchMethodException e) {
             return null;
         }
@@ -189,7 +193,7 @@ public class FieldFilterProcessor {
     }
 
     private void clearField(Field field, Object object) {
-        Method setterMethod = getMethod(field, object, "set");
+        Method setterMethod = findMethod(field, object, "set");
         if (setterMethod != null) {
             try {
                 setterMethod.invoke(object, getDefaultValue(field));
@@ -219,7 +223,7 @@ public class FieldFilterProcessor {
     }
 
     private Object getFieldObject(Field field, Object object) {
-        Method method = getMethod(field, object, "get");
+        Method method = findMethod(field, object, "get");
         try {
             return method != null ? method.invoke(object) : null;
         } catch (IllegalAccessException | InvocationTargetException e) {
