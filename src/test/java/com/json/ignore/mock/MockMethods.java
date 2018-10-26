@@ -43,6 +43,11 @@ public class MockMethods {
         return findMethodParameterByName("mockClass");
     }
 
+    @FieldFilterSetting(fields = {"strValue", "intValue", "items2"})
+    public static MethodParameter mockClass2() {
+        return findMethodParameterByName("mockClass2");
+    }
+
     @FieldFilterSetting(fields = {"id"})
     public static MethodParameter secondSingleAnnotation() {
         return findMethodParameterByName("secondSingleAnnotation");

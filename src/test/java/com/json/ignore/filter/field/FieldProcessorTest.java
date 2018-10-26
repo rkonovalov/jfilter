@@ -187,7 +187,7 @@ public class FieldProcessorTest {
 
 
     @Test
-    public void testMockMap() {
+    public void testMockMapNull() {
         MockWithAll defaultMock = new MockWithAll(null, null, null, null);
         MockWithAll checkMock = new MockWithAll();
 
@@ -199,5 +199,19 @@ public class FieldProcessorTest {
         fieldFilterProcessor.filterFields(checkMock);
 
         assertEquals(defaultMock, checkMock);
+    }
+
+    @Test
+    public void testMockMapNotNull() {
+        MockWithAll checkMock = new MockWithAll();
+
+
+        MethodParameter methodParameter = MockMethods.mockClass2();
+        assertNotNull(methodParameter);
+
+        FieldFilterProcessor fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
+        fieldFilterProcessor.filterFields(checkMock);
+
+        assertNotNull(checkMock.getItems());
     }
 }

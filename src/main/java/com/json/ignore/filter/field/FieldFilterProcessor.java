@@ -4,9 +4,8 @@ import com.json.ignore.FieldAccessException;
 import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.*;
 import java.util.*;
 
 /**
@@ -151,9 +150,15 @@ public class FieldFilterProcessor {
         return prefix + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
     }
 
+
     private Method getMethod(Field field, Object object, String prefix) {
         try {
-            return object.getClass().getDeclaredMethod(getSetMethodName(field, prefix), field.getType());
+            String methodName = getSetMethodName(field, prefix);
+
+            if(prefix.equals("get")) {
+                return object.getClass().getDeclaredMethod(methodName);
+            } else
+            return object.getClass().getDeclaredMethod(methodName, field.getType());
         } catch (NoSuchMethodException e) {
             return null;
         }
