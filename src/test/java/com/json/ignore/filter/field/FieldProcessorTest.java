@@ -8,7 +8,9 @@ import com.json.ignore.mock.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
+
 import java.util.*;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -173,6 +175,22 @@ public class FieldProcessorTest {
     public void testMockPrivateGetterSetterNull() {
         MockPrivateGetterSetter defaultMock = new MockPrivateGetterSetter(null, null, null, null);
         MockPrivateGetterSetter checkMock = new MockPrivateGetterSetter(null, null, null, null);
+
+        MethodParameter methodParameter = MockMethods.mockClass();
+        assertNotNull(methodParameter);
+
+        FieldFilterProcessor fieldFilterProcessor = new FieldFilterProcessor(methodParameter);
+        fieldFilterProcessor.filterFields(checkMock);
+
+        assertEquals(defaultMock, checkMock);
+    }
+
+
+    @Test
+    public void testMockMap() {
+        MockWithAll defaultMock = new MockWithAll(null, null, null, null);
+        MockWithAll checkMock = new MockWithAll();
+
 
         MethodParameter methodParameter = MockMethods.mockClass();
         assertNotNull(methodParameter);

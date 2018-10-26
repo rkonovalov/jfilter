@@ -38,7 +38,7 @@ public class MockMethods {
         return findMethodParameterByName("singleAnnotation");
     }
 
-    @FieldFilterSetting(fields = {"strValue", "intValue", "items"})
+    @FieldFilterSetting(fields = {"strValue", "intValue", "items", "items2"})
     public static MethodParameter mockClass() {
         return findMethodParameterByName("mockClass");
     }
