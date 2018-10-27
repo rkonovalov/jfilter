@@ -5,6 +5,6 @@ package com.json.ignore;
  */
 public class FieldAccessException extends RuntimeException {
     public FieldAccessException(Throwable cause) {
-        super(cause);
+       super(cause);
     }
 }
