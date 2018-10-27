@@ -4,7 +4,9 @@ import com.json.ignore.mock.MockWithAll;
 import com.json.ignore.mock.MockWithoutGetters;
 import com.json.ignore.mock.MockWithoutSetters;
 import org.junit.Test;
+
 import java.lang.reflect.Field;
+
 import static org.junit.Assert.*;
 
 public class MethodRecordTest {
@@ -102,5 +104,34 @@ public class MethodRecordTest {
         methodRecord.setValue(() -> new MethodEventValue(object, 500));
 
         assertNotEquals(new Integer(500), object.getIntValue());
+    }
+
+    @Test
+    public void testGetValueException() throws NoSuchFieldException {
+        MockWithoutSetters object = new MockWithoutSetters();
+
+
+        Field field = object.getClass().getDeclaredField("strValue");
+        assertNotNull(field);
+
+        MethodRecord methodRecord = new MethodRecord(field);
+
+        String value = (String) methodRecord.getValue(() -> object);
+
+        assertNull(value);
+    }
+
+    @Test
+    public void testSetValueException() throws NoSuchFieldException {
+        MockWithoutGetters object = new MockWithoutGetters();
+
+        Field field = object.getClass().getDeclaredField("strValue");
+        assertNotNull(field);
+
+        MethodRecord methodRecord = new MethodRecord(field);
+
+        boolean result = methodRecord.setValue(() -> new MethodEventValue(object, "test"));
+
+        assertFalse(result);
     }
 }
