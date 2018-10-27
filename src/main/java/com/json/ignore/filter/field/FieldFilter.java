@@ -42,6 +42,6 @@ public class FieldFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) {
-        filter(object, new FieldFilterProcessor(config));
+        filter(object, new FieldProcessor(config));
     }
 }

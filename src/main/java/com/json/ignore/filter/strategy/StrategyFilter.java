@@ -1,7 +1,7 @@
 package com.json.ignore.filter.strategy;
 
 import com.json.ignore.filter.BaseFilter;
-import com.json.ignore.filter.field.FieldFilterProcessor;
+import com.json.ignore.filter.field.FieldProcessor;
 import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -48,7 +48,7 @@ public class StrategyFilter extends BaseFilter {
             for (SessionStrategy strategy : config) {
                 if (requestSession.isSessionPropertyExists(strategy.attributeName(),
                         strategy.attributeValue())) {
-                    filter(object, new FieldFilterProcessor(strategy.ignoreFields()));
+                    filter(object, new FieldProcessor(strategy.ignoreFields()));
                 }
             }
         }

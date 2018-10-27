@@ -3,7 +3,7 @@ package com.json.ignore.filter.file;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.BaseFilter;
-import com.json.ignore.filter.field.FieldFilterProcessor;
+import com.json.ignore.filter.field.FieldProcessor;
 import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -133,7 +133,7 @@ public class FileFilter extends BaseFilter {
                 if (controllerClass.getName().equalsIgnoreCase(controller.getClassName())) {
                     controller.getStrategies().forEach(strategy -> {
                         if (requestSession.isSessionPropertyExists(strategy.getAttributeName(), strategy.getAttributeValue())) {
-                            filter(object, new FieldFilterProcessor(strategy.getStrategyFields()));
+                            filter(object, new FieldProcessor(strategy.getStrategyFields()));
                         }
                     });
                 }
