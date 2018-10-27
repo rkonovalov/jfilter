@@ -11,7 +11,7 @@ import java.util.*;
 
 public class FieldProcessor {
     private Map<Class, List<String>> ignoreList;
-    private Reflect reflect;
+    private final Reflect reflect;
 
     public FieldProcessor() {
         this.ignoreList = new HashMap<>();
@@ -62,10 +62,9 @@ public class FieldProcessor {
     private boolean isIgnoreRecordFound(Field field, Class clazz) {
         for (Map.Entry<Class, List<String>> entry : ignoreList.entrySet()) {
             if (entry.getValue().contains(field.getName())) {
-                boolean result = Objects.equals(clazz, entry.getKey()) ||
+                return Objects.equals(clazz, entry.getKey()) ||
                         Objects.equals(void.class, entry.getKey()) ||
                         Objects.equals(null, entry.getKey());
-                return result;
             }
         }
 
@@ -114,14 +113,14 @@ public class FieldProcessor {
             return null;
     }
 
-    public void filterCollection(Collection collection) {
+    private void filterCollection(Collection collection) {
         for (Object aCollection : collection) {
             filter(aCollection);
         }
     }
 
     @SuppressWarnings("unchecked")
-    public void filterMap(Map map) {
+    private void filterMap(Map map) {
         for (Map.Entry<Object, Object> entry : (Iterable<Map.Entry<Object, Object>>) map.entrySet()) {
             filter(entry.getKey());
             filter(entry.getValue());
