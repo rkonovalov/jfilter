@@ -3,7 +3,6 @@ package com.json.ignore.filter.field;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.json.ignore.FieldAccessException;
 import com.json.ignore.mock.*;
 import org.junit.Before;
 import org.junit.Test;
