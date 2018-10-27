@@ -3,11 +3,8 @@ package com.json.ignore.reflect;
 import com.json.ignore.mock.MockWithAll;
 import com.json.ignore.mock.MockWithoutGetters;
 import com.json.ignore.mock.MockWithoutSetters;
-import org.junit.Assert;
 import org.junit.Test;
-
 import java.lang.reflect.Field;
-
 import static org.junit.Assert.*;
 
 public class MethodRecordTest {
