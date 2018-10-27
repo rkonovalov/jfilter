@@ -60,9 +60,7 @@ public class FieldProcessor {
     }
 
     private boolean isIgnoreRecordFound(Field field, Class clazz) {
-        Iterator<Map.Entry<Class, List<String>>> iterator = ignoreList.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Class, List<String>> entry = iterator.next();
+        for (Map.Entry<Class, List<String>> entry : ignoreList.entrySet()) {
             if (entry.getValue().contains(field.getName())) {
                 boolean result = Objects.equals(clazz, entry.getKey()) ||
                         Objects.equals(void.class, entry.getKey()) ||
@@ -117,17 +115,14 @@ public class FieldProcessor {
     }
 
     public void filterCollection(Collection collection) {
-        Iterator iterator = collection.iterator();
-        while (iterator.hasNext()) {
-            filter(iterator.next());
+        for (Object aCollection : collection) {
+            filter(aCollection);
         }
     }
 
     @SuppressWarnings("unchecked")
     public void filterMap(Map map) {
-        Iterator<Map.Entry<Object, Object>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Object, Object> entry = iterator.next();
+        for (Map.Entry<Object, Object> entry : (Iterable<Map.Entry<Object, Object>>) map.entrySet()) {
             filter(entry.getKey());
             filter(entry.getValue());
         }
