@@ -91,7 +91,7 @@ public class MockMethods {
         return findMethodParameterByName("fileAnnotationClassDuplicated");
     }
 
-    public static Method findMethodByName(String methodName) {
+    private static Method findMethodByName(String methodName) {
         Method[] methods = MockMethods.class.getDeclaredMethods();
 
         for (Method method : methods) {

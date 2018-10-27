@@ -18,7 +18,6 @@ public class FilterProviderTest {
     private MethodParameter fileAnnotationMethod;
     private MethodParameter methodWithoutAnnotationsMethod;
 
-
     @Before
     public void init() {
         filterProvider = new FilterProvider();
