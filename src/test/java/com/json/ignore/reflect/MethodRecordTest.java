@@ -163,4 +163,46 @@ public class MethodRecordTest {
 
         assertFalse(result);
     }
+
+    @Test
+    public void testGetEventNull() throws NoSuchFieldException {
+        MockPrivateGetterSetter object = new MockPrivateGetterSetter();
+
+        Field field = object.getClass().getDeclaredField("strValue");
+        assertNotNull(field);
+
+        MethodRecord methodRecord = new MethodRecord(field);
+
+        String value = (String) methodRecord.getValue(null);
+
+        assertNull(value);
+    }
+
+    @Test
+    public void testSetEventNull() throws NoSuchFieldException {
+        MockPrivateGetterSetter object = new MockPrivateGetterSetter();
+
+        Field field = object.getClass().getDeclaredField("strValue");
+        assertNotNull(field);
+
+        MethodRecord methodRecord = new MethodRecord(field);
+
+        boolean result = methodRecord.setValue(null);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void testSetEventValueNull() throws NoSuchFieldException {
+        MockPrivateGetterSetter object = new MockPrivateGetterSetter();
+
+        Field field = object.getClass().getDeclaredField("strValue");
+        assertNotNull(field);
+
+        MethodRecord methodRecord = new MethodRecord(field);
+
+        boolean result = methodRecord.setValue(() -> null);
+
+        assertFalse(result);
+    }
 }
