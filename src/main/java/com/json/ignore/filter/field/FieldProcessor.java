@@ -127,11 +127,20 @@ public class FieldProcessor {
         }
     }
 
+    private void filterComplexType(Object value) {
+        if (value != null) {
+            if (value instanceof Collection) {
+                filterCollection((Collection) value);
+            } else if (value instanceof Map) {
+                filterMap((Map) value);
+            } else
+                filter(value);
+        }
+    }
 
     public void filter(Object object) {
         Class objectClass = getObjectClass(object);
         if (objectClass != null) {
-
             for (Field field : objectClass.getDeclaredFields()) {
                 MethodRecord methodRecord = reflect.getRecord(field);
                 if (methodRecord != null) {
@@ -139,16 +148,7 @@ public class FieldProcessor {
                         clearField(object, methodRecord);
                     } else {
                         Object value = methodRecord.getValue(() -> object);
-                        if (value != null) {
-
-                            if (value instanceof Collection) {
-                                filterCollection((Collection) value);
-                            } else if (value instanceof Map) {
-                                filterMap((Map) value);
-                            } else
-                                filter(value);
-
-                        }
+                        filterComplexType(value);
                     }
                 }
             }
