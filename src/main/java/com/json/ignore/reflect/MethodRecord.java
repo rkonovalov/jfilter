@@ -37,11 +37,12 @@ public class MethodRecord {
                     return clazz.getDeclaredMethod(methodName);
                 case SET:
                     return clazz.getDeclaredMethod(methodName, field.getType());
+                default:
+                    return null;
             }
         } catch (NoSuchMethodException e) {
             return null;
         }
-        return null;
     }
 
     private String methodName(MethodType methodType) {
