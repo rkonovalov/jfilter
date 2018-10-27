@@ -101,7 +101,7 @@ public class MockMethods {
         return null;
     }
 
-    public static MethodParameter findMethodParameterByName(String methodName) {
+    private static MethodParameter findMethodParameterByName(String methodName) {
         Method method = findMethodByName(methodName);
         if (method != null) {
             return new MethodParameter(method, 0);
