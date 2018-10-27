@@ -1,5 +1,6 @@
 package com.json.ignore.reflect;
 
+import com.json.ignore.mock.MockPrivateGetterSetter;
 import com.json.ignore.mock.MockWithAll;
 import com.json.ignore.mock.MockWithoutGetters;
 import com.json.ignore.mock.MockWithoutSetters;
@@ -124,6 +125,34 @@ public class MethodRecordTest {
     @Test
     public void testSetValueException() throws NoSuchFieldException {
         MockWithoutGetters object = new MockWithoutGetters();
+
+        Field field = object.getClass().getDeclaredField("strValue");
+        assertNotNull(field);
+
+        MethodRecord methodRecord = new MethodRecord(field);
+
+        boolean result = methodRecord.setValue(() -> new MethodEventValue(object, "test"));
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void testGetValuePrivate() throws NoSuchFieldException {
+        MockPrivateGetterSetter object = new MockPrivateGetterSetter();
+
+        Field field = object.getClass().getDeclaredField("strValue");
+        assertNotNull(field);
+
+        MethodRecord methodRecord = new MethodRecord(field);
+
+        String value = (String) methodRecord.getValue(() -> object);
+
+        assertNull(value);
+    }
+
+    @Test
+    public void testSetValuePrivate() throws NoSuchFieldException {
+        MockPrivateGetterSetter object = new MockPrivateGetterSetter();
 
         Field field = object.getClass().getDeclaredField("strValue");
         assertNotNull(field);
