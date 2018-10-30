@@ -1,7 +1,8 @@
-package com.json.ignore.advice;
+package com.json.ignore.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.json.ignore.IgnoreMapper;
+import com.json.ignore.advice.FilterClassWrapper;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 

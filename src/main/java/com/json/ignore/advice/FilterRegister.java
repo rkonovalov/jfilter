@@ -1,5 +1,7 @@
 package com.json.ignore.advice;
 
+import com.json.ignore.converter.FilterJsonConverter;
+import com.json.ignore.converter.FilterXmlConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;

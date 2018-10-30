@@ -1,6 +1,7 @@
-package com.json.ignore.advice;
+package com.json.ignore.converter;
 
 import com.json.ignore.IgnoreMapper;
+import com.json.ignore.advice.FilterClassWrapper;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;

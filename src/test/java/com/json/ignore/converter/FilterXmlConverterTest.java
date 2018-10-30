@@ -1,5 +1,6 @@
-package com.json.ignore.advice;
+package com.json.ignore.converter;
 
+import com.json.ignore.converter.FilterXmlConverter;
 import com.json.ignore.mock.MockHttpRequest;
 import com.json.ignore.mock.MockUser;
 import org.junit.Assert;

@@ -1,8 +1,8 @@
 package com.json.ignore.mock.config;
   
 import com.json.ignore.EnableJsonFilter;
-import com.json.ignore.advice.FilterJsonConverter;
-import com.json.ignore.advice.FilterXmlConverter;
+import com.json.ignore.converter.FilterJsonConverter;
+import com.json.ignore.converter.FilterXmlConverter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
