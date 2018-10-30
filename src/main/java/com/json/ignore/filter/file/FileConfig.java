@@ -195,9 +195,8 @@ public class FileConfig implements Serializable {
             return className;
         }
 
-        public Filter setClassName(String className) {
+        public void setClassName(String className) {
             this.className = className;
-            return this;
         }
 
         public List<Field> getFields() {
