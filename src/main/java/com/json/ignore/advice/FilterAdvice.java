@@ -41,8 +41,6 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
 
-        //return filterProvider.filter(serverHttpRequest, methodParameter, obj);
-
         BaseFilter filter = filterProvider.getFilter(methodParameter);
         if (filter != null) {
             return new FilterClassWrapper(obj, filter.getIgnoreList(obj, serverHttpRequest));
