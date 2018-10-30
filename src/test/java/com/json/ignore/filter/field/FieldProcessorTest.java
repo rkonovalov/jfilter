@@ -3,16 +3,11 @@ package com.json.ignore.filter.field;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.mock.*;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
-
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -215,36 +210,5 @@ public class FieldProcessorTest {
         fieldFilterProcessor.filter(checkMock);
 
         assertNotNull(checkMock.getItems());
-    }
-
-    private long calculate(AtomicLong n) {
-        long current = System.currentTimeMillis();
-        return current - n.getAndSet(current);
-    }
-
-    private void buildTest() {
-        FileConfig config = MockClasses.getMockAdminFileConfig();
-
-        MethodParameter methodParameter = MockMethods.withoutFileFilters();
-        assertNotNull(methodParameter);
-
-        AtomicLong n =  new AtomicLong(System.currentTimeMillis());
-
-        System.out.println("Begin");
-
-        FieldProcessor fieldFilterProcessor = new FieldProcessor(methodParameter);
-       // System.out.println("Create: " + calculate(n));
-
-        fieldFilterProcessor.filter(config);
-        System.out.println("Filtered 1: " + calculate(n));
-
-        System.out.println("End");
-    }
-
-    @Test
-    public void testTime() {
-        buildTest();
-        buildTest();
-        buildTest();
     }
 }
