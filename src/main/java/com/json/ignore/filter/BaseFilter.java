@@ -1,10 +1,8 @@
 package com.json.ignore.filter;
 
-import com.json.ignore.filter.field.FieldProcessor;
 import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,12 +30,6 @@ public abstract class BaseFilter {
     }
 
     protected abstract void setConfig(MethodParameter methodParameter);
-
-    public abstract void filter(Object object, ServerHttpRequest request);
-
-    protected void filter(Object object, FieldProcessor filterProcessor) {
-        filterProcessor.filter(object);
-    }
 
     public abstract Map<Class, List<String>> getIgnoreList(Object object, ServerHttpRequest request);
 }

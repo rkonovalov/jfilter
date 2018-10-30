@@ -73,23 +73,6 @@ public class FilterProvider<T> {
         return enabled && FilterFactory.isAccept(methodParameter);
     }
 
-    /**
-     * Filter object.
-     *
-     * @param serverHttpRequest the server http request
-     * @param methodParameter   the method parameter
-     * @param object            the object
-     * @return                  the object
-     */
-    public T filter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter,
-                         T object) {
-        BaseFilter filter = getBaseFilter(methodParameter);
-        if (filter != null) {
-            filter.filter(object, serverHttpRequest);
-        }
-        return object;
-    }
-
     public BaseFilter getFilter(MethodParameter methodParameter) {
         return getBaseFilter(methodParameter);
     }

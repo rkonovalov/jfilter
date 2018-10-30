@@ -2,7 +2,6 @@ package com.json.ignore.filter.strategy;
 
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.field.FieldFilterSetting;
-import com.json.ignore.filter.field.FieldProcessor;
 import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -36,16 +35,6 @@ public class StrategyFilter extends BaseFilter {
     @Override
     protected void setConfig(MethodParameter methodParameter) {
         config = getRequestMethodParameter().getStrategyAnnotations(methodParameter);
-    }
-
-    /**
-     * Attempt to filter object fields if filter annotations is configured
-     *
-     * @param object {@link Object} object which fields will be filtered
-     */
-    @Override
-    public void filter(Object object, ServerHttpRequest request) {
-        filter(object, new FieldProcessor(getIgnoreList(object, request)));
     }
 
     @Override
