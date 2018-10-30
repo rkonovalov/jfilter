@@ -7,21 +7,21 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 
-public class FilterConverterTest {
-    private FilterConverter filterConverter;
+public class FilterJsonConverterTest {
+    private FilterJsonConverter filterJsonConverter;
 
     @Before
     public void init() {
-        filterConverter = new FilterConverter();
+        filterJsonConverter = new FilterJsonConverter();
     }
 
     @Test
     public void testCanReadFalse() {
-        Assert.assertFalse(filterConverter.canRead(MockUser.class, MediaType.APPLICATION_JSON));
+        Assert.assertFalse(filterJsonConverter.canRead(MockUser.class, MediaType.APPLICATION_JSON));
     }
 
     @Test
     public void testReadNull() {
-        Assert.assertNull(filterConverter.read(MockUser.class, MockHttpRequest.getMockAdminRequest()));
+        Assert.assertNull(filterJsonConverter.read(MockUser.class, MockHttpRequest.getMockAdminRequest()));
     }
 }
