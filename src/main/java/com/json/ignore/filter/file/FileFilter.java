@@ -102,26 +102,6 @@ public class FileFilter extends BaseFilter {
             config = parseFile(fileFilterSetting.fileName());
     }
 
-    /**
-     * Get class where method was initiated
-     *
-     * @return {@link Class} class
-     */
-    public Class getControllerClass() {
-        return controllerClass;
-    }
-
-    /**
-     * Set class where method was initiated. Used in unit tests
-     *
-     * @param controllerClass {@link Class} class
-     * @return {@link FileFilter} current instance
-     */
-    public FileFilter setControllerClass(Class controllerClass) {
-        this.controllerClass = controllerClass;
-        return this;
-    }
-
     @Override
     public Map<Class, List<String>> getIgnoreList(Object object, ServerHttpRequest request) {
         Map<Class, List<String>> result = new HashMap<>();
