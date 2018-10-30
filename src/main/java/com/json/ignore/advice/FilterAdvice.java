@@ -43,7 +43,7 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
 
         //return filterProvider.filter(serverHttpRequest, methodParameter, obj);
 
-        BaseFilter filter = filterProvider.getFilter(serverHttpRequest, methodParameter);
+        BaseFilter filter = filterProvider.getFilter(methodParameter);
         if (filter != null) {
             return new FilterClassWrapper(obj, filter.getIgnoreList(obj, serverHttpRequest));
         } else

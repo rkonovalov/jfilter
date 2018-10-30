@@ -90,7 +90,7 @@ public class FilterProvider<T> {
         return object;
     }
 
-    public BaseFilter getFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
+    public BaseFilter getFilter(MethodParameter methodParameter) {
         return getBaseFilter(methodParameter);
     }
 
