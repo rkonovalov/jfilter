@@ -38,7 +38,6 @@ public class FilterAdviceITTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
-
     @Test
     public void testWebContext() {
         ServletContext servletContext = wac.getServletContext();
