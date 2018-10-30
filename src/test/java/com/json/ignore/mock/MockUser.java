@@ -1,17 +1,12 @@
 package com.json.ignore.mock;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
-
 
 public class MockUser implements Serializable {
     private Integer id;
