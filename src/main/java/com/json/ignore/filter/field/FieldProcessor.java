@@ -48,14 +48,8 @@ public class FieldProcessor {
         if (settings != null)
             for (FieldFilterSetting setting : settings) {
                 List<String> fields = new ArrayList<>(Arrays.asList(setting.fields()));
-                if (items.containsKey(setting.className())) {
-                    List<String> existFields = items.get(setting.className());
-                    existFields.addAll(fields);
-                    items.put(setting.className(), existFields);
-                } else
-                    items.put(setting.className(), fields);
+                items.computeIfAbsent(setting.className(), i -> new ArrayList<>()).addAll(fields);
             }
-
         return items;
     }
 
@@ -99,9 +93,9 @@ public class FieldProcessor {
         }
     }
 
-    private boolean clearField(Object object, MethodRecord methodRecord) {
+    private void clearField(Object object, MethodRecord methodRecord) {
         Object value = defaultValue(methodRecord.getField());
-        return methodRecord.setValue(() -> new MethodEventValue(object, value));
+        methodRecord.setValue(() -> new MethodEventValue(object, value));
     }
 
 
