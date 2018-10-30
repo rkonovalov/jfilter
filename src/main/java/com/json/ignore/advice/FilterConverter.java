@@ -19,10 +19,6 @@ public class FilterConverter implements HttpMessageConverter<FilterClassWrapper>
         supportedMedia = new ArrayList<>();
     }
 
-    public List<MediaType> getSupportedMedia() {
-        return supportedMedia;
-    }
-
     @Override
     public boolean canRead(Class aClass, MediaType mediaType) {
         return false;

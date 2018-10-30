@@ -22,9 +22,10 @@ public class FilterRegister extends WebMvcConfigurationSupport {
 
     @Override
     protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        if (enabled)
+        if (enabled) {
             converters.add(new FilterJsonConverter());
             converters.add(new FilterXmlConverter());
+        }
         super.configureMessageConverters(converters);
     }
 }
