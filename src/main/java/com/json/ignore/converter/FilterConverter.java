@@ -41,11 +41,11 @@ public class FilterConverter implements HttpMessageConverter<FilterClassWrapper>
     @Override
     public void write(FilterClassWrapper object, MediaType mediaType, HttpOutputMessage httpOutputMessage) throws HttpMessageNotWritableException, IOException {
         httpOutputMessage.getHeaders().setContentType(mediaType);
-        ConverterMapper converterMapper = getIgnoreMapper(object, mediaType, httpOutputMessage);
+        ConverterMapper converterMapper = getIgnoreMapper(object);
         httpOutputMessage.getBody().write(converterMapper.getMapper().writeValueAsBytes(object.getObject()));
     }
 
-    protected ConverterMapper getIgnoreMapper(FilterClassWrapper object, MediaType mediaType, HttpOutputMessage httpOutputMessage) {
+    protected ConverterMapper getIgnoreMapper(FilterClassWrapper object) {
         return null;
     }
 }

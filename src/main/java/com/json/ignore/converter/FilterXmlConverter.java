@@ -19,7 +19,7 @@ public class FilterXmlConverter extends FilterConverter {
     }
 
     @Override
-    protected ConverterMapper getIgnoreMapper(FilterClassWrapper object, MediaType mediaType, HttpOutputMessage httpOutputMessage) {
+    protected ConverterMapper getIgnoreMapper(FilterClassWrapper object) {
         return new ConverterMapper(new XmlMapper(), object.getIgnoreList());
     }
 }
