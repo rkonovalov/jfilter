@@ -1,16 +1,17 @@
-package com.json.ignore;
+package com.json.ignore.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
 import com.fasterxml.jackson.databind.ser.SerializerFactory;
+
 import java.util.List;
 import java.util.Map;
 
-public class IgnoreMapper {
+public class ConverterMapper {
     private final ObjectMapper mapper;
     private final Map<Class, List<String>> ignoreList;
 
-    public IgnoreMapper(ObjectMapper mapper, Map<Class, List<String>> ignoreList) {
+    public ConverterMapper(ObjectMapper mapper, Map<Class, List<String>> ignoreList) {
         this.mapper = mapper;
         this.ignoreList = ignoreList;
         setIgnoreModifier();
@@ -18,7 +19,7 @@ public class IgnoreMapper {
 
     private void setIgnoreModifier() {
         SerializerFactory factory = BeanSerializerFactory.instance
-                .withSerializerModifier(new IgnoreMapperModifier(ignoreList));
+                .withSerializerModifier(new ConverterMapperModifier(ignoreList));
         mapper.setSerializerFactory(factory);
     }
 

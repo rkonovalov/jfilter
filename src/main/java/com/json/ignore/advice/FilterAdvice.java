@@ -1,5 +1,6 @@
 package com.json.ignore.advice;
 
+import com.json.ignore.converter.FilterClassWrapper;
 import com.json.ignore.filter.BaseFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;

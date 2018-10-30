@@ -1,8 +1,6 @@
 package com.json.ignore.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.json.ignore.IgnoreMapper;
-import com.json.ignore.advice.FilterClassWrapper;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 
@@ -20,7 +18,7 @@ public class FilterJsonConverter extends FilterConverter {
     }
 
     @Override
-    protected IgnoreMapper getIgnoreMapper(FilterClassWrapper object, MediaType mediaType, HttpOutputMessage httpOutputMessage) {
-        return new IgnoreMapper(new ObjectMapper(), object.getIgnoreList());
+    protected ConverterMapper getIgnoreMapper(FilterClassWrapper object, MediaType mediaType, HttpOutputMessage httpOutputMessage) {
+        return new ConverterMapper(new ObjectMapper(), object.getIgnoreList());
     }
 }

@@ -1,4 +1,4 @@
-package com.json.ignore.advice;
+package com.json.ignore.converter;
 
 import java.io.Serializable;
 import java.util.List;

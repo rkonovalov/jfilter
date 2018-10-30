@@ -1,7 +1,5 @@
 package com.json.ignore.converter;
 
-import com.json.ignore.IgnoreMapper;
-import com.json.ignore.advice.FilterClassWrapper;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -43,11 +41,11 @@ public class FilterConverter implements HttpMessageConverter<FilterClassWrapper>
     @Override
     public void write(FilterClassWrapper object, MediaType mediaType, HttpOutputMessage httpOutputMessage) throws HttpMessageNotWritableException, IOException {
         httpOutputMessage.getHeaders().setContentType(mediaType);
-        IgnoreMapper ignoreMapper = getIgnoreMapper(object, mediaType, httpOutputMessage);
-        httpOutputMessage.getBody().write(ignoreMapper.getMapper().writeValueAsBytes(object.getObject()));
+        ConverterMapper converterMapper = getIgnoreMapper(object, mediaType, httpOutputMessage);
+        httpOutputMessage.getBody().write(converterMapper.getMapper().writeValueAsBytes(object.getObject()));
     }
 
-    protected IgnoreMapper getIgnoreMapper(FilterClassWrapper object, MediaType mediaType, HttpOutputMessage httpOutputMessage) {
+    protected ConverterMapper getIgnoreMapper(FilterClassWrapper object, MediaType mediaType, HttpOutputMessage httpOutputMessage) {
         return null;
     }
 }

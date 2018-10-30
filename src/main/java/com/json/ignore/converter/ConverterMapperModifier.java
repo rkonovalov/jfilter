@@ -1,4 +1,4 @@
-package com.json.ignore;
+package com.json.ignore.converter;
 
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.SerializationConfig;
@@ -8,10 +8,10 @@ import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import java.util.List;
 import java.util.Map;
 
-public class IgnoreMapperModifier extends BeanSerializerModifier {
+public class ConverterMapperModifier extends BeanSerializerModifier {
     private final Map<Class, List<String>> ignoreList;
 
-    public IgnoreMapperModifier(Map<Class, List<String>> ignoreList) {
+    public ConverterMapperModifier(Map<Class, List<String>> ignoreList) {
         this.ignoreList = ignoreList;
     }
 
