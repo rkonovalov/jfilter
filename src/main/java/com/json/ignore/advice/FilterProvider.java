@@ -8,7 +8,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
-
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * This class also has cache for caching already found filter for better productivity
  */
 @Component
-public class FilterProvider {
+public class FilterProvider<T> {
     private final Map<Annotation, BaseFilter> items;
     private boolean enabled;
 
@@ -80,14 +79,19 @@ public class FilterProvider {
      * @param serverHttpRequest the server http request
      * @param methodParameter   the method parameter
      * @param object            the object
-     * @return the object
+     * @return                  the object
      */
-    public Object filter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter, Object object) {
+    public T filter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter,
+                         T object) {
         BaseFilter filter = getBaseFilter(methodParameter);
         if (filter != null) {
             filter.filter(object, serverHttpRequest);
         }
         return object;
+    }
+
+    public BaseFilter getFilter(ServerHttpRequest serverHttpRequest, MethodParameter methodParameter) {
+        return getBaseFilter(methodParameter);
     }
 
     /**

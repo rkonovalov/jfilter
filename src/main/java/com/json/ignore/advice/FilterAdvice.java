@@ -1,5 +1,6 @@
 package com.json.ignore.advice;
 
+import com.json.ignore.filter.BaseFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -20,10 +21,10 @@ import java.io.Serializable;
 
 @ControllerAdvice
 public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
-    private FilterProvider filterProvider;
+    private FilterProvider<Serializable> filterProvider;
 
     @Autowired
-    public void setFilterProvider(FilterProvider filterProvider) {
+    public void setFilterProvider(FilterProvider<Serializable> filterProvider) {
         this.filterProvider = filterProvider;
     }
 
@@ -40,6 +41,12 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
 
-        return (Serializable) filterProvider.filter(serverHttpRequest, methodParameter, obj);
+        //return filterProvider.filter(serverHttpRequest, methodParameter, obj);
+
+        BaseFilter filter = filterProvider.getFilter(serverHttpRequest, methodParameter);
+        if (filter != null) {
+            return new FilterClassWrapper(obj, filter.getIgnoreList(obj, serverHttpRequest));
+        } else
+            return obj;
     }
 }

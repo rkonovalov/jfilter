@@ -9,10 +9,12 @@ import org.junit.Test;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 
+import java.io.Serializable;
+
 import static org.junit.Assert.*;
 
 public class FilterProviderTest {
-    private FilterProvider filterProvider;
+    private FilterProvider<Serializable> filterProvider;
     private MockUser defaultUser;
     private ServletServerHttpRequest defaultRequest;
     private MethodParameter fileAnnotationMethod;
@@ -20,7 +22,7 @@ public class FilterProviderTest {
 
     @Before
     public void init() {
-        filterProvider = new FilterProvider();
+        filterProvider = new FilterProvider<>();
         defaultUser = MockClasses.getUserMock();
         assertNotNull(defaultUser);
 

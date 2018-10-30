@@ -36,15 +36,6 @@ public class FilterAdviceTest {
     }
 
     @Test
-    public void testBeforeBodyWrite() {
-        MockUser user = MockClasses.getUserMock();
-
-        user = (MockUser) filterAdvice.beforeBodyWrite(user, MockMethods.singleAnnotation(), MediaType.APPLICATION_JSON,
-                Jaxb2RootElementHttpMessageConverter.class, request, response);
-        assertNotEquals(user, MockClasses.getUserMock());
-    }
-
-    @Test
     public void testBeforeBodyWriteFalse() {
         MockUser user = MockClasses.getUserMock();
 

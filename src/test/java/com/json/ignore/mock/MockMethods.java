@@ -53,6 +53,11 @@ public class MockMethods {
         return findMethodParameterByName("secondSingleAnnotation");
     }
 
+    @FieldFilterSetting(fields = {"filters"})
+    public static MethodParameter withoutFileFilters() {
+        return findMethodParameterByName("withoutFileFilters");
+    }
+
     @FieldFilterSetting(fields = {"password"})
     public static MethodParameter thirdSingleAnnotation() {
         return findMethodParameterByName("thirdSingleAnnotation");
