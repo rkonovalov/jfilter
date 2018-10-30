@@ -25,4 +25,11 @@ public class FileFilterTest {
         Assert.assertEquals(0,ignoreList.size());
     }
 
+    @Test
+    public void testMethodBadConfig() {
+        FileFilter fileFilter = new FileFilter(MockMethods.fileBadConfig());
+        Map<Class, List<String>> ignoreList = fileFilter.getIgnoreList(MockClasses.getUserMock(), MockHttpRequest.getMockAdminRequest());
+        Assert.assertEquals(0,ignoreList.size());
+    }
+
 }

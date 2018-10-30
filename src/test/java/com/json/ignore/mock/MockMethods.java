@@ -81,6 +81,11 @@ public class MockMethods {
         return findMethodParameterByName("fileAnnotation");
     }
 
+    @FileFilterSetting(fileName = "bad_config.xml")
+    public static MethodParameter fileBadConfig() {
+        return findMethodParameterByName("fileBadConfig");
+    }
+
     @FileFilterSetting(fileName = "unknown_config.xml")
     public static MethodParameter fileNotExist() {
         return findMethodParameterByName("fileNotExist");
@@ -119,10 +124,7 @@ public class MockMethods {
             return null;
     }
 
-    @FileFilterSetting(fileName = "config.xml")
-    public static MethodParameter methodWithParams(String email, String password) {
-        return findMethodParameterByName("methodWithParams");
-    }
+
 
 
 }
