@@ -44,9 +44,6 @@ public class FilterConverter implements HttpMessageConverter<FilterClassWrapper>
     public void write(FilterClassWrapper object, MediaType mediaType, HttpOutputMessage httpOutputMessage) throws HttpMessageNotWritableException, IOException {
         httpOutputMessage.getHeaders().setContentType(mediaType);
         IgnoreMapper ignoreMapper = getIgnoreMapper(object, mediaType, httpOutputMessage);
-
-        String result = ignoreMapper.getMapper().writeValueAsString(object.getObject());
-
         httpOutputMessage.getBody().write(ignoreMapper.getMapper().writeValueAsBytes(object.getObject()));
     }
 
