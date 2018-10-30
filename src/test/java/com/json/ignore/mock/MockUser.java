@@ -146,9 +146,8 @@ public class MockUser implements Serializable {
         return shortValue;
     }
 
-    public MockUser setShortValue(short shortValue) {
+    public void setShortValue(short shortValue) {
         this.shortValue = shortValue;
-        return this;
     }
 
     @Override
