@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
+
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,7 +39,11 @@ public class FilterProvider {
         /*
          * Important! For enabling filtration, should be specified one of application bean with EnableJsonFilter annotation
          */
-        enabled = webApplicationContext.getBeansWithAnnotation(EnableJsonFilter.class).size() > 0;
+        enabled = isFilterEnabled(webApplicationContext);
+    }
+
+    public static boolean isFilterEnabled(WebApplicationContext webApplicationContext) {
+        return webApplicationContext.getBeansWithAnnotation(EnableJsonFilter.class).size() > 0;
     }
 
     private BaseFilter getBaseFilter(MethodParameter methodParameter) {
