@@ -3,6 +3,8 @@ package com.json.ignore.mock;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
@@ -179,6 +181,17 @@ public class MockUser implements Serializable {
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return super.toString();
+        }
+    }
+
+
+    public String toXmlString() {
+        XmlMapper mapper = new XmlMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         try {
             return mapper.writeValueAsString(this);
