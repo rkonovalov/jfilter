@@ -1,7 +1,5 @@
 package com.json.ignore.advice;
 
-import com.fasterxml.jackson.databind.DeserializationConfig;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
 import com.json.ignore.mock.MockUser;
@@ -18,10 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.io.IOException;
-
-import static com.fasterxml.jackson.databind.DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY;
 import static junit.framework.TestCase.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
