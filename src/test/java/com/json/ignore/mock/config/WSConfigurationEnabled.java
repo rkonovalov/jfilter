@@ -1,7 +1,8 @@
 package com.json.ignore.mock.config;
   
 import com.json.ignore.EnableJsonFilter;
-import com.json.ignore.advice.FilterConverter;
+import com.json.ignore.advice.FilterJsonConverter;
+import com.json.ignore.advice.FilterXmlConverter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -18,7 +19,8 @@ public class WSConfigurationEnabled extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(new FilterConverter());
+        converters.add(new FilterJsonConverter());
+        converters.add(new FilterXmlConverter());
         super.configureMessageConverters(converters);
     }
 }
