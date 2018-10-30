@@ -1,10 +1,13 @@
 package com.json.ignore.filter.strategy;
 
 import com.json.ignore.filter.BaseFilter;
+import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.field.FieldProcessor;
 import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
+
+import java.util.*;
 
 /**
  * This class used for strategy filtration of object's fields based on SessionStrategy configuration
@@ -42,15 +45,25 @@ public class StrategyFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) {
+        filter(object, new FieldProcessor(getIgnoreList(object, request)));
+    }
+
+    @Override
+    public Map<Class, List<String>> getIgnoreList(Object object, ServerHttpRequest request) {
+        Map<Class, List<String>> result = new HashMap<>();
         RequestSession requestSession = new RequestSession(request);
 
         if (config != null) {
             for (SessionStrategy strategy : config) {
                 if (requestSession.isSessionPropertyExists(strategy.attributeName(),
                         strategy.attributeValue())) {
-                    filter(object, new FieldProcessor(strategy.ignoreFields()));
+
+                    for (FieldFilterSetting setting : strategy.ignoreFields()) {
+                        appendToMap(result, setting.className(), Arrays.asList(setting.fields()));
+                    }
                 }
             }
         }
+        return result;
     }
 }

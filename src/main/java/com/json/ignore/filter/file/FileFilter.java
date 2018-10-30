@@ -11,6 +11,9 @@ import org.springframework.http.server.ServerHttpRequest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class used for filtration of object's fields based on xml file configuration
@@ -47,7 +50,7 @@ public class FileFilter extends BaseFilter {
      * @param file {@link File} file from resource name if file exist
      * @return {@link Object} returns instantiated object type of specified class
      */
-    private FileConfig load(File file)  {
+    private FileConfig load(File file) {
         try {
             return file != null ? new XmlMapper().readValue(file, FileConfig.class) : null;
         } catch (IOException e) {
@@ -126,20 +129,24 @@ public class FileFilter extends BaseFilter {
      */
     @Override
     public void filter(Object object, ServerHttpRequest request) {
-        RequestSession requestSession = new RequestSession(request);
+        filter(object, new FieldProcessor(getIgnoreList(object, request)));
+    }
 
+    @Override
+    public Map<Class, List<String>> getIgnoreList(Object object, ServerHttpRequest request) {
+        Map<Class, List<String>> result = new HashMap<>();
+        RequestSession requestSession = new RequestSession(request);
         if (config != null) {
             for (FileConfig.Controller controller : config.getControllers()) {
                 if (controllerClass.getName().equalsIgnoreCase(controller.getClassName())) {
                     controller.getStrategies().forEach(strategy -> {
                         if (requestSession.isSessionPropertyExists(strategy.getAttributeName(), strategy.getAttributeValue())) {
-                            filter(object, new FieldProcessor(strategy.getStrategyFields()));
+                            appendToMap(result, strategy.getStrategyFields());
                         }
                     });
                 }
             }
         }
+        return result;
     }
-
-
 }
