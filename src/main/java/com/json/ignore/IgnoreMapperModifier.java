@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class IgnoreMapperModifier extends BeanSerializerModifier {
-    private Map<Class, List<String>> ignoreList;
+    private final Map<Class, List<String>> ignoreList;
 
     public IgnoreMapperModifier(Map<Class, List<String>> ignoreList) {
         this.ignoreList = ignoreList;

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilterConverter implements HttpMessageConverter<FilterClassWrapper> {
-    private List<MediaType> supportedMedia;
+    private final List<MediaType> supportedMedia;
 
     public FilterConverter() {
         supportedMedia = new ArrayList<>();
