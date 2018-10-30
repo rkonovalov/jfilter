@@ -98,7 +98,8 @@ public class FileFilter extends BaseFilter {
     protected void setConfig(MethodParameter methodParameter) {
         controllerClass = methodParameter.getContainingClass();
         FileFilterSetting fileFilterSetting = getRequestMethodParameter().getDeclaredAnnotation(FileFilterSetting.class);
-        config = parseFile(fileFilterSetting.fileName());
+        if (fileFilterSetting != null)
+            config = parseFile(fileFilterSetting.fileName());
     }
 
     /**

@@ -81,6 +81,11 @@ public class MockMethods {
         return findMethodParameterByName("fileAnnotation");
     }
 
+    @FileFilterSetting(fileName = "unknown_config.xml")
+    public static MethodParameter fileNotExist() {
+        return findMethodParameterByName("fileNotExist");
+    }
+
     @FileFilterSetting(fileName = "config_no_controllers.xml")
     public static MethodParameter fileAnnotationNoControllers() {
         return findMethodParameterByName("fileAnnotationNoControllers");
