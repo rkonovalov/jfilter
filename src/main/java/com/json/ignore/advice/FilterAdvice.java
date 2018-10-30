@@ -21,10 +21,10 @@ import java.io.Serializable;
 
 @ControllerAdvice
 public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
-    private FilterProvider<Serializable> filterProvider;
+    private FilterProvider filterProvider;
 
     @Autowired
-    public void setFilterProvider(FilterProvider<Serializable> filterProvider) {
+    public void setFilterProvider(FilterProvider filterProvider) {
         this.filterProvider = filterProvider;
     }
 

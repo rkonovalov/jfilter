@@ -1,33 +1,21 @@
 package com.json.ignore.advice;
 
-import com.json.ignore.mock.MockClasses;
-import com.json.ignore.mock.MockHttpRequest;
+import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.mock.MockMethods;
-import com.json.ignore.mock.MockUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.server.ServletServerHttpRequest;
-
-import java.io.Serializable;
 
 import static org.junit.Assert.*;
 
 public class FilterProviderTest {
-    private FilterProvider<Serializable> filterProvider;
-    private MockUser defaultUser;
-    private ServletServerHttpRequest defaultRequest;
+    private FilterProvider filterProvider;
     private MethodParameter fileAnnotationMethod;
     private MethodParameter methodWithoutAnnotationsMethod;
 
     @Before
     public void init() {
-        filterProvider = new FilterProvider<>();
-        defaultUser = MockClasses.getUserMock();
-        assertNotNull(defaultUser);
-
-        defaultRequest = MockHttpRequest.getMockAdminRequest();
-        assertNotNull(defaultRequest);
+        filterProvider = new FilterProvider();
 
         fileAnnotationMethod = MockMethods.fileAnnotation();
         assertNotNull(fileAnnotationMethod);
@@ -41,4 +29,19 @@ public class FilterProviderTest {
         boolean result = filterProvider.isAccept(methodWithoutAnnotationsMethod);
         assertFalse(result);
     }
+
+    @Test
+    public void testCacheSizeGreaterZero() {
+        BaseFilter filter = filterProvider.getFilter(fileAnnotationMethod);
+        assertTrue(filterProvider.cacheSize() > 0);
+    }
+
+    @Test
+    public void testCacheSizeZero() {
+        BaseFilter filter = filterProvider.getFilter(fileAnnotationMethod);
+        filterProvider.clearCache();
+        assertEquals(0, filterProvider.cacheSize());
+    }
+
+
 }

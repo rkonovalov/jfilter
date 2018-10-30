@@ -5,7 +5,6 @@ import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.FilterFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import java.lang.annotation.Annotation;
@@ -23,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * This class also has cache for caching already found filter for better productivity
  */
 @Component
-public class FilterProvider<T> {
+public class FilterProvider {
     private final Map<Annotation, BaseFilter> items;
     private boolean enabled;
 
