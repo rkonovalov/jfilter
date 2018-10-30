@@ -1,7 +1,6 @@
 package com.json.ignore.advice;
 
 import com.json.ignore.mock.MockHttpRequest;
-import com.json.ignore.mock.MockMethods;
 import com.json.ignore.mock.MockUser;
 import org.junit.Assert;
 import org.junit.Before;
