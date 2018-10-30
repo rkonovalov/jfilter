@@ -33,12 +33,16 @@ public class FilterProviderTest {
     @Test
     public void testCacheSizeGreaterZero() {
         BaseFilter filter = filterProvider.getFilter(fileAnnotationMethod);
+        assertNotNull(filter);
+
         assertTrue(filterProvider.cacheSize() > 0);
     }
 
     @Test
     public void testCacheSizeZero() {
         BaseFilter filter = filterProvider.getFilter(fileAnnotationMethod);
+        assertNotNull(filter);
+
         filterProvider.clearCache();
         assertEquals(0, filterProvider.cacheSize());
     }
