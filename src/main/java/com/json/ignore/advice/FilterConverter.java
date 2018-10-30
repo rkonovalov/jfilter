@@ -11,17 +11,14 @@ import org.springframework.http.converter.HttpMessageNotWritableException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import static org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.DEFAULT_CHARSET;
 
 public class FilterConverter implements HttpMessageConverter<FilterClassWrapper> {
     private List<MediaType> supportedMedia;
 
     public FilterConverter() {
         supportedMedia = new ArrayList<>();
-        supportedMedia.add(new MediaType("application", "json", DEFAULT_CHARSET));
-        supportedMedia.add(new MediaType("application", "json"));
-        supportedMedia.add(new MediaType("application", "*+json", DEFAULT_CHARSET));
-        supportedMedia.add(new MediaType("application", "*+json"));
+        supportedMedia.add(MediaType.APPLICATION_JSON);
+        supportedMedia.add(MediaType.APPLICATION_JSON_UTF8);
     }
 
     @Override
