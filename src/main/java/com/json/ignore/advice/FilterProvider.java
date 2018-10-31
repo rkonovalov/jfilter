@@ -42,10 +42,20 @@ public class FilterProvider {
         enabled = isFilterEnabled(webApplicationContext);
     }
 
+    /**
+     * Returns true if found EnableJsonFilter annotation in one of Spring beans
+     * @param webApplicationContext {@link WebApplicationContext}
+     * @return true if found, else false
+     */
     public static boolean isFilterEnabled(WebApplicationContext webApplicationContext) {
         return webApplicationContext.getBeansWithAnnotation(EnableJsonFilter.class).size() > 0;
     }
 
+    /**
+     * Returns one of filters which supports annotation specified in MethodParameter or in Spring Web Service where MethodParameter is declared
+     * @param methodParameter {@link MethodParameter}
+     * @return {@link BaseFilter}
+     */
     private BaseFilter getBaseFilter(MethodParameter methodParameter) {
         Annotation key = FilterFactory.getFilterAnnotation(methodParameter);
 
