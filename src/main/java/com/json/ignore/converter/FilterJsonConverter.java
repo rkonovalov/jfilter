@@ -1,7 +1,6 @@
 package com.json.ignore.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 
 import java.nio.charset.Charset;
