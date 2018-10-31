@@ -18,7 +18,6 @@ import java.util.List;
  */
 public abstract class FilterConverter implements HttpMessageConverter<Object> {
     private final List<MediaType> supportedMedia;
-    private ObjectMapper objectMapper;
 
     /**
      * Constructor
@@ -26,7 +25,6 @@ public abstract class FilterConverter implements HttpMessageConverter<Object> {
     protected FilterConverter() {
         supportedMedia = new ArrayList<>();
     }
-
 
     protected abstract ObjectMapper getObjectMapper();
 
