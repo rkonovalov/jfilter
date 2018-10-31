@@ -54,19 +54,38 @@ public class FileConfig implements Serializable {
             this.strategies = new ArrayList<>();
         }
 
+        /**
+         * Returns class name
+         * @return {@link String}
+         */
         public String getClassName() {
             return className;
         }
 
-        public FileConfig.Controller setClassName(String className) {
+        /**
+         * Sets class name
+         *
+         * @param className {@link String}
+         * @return instance of {@link Controller}
+         */
+        public Controller setClassName(String className) {
             this.className = className;
             return this;
         }
 
+        /**
+         * Returns list of strategies
+         * @return {@link List}, {@link Strategy}
+         */
         public List<Strategy> getStrategies() {
             return strategies;
         }
 
+        /**
+         * Sets list of strategies
+         * @param strategies {@link List}, {@link Strategy}
+         * @return instance of {@link Controller}
+         */
         public Controller setStrategies(List<Strategy> strategies) {
             this.strategies = strategies;
             return this;
