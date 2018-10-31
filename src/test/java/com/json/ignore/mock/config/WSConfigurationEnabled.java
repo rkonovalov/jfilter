@@ -1,26 +1,32 @@
 package com.json.ignore.mock.config;
   
 import com.json.ignore.EnableJsonFilter;
-import com.json.ignore.converter.FilterJsonConverter;
-import com.json.ignore.converter.FilterXmlConverter;
+import com.json.ignore.advice.FilterRegister;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
 import java.util.List;
 
+@RunWith(SpringRunner.class)
 @Configuration
 @ComponentScan({"com.json.ignore", "com.json.ignore.advice", "com.json.ignore.mock.webservice"})
-@EnableWebMvc
 @EnableJsonFilter
 public class WSConfigurationEnabled extends WebMvcConfigurerAdapter {
+    private  FilterRegister filterRegister;
+
+    @Autowired
+    public WSConfigurationEnabled setFilterRegister(FilterRegister filterRegister) {
+        this.filterRegister = filterRegister;
+        return this;
+    }
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(new FilterJsonConverter());
-        converters.add(new FilterXmlConverter());
+        filterRegister.configureMessageConverters(converters);
         super.configureMessageConverters(converters);
     }
 }
