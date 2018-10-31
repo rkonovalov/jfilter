@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * Class which handle all responses from web service and tries to filter it
@@ -34,8 +35,10 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
         /*
          * Attempt to find annotations in method and associated filter
          */
-        return filterProvider.isAccept(methodParameter);
+       return filterProvider.isAccept(methodParameter);
     }
+
+
 
     @Override
     public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
@@ -46,6 +49,6 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
         if (filter != null) {
             return new FilterClassWrapper(obj, filter.getIgnoreList(obj, serverHttpRequest));
         } else
-            return obj;
+            return new FilterClassWrapper(obj, new HashMap<>());
     }
 }

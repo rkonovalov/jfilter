@@ -2,6 +2,7 @@ package com.json.ignore.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -23,14 +24,8 @@ public class FilterJsonConverter extends FilterConverter {
         ));
     }
 
-    /**
-     * Returns converter mapper
-     *
-     * @param object {@link FilterClassWrapper} wrapped object which should be serialized
-     * @return {@link ConverterMapper} converter mapper
-     */
     @Override
-    protected ConverterMapper getIgnoreMapper(FilterClassWrapper object) {
-        return new ConverterMapper(new ObjectMapper(), object.getIgnoreList());
+    public ObjectMapper getObjectMapper() {
+        return Jackson2ObjectMapperBuilder.json().build();
     }
 }

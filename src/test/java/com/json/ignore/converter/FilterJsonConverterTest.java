@@ -1,6 +1,5 @@
 package com.json.ignore.converter;
 
-import com.json.ignore.mock.MockHttpRequest;
 import com.json.ignore.mock.MockUser;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,10 +17,5 @@ public class FilterJsonConverterTest {
     @Test
     public void testCanReadFalse() {
         Assert.assertFalse(filterJsonConverter.canRead(MockUser.class, MediaType.APPLICATION_JSON));
-    }
-
-    @Test
-    public void testReadNull() {
-        Assert.assertNull(filterJsonConverter.read(MockUser.class, MockHttpRequest.getMockAdminRequest()));
     }
 }

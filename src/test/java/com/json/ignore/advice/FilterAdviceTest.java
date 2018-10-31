@@ -1,5 +1,6 @@
 package com.json.ignore.advice;
 
+import com.json.ignore.converter.FilterClassWrapper;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
 import com.json.ignore.mock.MockMethods;
@@ -39,8 +40,8 @@ public class FilterAdviceTest {
     public void testBeforeBodyWriteFalse() {
         MockUser user = MockClasses.getUserMock();
 
-        user = (MockUser) filterAdvice.beforeBodyWrite(user, MockMethods.methodWithoutAnnotations(), MediaType.APPLICATION_JSON,
+        FilterClassWrapper wrapper = (FilterClassWrapper) filterAdvice.beforeBodyWrite(user, MockMethods.methodWithoutAnnotations(), MediaType.APPLICATION_JSON,
                 Jaxb2RootElementHttpMessageConverter.class, request, response);
-        assertEquals(user, MockClasses.getUserMock());
+        assertEquals(MockClasses.getUserMock(), wrapper.getObject());
     }
 }

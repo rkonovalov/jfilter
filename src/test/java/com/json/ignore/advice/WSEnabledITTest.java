@@ -122,7 +122,4 @@ public class WSEnabledITTest {
         assertEquals(user.toString(), result);
     }
 
-
-
-
 }

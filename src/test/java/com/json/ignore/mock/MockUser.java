@@ -4,12 +4,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
+@JacksonXmlRootElement(localName = "user")
 public class MockUser implements Serializable {
     private Integer id;
     private String email;
@@ -17,8 +22,15 @@ public class MockUser implements Serializable {
     private String password;
 
     private int intValue;
+
+    @JacksonXmlProperty(localName = "collectionValue")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Collection<String> collectionValue;
+
+    @JacksonXmlProperty(localName = "mapValue")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Map<String, String> mapValue;
+
     private boolean boolValue;
     private byte byteValue;
     private char charValue;
@@ -71,6 +83,7 @@ public class MockUser implements Serializable {
         this.intValue = intValue;
         return this;
     }
+
 
     public Collection<String> getCollectionValue() {
         return collectionValue;
@@ -191,7 +204,7 @@ public class MockUser implements Serializable {
 
 
     public String toXmlString() {
-        XmlMapper mapper = new XmlMapper();
+        XmlMapper mapper = Jackson2ObjectMapperBuilder.xml().build();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         try {
             return mapper.writeValueAsString(this);
