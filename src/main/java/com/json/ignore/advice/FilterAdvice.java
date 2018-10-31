@@ -30,21 +30,34 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
         this.filterProvider = filterProvider;
     }
 
+    /**
+     * Attempt to find annotations in method and associated filter
+     *
+     * @param methodParameter {@link MethodParameter}
+     * @param aClass {@link HttpMessageConverter}
+     * @return true if found, else false
+     */
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        /*
-         * Attempt to find annotations in method and associated filter
-         */
        return filterProvider.isAccept(methodParameter);
     }
 
-
-
+    /**
+     * Attempt to find filter and extract ignorable fields from methodParameter
+     *
+     * @param obj {@link Serializable} object sent from response of Spring Web Service
+     * @param methodParameter {@link MethodParameter}
+     * @param mediaType {@link MediaType}
+     * @param aClass {@link HttpMessageConverter}
+     * @param serverHttpRequest {@link ServerHttpRequest}
+     * @param serverHttpResponse {@link ServerHttpResponse}
+     * @return {@link FilterClassWrapper} if BaseFilter is found FilterClassWrapper contains list of ignorable fields,
+     * else returns FilterClassWrapper with HashMap zero length
+     */
     @Override
     public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
-
         BaseFilter filter = filterProvider.getFilter(methodParameter);
         if (filter != null) {
             return new FilterClassWrapper(obj, filter.getIgnoreList(obj, serverHttpRequest));
