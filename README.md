@@ -19,9 +19,9 @@ Manual could be found by the next link:
 # Release notes
 
 ## Version 1.0.6
-* Added JSON/XML converters as HttpMessageConverter
+* Added JSON/XML converters inherited from HttpMessageConverter
 * Removed native reflection and added Jackson BeanSerializerModifier for field filtering
-* Added EnableJsonFilter annotation for enabling/disabling filters
+* Added EnableJsonFilter annotation for enabling/disabling filtration
 * Added ability to apply filter annotations on whole Spring Rest controller
 * Fixed bugs
 
