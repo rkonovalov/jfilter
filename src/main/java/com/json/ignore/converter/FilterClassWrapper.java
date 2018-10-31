@@ -1,7 +1,6 @@
 package com.json.ignore.converter;
 
 import com.json.ignore.advice.FilterAdvice;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
