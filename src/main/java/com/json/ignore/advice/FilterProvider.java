@@ -28,7 +28,7 @@ public class FilterProvider {
     private boolean enabled;
 
     /**
-     * Instantiates a new Filter provider.
+     * Creates a new instance of the {@link FilterProvider} class.
      */
     public FilterProvider() {
         this.items = new ConcurrentHashMap<>();
