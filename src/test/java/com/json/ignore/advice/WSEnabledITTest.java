@@ -122,4 +122,20 @@ public class WSEnabledITTest {
         assertEquals(user.toString(), result);
     }
 
+    @Test
+    public void testWSSignInDefault() {
+        MockUser user = MockClasses.getUserMock();
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post("/signInDefault");
+
+        requestBuilder.sessionAttr("ROLE", "ADMIN")
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = MockHttpRequest.getContent(mockMvc, requestBuilder);
+        assertEquals(user.toString(), result);
+    }
+
 }

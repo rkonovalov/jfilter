@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 
+import static org.junit.Assert.assertNull;
+
 public class FilterXmlConverterTest {
     private FilterXmlConverter filterXmlConverter;
 
@@ -17,5 +19,10 @@ public class FilterXmlConverterTest {
     @Test
     public void testCanReadFalse() {
         Assert.assertFalse(filterXmlConverter.canRead(MockUser.class, MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void testReadFalse() {
+        assertNull(filterXmlConverter.read(MockUser.class, null));
     }
 }

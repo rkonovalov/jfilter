@@ -51,4 +51,12 @@ public class WSMethod {
     public MockUser signInUnExistedFile(@RequestParam("email") String email, @RequestParam("password") String password) {
         return MockClasses.getUserMock();
     }
+
+    @RequestMapping(value = "/signInDefault",
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public MockUser signInDefault(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return MockClasses.getUserMock();
+    }
 }
