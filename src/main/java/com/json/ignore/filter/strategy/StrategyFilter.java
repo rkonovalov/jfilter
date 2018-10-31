@@ -18,7 +18,7 @@ public class StrategyFilter extends BaseFilter {
     private SessionStrategy[] config;
 
     /**
-     * Constructor
+     * Creates a new instance of the {@link StrategyFilter} class.
      *
      * @param methodParameter {@link MethodParameter} Rest method of Rest controller
      */

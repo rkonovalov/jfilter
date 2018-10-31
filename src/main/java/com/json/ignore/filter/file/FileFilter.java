@@ -22,7 +22,7 @@ public class FileFilter extends BaseFilter {
     private Class controllerClass;
 
     /**
-     * Constructor
+     * Creates a new instance of the {@link FileFilter} class.
      *
      * @param methodParameter {@link MethodParameter} method
      */

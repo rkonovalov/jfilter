@@ -14,7 +14,8 @@ public abstract class BaseFilter {
     private final RequestMethodParameter requestMethodParameter;
 
     /**
-     * Constructor
+     * Creates a new instance of the {@link BaseFilter} class.
+     *
      * @param methodParameter {@link MethodParameter}
      */
     protected BaseFilter(MethodParameter methodParameter) {

@@ -8,6 +8,7 @@ import org.springframework.core.MethodParameter;
 @FunctionalInterface
 public interface FilterEvent {
     /**
+     * Build base {@link BaseFilter}
      *
      * @param methodParameter {@link MethodParameter} method parameter
      * @return object instance of inherited class from {@link BaseFilter}

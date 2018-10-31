@@ -13,7 +13,8 @@ import java.util.List;
 
 /**
  * This class used for register JSON/ and XML message converters
- * Class depends from {@link EnableJsonFilter} annotation
+ *
+ * <p>Class depends from {@link EnableJsonFilter} annotation
  */
 @Configuration
 public class FilterRegister extends WebMvcConfigurationSupport {

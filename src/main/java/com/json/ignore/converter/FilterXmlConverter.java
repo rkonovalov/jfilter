@@ -14,8 +14,9 @@ import java.util.Arrays;
 public class FilterXmlConverter extends FilterConverter {
 
     /**
-     * Constructor
-     * Add supported media types
+     * Creates a new instance of the {@link FilterXmlConverter} class.
+     *
+     * And specify supported media types
      */
     public FilterXmlConverter() {
         getSupportedMediaTypes().addAll(Arrays.asList(

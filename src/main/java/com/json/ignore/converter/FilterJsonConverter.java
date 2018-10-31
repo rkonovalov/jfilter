@@ -13,8 +13,9 @@ import java.util.Arrays;
 public class FilterJsonConverter extends FilterConverter {
 
     /**
-     * Constructor
-     * Add supported media types
+     * Creates a new instance of the {@link FilterJsonConverter} class.
+     *
+     * And specify supported media types
      */
     public FilterJsonConverter() {
         getSupportedMediaTypes().addAll(Arrays.asList(

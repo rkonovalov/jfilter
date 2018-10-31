@@ -19,7 +19,8 @@ public abstract class FilterConverter implements HttpMessageConverter<Object> {
     private final List<MediaType> supportedMedia;
 
     /**
-     * Constructor
+     * Creates a new instance of the {@link FilterConverter} class.
+     *
      */
     protected FilterConverter() {
         supportedMedia = new ArrayList<>();

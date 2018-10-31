@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This is class represents additional functionality of standard ObjectMapper class
- *
+ * Class represents additional functionality of standard ObjectMapper class
  */
 public class ConverterMapper {
     private final ObjectMapper mapper;
     private final Map<Class, List<String>> ignoreList;
 
     /**
-     * Constructor
+     * Creates a new instance of the {@link ConverterMapper} class.
+     *
      * @param mapper  could be instance of {@link ObjectMapper} or {@link XmlMapper}
      * @param ignoreList {@link Map} map of fields which could be ignored
      */

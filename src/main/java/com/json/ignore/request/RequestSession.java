@@ -14,10 +14,19 @@ import java.util.Objects;
 public class RequestSession {
     private final HttpSession session;
 
+    /**
+     * Creates a new instance of the {@link RequestSession} class.
+     *
+     * @param request {@link ServerHttpRequest}
+     */
     public RequestSession(ServerHttpRequest request) {
         this.session = getSession(request);
     }
 
+    /**
+     * Return session extracted from {@link ServerHttpRequest}
+     * @return {@link HttpSession}
+     */
     public HttpSession getSession() {
         return session;
     }

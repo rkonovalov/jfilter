@@ -6,7 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
  * This annotation used for loading and parsing xml file annotated configurations
  */
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.TYPE})
@@ -15,6 +14,7 @@ public @interface FileFilterSetting {
 
     /**
      * File name
+     *
      * @return {@link String} file name
      * Default location id /resources/
      */

@@ -5,7 +5,6 @@ import com.json.ignore.filter.field.FieldFilterSettings;
 import com.json.ignore.filter.strategy.SessionStrategies;
 import com.json.ignore.filter.strategy.SessionStrategy;
 import org.springframework.core.MethodParameter;
-
 import java.lang.annotation.Annotation;
 
 
@@ -16,6 +15,11 @@ import java.lang.annotation.Annotation;
  */
 public class RequestMethodParameter extends MethodParameter {
 
+    /**
+     * Creates a new instance of the {@link RequestMethodParameter} class.
+     *
+     * @param methodParameter {@link MethodParameter}
+     */
     public RequestMethodParameter(MethodParameter methodParameter) {
         super(methodParameter);
     }
@@ -34,6 +38,15 @@ public class RequestMethodParameter extends MethodParameter {
         return annotations;
     }
 
+    /**
+     * Get declared annotation
+     *
+     * <p>Attempts to find filter annotations in {@link MethodParameter} or in containing class
+     *
+     * @param annotationClass {@link Annotation} name of annotation to search
+     * @param <T> {@link Annotation} generic class
+     * @return {@link Annotation} annotation if found, else null
+     */
     public <T extends Annotation> T getDeclaredAnnotation(Class<T> annotationClass) {
         //Get annotation from method
         T annotation = getMethod().getDeclaredAnnotation(annotationClass);

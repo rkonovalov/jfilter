@@ -19,7 +19,7 @@ public class FieldFilter extends BaseFilter {
     private FieldFilterSetting[] config;
 
     /**
-     * Constructor
+     * Creates a new instance of the {@link FieldFilter} class.
      *
      * @param methodParameter {@link MethodParameter} Rest method of Rest controller
      */

@@ -7,16 +7,16 @@ import java.util.Map;
 
 /**
  * Class contains Serializable object and list of ignorable fields
- * <p>
- * Class used to send additional information from {@link FilterAdvice} to {@link FilterConverter}
  *
+ * <p>Class used to send additional information from {@link FilterAdvice} to {@link FilterConverter}
  */
 public class FilterClassWrapper implements Serializable {
     private final Serializable object;
     private final Map<Class, List<String>> ignoreList;
 
     /**
-     * Constructor
+     * Creates a new instance of the {@link FilterClassWrapper} class.
+     *
      * @param object Serializable object
      * @param ignoreList ignorable fields
      */

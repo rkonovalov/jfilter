@@ -14,13 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Object filter provide bean
- * <p>
- * This class will be detected and instantiated automatically by Spring Framework
- * <p>
- * The main task of this class is: getting from http request session information, getting annotations from methodParam and
+ *
+ * <p>This class will be detected and instantiated automatically by Spring Framework
+ *
+ * <p>The main task of this class is: getting from http request session information, getting annotations from methodParam and
  * trying to find filter associated with annotation.
- * <p>
- * This class also has cache for caching already found filter for better productivity
+ *
+ * <p>This class also has cache for caching already found filter for better productivity
  */
 @Component
 public class FilterProvider {
@@ -29,6 +29,7 @@ public class FilterProvider {
 
     /**
      * Creates a new instance of the {@link FilterProvider} class.
+     *
      */
     public FilterProvider() {
         this.items = new ConcurrentHashMap<>();

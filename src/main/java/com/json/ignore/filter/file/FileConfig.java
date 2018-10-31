@@ -20,7 +20,8 @@ public class FileConfig implements Serializable {
     private List<Controller> controllers;
 
     /**
-     * Constructor
+     * Creates a new instance of the {@link FileConfig} class.
+     *
      */
     public FileConfig() {
         this.controllers = new ArrayList<>();
@@ -48,7 +49,7 @@ public class FileConfig implements Serializable {
         private List<Strategy> strategies;
 
         /**
-         * Constructor
+         * Creates a new instance of the {@link Controller} class.
          */
         public Controller() {
             this.strategies = new ArrayList<>();
@@ -109,7 +110,8 @@ public class FileConfig implements Serializable {
         private List<Filter> filters;
 
         /**
-         * Constructor
+         * Creates a new instance of the {@link Strategy} class.
+         *
          */
         public Strategy() {
             this.filters = new ArrayList<>();
@@ -204,7 +206,8 @@ public class FileConfig implements Serializable {
         private List<Field> fields;
 
         /**
-         * Constructor
+         * Creates a new instance of the {@link Filter} class.
+         *
          */
         public Filter() {
             this.fields = new ArrayList<>();

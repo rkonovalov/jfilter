@@ -10,16 +10,15 @@ import java.util.Map;
 /**
  * This class is  inherited from BeanSerializerModifier
  *
- * <p>
- * Extends functionality of standard {@link BeanSerializerModifier} and
+ * <p>Extends functionality of standard {@link BeanSerializerModifier} and
  * give ability to filter ignorable fields from object
- *
  */
 public class ConverterMapperModifier extends BeanSerializerModifier {
     private final Map<Class, List<String>> ignoreList;
 
     /**
-     * Constructor
+     * Creates a new instance of the {@link ConverterMapperModifier} class.
+     *
      * @param ignoreList {@link Map} list of ignorable field names
      */
     public ConverterMapperModifier(Map<Class, List<String>> ignoreList) {
