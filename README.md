@@ -12,7 +12,7 @@ This module could be used in Spring MVC Rest project for filter(exclude) of fiel
 When you used Spring @View interface and need more powerful and flexibility, this module could useful.
 
 # Manual
-Manual could be found by the next link:
+Manuals and documentation could be found by the next links:
 * [Manual v1.0.6](https://rkonovalov.github.io/projects/jsonignore/1.0.6/)
 * [Maven repository](https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.6/jar)
 * [Javadoc](http://www.javadoc.io/doc/com.github.rkonovalov/json-ignore/1.0.6)
