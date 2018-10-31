@@ -1,6 +1,7 @@
 package com.json.ignore.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
@@ -25,6 +26,11 @@ public class FilterXmlConverter extends FilterConverter {
         ));
     }
 
+    /**
+     * Returns XML object mapper
+     *
+     * @return {@link XmlMapper}
+     */
     @Override
     public ObjectMapper getObjectMapper() {
         return Jackson2ObjectMapperBuilder.xml().build();

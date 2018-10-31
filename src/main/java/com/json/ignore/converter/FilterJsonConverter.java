@@ -24,6 +24,11 @@ public class FilterJsonConverter extends FilterConverter {
         ));
     }
 
+    /**
+     * Returns JSON object mapper
+     *
+     * @return {@link ObjectMapper}
+     */
     @Override
     public ObjectMapper getObjectMapper() {
         return Jackson2ObjectMapperBuilder.json().build();
