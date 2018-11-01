@@ -6,15 +6,21 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jsonignore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jsonignore&amp;utm_campaign=Badge_Grade)
 [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rkonovalov_jsonignore&metric=alert_status)](https://sonarcloud.io/dashboard?id=rkonovalov_jsonignore)
 
-# Json ignore module
+# Json Ignore module
 This module could be used in Spring Web Service project for filter(exclude) of fields in Service response.
 When you used Spring @View interface and need more powerful and flexibility, this module could be useful.
+For information please follow the links below.
 
-# Manual
-Manuals and documentation could be found by the next links:
-* [Manual v1.0.6](https://rkonovalov.github.io/projects/jsonignore/1.0.6/)
-* [Maven repository](https://search.maven.org/artifact/com.github.rkonovalov/json-ignore/1.0.6/jar)
-* [Javadoc](http://www.javadoc.io/doc/com.github.rkonovalov/json-ignore/1.0.6)
+## Index
+* [Requirements](https://rkonovalov.github.io/projects/jsonignore/1.0.6/requirements/)
+* [Installation](https://rkonovalov.github.io/projects/jsonignore/1.0.6/installation/)
+* [Getting started](https://rkonovalov.github.io/projects/jsonignore/1.0.6/getting-started/)
+* [Examples](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/)
+  * [Simple field filter](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/filter-field/)  
+  * [Session strategy filter](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/filter-strategy/) 
+  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/filter-file/)
+  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/filter-controller/)
+* [Release Notes](https://rkonovalov.github.io/projects/jsonignore/1.0.6/release-notes/)
 
 # Release notes
 
