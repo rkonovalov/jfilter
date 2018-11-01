@@ -4,12 +4,11 @@
 [![Javadocs](https://www.javadoc.io/badge/com.github.rkonovalov/json-ignore.svg)](https://www.javadoc.io/doc/com.github.rkonovalov/json-ignore)
 [![codecov](https://codecov.io/gh/rkonovalov/jsonignore/branch/master/graph/badge.svg)](https://codecov.io/gh/rkonovalov/jsonignore)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jsonignore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jsonignore&amp;utm_campaign=Badge_Grade)
-[![CircleCI](https://circleci.com/gh/rkonovalov/jsonignore/tree/master.svg?style=svg)](https://circleci.com/gh/rkonovalov/jsonignore/tree/master)
 [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rkonovalov_jsonignore&metric=alert_status)](https://sonarcloud.io/dashboard?id=rkonovalov_jsonignore)
 
 # Json ignore module
 This module could be used in Spring MVC Rest project for filter(exclude) of fields in Service response.
-When you used Spring @View interface and need more powerful and flexibility, this module could useful.
+When you used Spring @View interface and need more powerful and flexibility, this module could be useful.
 
 # Manual
 Manuals and documentation could be found by the next links:
