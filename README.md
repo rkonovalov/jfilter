@@ -11,7 +11,10 @@ This module could be used in Spring Web Service project for filter(exclude) of f
 When you used Spring @View interface and need more powerful and flexibility, this module could be useful.
 For information please follow the links below.
 
+
+
 ## Index
+* [Main page](https://rkonovalov.github.io/projects/jsonignore/1.0.6/)
 * [Requirements](https://rkonovalov.github.io/projects/jsonignore/1.0.6/requirements/)
 * [Installation](https://rkonovalov.github.io/projects/jsonignore/1.0.6/installation/)
 * [Getting started](https://rkonovalov.github.io/projects/jsonignore/1.0.6/getting-started/)
