@@ -18,7 +18,7 @@ Manuals and documentation could be found by the next links:
 
 # Release notes
 
-**Version 1.0.6**
+## Version 1.0.6
 * Added JSON/XML converters inherited from HttpMessageConverter
 * Removed native reflection and added Jackson BeanSerializerModifier for field filtering
 * Added EnableJsonFilter annotation for enabling/disabling filtration
