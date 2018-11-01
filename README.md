@@ -7,7 +7,7 @@
 [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rkonovalov_jsonignore&metric=alert_status)](https://sonarcloud.io/dashboard?id=rkonovalov_jsonignore)
 
 # Json ignore module
-This module could be used in Spring MVC Rest project for filter(exclude) of fields in Service response.
+This module could be used in Spring Web Service project for filter(exclude) of fields in Service response.
 When you used Spring @View interface and need more powerful and flexibility, this module could be useful.
 
 # Manual
