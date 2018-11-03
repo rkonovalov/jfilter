@@ -3,7 +3,6 @@ package com.json.ignore.converter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
