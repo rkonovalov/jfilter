@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class FilterProvider {
-    private final Map<Annotation, BaseFilter> items;
+    private final Map<Annotation, BaseFilter> filters;
     private boolean enabled;
 
     /**
@@ -32,7 +32,7 @@ public class FilterProvider {
      *
      */
     public FilterProvider() {
-        this.items = new ConcurrentHashMap<>();
+        this.filters = new ConcurrentHashMap<>();
     }
 
     @Autowired
@@ -61,14 +61,14 @@ public class FilterProvider {
         Annotation key = FilterFactory.getFilterAnnotation(methodParameter);
 
         if (key != null) {
-            if (items.containsKey(key)) {
+            if (filters.containsKey(key)) {
                 //Retrieve filter from cache
-                return items.get(key);
+                return filters.get(key);
             } else {
                 //Create and put filter in cache
                 BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
                 if (filter != null) {
-                    items.put(key, filter);
+                    filters.put(key, filter);
                     return filter;
                 }
             }
@@ -96,7 +96,7 @@ public class FilterProvider {
      * Clear cache.
      */
     public void clearCache() {
-        items.clear();
+        filters.clear();
     }
 
     /**
@@ -105,7 +105,7 @@ public class FilterProvider {
      * @return the int
      */
     public int cacheSize() {
-        return items.size();
+        return filters.size();
     }
 
 }
