@@ -160,7 +160,7 @@ public final class FileWatcher {
      * @throws InterruptedException if interrupted while waiting
      */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
-    protected void waitFileModify() throws InterruptedException {
+    protected void scheduleModifiedFiles() throws InterruptedException {
         processModifiedFiles();
     }
 }
