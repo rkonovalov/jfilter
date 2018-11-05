@@ -30,8 +30,8 @@ public final class FileWatcher {
     private Map<File, FileRecord> fileRecords;
 
     public static class FileRecord {
-        private File file;
-        private FileWatcherEvent event;
+        private final File file;
+        private final FileWatcherEvent event;
         private Long lastModified;
 
         public FileRecord(File file, FileWatcherEvent event) {
