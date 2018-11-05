@@ -79,8 +79,7 @@ public final class FileWatcher {
             return true;
     }
 
-    public boolean fileIsModified(String fileName) {
-        File file = new File(fileName);
+    public boolean fileIsModified(File file) {
         boolean result = false;
         if (fileRecords.containsKey(file)) {
             FileRecord record = fileRecords.get(file);
@@ -94,7 +93,7 @@ public final class FileWatcher {
     }
 
     @SuppressWarnings("unchecked")
-    private List<File> getModifiedFiles() throws InterruptedException {
+    private void processModifiedFiles() throws InterruptedException {
         WatchKey key = watcher.take();
         List<File> result = new ArrayList<>();
         if (key != null) {
@@ -107,16 +106,17 @@ public final class FileWatcher {
                 WatchEvent<Path> ev = (WatchEvent<Path>) event;
                 String filename = String.format("%s%s%s", watchKeys.get(key).toString(),
                         File.separator, ev.context().toString());
-                if (fileIsModified(filename))
-                    result.add(new File(filename));
+                File file = new File(filename);
+
+                if (fileIsModified(file))
+                    fileRecords.get(file).onEvent();
             }
             key.reset();
         }
-        return result;
     }
 
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
     protected void waitFileModify() throws InterruptedException {
-        getModifiedFiles().forEach(f -> fileRecords.get(f).onEvent());
+        processModifiedFiles();
     }
 }
