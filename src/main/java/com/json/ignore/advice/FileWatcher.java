@@ -3,6 +3,7 @@ package com.json.ignore.advice;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
@@ -11,6 +12,12 @@ import java.util.Map;
 
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
+/**
+ * File watcher class
+ *
+ * <p>This class used for watching on file modified event
+ * Also class uses Spring Scheduling mechanism for periodically checking files
+ */
 @EnableScheduling
 @Controller
 public final class FileWatcher {
@@ -51,12 +58,24 @@ public final class FileWatcher {
         }
     }
 
+    /**
+     * Creates a new instance of the {@link FileWatcher} class.
+     *
+     * @throws IOException If an I/O error occurs
+     */
     public FileWatcher() throws IOException {
         watcher = FileSystems.getDefault().newWatchService();
         watchKeys = new HashMap<>();
         fileRecords = new HashMap<>();
     }
 
+    /**
+     * Add new file watcher
+     *
+     * @param file  file
+     * @param event event which occurs on file modification
+     * @return {@link Boolean} true if watcher is added, otherwise false
+     */
     public boolean add(File file, FileWatcherEvent event) {
         if (file == null || !file.exists())
             return false;
@@ -76,6 +95,23 @@ public final class FileWatcher {
             return true;
     }
 
+    /**
+     * Check if file is modified
+     *
+     * <p>Method compares file lastModified value and lastModified which added on watcher creation
+     * If difference between this two values is greater than FILE_MODIFY_THRESHOLD then method returns true,
+     * otherwise false
+     *
+     * <p>FILE_MODIFY_THRESHOLD used because when file is modifying it modifies twice:
+     * <ul>
+     * <li>When file content modified</li>
+     * <li>When file modification information changed</li>
+     * </ul>
+     * Therefore we need to filter this duplicated modify events.
+     *
+     * @param file file
+     * @return true if file modified, otherwise false
+     */
     public boolean fileIsModified(File file) {
         boolean result = false;
         if (fileRecords.containsKey(file)) {
@@ -89,6 +125,11 @@ public final class FileWatcher {
         return result;
     }
 
+    /**
+     * Process all modify events
+     *
+     * @throws InterruptedException if interrupted while waiting
+     */
     @SuppressWarnings("unchecked")
     private void processModifiedFiles() throws InterruptedException {
         WatchKey key = watcher.take();
@@ -100,6 +141,7 @@ public final class FileWatcher {
                     continue;
 
                 WatchEvent<Path> ev = (WatchEvent<Path>) event;
+
                 String filename = String.format("%s%s%s", watchKeys.get(key).toString(),
                         File.separator, ev.context().toString());
                 File file = new File(filename);
@@ -111,6 +153,12 @@ public final class FileWatcher {
         }
     }
 
+    /**
+     * Process modify events by schedule
+     *
+     * FILE_MODIFY_DELAY used for set schedule repeat delay
+     * @throws InterruptedException if interrupted while waiting
+     */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
     protected void waitFileModify() throws InterruptedException {
         processModifiedFiles();
