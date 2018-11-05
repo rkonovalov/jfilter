@@ -25,7 +25,7 @@ public final class FileWatcher {
     private Map<WatchKey, Path> watchKeys;
     private Map<File, FileRecord> fileRecords;
 
-    public class FileRecord {
+    public static class FileRecord {
         private File file;
         private FileWatcherEvent event;
         private Long lastModified;
@@ -45,9 +45,12 @@ public final class FileWatcher {
             return this;
         }
 
-        public void onEvent() {
-            if (event != null)
+        public boolean onEvent() {
+            if (event != null) {
                 event.onEvent(file);
+                return true;
+            } else
+                return false;
         }
     }
 
