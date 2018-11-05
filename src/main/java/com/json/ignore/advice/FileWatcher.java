@@ -16,7 +16,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
 @EnableScheduling
 @Controller
-public class FileWatcher {
+public final class FileWatcher {
 
     private static final Long FILE_MODIFY_THRESHOLD = 1000L;
     private static final String FILE_MODIFY_DELAY = "1000";
@@ -114,7 +114,7 @@ public class FileWatcher {
     }
 
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
-    private void waitFileModify() throws InterruptedException {
+    protected void waitFileModify() throws InterruptedException {
         getModifiedFiles().forEach((f) -> fileRecords.get(f).onEvent());
     }
 }
