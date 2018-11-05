@@ -11,7 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
 import static org.junit.Assert.assertFalse;
@@ -61,13 +64,10 @@ public class FileWatcherITTest {
 
     @Test
     public void testFileIsModifiedTrue() {
-        boolean added = fileWatcher.add(file, f -> System.out.println(f.getAbsoluteFile()));
-        assertTrue(added);
+        final AtomicBoolean changed = new AtomicBoolean(false);
+        fileWatcher.add(file, f -> changed.set(true));
 
         boolean modified = file.setLastModified(new Date().getTime());
-        assertTrue(modified);
-
-        boolean result = fileWatcher.fileIsModified(file);
-        assertTrue(result);
+        assertTrue(changed.get());
     }
 }

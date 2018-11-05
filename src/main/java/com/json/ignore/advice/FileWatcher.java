@@ -19,7 +19,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 public final class FileWatcher {
 
     private static final Long FILE_MODIFY_THRESHOLD = 1000L;
-    private static final String FILE_MODIFY_DELAY = "1000";
+    private static final String FILE_MODIFY_DELAY = "2000";
 
     private WatchService watcher;
     private Map<WatchKey, Path> watchKeys;
