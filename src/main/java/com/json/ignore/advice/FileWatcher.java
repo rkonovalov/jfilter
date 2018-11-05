@@ -115,6 +115,6 @@ public final class FileWatcher {
 
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
     protected void waitFileModify() throws InterruptedException {
-        getModifiedFiles().forEach((f) -> fileRecords.get(f).onEvent());
+        getModifiedFiles().forEach(f -> fileRecords.get(f).onEvent());
     }
 }
