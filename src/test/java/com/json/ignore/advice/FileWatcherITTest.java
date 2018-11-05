@@ -13,6 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.io.File;
 import java.util.Date;
 
+import static com.json.ignore.filter.file.FileFilter.resourceFile;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -28,8 +29,7 @@ public class FileWatcherITTest {
     @Before
     public void init() {
         Assert.assertNotNull(fileWatcher);
-        file = FileFilter.resourceFile("config.xml");
-
+        file = resourceFile("config.xml");
         assertNotNull(file);
     }
 
@@ -49,13 +49,13 @@ public class FileWatcherITTest {
 
     @Test
     public void testUnExistFile() {
-        boolean result = fileWatcher.add(FileFilter.resourceFile("unexist_config.xml"), f -> System.out.println(f.getAbsoluteFile()));
+        boolean result = fileWatcher.add(resourceFile("unexist_config.xml"), f -> System.out.println(f.getAbsoluteFile()));
         assertFalse(result);
     }
 
     @Test
     public void testFileIsModifiedFalse() {
-        boolean result = fileWatcher.fileIsModified(file.getAbsolutePath());
+        boolean result = fileWatcher.fileIsModified(file);
         assertFalse(result);
     }
 
@@ -67,7 +67,7 @@ public class FileWatcherITTest {
         boolean modified = file.setLastModified(new Date().getTime());
         assertTrue(modified);
 
-        boolean result = fileWatcher.fileIsModified(file.getAbsolutePath());
+        boolean result = fileWatcher.fileIsModified(file);
         assertTrue(result);
     }
 }
