@@ -93,7 +93,7 @@ public final class FileWatcher {
     }
 
     @SuppressWarnings("unchecked")
-    private void processModifiedFiles() throws InterruptedException {
+    private List<File> processModifiedFiles() throws InterruptedException {
         WatchKey key = watcher.take();
         List<File> result = new ArrayList<>();
         if (key != null) {
@@ -109,14 +109,15 @@ public final class FileWatcher {
                 File file = new File(filename);
 
                 if (fileIsModified(file))
-                    fileRecords.get(file).onEvent();
+                    result.add(file);
             }
             key.reset();
         }
+        return result;
     }
 
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
     protected void waitFileModify() throws InterruptedException {
-        processModifiedFiles();
+        processModifiedFiles().forEach(f -> fileRecords.get(f).onEvent());
     }
 }
