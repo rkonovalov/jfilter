@@ -33,10 +33,9 @@ public class FileFilter extends BaseFilter {
         setConfig(methodParameter);
     }
 
-    public FileFilter setFileWatcher(FileWatcher fileWatcher) {
+    public void setFileWatcher(FileWatcher fileWatcher) {
         if (fileWatcher != null)
             fileWatcher.add(file, f -> config = load(file));
-        return this;
     }
 
     /**
@@ -76,7 +75,7 @@ public class FileFilter extends BaseFilter {
      * @param resourceName {@link String} resource name
      * @return {@link String} local file name, else null
      */
-    public static String getFileName(String resourceName) {
+    private static String getFileName(String resourceName) {
         if (resourceName != null) {
             ClassLoader classLoader = FileFilter.class.getClassLoader();
             URL url = classLoader.getResource(resourceName);
