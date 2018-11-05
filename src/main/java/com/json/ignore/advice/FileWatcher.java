@@ -79,8 +79,7 @@ public final class FileWatcher {
             return true;
     }
 
-
-    private boolean fileIsModified(String fileName) {
+    public boolean fileIsModified(String fileName) {
         File file = new File(fileName);
         boolean result = false;
         if (fileRecords.containsKey(file)) {
