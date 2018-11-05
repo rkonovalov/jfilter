@@ -3,6 +3,7 @@ package com.json.ignore.advice;
 import com.json.ignore.EnableJsonFilter;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.FilterFactory;
+import com.json.ignore.filter.file.FileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FilterProvider {
     private final Map<Annotation, BaseFilter> filters;
     private boolean enabled;
+    private FileWatcher fileWatcher;
 
     /**
      * Creates a new instance of the {@link FilterProvider} class.
@@ -41,6 +43,12 @@ public class FilterProvider {
          * Important! For enabling filtration, should be specified one of application bean with EnableJsonFilter annotation
          */
         enabled = isFilterEnabled(webApplicationContext);
+    }
+
+    @Autowired
+    public FilterProvider setFileWatcher(FileWatcher fileWatcher) {
+        this.fileWatcher = fileWatcher;
+        return this;
     }
 
     /**
@@ -68,6 +76,9 @@ public class FilterProvider {
                 //Create and put filter in cache
                 BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
                 if (filter != null) {
+                    if(filter instanceof FileFilter) {
+                        ((FileFilter)filter).setFileWatcher(fileWatcher);
+                    }
                     filters.put(key, filter);
                     return filter;
                 }

@@ -2,6 +2,7 @@ package com.json.ignore.filter.file;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.json.ignore.FieldAccessException;
+import com.json.ignore.advice.FileWatcher;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
@@ -20,6 +21,8 @@ import java.util.Map;
 public class FileFilter extends BaseFilter {
     private FileConfig config;
     private Class controllerClass;
+    private FileWatcher fileWatcher;
+    private File file;
 
     /**
      * Creates a new instance of the {@link FileFilter} class.
@@ -29,6 +32,13 @@ public class FileFilter extends BaseFilter {
     public FileFilter(MethodParameter methodParameter) {
         super(methodParameter);
         setConfig(methodParameter);
+    }
+
+    public FileFilter setFileWatcher(FileWatcher fileWatcher) {
+        this.fileWatcher = fileWatcher;
+        if (fileWatcher != null)
+            fileWatcher.add(file, (f) -> config = load(file));
+        return this;
     }
 
     /**
@@ -50,6 +60,7 @@ public class FileFilter extends BaseFilter {
      * @return {@link Object} returns instantiated object type of specified class
      */
     private FileConfig load(File file) {
+        this.file = file;
         try {
             return file != null ? new XmlMapper().readValue(file, FileConfig.class) : null;
         } catch (IOException e) {
