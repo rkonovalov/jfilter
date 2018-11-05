@@ -21,7 +21,6 @@ import java.util.Map;
 public class FileFilter extends BaseFilter {
     private FileConfig config;
     private Class controllerClass;
-    private FileWatcher fileWatcher;
     private File file;
 
     /**
@@ -35,7 +34,6 @@ public class FileFilter extends BaseFilter {
     }
 
     public FileFilter setFileWatcher(FileWatcher fileWatcher) {
-        this.fileWatcher = fileWatcher;
         if (fileWatcher != null)
             fileWatcher.add(file, (f) -> config = load(file));
         return this;
