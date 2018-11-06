@@ -1,5 +1,6 @@
 package com.json.ignore.advice;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
  */
 @EnableScheduling
 @Controller
-public final class FileWatcher {
+public final class FileWatcher implements DisposableBean {
 
     private static final Long FILE_MODIFY_THRESHOLD = 1000L;
     private static final String FILE_MODIFY_DELAY = "2000";
@@ -185,8 +186,7 @@ public final class FileWatcher {
      *
      * @throws IOException if this watch service is closed
      */
-    @PreDestroy
-    private void onDestroy() throws IOException {
+    public void destroy() throws IOException {
         watcher.close();
     }
 }
