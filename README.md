@@ -30,6 +30,7 @@ For information please follow the links below.
 ## Version 1.0.7
     * Added FileWatcher controller which auto reloads modified XML Schema based configurations
     * Refactored Javadoc
+    * Fixed incorrect Jackson XML dependency importing
 
 ## Version 1.0.6
     * Added JSON/XML converters inherited from HttpMessageConverter
