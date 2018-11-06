@@ -2,6 +2,7 @@ package com.json.ignore.advice;
 
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
@@ -28,6 +29,8 @@ public final class FileWatcher {
     private WatchService watcher;
     private Map<WatchKey, Path> watchKeys;
     private Map<File, FileRecord> fileRecords;
+    private ThreadPoolTaskScheduler scheduler;
+    private Boolean closed;
 
     /**
      * File watcher record
@@ -40,7 +43,7 @@ public final class FileWatcher {
         /**
          * Creates a new instance of the {@link FileRecord} class.
          *
-         * @param file file
+         * @param file  file
          * @param event event which occurs on file modification
          */
         public FileRecord(File file, FileWatcherEvent event) {
@@ -81,6 +84,11 @@ public final class FileWatcher {
         watcher = FileSystems.getDefault().newWatchService();
         watchKeys = new HashMap<>();
         fileRecords = new HashMap<>();
+    }
+
+    public FileWatcher setScheduler(ThreadPoolTaskScheduler scheduler) {
+        this.scheduler = scheduler;
+        return this;
     }
 
     /**
@@ -171,11 +179,16 @@ public final class FileWatcher {
      * Process modify events by schedule
      *
      * <p>FILE_MODIFY_DELAY used for set schedule repeat delay
+     *
      * @throws InterruptedException if interrupted while waiting
      */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
     protected void scheduleModifiedFiles() throws InterruptedException {
-        processModifiedFiles();
+        try {
+            processModifiedFiles();
+        } catch (ClosedWatchServiceException e) {
+            scheduler.shutdown();
+        }
     }
 
     /**
@@ -185,6 +198,15 @@ public final class FileWatcher {
      */
     @Override
     protected void finalize() throws Throwable {
-        watcher.close();
+        try {
+            watcher.close();
+        } finally {
+            this.closed = true;
+            super.finalize();
+        }
+    }
+
+    public Boolean getClosed() {
+        return closed;
     }
 }

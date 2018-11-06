@@ -1,6 +1,7 @@
 package com.json.ignore.advice;
 
 import com.json.ignore.mock.config.WSConfigurationEnabled;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
 @RunWith(SpringRunner.class)
@@ -65,6 +64,17 @@ public class FileWatcherITTest implements FileWatcherEvent {
     public void testFileIsModifiedTrue() throws IOException {
         Files.write(file.toPath(), " ".getBytes(), StandardOpenOption.APPEND);
         assertTrue(fileWatcher.fileIsModified(file));
+    }
+
+    @After
+    public void testFinalize() {
+        try {
+            assertNotNull(fileWatcher);
+        } finally {
+            fileWatcher = null;
+            System.gc();
+            assertNull(fileWatcher);
+        }
     }
 
     @Override
