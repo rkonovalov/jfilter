@@ -30,7 +30,6 @@ public final class FileWatcher {
     private Map<WatchKey, Path> watchKeys;
     private Map<File, FileRecord> fileRecords;
     private ThreadPoolTaskScheduler scheduler;
-    private Boolean closed;
 
     /**
      * File watcher record
@@ -192,7 +191,7 @@ public final class FileWatcher {
     }
 
     /**
-     * Closing watcher
+     * Finalizing watcher
      *
      * @throws Throwable exception
      */
@@ -201,12 +200,7 @@ public final class FileWatcher {
         try {
             watcher.close();
         } finally {
-            this.closed = true;
             super.finalize();
         }
-    }
-
-    public Boolean getClosed() {
-        return closed;
     }
 }
