@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Controller;
 
+import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
@@ -189,14 +190,10 @@ public final class FileWatcher {
     /**
      * Finalizing watcher
      *
-     * @throws Throwable exception
+     * @throws IOException if this watch service is closed
      */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            watcher.close();
-        } finally {
-            super.finalize();
-        }
+    @PreDestroy
+    private void onDestroy() throws IOException {
+        watcher.close();
     }
 }
