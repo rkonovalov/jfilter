@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
         @FieldFilterSetting(fields = {"email"})
 })
 public class WSClassStrategyMultiple {
+    public static final String MAPPING_SIGN_IN_STRATEGY_MULTIPLE = "/strategy-multiple/customers/signIn";
 
-
-    @RequestMapping(value = "/strategy-multiple/customers/signIn",
+    @RequestMapping(value = MAPPING_SIGN_IN_STRATEGY_MULTIPLE,
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})

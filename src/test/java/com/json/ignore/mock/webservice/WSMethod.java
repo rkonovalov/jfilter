@@ -13,9 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class WSMethod {
+    public static final String MAPPING_SIGN_IN_SINGLE_ANNOTATION = "/customers/signInSingleAnnotation";
+    public static final String MAPPING_SIGN_IN_FILE_ANNOTATION = "/customers/signInFileAnnotation";
+    public static final String MAPPING_SIGN_IN_UN_EXIST_FILE = "/customers/signInUnExistedFile";
+    public static final String MAPPING_SIGN_IN_STRATEGY_ANNOTATION = "/customers/signInStrategyAnnotation";
+    public static final String MAPPING_SIGN_IN_STRATEGY_DEFAULT = "/customers/signInStrategyDefault";
+    public static final String MAPPING_SIGN_IN_DEFAULT = "/signInDefault";
 
     @FieldFilterSetting(fields = {"id", "password"})
-    @RequestMapping(value = "/customers/signInSingleAnnotation",
+    @RequestMapping(value = MAPPING_SIGN_IN_SINGLE_ANNOTATION,
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -24,7 +30,7 @@ public class WSMethod {
     }
 
     @FileFilterSetting(fileName = "configMockWebService.xml")
-    @RequestMapping(value = "/customers/signInFileAnnotation",
+    @RequestMapping(value = MAPPING_SIGN_IN_FILE_ANNOTATION,
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -35,7 +41,7 @@ public class WSMethod {
     @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
             @FieldFilterSetting(fields = {"id", "password"})
     })
-    @RequestMapping(value = "/customers/signInStrategyAnnotation",
+    @RequestMapping(value = MAPPING_SIGN_IN_STRATEGY_ANNOTATION,
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -43,8 +49,19 @@ public class WSMethod {
         return MockClasses.getUserMock();
     }
 
+    @SessionStrategy(ignoreFields = {
+            @FieldFilterSetting(fields = {"id", "password", "email"})
+    })
+    @RequestMapping(value = MAPPING_SIGN_IN_STRATEGY_DEFAULT,
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public MockUser signInStrategyDefault(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return MockClasses.getUserMock();
+    }
+
     @FileFilterSetting(fileName = "unExistFile.xml")
-    @RequestMapping(value = "/customers/signInUnExistedFile",
+    @RequestMapping(value = MAPPING_SIGN_IN_UN_EXIST_FILE,
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -52,7 +69,7 @@ public class WSMethod {
         return MockClasses.getUserMock();
     }
 
-    @RequestMapping(value = "/signInDefault",
+    @RequestMapping(value = MAPPING_SIGN_IN_DEFAULT,
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})

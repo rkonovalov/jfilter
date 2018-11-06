@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static com.json.ignore.mock.webservice.WSClassFieldSingle.MAPPING_SIGN_IN_FIELD_SINGLE;
 import static org.junit.Assert.assertNotEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -40,7 +41,7 @@ public class WSDisabledITTest {
         user.setId(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/field-single/customers/signIn");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_FIELD_SINGLE);
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")

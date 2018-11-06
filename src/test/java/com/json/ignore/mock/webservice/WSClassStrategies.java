@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 })
 
 public class WSClassStrategies {
+    public static final String MAPPING_SIGN_IN_STRATEGIES = "/strategies/customers/signIn";
 
-
-    @RequestMapping(value = "/strategies/customers/signIn",
+    @RequestMapping(value = MAPPING_SIGN_IN_STRATEGIES,
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})

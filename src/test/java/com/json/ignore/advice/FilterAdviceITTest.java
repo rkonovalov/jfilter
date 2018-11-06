@@ -21,6 +21,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
 
+import static com.json.ignore.mock.webservice.WSClassFile.MAPPING_SIGN_IN_FILE;
+import static com.json.ignore.mock.webservice.WSMethod.*;
 import static junit.framework.TestCase.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -58,7 +60,7 @@ public class FilterAdviceITTest {
         user.setPassword(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInSingleAnnotation");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_SINGLE_ANNOTATION);
         requestBuilder.param("email", "email")
                 .param("password", "password")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -73,7 +75,7 @@ public class FilterAdviceITTest {
         user.setId(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInFileAnnotation");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_FILE_ANNOTATION);
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -88,7 +90,7 @@ public class FilterAdviceITTest {
         MockUser user = MockClasses.getUserMock();
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInUnExistedFile");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_UN_EXIST_FILE);
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -105,7 +107,7 @@ public class FilterAdviceITTest {
         user.setPassword(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInFileAnnotation");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_FILE_ANNOTATION);
         requestBuilder.sessionAttr("ROLE", "USER")
                 .param("email", "email")
                 .param("password", "password")
@@ -124,8 +126,26 @@ public class FilterAdviceITTest {
         user.setPassword(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/customers/signInStrategyAnnotation");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_STRATEGY_ANNOTATION);
         requestBuilder.sessionAttr("ROLE", "USER")
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = MockHttpRequest.getContent(mockMvc, requestBuilder);
+        assertEquals(user.toString(), result);
+    }
+
+ @Test
+    public void testSignInStrategyDefault() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
+        user.setEmail(null);
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_STRATEGY_DEFAULT);
+        requestBuilder
                 .param("email", "email")
                 .param("password", "password")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -141,7 +161,7 @@ public class FilterAdviceITTest {
         user.setId(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/file/customers/signIn");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_FILE);
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")

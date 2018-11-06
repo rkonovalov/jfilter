@@ -16,6 +16,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import static com.json.ignore.mock.webservice.WSClassFieldMultiple.MAPPING_SIGN_IN_FIELD_MULTIPLE;
+import static com.json.ignore.mock.webservice.WSClassFieldSingle.MAPPING_SIGN_IN_FIELD_SINGLE;
+import static com.json.ignore.mock.webservice.WSClassStrategies.MAPPING_SIGN_IN_STRATEGIES;
+import static com.json.ignore.mock.webservice.WSClassStrategyMultiple.MAPPING_SIGN_IN_STRATEGY_MULTIPLE;
+import static com.json.ignore.mock.webservice.WSClassStrategySingle.MAPPING_SIGN_IN_STRATEGY_SINGLE;
+import static com.json.ignore.mock.webservice.WSMethod.MAPPING_SIGN_IN_DEFAULT;
 import static junit.framework.TestCase.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -39,7 +46,7 @@ public class WSEnabledITTest {
         user.setId(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/field-single/customers/signIn");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_FIELD_SINGLE);
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -56,7 +63,7 @@ public class WSEnabledITTest {
         user.setPassword(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/field-multiple/customers/signIn");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_FIELD_MULTIPLE);
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -73,7 +80,7 @@ public class WSEnabledITTest {
         user.setPassword(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/strategy-single/customers/signIn");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_STRATEGY_SINGLE);
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -91,7 +98,7 @@ public class WSEnabledITTest {
         user.setEmail(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/strategy-multiple/customers/signIn");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_STRATEGY_MULTIPLE);
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")
                 .param("password", "password")
@@ -109,7 +116,7 @@ public class WSEnabledITTest {
         user.setEmail(null);
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/strategies/customers/signIn");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_STRATEGIES);
 
         requestBuilder.accept(MediaType.APPLICATION_JSON);
 
@@ -127,7 +134,7 @@ public class WSEnabledITTest {
         MockUser user = MockClasses.getUserMock();
 
         //Build mock request
-        MockHttpServletRequestBuilder requestBuilder = post("/signInDefault");
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_DEFAULT);
 
         requestBuilder.sessionAttr("ROLE", "ADMIN")
                 .param("email", "email")

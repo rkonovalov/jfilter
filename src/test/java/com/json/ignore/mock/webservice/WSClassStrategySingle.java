@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
         @FieldFilterSetting(fields = {"id", "password"})
 })
 public class WSClassStrategySingle {
+    public static final String MAPPING_SIGN_IN_STRATEGY_SINGLE = "/strategy-single/customers/signIn";
 
-
-    @RequestMapping(value = "/strategy-single/customers/signIn",
+    @RequestMapping(value = MAPPING_SIGN_IN_STRATEGY_SINGLE,
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
