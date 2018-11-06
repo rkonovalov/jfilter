@@ -14,18 +14,22 @@ For information please follow the links below.
 
 
 ## Index
-* [Main page](https://rkonovalov.github.io/projects/jsonignore/1.0.6/)
-* [Requirements](https://rkonovalov.github.io/projects/jsonignore/1.0.6/requirements/)
-* [Installation](https://rkonovalov.github.io/projects/jsonignore/1.0.6/installation/)
-* [Getting started](https://rkonovalov.github.io/projects/jsonignore/1.0.6/getting-started/)
-* [Examples](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/)
-  * [Simple field filter](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/filter-field/)  
-  * [Session strategy filter](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/filter-strategy/) 
-  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/filter-file/)
-  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jsonignore/1.0.6/examples/filter-controller/)
-* [Release Notes](https://rkonovalov.github.io/projects/jsonignore/1.0.6/release-notes/)
+* [Main page](https://rkonovalov.github.io/projects/jsonignore/1.0.7/)
+* [Requirements](https://rkonovalov.github.io/projects/jsonignore/1.0.7/requirements/)
+* [Installation](https://rkonovalov.github.io/projects/jsonignore/1.0.7/installation/)
+* [Getting started](https://rkonovalov.github.io/projects/jsonignore/1.0.7/getting-started/)
+* [Examples](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/)
+  * [Simple field filter](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-field/)  
+  * [Session strategy filter](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-strategy/) 
+  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-file/)
+  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-controller/)
+* [Release Notes](https://rkonovalov.github.io/projects/jsonignore/1.0.7/release-notes/)
 
 # Release notes
+
+## Version 1.0.7
+    * Added FileWatcher controller which auto reloads modified XML Schema based configurations
+    * Refactored Javadoc
 
 ## Version 1.0.6
     * Added JSON/XML converters inherited from HttpMessageConverter
