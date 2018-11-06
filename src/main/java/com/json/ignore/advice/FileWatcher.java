@@ -4,6 +4,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
@@ -28,6 +29,7 @@ public final class FileWatcher implements DisposableBean {
     private WatchService watcher;
     private Map<WatchKey, Path> watchKeys;
     private Map<File, FileRecord> fileRecords;
+    private boolean closed;
 
     /**
      * File watcher record
@@ -78,6 +80,7 @@ public final class FileWatcher implements DisposableBean {
      * @throws IOException If an I/O error occurs
      */
     public FileWatcher() throws IOException {
+        closed = false;
         watcher = FileSystems.getDefault().newWatchService();
         watchKeys = new HashMap<>();
         fileRecords = new HashMap<>();
@@ -176,7 +179,12 @@ public final class FileWatcher implements DisposableBean {
      */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
     protected void scheduleModifiedFiles() throws InterruptedException {
-        processModifiedFiles();
+        try {
+            if (!closed)
+                processModifiedFiles();
+        } catch (ClosedWatchServiceException e) {
+            closed = true;
+        }
     }
 
     /**
@@ -185,6 +193,7 @@ public final class FileWatcher implements DisposableBean {
      * @throws IOException if this watch service is closed
      */
     public void destroy() throws IOException {
-        watcher.close();
+        if (!closed)
+            watcher.close();
     }
 }
