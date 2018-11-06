@@ -29,11 +29,20 @@ public final class FileWatcher {
     private Map<WatchKey, Path> watchKeys;
     private Map<File, FileRecord> fileRecords;
 
+    /**
+     * File watcher record
+     */
     public static class FileRecord {
         private final File file;
         private final FileWatcherEvent event;
         private Long lastModified;
 
+        /**
+         * Creates a new instance of the {@link FileRecord} class.
+         *
+         * @param file file
+         * @param event event which occurs on file modification
+         */
         public FileRecord(File file, FileWatcherEvent event) {
             this.file = file;
             this.event = event;
@@ -49,6 +58,11 @@ public final class FileWatcher {
             return this;
         }
 
+        /**
+         * On file modify occur
+         *
+         * @return {@link Boolean} true if event not null, otherwise false
+         */
         public boolean onEvent() {
             if (event != null) {
                 event.onEvent(file);
@@ -156,11 +170,21 @@ public final class FileWatcher {
     /**
      * Process modify events by schedule
      *
-     * FILE_MODIFY_DELAY used for set schedule repeat delay
+     * <p>FILE_MODIFY_DELAY used for set schedule repeat delay
      * @throws InterruptedException if interrupted while waiting
      */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
     protected void scheduleModifiedFiles() throws InterruptedException {
         processModifiedFiles();
+    }
+
+    /**
+     * Closing watcher
+     *
+     * @throws Throwable exception
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        watcher.close();
     }
 }
