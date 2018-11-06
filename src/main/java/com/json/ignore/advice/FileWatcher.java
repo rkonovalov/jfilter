@@ -182,12 +182,8 @@ public final class FileWatcher {
      * @throws InterruptedException if interrupted while waiting
      */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
-    protected void scheduleModifiedFiles() throws InterruptedException {
-        try {
-            processModifiedFiles();
-        } catch (ClosedWatchServiceException e) {
-            scheduler.shutdown();
-        }
+    protected void scheduleModifiedFiles() throws InterruptedException, ClosedWatchServiceException {
+        processModifiedFiles();
     }
 
     /**
