@@ -2,7 +2,6 @@ package com.json.ignore.advice;
 
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.PreDestroy;
@@ -30,7 +29,6 @@ public final class FileWatcher {
     private WatchService watcher;
     private Map<WatchKey, Path> watchKeys;
     private Map<File, FileRecord> fileRecords;
-    private ThreadPoolTaskScheduler scheduler;
 
     /**
      * File watcher record
@@ -84,11 +82,6 @@ public final class FileWatcher {
         watcher = FileSystems.getDefault().newWatchService();
         watchKeys = new HashMap<>();
         fileRecords = new HashMap<>();
-    }
-
-    public FileWatcher setScheduler(ThreadPoolTaskScheduler scheduler) {
-        this.scheduler = scheduler;
-        return this;
     }
 
     /**
@@ -183,8 +176,12 @@ public final class FileWatcher {
      * @throws InterruptedException if interrupted while waiting
      */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
-    protected void scheduleModifiedFiles() throws InterruptedException, ClosedWatchServiceException {
-        processModifiedFiles();
+    protected void scheduleModifiedFiles() throws Throwable {
+        try {
+            processModifiedFiles();
+        } catch (ClosedWatchServiceException e) {
+            throw new Throwable(e);
+        }
     }
 
     /**
