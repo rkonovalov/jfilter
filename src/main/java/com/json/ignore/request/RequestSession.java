@@ -2,6 +2,7 @@ package com.json.ignore.request;
 
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
@@ -68,6 +69,7 @@ public class RequestSession {
      */
     public boolean isSessionPropertyExists(String attributeName, String attributeValue) {
         Object sessionObject = getSessionProperty(attributeName);
-        return Objects.equals(sessionObject, attributeValue);
+        boolean defaultValue = StringUtils.isEmpty(attributeName) && StringUtils.isEmpty(attributeValue);
+        return Objects.equals(sessionObject, attributeValue) || defaultValue;
     }
 }
