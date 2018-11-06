@@ -175,14 +175,13 @@ public final class FileWatcher implements DisposableBean {
      *
      * <p>FILE_MODIFY_DELAY used for set schedule repeat delay
      *
-     * @throws InterruptedException if interrupted while waiting
      */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
-    protected void scheduleModifiedFiles() throws InterruptedException {
+    protected void scheduleModifiedFiles() {
         try {
             if (!closed)
                 processModifiedFiles();
-        } catch (ClosedWatchServiceException e) {
+        } catch (InterruptedException | ClosedWatchServiceException e) {
             closed = true;
         }
     }
