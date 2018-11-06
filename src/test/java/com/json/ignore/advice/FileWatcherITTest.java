@@ -61,7 +61,8 @@ public class FileWatcherITTest implements FileWatcherEvent {
     }
 
     @Test
-    public void testFileIsModifiedTrue() throws IOException {
+    public void testFileIsModifiedTrue() throws IOException, InterruptedException {
+        Thread.sleep(1000);
         Files.write(file.toPath(), " ".getBytes(), StandardOpenOption.APPEND);
         assertTrue(fileWatcher.fileIsModified(file));
     }
