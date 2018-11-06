@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WSMethod {
     public static final String MAPPING_SIGN_IN_SINGLE_ANNOTATION = "/customers/signInSingleAnnotation";
     public static final String MAPPING_SIGN_IN_FILE_ANNOTATION = "/customers/signInFileAnnotation";
+    public static final String MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY = "/customers/signInFileDefaultStrategy";
     public static final String MAPPING_SIGN_IN_UN_EXIST_FILE = "/customers/signInUnExistedFile";
     public static final String MAPPING_SIGN_IN_STRATEGY_ANNOTATION = "/customers/signInStrategyAnnotation";
     public static final String MAPPING_SIGN_IN_STRATEGY_DEFAULT = "/customers/signInStrategyDefault";
@@ -66,6 +67,15 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInUnExistedFile(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return MockClasses.getUserMock();
+    }
+
+    @FileFilterSetting(fileName = "config_default_strategy.xml")
+    @RequestMapping(value = MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY,
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public MockUser signInDefaultStrategyFile(@RequestParam("email") String email, @RequestParam("password") String password) {
         return MockClasses.getUserMock();
     }
 

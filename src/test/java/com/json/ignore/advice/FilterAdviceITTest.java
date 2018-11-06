@@ -100,6 +100,24 @@ public class FilterAdviceITTest {
         assertEquals(user.toString(), result);
     }
 
+@Test
+    public void testSignInDefaultStrategyFile() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setEmail(null);
+        user.setPassword(null);
+
+        //Build mock request
+        MockHttpServletRequestBuilder requestBuilder = post(MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY);
+        requestBuilder
+                .param("email", "email")
+                .param("password", "password")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        String result = MockHttpRequest.getContent(mockMvc, requestBuilder);
+        assertEquals(user.toString(), result);
+    }
+
     @Test
     public void testSignInFileAnnotationUser() {
         MockUser user = MockClasses.getUserMock();
