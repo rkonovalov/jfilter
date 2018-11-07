@@ -97,8 +97,7 @@ public final class FileWatcher implements DisposableBean {
         if (file == null || !file.exists())
             return false;
 
-        if (!fileRecords.containsKey(file))
-            fileRecords.put(file, new FileRecord(file, event));
+        fileRecords.put(file, new FileRecord(file, event));
 
         Path path = file.isDirectory() ? Paths.get(file.getPath()) : Paths.get(file.getParent());
         if (!watchKeys.containsValue(path)) {
@@ -174,7 +173,6 @@ public final class FileWatcher implements DisposableBean {
      * Process modify events by schedule
      *
      * <p>FILE_MODIFY_DELAY used for set schedule repeat delay
-     *
      */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
     protected void scheduleModifiedFiles() {
