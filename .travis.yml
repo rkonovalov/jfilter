@@ -1,5 +1,9 @@
 language: java
 
+env:
+  global:
+    - CODECOV_TOKEN=:uuid-repo-token
+
 jdk:
     - oraclejdk8
 
@@ -17,6 +21,5 @@ cache:
 
 script:
   - "mvn test"
-  - "mvn cobertura:cobertura"
   - "mvn jacoco:report"
   - sonar-scanner
