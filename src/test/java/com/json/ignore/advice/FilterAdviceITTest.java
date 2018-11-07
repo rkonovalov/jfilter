@@ -31,24 +31,28 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @WebAppConfiguration("src/main/resources")
 public class FilterAdviceITTest {
     private MockMvc mockMvc;
+    private WebApplicationContext webApplicationContext;
 
     @Autowired
-    private WebApplicationContext wac;
+    public FilterAdviceITTest setWebApplicationContext(WebApplicationContext webApplicationContext) {
+        this.webApplicationContext = webApplicationContext;
+        return this;
+    }
 
     @Before
     public void init() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
     @Test
     public void testWebContext() {
-        ServletContext servletContext = wac.getServletContext();
+        ServletContext servletContext = webApplicationContext.getServletContext();
         Assert.assertNotNull(servletContext);
     }
 
     @Test
     public void testWebContextIsMockServletContext() {
-        ServletContext servletContext = wac.getServletContext();
+        ServletContext servletContext = webApplicationContext.getServletContext();
         Assert.assertNotNull(servletContext);
         Assert.assertTrue(servletContext instanceof MockServletContext);
     }
