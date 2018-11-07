@@ -79,7 +79,7 @@ public class FileFilter extends BaseFilter {
         if (resourceName != null) {
             ClassLoader classLoader = FileFilter.class.getClassLoader();
             URL url = classLoader.getResource(resourceName);
-            return url != null ? url.getFile() : null;
+            return url != null ? url.getFile() : resourceName;
         }
         return null;
     }
