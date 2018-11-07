@@ -94,7 +94,8 @@ public class FileFilter extends BaseFilter {
      */
     public static File resourceFile(String resourceName) {
         String fileName = getFileName(resourceName);
-        return fileName != null ? new File(fileName) : null;
+        File file = new File(fileName);
+        return file.exists() ? file : null;
     }
 
     /**
