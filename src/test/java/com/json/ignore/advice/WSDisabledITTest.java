@@ -26,13 +26,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @WebAppConfiguration("src/main/resources")
 public class WSDisabledITTest {
     private MockMvc mockMvc;
+    private WebApplicationContext webApplicationContext;
 
     @Autowired
-    private WebApplicationContext wac;
+    public WSDisabledITTest setWebApplicationContext(WebApplicationContext webApplicationContext) {
+        this.webApplicationContext = webApplicationContext;
+        return this;
+    }
 
     @Before
     public void init() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
     @Test
