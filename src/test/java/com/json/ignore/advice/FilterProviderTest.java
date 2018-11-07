@@ -5,7 +5,6 @@ import com.json.ignore.mock.MockMethods;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
-
 import static org.junit.Assert.*;
 
 public class FilterProviderTest {
