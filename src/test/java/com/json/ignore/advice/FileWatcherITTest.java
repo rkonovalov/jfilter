@@ -11,9 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
@@ -25,10 +23,13 @@ import static org.junit.Assert.*;
 public class FileWatcherITTest {
     private File file;
     private AtomicBoolean modified;
-
-    @Autowired
     private FileWatcher fileWatcher;
 
+    @Autowired
+    public FileWatcherITTest setFileWatcher(FileWatcher fileWatcher) {
+        this.fileWatcher = fileWatcher;
+        return this;
+    }
 
     @Before
     public void init() {
@@ -42,7 +43,7 @@ public class FileWatcherITTest {
     }
 
     @Test
-    public void testWWWFileIsModifiedTrue() throws IOException {
+    public void testFileIsModifiedTrue() throws IOException {
         Files.write(file.toPath(), " ".getBytes(), StandardOpenOption.APPEND);
         await().atMost(5, SECONDS).untilTrue(modified);
         assertTrue(modified.get());
@@ -63,7 +64,7 @@ public class FileWatcherITTest {
 
     @Test
     public void testUnExistFile() {
-        boolean result = fileWatcher.add(resourceFile("unexist_config.xml"), (f) -> modified.set(true));
+        boolean result = fileWatcher.add(resourceFile("un_exist_config.xml"), (f) -> modified.set(true));
         assertFalse(result);
     }
 
