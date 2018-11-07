@@ -1,9 +1,7 @@
 package com.json.ignore.advice;
 
 import com.json.ignore.mock.config.WSConfigurationEnabled;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,14 +11,20 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 import static org.junit.Assert.*;
 
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
 @RunWith(SpringRunner.class)
 @WebAppConfiguration("src/main/resources")
-public class FileWatcherITTest implements FileWatcherEvent {
+public class FileWatcherITTest {
     private File file;
+    private AtomicBoolean modified;
 
     @Autowired
     private FileWatcher fileWatcher;
@@ -28,29 +32,38 @@ public class FileWatcherITTest implements FileWatcherEvent {
 
     @Before
     public void init() {
+        modified = new AtomicBoolean(false);
         assertNotNull(fileWatcher);
+
         file = resourceFile("config.xml");
         assertNotNull(file);
 
-        fileWatcher.add(file, this);
+        fileWatcher.add(file, (f) -> modified.set(true));
+    }
+
+    @Test
+    public void testWWWFileIsModifiedTrue() throws IOException {
+        Files.write(file.toPath(), " ".getBytes(), StandardOpenOption.APPEND);
+        await().atMost(5, SECONDS).untilTrue(modified);
+        assertTrue(modified.get());
     }
 
     @Test
     public void testAdd() {
-        boolean result = fileWatcher.add(file, this);
+        boolean result = fileWatcher.add(file, (f) -> modified.set(true));
         assertTrue(result);
     }
 
     @Test
     public void testAddTwice() {
-        boolean addedOne = fileWatcher.add(file, this);
-        boolean addedTwo = fileWatcher.add(file, this);
+        boolean addedOne = fileWatcher.add(file, (f) -> modified.set(true));
+        boolean addedTwo = fileWatcher.add(file, (f) -> modified.set(true));
         assertTrue(addedOne && addedTwo);
     }
 
     @Test
     public void testUnExistFile() {
-        boolean result = fileWatcher.add(resourceFile("unexist_config.xml"), this);
+        boolean result = fileWatcher.add(resourceFile("unexist_config.xml"), (f) -> modified.set(true));
         assertFalse(result);
     }
 
@@ -58,12 +71,6 @@ public class FileWatcherITTest implements FileWatcherEvent {
     public void testFileIsModifiedFalse() {
         boolean result = fileWatcher.fileIsModified(file);
         assertFalse(result);
-    }
-
-    @Test
-    public void testFileIsModifiedTrue() throws IOException {
-        Files.write(file.toPath(), " ".getBytes(), StandardOpenOption.APPEND);
-        assertTrue(fileWatcher.fileIsModified(file));
     }
 
     @After
@@ -75,10 +82,5 @@ public class FileWatcherITTest implements FileWatcherEvent {
             System.gc();
             assertNull(fileWatcher);
         }
-    }
-
-    @Override
-    public void onEvent(File file) {
-        System.out.println("File modified: " + file);
     }
 }
