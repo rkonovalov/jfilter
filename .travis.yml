@@ -17,6 +17,4 @@ cache:
 
 script:
   - "mvn test"
-  - "mvn cobertura:cobertura"
   - "mvn jacoco:report"
-  - sonar-scanner
