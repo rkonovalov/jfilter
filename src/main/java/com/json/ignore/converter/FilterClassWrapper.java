@@ -1,9 +1,9 @@
 package com.json.ignore.converter;
 
 import com.json.ignore.advice.FilterAdvice;
+import com.json.ignore.filter.FilterFields;
+
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Class contains Serializable object and list of ignorable fields
@@ -11,25 +11,26 @@ import java.util.Map;
  * <p>Class used to send additional information from {@link FilterAdvice} to {@link FilterConverter}
  */
 public class FilterClassWrapper implements Serializable {
+    private static final long serialVersionUID = -6250969684778521840L;
     private final Serializable object;
-    private final Map<Class, List<String>> ignoreList;
+    private final FilterFields filterFields;
 
     /**
      * Creates a new instance of the {@link FilterClassWrapper} class.
      *
      * @param object Serializable object
-     * @param ignoreList ignorable fields
+     * @param filterFields ignorable fields
      */
-    public FilterClassWrapper(Serializable object, Map<Class, List<String>> ignoreList) {
+    public FilterClassWrapper(Serializable object, FilterFields filterFields) {
         this.object = object;
-        this.ignoreList = ignoreList;
+        this.filterFields = filterFields;
     }
 
     public Serializable getObject() {
         return object;
     }
 
-    public Map<Class, List<String>> getIgnoreList() {
-        return ignoreList;
+    public FilterFields getIgnoreList() {
+        return filterFields;
     }
 }

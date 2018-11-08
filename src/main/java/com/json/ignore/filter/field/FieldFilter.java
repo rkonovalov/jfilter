@@ -1,12 +1,11 @@
 package com.json.ignore.filter.field;
 
 import com.json.ignore.filter.BaseFilter;
+import com.json.ignore.filter.FilterFields;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
+
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * This class used for simple filtration of object's fields based on FieldFilterSetting configuration
@@ -39,11 +38,11 @@ public class FieldFilter extends BaseFilter {
     }
 
     @Override
-    public Map<Class, List<String>> getIgnoreList(Object object, ServerHttpRequest request) {
-        Map<Class, List<String>> result = new HashMap<>();
+    public FilterFields getIgnoreList(Object object, ServerHttpRequest request) {
+        FilterFields result = new FilterFields();
 
         for (FieldFilterSetting setting : config) {
-            appendToMap(result, setting.className(), Arrays.asList(setting.fields()));
+            result.appendToMap(setting.className(), Arrays.asList(setting.fields()));
         }
 
         return result;

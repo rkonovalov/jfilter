@@ -4,7 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
 import com.fasterxml.jackson.databind.ser.SerializerFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import java.util.List;
+import com.json.ignore.filter.FilterFields;
+
 import java.util.Map;
 
 /**
@@ -12,17 +13,17 @@ import java.util.Map;
  */
 public class ConverterMapper {
     private final ObjectMapper mapper;
-    private final Map<Class, List<String>> ignoreList;
+    private final FilterFields filterFields;
 
     /**
      * Creates a new instance of the {@link ConverterMapper} class.
      *
      * @param mapper  could be instance of {@link ObjectMapper} or {@link XmlMapper}
-     * @param ignoreList {@link Map} map of fields which could be ignored
+     * @param filterFields {@link Map} map of fields which could be ignored
      */
-    public ConverterMapper(ObjectMapper mapper, Map<Class, List<String>> ignoreList) {
+    public ConverterMapper(ObjectMapper mapper, FilterFields filterFields) {
         this.mapper = mapper;
-        this.ignoreList = ignoreList;
+        this.filterFields = filterFields;
         setIgnoreModifier();
     }
 
@@ -32,7 +33,7 @@ public class ConverterMapper {
      */
     private void setIgnoreModifier() {
         SerializerFactory factory = BeanSerializerFactory.instance
-                .withSerializerModifier(new ConverterMapperModifier(ignoreList));
+                .withSerializerModifier(new ConverterMapperModifier(filterFields));
         mapper.setSerializerFactory(factory);
     }
 

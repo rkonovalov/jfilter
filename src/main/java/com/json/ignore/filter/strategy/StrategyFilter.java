@@ -1,6 +1,7 @@
 package com.json.ignore.filter.strategy;
 
 import com.json.ignore.filter.BaseFilter;
+import com.json.ignore.filter.FilterFields;
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
@@ -38,8 +39,8 @@ public class StrategyFilter extends BaseFilter {
     }
 
     @Override
-    public Map<Class, List<String>> getIgnoreList(Object object, ServerHttpRequest request) {
-        Map<Class, List<String>> result = new HashMap<>();
+    public FilterFields getIgnoreList(Object object, ServerHttpRequest request) {
+        FilterFields result = new FilterFields();
         RequestSession requestSession = new RequestSession(request);
 
         if (config != null) {
@@ -48,7 +49,7 @@ public class StrategyFilter extends BaseFilter {
                         strategy.attributeValue())) {
 
                     for (FieldFilterSetting setting : strategy.ignoreFields()) {
-                        appendToMap(result, setting.className(), Arrays.asList(setting.fields()));
+                        result.appendToMap(setting.className(), Arrays.asList(setting.fields()));
                     }
                 }
             }

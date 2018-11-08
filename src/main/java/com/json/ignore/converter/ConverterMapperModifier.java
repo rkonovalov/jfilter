@@ -4,8 +4,9 @@ import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
 import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
+import com.json.ignore.filter.FilterFields;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * This class is  inherited from BeanSerializerModifier
@@ -14,15 +15,15 @@ import java.util.Map;
  * give ability to filter ignorable fields from object
  */
 public class ConverterMapperModifier extends BeanSerializerModifier {
-    private final Map<Class, List<String>> ignoreList;
+    private final FilterFields filterFields;
 
     /**
      * Creates a new instance of the {@link ConverterMapperModifier} class.
      *
-     * @param ignoreList {@link Map} list of ignorable field names
+     * @param filterFields {@link FilterFields} list of ignorable field names
      */
-    public ConverterMapperModifier(Map<Class, List<String>> ignoreList) {
-        this.ignoreList = ignoreList;
+    public ConverterMapperModifier(FilterFields filterFields) {
+        this.filterFields = filterFields;
     }
 
     /**
@@ -46,10 +47,8 @@ public class ConverterMapperModifier extends BeanSerializerModifier {
      * @param beanProperties list of bean properties
      */
     private void removeFieldsByClass(Class clazz, List<BeanPropertyWriter> beanProperties) {
-        if(ignoreList.containsKey(clazz)) {
-            List<String> ignores = ignoreList.get(clazz);
-            beanProperties.removeIf(beanProperty -> ignores.contains(beanProperty.getName()));
-        }
+        List<String> ignores = filterFields.getFields(clazz);
+        beanProperties.removeIf(beanProperty -> ignores.contains(beanProperty.getName()));
     }
 
     /**

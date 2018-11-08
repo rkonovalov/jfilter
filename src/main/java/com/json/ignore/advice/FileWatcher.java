@@ -55,9 +55,8 @@ public final class FileWatcher implements DisposableBean {
             return lastModified;
         }
 
-        public FileRecord setLastModified(Long lastModified) {
+        public void setLastModified(Long lastModified) {
             this.lastModified = lastModified;
-            return this;
         }
 
         /**

@@ -3,11 +3,11 @@ package com.json.ignore.filter.file;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.json.ignore.filter.FilterFields;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * This class used for deserialization of xml annotated strategy files
@@ -15,13 +15,13 @@ import java.util.Map;
 @JacksonXmlRootElement(localName = "config")
 public class FileConfig implements Serializable {
 
+    private static final long serialVersionUID = -5089337585215156841L;
     @JacksonXmlProperty(localName = "controller")
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<Controller> controllers;
 
     /**
      * Creates a new instance of the {@link FileConfig} class.
-     *
      */
     public FileConfig() {
         this.controllers = new ArrayList<>();
@@ -41,6 +41,7 @@ public class FileConfig implements Serializable {
      */
     @JacksonXmlRootElement(localName = "controller")
     public static class Controller implements Serializable {
+        private static final long serialVersionUID = -7843796315737644281L;
         @JacksonXmlProperty(localName = "class-name", isAttribute = true)
         private String className;
 
@@ -57,6 +58,7 @@ public class FileConfig implements Serializable {
 
         /**
          * Returns class name
+         *
          * @return {@link String}
          */
         public String getClassName() {
@@ -76,6 +78,7 @@ public class FileConfig implements Serializable {
 
         /**
          * Returns list of strategies
+         *
          * @return {@link List}, {@link Strategy}
          */
         public List<Strategy> getStrategies() {
@@ -84,6 +87,7 @@ public class FileConfig implements Serializable {
 
         /**
          * Sets list of strategies
+         *
          * @param strategies {@link List}, {@link Strategy}
          * @return instance of {@link Controller}
          */
@@ -99,6 +103,7 @@ public class FileConfig implements Serializable {
     @JacksonXmlRootElement(localName = "strategy")
     public static class Strategy implements Serializable {
 
+        private static final long serialVersionUID = 2166775466278797733L;
         @JacksonXmlProperty(localName = "attribute-name", isAttribute = true)
         private String attributeName;
 
@@ -111,7 +116,6 @@ public class FileConfig implements Serializable {
 
         /**
          * Creates a new instance of the {@link Strategy} class.
-         *
          */
         public Strategy() {
             this.filters = new ArrayList<>();
@@ -146,8 +150,9 @@ public class FileConfig implements Serializable {
 
         /**
          * Gets class by name
-         * <P>
+         * <p>
          * Try to get class by it full name. If class couldn't be found, returns null
+         *
          * @param className {@link String} class name. Example: java.io.File
          * @return {@link Class} return class, else null
          */
@@ -166,29 +171,22 @@ public class FileConfig implements Serializable {
         /**
          * Convert strategy class in Map
          *
-         * @return {@link HashMap} map of fields which should be filtered/excluded
+         * @return {@link FilterFields} fields which should be filtered/excluded
          */
-        public Map<Class, List<String>> getStrategyFields() {
-            Map<Class, List<String>> fields = new HashMap<>();
-
+        public FilterFields appendStrategyFields(FilterFields filterFields) {
             this.getFilters().forEach(filter -> {
                 Class clazz = getClassByName(filter.getClassName());
-                List<String> items;
-
-                if (fields.containsKey(clazz)) {
-                    items = fields.get(clazz);
-                } else
-                    items = new ArrayList<>();
+                List<String> items = filterFields.getFields(clazz);
 
                 filter.getFields().forEach(field -> {
                     //filter duplicates of field names
                     if (!items.contains(field.getName()))
                         items.add(field.getName());
                 });
-                fields.put(clazz, items);
+                filterFields.appendToMap(clazz, items);
             });
 
-            return fields;
+            return filterFields;
         }
     }
 
@@ -198,6 +196,7 @@ public class FileConfig implements Serializable {
     @JacksonXmlRootElement(localName = "filter")
     public static class Filter implements Serializable {
 
+        private static final long serialVersionUID = 4096598826506008282L;
         @JacksonXmlProperty(localName = "class", isAttribute = true)
         private String className;
 
@@ -207,7 +206,6 @@ public class FileConfig implements Serializable {
 
         /**
          * Creates a new instance of the {@link Filter} class.
-         *
          */
         public Filter() {
             this.fields = new ArrayList<>();
@@ -237,6 +235,7 @@ public class FileConfig implements Serializable {
     @JacksonXmlRootElement(localName = "field")
     public static class Field implements Serializable {
 
+        private static final long serialVersionUID = 6812574046008633856L;
         @JacksonXmlProperty(localName = "name", isAttribute = true)
         private String name;
 

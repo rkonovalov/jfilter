@@ -2,6 +2,7 @@ package com.json.ignore.advice;
 
 import com.json.ignore.converter.FilterClassWrapper;
 import com.json.ignore.filter.BaseFilter;
+import com.json.ignore.filter.FilterFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -11,7 +12,6 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import java.io.Serializable;
-import java.util.HashMap;
 
 /**
  * Class which handle all responses from web service and tries to filter it
@@ -61,6 +61,6 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
         if (filter != null) {
             return new FilterClassWrapper(obj, filter.getIgnoreList(obj, serverHttpRequest));
         } else
-            return new FilterClassWrapper(obj, new HashMap<>());
+            return new FilterClassWrapper(obj, new FilterFields());
     }
 }

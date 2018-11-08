@@ -3,9 +3,6 @@ package com.json.ignore.filter;
 import com.json.ignore.request.RequestMethodParameter;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServerHttpRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * This class is base class of filtration mechanism
@@ -23,31 +20,6 @@ public abstract class BaseFilter {
     }
 
     /**
-     * Append list items in map
-     *
-     * @param map {@link Map}
-     * @param key key
-     * @param value value
-     * @param <K> generic key class
-     * @param <V> generic value class
-     */
-    protected <K, V> void appendToMap(Map<K, List<V>> map, K key, List<V> value) {
-        map.computeIfAbsent(key, k -> new ArrayList<>()).addAll(value);
-    }
-
-    /**
-     * Append list items in map
-     *
-     * @param map {@link Map}
-     * @param mapValues list of items
-     * @param <K> generic key class
-     * @param <V> generic value class
-     */
-    protected <K, V> void appendToMap(Map<K, List<V>> map, Map<K, List<V>> mapValues) {
-        mapValues.forEach((k, v) -> appendToMap(map, k, v));
-    }
-
-    /**
      * Returns RequestMethodParameter
      * @return {@link RequestMethodParameter}
      */
@@ -61,7 +33,7 @@ public abstract class BaseFilter {
      * Returns list of ignorable fields of object
      * @param object {@link Object}
      * @param request {@link ServerHttpRequest}
-     * @return {@link Map}
+     * @return {@link FilterFields}
      */
-    public abstract Map<Class, List<String>> getIgnoreList(Object object, ServerHttpRequest request);
+    public abstract FilterFields getIgnoreList(Object object, ServerHttpRequest request);
 }
