@@ -46,14 +46,11 @@ public class DynamicFilterProvider {
 
     public FilterFields getFields(MethodParameter methodParameter, RequestSession request) {
         DynamicFilter dynamicFilterAnnotation = methodParameter.getMethod().getDeclaredAnnotation(DynamicFilter.class);
-        FilterFields filterFields = new FilterFields();
 
-        if (dynamicFilterAnnotation != null) {
-            if (dynamicList.containsKey(dynamicFilterAnnotation.value())) {
-                DynamicFilterEvent filter = dynamicList.get(dynamicFilterAnnotation.value());
-                filterFields = filter.onGetFilterFields(methodParameter, request);
-            }
-        }
-        return filterFields;
+        if (dynamicFilterAnnotation != null && dynamicList.containsKey(dynamicFilterAnnotation.value())) {
+            DynamicFilterEvent filter = dynamicList.get(dynamicFilterAnnotation.value());
+            return filter.onGetFilterFields(methodParameter, request);
+        } else
+            return new FilterFields();
     }
 }
