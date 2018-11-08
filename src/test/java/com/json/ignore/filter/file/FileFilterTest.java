@@ -1,6 +1,5 @@
 package com.json.ignore.filter.file;
 
-import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.FilterFields;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
