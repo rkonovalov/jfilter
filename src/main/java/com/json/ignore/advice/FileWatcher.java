@@ -179,11 +179,21 @@ public final class FileWatcher implements DisposableBean {
             if (!closed)
                 processModifiedFiles();
         } catch (ClosedWatchServiceException e) {
+            System.out.println("close->ClosedWatchServiceException");
             closed = true;
         } catch (InterruptedException e) {
+            System.out.println("close->InterruptedException");
             closed = true;
             Thread.currentThread().interrupt();
         }
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public WatchService getWatcher() {
+        return watcher;
     }
 
     /**
@@ -192,7 +202,9 @@ public final class FileWatcher implements DisposableBean {
      * @throws IOException if this watch service is closed
      */
     public void destroy() throws IOException {
-        if (!closed)
+        if (!closed) {
             watcher.close();
+            closed = true;
+        }
     }
 }
