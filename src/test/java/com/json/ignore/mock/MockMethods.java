@@ -1,5 +1,7 @@
 package com.json.ignore.mock;
 
+import com.json.ignore.filter.dynamic.DynamicFilter;
+import com.json.ignore.filter.dynamic.DynamicSessionFilter;
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.file.FileFilterSetting;
 import com.json.ignore.filter.strategy.SessionStrategy;
@@ -104,6 +106,11 @@ public class MockMethods {
     @FileFilterSetting(fileName = "config_class_duplicated.xml")
     public static MethodParameter fileAnnotationClassDuplicated() {
         return findMethodParameterByName("fileAnnotationClassDuplicated");
+    }
+
+    @DynamicFilter(DynamicSessionFilter.class)
+    public static MethodParameter dynamicSessionFilter() {
+        return findMethodParameterByName("dynamicSessionFilter");
     }
 
 

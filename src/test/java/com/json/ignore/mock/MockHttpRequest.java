@@ -1,17 +1,19 @@
 package com.json.ignore.mock;
 
+import com.json.ignore.filter.FilterFields;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+import static com.json.ignore.filter.dynamic.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class MockHttpRequest {
 
-    private static ServletServerHttpRequest getMocRequest(String attributeName, String attributeValue) {
+    private static ServletServerHttpRequest getMocRequest(String attributeName, Object attributeValue) {
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "");
         if (attributeName != null && !attributeName.isEmpty())
             request.getSession().setAttribute(attributeName, attributeValue);
@@ -30,6 +32,10 @@ public class MockHttpRequest {
         return getMocRequest("", "");
     }
 
+    public static ServletServerHttpRequest getMockDynamicFilterRequest(FilterFields filterFields) {
+        return getMocRequest(ATTRIBUTE_FILTER_FIELDS, filterFields);
+    }
+
     private static String getContent(MockMvc mockMvc, MockHttpServletRequestBuilder requestBuilder) {
         final StringBuilder result = new StringBuilder();
         try {
@@ -42,7 +48,7 @@ public class MockHttpRequest {
         return result.toString();
     }
 
-    public static String doRequest(MockMvc mockMvc, String url, String attributeName, String attributeValue) {
+    public static String doRequest(MockMvc mockMvc, String url, String attributeName, Object attributeValue) {
         MockHttpServletRequestBuilder requestBuilder = post(url);
         requestBuilder
                 .param("email", "email")
