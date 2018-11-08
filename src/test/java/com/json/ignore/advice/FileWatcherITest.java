@@ -2,6 +2,7 @@ package com.json.ignore.advice;
 
 import com.json.ignore.mock.config.WSConfigurationEnabled;
 import org.junit.*;
+import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,6 +25,10 @@ public class FileWatcherITest {
     private File file;
     private AtomicBoolean modified;
     private FileWatcher fileWatcher;
+
+
+    @Rule
+    public TemporaryFolder temp = new TemporaryFolder();
 
     @Autowired
     public FileWatcherITest setFileWatcher(FileWatcher fileWatcher) {
@@ -72,6 +77,13 @@ public class FileWatcherITest {
     public void testFileIsModifiedFalse() {
         boolean result = fileWatcher.fileIsModified(file);
         assertFalse(result);
+    }
+
+
+    @Test
+    public void testIoException() {
+        boolean addedOne = fileWatcher.add(new File("unknown_path"), (f) -> modified.set(true));
+        assertFalse(addedOne);
     }
 
     @After

@@ -98,16 +98,16 @@ public final class FileWatcher implements DisposableBean {
 
         fileRecords.put(file, new FileRecord(file, event));
 
-        Path path = file.isDirectory() ? Paths.get(file.getPath()) : Paths.get(file.getParent());
-        if (!watchKeys.containsValue(path)) {
-            try {
+        try {
+            Path path = file.isDirectory() ? Paths.get(file.getPath()) : Paths.get(file.getParent());
+            if (!watchKeys.containsValue(path)) {
                 watchKeys.put(path.register(watcher, ENTRY_MODIFY), path);
                 return true;
-            } catch (IOException e) {
-                return false;
-            }
-        } else
-            return true;
+            } else
+                return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     /**
