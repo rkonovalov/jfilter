@@ -33,9 +33,4 @@ public class FilterFields implements Serializable {
 
         return this;
     }
-
-    public FilterFields appendToMap(Map<Class, List<String>> fields) {
-        fields.forEach(this::appendToMap);
-        return this;
-    }
 }
