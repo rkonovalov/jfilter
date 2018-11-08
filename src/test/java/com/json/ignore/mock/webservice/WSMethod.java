@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WSMethod {
     public static final String MAPPING_SIGN_IN_SINGLE_ANNOTATION = "/customers/signInSingleAnnotation";
+    public static final String MAPPING_SIGN_IN_SINGLE_ANNOTATION_XML = "/customers/signInSingleAnnotationXml";
     public static final String MAPPING_SIGN_IN_FILE_ANNOTATION = "/customers/signInFileAnnotation";
     public static final String MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY = "/customers/signInFileDefaultStrategy";
     public static final String MAPPING_SIGN_IN_UN_EXIST_FILE = "/customers/signInUnExistedFile";
@@ -31,6 +32,15 @@ public class WSMethod {
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInSingleAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
        return MockClasses.getUserMock();
+    }
+
+    @FieldFilterSetting(fields = {"id", "password"})
+    @RequestMapping(value = MAPPING_SIGN_IN_SINGLE_ANNOTATION_XML,
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_XML_VALUE})
+    public MockUser signInSingleAnnotationXml(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return MockClasses.getUserMock();
     }
 
     @FileFilterSetting(fileName = "configMockWebService.xml")

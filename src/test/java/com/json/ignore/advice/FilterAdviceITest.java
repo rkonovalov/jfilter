@@ -64,6 +64,17 @@ public class FilterAdviceITest {
     }
 
     @Test
+    public void testSignInSingleAnnotationXml() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
+
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_SINGLE_ANNOTATION_XML, null, null);
+
+        assertEquals(user.toXmlString(), result);
+    }
+
+    @Test
     public void testSignInFileAnnotationAdmin() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
