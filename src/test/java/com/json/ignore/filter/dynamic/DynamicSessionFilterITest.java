@@ -52,7 +52,7 @@ public class DynamicSessionFilterITest {
 
     @Test
     public void testOnGetFilterFieldsTrue() {
-        FilterFields filterFields = FilterFields.fromList(MockUser.class, Arrays.asList("id", "password"));
+        FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
 
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
         ServletServerHttpRequest request = MockHttpRequest.getMockDynamicFilterRequest(filterFields);
@@ -94,7 +94,7 @@ public class DynamicSessionFilterITest {
         user.setId(null);
         user.setPassword(null);
 
-        FilterFields filterFields = FilterFields.fromList(MockUser.class, Arrays.asList("id", "password"));
+        FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
 
         String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC, ATTRIBUTE_FILTER_FIELDS, filterFields);
 

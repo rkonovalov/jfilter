@@ -12,13 +12,9 @@ public class FilterFields implements Serializable {
         this.fieldsMap = new HashMap<>();
     }
 
-    private FilterFields(Class className, List<String> fields) {
+    public FilterFields(Class className, List<String> fields) {
         this();
         this.fieldsMap.put(className, fields);
-    }
-
-    private FilterFields(Map<Class, List<String>> map) {
-        this.fieldsMap = map;
     }
 
     public Map<Class, List<String>> getFieldsMap() {
@@ -41,13 +37,5 @@ public class FilterFields implements Serializable {
     public FilterFields appendToMap(Map<Class, List<String>> fields) {
         fields.forEach(this::appendToMap);
         return this;
-    }
-
-    public static FilterFields fromMap(Map<Class, List<String>> map) {
-        return new FilterFields(map);
-    }
-
-    public static FilterFields fromList(Class className, List<String> fields) {
-        return new FilterFields(className, fields);
     }
 }
