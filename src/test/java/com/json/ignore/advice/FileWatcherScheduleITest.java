@@ -1,9 +1,7 @@
 package com.json.ignore.advice;
 
 import com.json.ignore.mock.config.WSConfigurationEnabled;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
@@ -22,9 +20,6 @@ public class FileWatcherScheduleITest {
 
     private FileWatcher fileWatcher;
     private ScheduledAnnotationBeanPostProcessor taskScheduler;
-
-    @Rule
-    public TemporaryFolder temp = new TemporaryFolder();
 
     @Autowired
     public FileWatcherScheduleITest setFileWatcher(FileWatcher fileWatcher) {

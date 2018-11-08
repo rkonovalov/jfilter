@@ -179,10 +179,8 @@ public final class FileWatcher implements DisposableBean {
             if (!closed)
                 processModifiedFiles();
         } catch (ClosedWatchServiceException e) {
-            System.out.println("close->ClosedWatchServiceException");
             closed = true;
         } catch (InterruptedException e) {
-            System.out.println("close->InterruptedException");
             closed = true;
             Thread.currentThread().interrupt();
         }
