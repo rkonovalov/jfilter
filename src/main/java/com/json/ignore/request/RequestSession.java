@@ -34,10 +34,6 @@ public class RequestSession {
         return session;
     }
 
-    public ServletServerHttpRequest getRequest() {
-        return request;
-    }
-
     private ServletServerHttpRequest getRequest(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             return (ServletServerHttpRequest) serverHttpRequest;
