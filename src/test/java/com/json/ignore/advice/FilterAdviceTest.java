@@ -1,19 +1,13 @@
 package com.json.ignore.advice;
 
-import com.json.ignore.converter.FilterClassWrapper;
-import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
 import com.json.ignore.mock.MockMethods;
-import com.json.ignore.mock.MockUser;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.mock.web.MockHttpServletResponse;
-
 import static org.junit.Assert.*;
 
 public class FilterAdviceTest {
@@ -34,14 +28,5 @@ public class FilterAdviceTest {
     public void testSupportsFalse() {
         boolean result = filterAdvice.supports(MockMethods.methodWithoutAnnotations(), null);
         assertFalse(result);
-    }
-
-    @Test
-    public void testBeforeBodyWriteFalse() {
-        MockUser user = MockClasses.getUserMock();
-
-        FilterClassWrapper wrapper = (FilterClassWrapper) filterAdvice.beforeBodyWrite(user, MockMethods.methodWithoutAnnotations(), MediaType.APPLICATION_JSON,
-                Jaxb2RootElementHttpMessageConverter.class, request, response);
-        assertEquals(MockClasses.getUserMock(), wrapper.getObject());
     }
 }
