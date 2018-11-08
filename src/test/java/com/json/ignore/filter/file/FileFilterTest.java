@@ -8,6 +8,8 @@ import com.json.ignore.request.RequestSession;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class FileFilterTest {
 
     @Test
@@ -32,6 +34,14 @@ public class FileFilterTest {
         FilterFields filterFields = fileFilter.getFields(MockClasses.getUserMock(),
                 new RequestSession(MockHttpRequest.getMockAdminRequest()));
         Assert.assertEquals(0, filterFields.getFieldsMap().size());
+    }
+
+    @Test
+    public void testFileAnnotationClassNotFound() {
+        FileFilter fileFilter = new FileFilter(MockMethods.fileAnnotationClassNotFound());
+        FilterFields filterFields = fileFilter.getFields(MockClasses.getUserMock(),
+                new RequestSession(MockHttpRequest.getMockAdminRequest()));
+        Assert.assertEquals(Arrays.asList("id", "password"), filterFields.getFieldsMap().get(null));
     }
 
 }
