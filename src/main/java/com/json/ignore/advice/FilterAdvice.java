@@ -2,7 +2,7 @@ package com.json.ignore.advice;
 
 import com.json.ignore.converter.FilterClassWrapper;
 import com.json.ignore.filter.BaseFilter;
-import com.json.ignore.filter.FilterFields;
+import com.json.ignore.request.RequestSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -23,10 +23,17 @@ import java.io.Serializable;
 @ControllerAdvice
 public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     private FilterProvider filterProvider;
+    private DynamicFilterProvider dynamicFilterProvider;
 
     @Autowired
     public void setFilterProvider(FilterProvider filterProvider) {
         this.filterProvider = filterProvider;
+    }
+
+    @Autowired
+    public FilterAdvice setDynamicFilterProvider(DynamicFilterProvider dynamicFilterProvider) {
+        this.dynamicFilterProvider = dynamicFilterProvider;
+        return this;
     }
 
     /**
@@ -57,10 +64,13 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
+
+        RequestSession requestSession = new RequestSession(serverHttpRequest);
+
         BaseFilter filter = filterProvider.getFilter(methodParameter);
         if (filter != null) {
-            return new FilterClassWrapper(obj, filter.getIgnoreList(obj, serverHttpRequest));
+            return new FilterClassWrapper(obj, filter.getFields(obj, requestSession));
         } else
-            return new FilterClassWrapper(obj, new FilterFields());
+            return new FilterClassWrapper(obj, dynamicFilterProvider.getFields(methodParameter, requestSession));
     }
 }
