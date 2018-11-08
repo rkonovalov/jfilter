@@ -11,11 +11,4 @@ public class FieldAccessException extends RuntimeException {
         super(cause);
     }
 
-    public FieldAccessException(String msg) {
-        super(msg);
-    }
-
-    public FieldAccessException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
 }
