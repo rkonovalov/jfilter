@@ -41,17 +41,16 @@ public class StrategyFilter extends BaseFilter {
     public FilterFields getFields(Object object, RequestSession request) {
         FilterFields result = new FilterFields();
 
-        if (config != null) {
-            for (SessionStrategy strategy : config) {
-                if (request.isSessionPropertyExists(strategy.attributeName(),
-                        strategy.attributeValue())) {
+        for (SessionStrategy strategy : config) {
+            if (request.isSessionPropertyExists(strategy.attributeName(),
+                    strategy.attributeValue())) {
 
-                    for (FieldFilterSetting setting : strategy.ignoreFields()) {
-                        result.appendToMap(setting.className(), Arrays.asList(setting.fields()));
-                    }
+                for (FieldFilterSetting setting : strategy.ignoreFields()) {
+                    result.appendToMap(setting.className(), Arrays.asList(setting.fields()));
                 }
             }
         }
+
         return result;
     }
 }
