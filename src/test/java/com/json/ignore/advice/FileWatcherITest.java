@@ -20,13 +20,13 @@ import static org.junit.Assert.*;
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
 @RunWith(SpringRunner.class)
 @WebAppConfiguration("src/main/resources")
-public class FileWatcherITTest {
+public class FileWatcherITest {
     private File file;
     private AtomicBoolean modified;
     private FileWatcher fileWatcher;
 
     @Autowired
-    public FileWatcherITTest setFileWatcher(FileWatcher fileWatcher) {
+    public FileWatcherITest setFileWatcher(FileWatcher fileWatcher) {
         this.fileWatcher = fileWatcher;
         return this;
     }
