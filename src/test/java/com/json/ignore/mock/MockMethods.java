@@ -118,6 +118,11 @@ public class MockMethods {
         return findMethodParameterByName("fileAnnotationClassNotFound");
     }
 
+    @FileFilterSetting()
+    public static MethodParameter fileAnnotationEmpty() {
+        return findMethodParameterByName("fileAnnotationEmpty");
+    }
+
 
     private static Method findMethodByName(String methodName) {
         Method[] methods = MockMethods.class.getDeclaredMethods();

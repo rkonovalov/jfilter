@@ -1,5 +1,6 @@
 package com.json.ignore.filter.file;
 
+import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.FilterFields;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
@@ -42,6 +43,15 @@ public class FileFilterTest {
         FilterFields filterFields = fileFilter.getFields(MockClasses.getUserMock(),
                 new RequestSession(MockHttpRequest.getMockAdminRequest()));
         Assert.assertEquals(Arrays.asList("id", "password"), filterFields.getFieldsMap().get(null));
+    }
+
+    @Test
+    public void testFileAnnotationEmpty() {
+        FileFilter fileFilter = new FileFilter(MockMethods.fileAnnotationEmpty());
+        FilterFields filterFields = fileFilter.getFields(MockClasses.getUserMock(),
+                new RequestSession(MockHttpRequest.getMockAdminRequest()));
+
+        Assert.assertEquals(0, filterFields.getFieldsMap().size());
     }
 
 }

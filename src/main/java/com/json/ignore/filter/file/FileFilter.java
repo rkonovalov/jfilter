@@ -73,12 +73,12 @@ public class FileFilter extends BaseFilter {
      * @return {@link String} local file name, else null
      */
     private static String getFileName(String resourceName) {
-        if (resourceName != null) {
+        if (!resourceName.isEmpty()) {
             ClassLoader classLoader = FileFilter.class.getClassLoader();
             URL url = classLoader.getResource(resourceName);
             return url != null ? url.getFile() : resourceName;
         }
-        return null;
+        return "";
     }
 
     /**
