@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -39,13 +40,20 @@ public class DynamicFilterProvider {
         });
     }
 
+    public static boolean isAccept(MethodParameter methodParameter) {
+        return methodParameter.getMethod().getDeclaredAnnotation(DynamicFilter.class) != null;
+    }
+
     public FilterFields getFields(MethodParameter methodParameter, RequestSession request) {
         DynamicFilter dynamicFilterAnnotation = methodParameter.getMethod().getDeclaredAnnotation(DynamicFilter.class);
+        FilterFields filterFields = new FilterFields();
 
-        if (dynamicList.containsKey(dynamicFilterAnnotation.value())) {
-            DynamicFilterEvent filter = dynamicList.get(dynamicFilterAnnotation.value());
-            return filter.onGetFilterFields(methodParameter, request);
-        } else
-            return null;
+        if (dynamicFilterAnnotation != null) {
+            if (dynamicList.containsKey(dynamicFilterAnnotation.value())) {
+                DynamicFilterEvent filter = dynamicList.get(dynamicFilterAnnotation.value());
+                filterFields = filter.onGetFilterFields(methodParameter, request);
+            }
+        }
+        return filterFields;
     }
 }
