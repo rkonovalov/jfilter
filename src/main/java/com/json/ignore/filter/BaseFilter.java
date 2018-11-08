@@ -1,8 +1,8 @@
 package com.json.ignore.filter;
 
 import com.json.ignore.request.RequestMethodParameter;
+import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.server.ServerHttpRequest;
 
 /**
  * This class is base class of filtration mechanism
@@ -32,8 +32,8 @@ public abstract class BaseFilter {
     /**
      * Returns list of ignorable fields of object
      * @param object {@link Object}
-     * @param request {@link ServerHttpRequest}
+     * @param request {@link RequestSession}
      * @return {@link FilterFields}
      */
-    public abstract FilterFields getIgnoreList(Object object, ServerHttpRequest request);
+    public abstract FilterFields getFields(Object object, RequestSession request);
 }

@@ -2,9 +2,8 @@ package com.json.ignore.filter.field;
 
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.FilterFields;
+import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.server.ServerHttpRequest;
-
 import java.util.Arrays;
 
 /**
@@ -38,7 +37,7 @@ public class FieldFilter extends BaseFilter {
     }
 
     @Override
-    public FilterFields getIgnoreList(Object object, ServerHttpRequest request) {
+    public FilterFields getFields(Object object, RequestSession request) {
         FilterFields result = new FilterFields();
 
         for (FieldFilterSetting setting : config) {
