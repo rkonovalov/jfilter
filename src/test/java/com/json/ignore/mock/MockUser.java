@@ -16,6 +16,7 @@ import java.util.Objects;
 
 @JacksonXmlRootElement(localName = "user")
 public class MockUser implements Serializable {
+    private static final long serialVersionUID = -4535075673304533587L;
     private Integer id;
     private String email;
     private String fullName;

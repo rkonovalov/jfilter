@@ -1,40 +1,14 @@
 package com.json.ignore.request;
 
+import com.json.ignore.filter.FilterFields;
 import com.json.ignore.filter.file.FileConfig;
 import com.json.ignore.filter.file.FileConfigTest;
 import com.json.ignore.mock.MockClasses;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Map;
-
 import static org.junit.Assert.*;
 
 public class RequestMethodParameterTest {
-
-   /* @Test
-    public void testClassExists() {
-        Class clazz = RequestMethodParameter.getClassByName("com.json.ignore.filter.BaseFilter");
-        assertNotNull(clazz);
-    }
-
-    @Test
-    public void testClassNotExists() {
-        Class clazz = RequestMethodParameter.getClassByName("com.json.ignore.NotExistedClass");
-        assertNull(clazz);
-    }
-
-    @Test
-    public void testClassEmpty() {
-        Class clazz = RequestMethodParameter.getClassByName("");
-        assertNull(clazz);
-    }
-
-    @Test
-    public void testClassNull() {
-        Class clazz = RequestMethodParameter.getClassByName("");
-        assertNull(clazz);
-    }*/
 
     @Test
     public void testGetStrategyFieldsNotNull() {
@@ -44,22 +18,22 @@ public class RequestMethodParameterTest {
         FileConfig.Strategy strategy = config.getControllers().get(0).getStrategies().get(0);
         assertNotNull(strategy);
 
-        Map<Class, List<String>> fields = strategy.getStrategyFields();
-        assertTrue(fields.keySet().size() > 0);
+        FilterFields filterFields = strategy.appendStrategyFields(new FilterFields());
+        assertTrue(filterFields.getFieldsMap().keySet().size() > 0);
     }
 
     @Test
     public void testGetStrategyFieldsEmptyStrategy() {
         FileConfig.Strategy strategy = new FileConfig.Strategy();
-        Map<Class, List<String>> fields = strategy.getStrategyFields();
-        assertEquals(0, fields.keySet().size());
+        FilterFields filterFields = strategy.appendStrategyFields(new FilterFields());
+        assertEquals(0, filterFields.getFieldsMap().keySet().size());
     }
 
     @Test
     public void testGetStrategyFieldsNull() {
         FileConfig.Strategy strategy = new FileConfig.Strategy();
-        Map<Class, List<String>> fields = strategy.getStrategyFields();
-        assertEquals(0, fields.keySet().size());
+        FilterFields filterFields = strategy.appendStrategyFields(new FilterFields());
+        assertEquals(0, filterFields.getFieldsMap().keySet().size());
     }
 
     @Test
@@ -78,8 +52,8 @@ public class RequestMethodParameterTest {
         strategy.getFilters().add(filter);
         strategy.getFilters().add(filter);
 
-        Map<Class, List<String>> fields = strategy.getStrategyFields();
-        assertEquals(3, fields.get(FileConfigTest.class).size());
+        FilterFields filterFields = strategy.appendStrategyFields(new FilterFields());
+        assertEquals(3, filterFields.getFields(FileConfigTest.class).size());
     }
 
 
