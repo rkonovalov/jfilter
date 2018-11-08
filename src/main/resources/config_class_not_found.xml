@@ -10,6 +10,11 @@
                 <field name="id"/>
                 <field name="password"/>
             </filter>
+
+            <filter class="">
+                <field name="id"/>
+                <field name="password"/>
+            </filter>
         </strategy>
     </controller>
 </config>
