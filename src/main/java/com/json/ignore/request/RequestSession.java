@@ -14,6 +14,7 @@ import java.util.Objects;
  */
 public class RequestSession {
     private final HttpSession session;
+    private final ServletServerHttpRequest request;
 
     /**
      * Creates a new instance of the {@link RequestSession} class.
@@ -21,7 +22,8 @@ public class RequestSession {
      * @param request {@link ServerHttpRequest}
      */
     public RequestSession(ServerHttpRequest request) {
-        this.session = getSession(request);
+        this.request = getRequest(request);
+        this.session = this.request.getServletRequest().getSession();
     }
 
     /**
@@ -32,18 +34,13 @@ public class RequestSession {
         return session;
     }
 
-    /**
-     * Gets session from request
-     * <p>
-     * If request is instance of {@link ServletServerHttpRequest} returns session. Another way return null
-     *
-     * @param serverHttpRequest {@link ServerHttpRequest} http request
-     * @return {@link HttpSession} session, else null
-     */
-    private HttpSession getSession(ServerHttpRequest serverHttpRequest) {
+    public ServletServerHttpRequest getRequest() {
+        return request;
+    }
+
+    private ServletServerHttpRequest getRequest(ServerHttpRequest serverHttpRequest) {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
-            return servletRequest.getServletRequest().getSession();
+            return (ServletServerHttpRequest) serverHttpRequest;
         } else
             throw new IllegalArgumentException();
     }
