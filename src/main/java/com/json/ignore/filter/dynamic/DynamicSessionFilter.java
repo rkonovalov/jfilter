@@ -11,7 +11,7 @@ import org.springframework.core.MethodParameter;
  */
 @SuppressWarnings("WeakerAccess")
 @DynamicFilterComponent
-public class DynamicSession implements DynamicFilterEvent {
+public class DynamicSessionFilter implements DynamicFilterEvent {
     public static final String ATTRIBUTE_FILTER_FIELDS = "ATTRIBUTE_FILTER_FIELDS";
 
     @Override
