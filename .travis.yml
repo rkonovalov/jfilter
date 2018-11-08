@@ -1,9 +1,5 @@
 language: java
 
-env:
-  global:
-    - CODECOV_TOKEN=:uuid-repo-token
-
 jdk:
     - oraclejdk8
 
