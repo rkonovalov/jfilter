@@ -113,6 +113,10 @@ public class MockMethods {
         return findMethodParameterByName("dynamicSessionFilter");
     }
 
+    @FileFilterSetting(fileName = "config_class_not_found.xml")
+    public static MethodParameter fileAnnotationClassNotFound() {
+        return findMethodParameterByName("fileAnnotationClassNotFound");
+    }
 
 
     private static Method findMethodByName(String methodName) {
