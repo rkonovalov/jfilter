@@ -33,4 +33,18 @@ public class FilterFields implements Serializable {
 
         return this;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof FilterFields)) return false;
+        FilterFields that = (FilterFields) object;
+        return Objects.equals(fieldsMap, that.fieldsMap);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(fieldsMap);
+    }
 }
