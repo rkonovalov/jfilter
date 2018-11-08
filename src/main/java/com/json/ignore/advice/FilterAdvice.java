@@ -11,6 +11,7 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+
 import java.io.Serializable;
 
 /**
@@ -40,22 +41,22 @@ public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
      * Attempt to find annotations in method and associated filter
      *
      * @param methodParameter {@link MethodParameter}
-     * @param aClass {@link HttpMessageConverter}
+     * @param aClass          {@link HttpMessageConverter}
      * @return true if found, else false
      */
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-       return filterProvider.isAccept(methodParameter);
+        return filterProvider.isAccept(methodParameter) || DynamicFilterProvider.isAccept(methodParameter);
     }
 
     /**
      * Attempt to find filter and extract ignorable fields from methodParameter
      *
-     * @param obj {@link Serializable} object sent from response of Spring Web Service
-     * @param methodParameter {@link MethodParameter}
-     * @param mediaType {@link MediaType}
-     * @param aClass {@link HttpMessageConverter}
-     * @param serverHttpRequest {@link ServerHttpRequest}
+     * @param obj                {@link Serializable} object sent from response of Spring Web Service
+     * @param methodParameter    {@link MethodParameter}
+     * @param mediaType          {@link MediaType}
+     * @param aClass             {@link HttpMessageConverter}
+     * @param serverHttpRequest  {@link ServerHttpRequest}
      * @param serverHttpResponse {@link ServerHttpResponse}
      * @return {@link FilterClassWrapper} if BaseFilter is found FilterClassWrapper contains list of ignorable fields,
      * else returns FilterClassWrapper with HashMap zero length
