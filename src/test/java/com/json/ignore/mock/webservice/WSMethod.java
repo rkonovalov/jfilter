@@ -1,5 +1,7 @@
 package com.json.ignore.mock.webservice;
 
+import com.json.ignore.filter.dynamic.DynamicFilter;
+import com.json.ignore.filter.dynamic.DynamicSessionFilter;
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.file.FileFilterSetting;
 import com.json.ignore.filter.strategy.SessionStrategy;
@@ -19,6 +21,7 @@ public class WSMethod {
     public static final String MAPPING_SIGN_IN_UN_EXIST_FILE = "/customers/signInUnExistedFile";
     private static final String MAPPING_SIGN_IN_STRATEGY_ANNOTATION = "/customers/signInStrategyAnnotation";
     public static final String MAPPING_SIGN_IN_STRATEGY_DEFAULT = "/customers/signInStrategyDefault";
+    public static final String MAPPING_SIGN_IN_DYNAMIC = "/customers/signInDynamic";
     public static final String MAPPING_SIGN_IN_DEFAULT = "/signInDefault";
 
     @FieldFilterSetting(fields = {"id", "password"})
@@ -84,6 +87,15 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInDefault(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return MockClasses.getUserMock();
+    }
+
+    @DynamicFilter(DynamicSessionFilter.class)
+    @RequestMapping(value = MAPPING_SIGN_IN_DYNAMIC,
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public MockUser signInDynamic(@RequestParam("email") String email, @RequestParam("password") String password) {
         return MockClasses.getUserMock();
     }
 }
