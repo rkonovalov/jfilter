@@ -27,7 +27,6 @@ public class FileWatcherITest {
     private AtomicBoolean modified;
     private FileWatcher fileWatcher;
 
-
     @Rule
     public TemporaryFolder temp = new TemporaryFolder();
 
@@ -49,7 +48,7 @@ public class FileWatcherITest {
     }
 
     @Test
-    public void testFileIsModifiedTrue() throws IOException {
+    public void testAAFileIsModifiedTrue() throws IOException {
         Files.write(file.toPath(), " ".getBytes(), StandardOpenOption.APPEND);
         await().atMost(5, SECONDS).untilTrue(modified);
         assertTrue(modified.get());
@@ -82,9 +81,9 @@ public class FileWatcherITest {
 
 
     @Test
-    public void testIoException() {
-        boolean addedOne = fileWatcher.add(new MockFile("unknown_path"), (f) -> modified.set(true));
-        assertFalse(addedOne);
+    public void testAfterIOException() {
+        boolean add = fileWatcher.add(new MockFile("unknown_path"), (f) -> modified.set(true));
+        assertFalse(add);
     }
 
     @After
