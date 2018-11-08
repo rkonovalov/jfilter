@@ -1,5 +1,6 @@
 package com.json.ignore.advice;
 
+import com.json.ignore.mock.MockFile;
 import com.json.ignore.mock.config.WSConfigurationEnabled;
 import org.junit.*;
 import org.junit.rules.TemporaryFolder;
@@ -82,7 +83,7 @@ public class FileWatcherITest {
 
     @Test
     public void testIoException() {
-        boolean addedOne = fileWatcher.add(new File("unknown_path"), (f) -> modified.set(true));
+        boolean addedOne = fileWatcher.add(new MockFile("unknown_path"), (f) -> modified.set(true));
         assertFalse(addedOne);
     }
 
