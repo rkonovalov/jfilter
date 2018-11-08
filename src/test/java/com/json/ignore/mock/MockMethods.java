@@ -1,7 +1,5 @@
 package com.json.ignore.mock;
 
-import com.json.ignore.dynamic.DynamicDefault;
-import com.json.ignore.dynamic.DynamicFilter;
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.file.FileFilterSetting;
 import com.json.ignore.filter.strategy.SessionStrategy;
@@ -108,10 +106,7 @@ public class MockMethods {
         return findMethodParameterByName("fileAnnotationClassDuplicated");
     }
 
-    @DynamicFilter(DynamicDefault.class)
-    public static MethodParameter dynamicAnnotation() {
-        return findMethodParameterByName("dynamicAnnotation");
-    }
+
 
     private static Method findMethodByName(String methodName) {
         Method[] methods = MockMethods.class.getDeclaredMethods();
@@ -130,8 +125,4 @@ public class MockMethods {
         } else
             return null;
     }
-
-
-
-
 }
