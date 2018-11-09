@@ -159,14 +159,16 @@ public final class FileWatcher implements DisposableBean {
                 continue;
             }
 
-            WatchEvent<Path> ev = (WatchEvent<Path>) event;
+            if (watchKeys.containsKey(key)) {
+                WatchEvent<Path> ev = (WatchEvent<Path>) event;
 
-            String filename = String.format("%s%s%s", watchKeys.get(key).toString(),
-                    File.separator, ev.context().toString());
-            File file = new File(filename);
+                String filename = String.format("%s%s%s", watchKeys.get(key).toString(),
+                        File.separator, ev.context().toString());
+                File file = new File(filename);
 
-            if (fileIsModified(file))
-                fileRecords.get(file).onEvent();
+                if (fileIsModified(file))
+                    fileRecords.get(file).onEvent();
+            }
         }
         key.reset();
     }
