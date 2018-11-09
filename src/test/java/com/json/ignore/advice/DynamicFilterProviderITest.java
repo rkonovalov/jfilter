@@ -59,7 +59,7 @@ public class DynamicFilterProviderITest {
     public void testWithAnnotationClear() throws NoSuchFieldException, IllegalAccessException {
 
         //Clear dynamicList of dynamicFilterProvider
-        Field field = DynamicFilterProvider.class.getDeclaredField("dynamicList");
+        Field field = DynamicFilterProvider.class.getDeclaredField("dynamicFilterMap");
         field.setAccessible(true);
         field.set(dynamicFilterProvider, new HashMap<>());
 
