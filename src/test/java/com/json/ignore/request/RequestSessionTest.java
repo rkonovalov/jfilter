@@ -1,12 +1,11 @@
 package com.json.ignore.request;
 
 import com.json.ignore.mock.MockHttpRequest;
+import com.json.ignore.mock.MockMethods;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class RequestSessionTest {
     private RequestSession requestSession;
@@ -37,6 +36,36 @@ public class RequestSessionTest {
     @Test
     public void testGetSession() {
         assertNotNull(requestSession.getSession());
+    }
+
+    @Test
+    public void testisPropertyExist() {
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
+        boolean result = requestSession.isSessionPropertyExists("ROLE", "ADMIN");
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void testisPropertyNotExist() {
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
+        boolean result = requestSession.isSessionPropertyExists("UN_EXIST", "UN_EXIST");
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void testisPropertyNotExistNull() {
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
+        boolean result = requestSession.isSessionPropertyExists("UN_EXIST", null);
+        assertFalse(result);
+    }
+
+    @Test
+    public void testisPropertyNotExistNulls() {
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
+        boolean result = requestSession.isSessionPropertyExists(null, null);
+        assertFalse(result);
     }
 
 

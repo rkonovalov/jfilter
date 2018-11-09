@@ -37,28 +37,13 @@ public class DynamicSessionFilterITest {
     private DynamicFilterProvider dynamicFilterProvider;
 
     private MockMvc mockMvc;
-    private WebApplicationContext webApplicationContext;
 
     @Autowired
-    public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
-        this.webApplicationContext = webApplicationContext;
-    }
+    private WebApplicationContext webApplicationContext;
 
     @Before
     public void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-    }
-
-
-    @Test
-    public void testOnGetFilterFieldsTrue() {
-        FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
-
-        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
-        ServletServerHttpRequest request = MockHttpRequest.getMockDynamicFilterRequest(filterFields);
-        FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
-
-        assertEquals(filterFields, found);
     }
 
     @Test
@@ -86,6 +71,17 @@ public class DynamicSessionFilterITest {
         String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC, null, null);
 
         assertEquals(user.toString(), result);
+    }
+
+    @Test
+    public void testOnGetFilterFieldsTrue() {
+        FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
+
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+        ServletServerHttpRequest request = MockHttpRequest.getMockDynamicFilterRequest(filterFields);
+        FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
+
+        assertEquals(filterFields, found);
     }
 
     @Test
