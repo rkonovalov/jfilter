@@ -28,8 +28,8 @@ public class FilterRegisterITest {
 
     private FilterRegister filterRegister;
 
-    public static final List<Object> registeredConverters = new ArrayList<>();
-    public static final AtomicBoolean changed = new AtomicBoolean(false);
+    private static final List<Object> registeredConverters = new ArrayList<>();
+    private static final AtomicBoolean changed = new AtomicBoolean(false);
 
     @Autowired(required = false)
     public FilterRegisterITest setFilterRegister(FilterRegister filterRegister) {
@@ -75,6 +75,7 @@ public class FilterRegisterITest {
     @Test
     public void testConfigureMessageConvertersDisabled() throws Exception {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_DISABLED_FILTERED, this);
+        filterRegister.configureMessageConverters(new ArrayList<>());
         await().atMost(5, TimeUnit.SECONDS).untilTrue(FilterRegisterITest.changed);
         System.out.println( FilterRegisterITest.registeredConverters.size());
         boolean contain = containClass(FilterJsonConverter.class);
