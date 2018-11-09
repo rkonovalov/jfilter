@@ -1,3 +1,7 @@
+---
+product.name: test
+---
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/rkonovalov/jsonignore.svg?branch=master)](https://travis-ci.org/rkonovalov/jsonignore)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/json-ignore/badge.svg?style=blue)](https://search.maven.org/search?q=a:json-ignore)
@@ -11,7 +15,7 @@ This module could be used in Spring Web Service project for filter(exclude) of f
 When you used Jackson @JsonView interface and need more powerful and flexibility, this module could be useful.
 For information please follow the links below.
 
-
+Product : ${product.name}
 
 ## Index
 * [Main page](https://rkonovalov.github.io/projects/jsonignore/1.0.7/)
@@ -23,10 +27,18 @@ For information please follow the links below.
   * [Session strategy filter](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-strategy/) 
   * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-file/)
   * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-controller/)
+  * [Dynamic Filter](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-dynamic/)
 * [Release Notes](https://rkonovalov.github.io/projects/jsonignore/1.0.7/release-notes/)
 
 # Release notes
 
+## Version 1.0.8
+    * Added Dynamic Filter which allows to create own filters with custom behaviour
+    * Added DynamicSessionFilter for storing custom field filter in session
+    * Added feature for auto loading XML Schema-based configuration filter when it changed on runtime
+    * Fixed bug in FileFilter which not allowed to load xml configuration from external source
+      
+    
 ## Version 1.0.7
     * Added FileWatcher controller which auto reloads modified XML Schema based configurations
     * Refactored Javadoc
