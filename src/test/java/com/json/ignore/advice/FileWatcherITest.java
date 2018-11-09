@@ -77,8 +77,20 @@ public class FileWatcherITest {
     }
 
     @Test
-    public void testUnExistFile() {
+    public void testUnExistResourceFile() {
         boolean result = fileWatcher.add(resourceFile("un_exist_config.xml"), (f) -> modified.set(true));
+        assertFalse(result);
+    }
+
+    @Test
+    public void testUnExistFile() {
+        boolean result = fileWatcher.add(new File("un_exist_config.xml"), (f) -> modified.set(true));
+        assertFalse(result);
+    }
+
+    @Test
+    public void testFileNull() {
+        boolean result = fileWatcher.add(null, (f) -> modified.set(true));
         assertFalse(result);
     }
 
@@ -131,4 +143,6 @@ public class FileWatcherITest {
         fileWatcher.scheduleModifiedFiles();
         assertTrue(fileWatcher.isClosed());
     }
+
+
 }
