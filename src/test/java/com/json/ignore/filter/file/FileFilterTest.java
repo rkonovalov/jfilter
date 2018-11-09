@@ -1,6 +1,6 @@
 package com.json.ignore.filter.file;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.json.ignore.FieldAccessException;
 import com.json.ignore.filter.FilterFields;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
@@ -55,7 +55,7 @@ public class FileFilterTest {
         Assert.assertEquals(0, filterFields.getFieldsMap().size());
     }
 
-    @Test(expected = IOException.class)
+    @Test(expected = FieldAccessException.class)
     public void testIOException() throws IOException {
         String fileName = FileFilter.getFileName("config_io_exception.xml");
         File file = new File(fileName);
@@ -63,16 +63,15 @@ public class FileFilterTest {
         try (FileOutputStream in = new FileOutputStream(file)) {
             java.nio.channels.FileLock lock = in.getChannel().lock();
             try {
-                FileConfig fileConfig = file != null ? new XmlMapper().readValue(file, FileConfig.class) : null;
-                System.out.println(fileConfig);
+                FileFilter fileFilter = new FileFilter(MockMethods.fileLocked());
+                FilterFields filterFields = fileFilter.getFields(MockClasses.getUserMock(),
+                        new RequestSession(MockHttpRequest.getMockAdminRequest()));
+
+                Assert.assertEquals(0, filterFields.getFieldsMap().size());
             } finally {
                 lock.release();
             }
         }
-
-
-
-
     }
 
 }
