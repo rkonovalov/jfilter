@@ -5,8 +5,8 @@ import com.json.ignore.filter.dynamic.DynamicSessionFilter;
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.file.FileFilterSetting;
 import com.json.ignore.filter.strategy.SessionStrategy;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.MethodParameter;
-
 import java.lang.reflect.Method;
 
 public class MockMethods {
@@ -76,6 +76,11 @@ public class MockMethods {
 
     public static MethodParameter methodWithoutAnnotations() {
         return findMethodParameterByName("methodWithoutAnnotations");
+    }
+
+    @Lazy
+    public static MethodParameter methodWithLazyAnnotation() {
+        return findMethodParameterByName("methodWithLazyAnnotation");
     }
 
     @FileFilterSetting(fileName = "config.xml")

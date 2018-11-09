@@ -59,7 +59,7 @@ public class FilterProviderITest {
     @Test
     public void testGetFilterNull() throws Exception {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
-        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
+        MethodParameter methodParameter = MockMethods.methodWithLazyAnnotation();
 
         BaseFilter filter = filterProvider.getFilter(methodParameter);
 
