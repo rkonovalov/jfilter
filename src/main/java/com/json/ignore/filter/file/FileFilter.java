@@ -72,7 +72,7 @@ public class FileFilter extends BaseFilter {
      * @param resourceName {@link String} resource name
      * @return {@link String} local file name, else null
      */
-    private static String getFileName(String resourceName) {
+    public static String getFileName(String resourceName) {
         if (!resourceName.isEmpty()) {
             ClassLoader classLoader = FileFilter.class.getClassLoader();
             URL url = classLoader.getResource(resourceName);
