@@ -48,10 +48,10 @@ public class FilterRegisterITest {
         System.out.println(FilterRegisterITest.changed.get());
     }
 
-    private boolean containClass(Class clazz) {
+    private boolean beanFilterJsonConverterLoaded() {
         final AtomicBoolean result = new AtomicBoolean(false);
         FilterRegisterITest.registeredConverters.forEach(i -> {
-            if (clazz.isInstance(i))
+            if (i instanceof FilterJsonConverter)
                 result.set(true);
         });
         return result.get();
@@ -61,7 +61,7 @@ public class FilterRegisterITest {
     public void testConfigureMessageConvertersEnabled() throws Exception {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
         await().atMost(5, TimeUnit.SECONDS).untilTrue(FilterRegisterITest.changed);
-        boolean contain = FilterRegisterITest.registeredConverters.size() > 2 && containClass(FilterJsonConverter.class);
+        boolean contain = FilterRegisterITest.registeredConverters.size() > 2 && beanFilterJsonConverterLoaded();
         assertTrue(contain);
     }
 
@@ -71,7 +71,7 @@ public class FilterRegisterITest {
         filterRegister.configureMessageConverters(new ArrayList<>());
         await().atMost(5, TimeUnit.SECONDS).untilTrue(FilterRegisterITest.changed);
         System.out.println( FilterRegisterITest.registeredConverters.size());
-        boolean contain = containClass(FilterJsonConverter.class);
+        boolean contain = beanFilterJsonConverterLoaded();
         assertFalse(contain);
     }
 }
