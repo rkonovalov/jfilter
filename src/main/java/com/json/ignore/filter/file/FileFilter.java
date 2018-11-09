@@ -7,6 +7,7 @@ import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.FilterFields;
 import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -32,11 +33,7 @@ public class FileFilter extends BaseFilter {
 
     public void setFileWatcher(FileWatcher fileWatcher) {
         if (fileWatcher != null)
-            fileWatcher.add(file, f -> {
-                FileConfig fileConfig = load(file);
-                if (fileConfig != null)
-                    config = fileConfig;
-            });
+            fileWatcher.add(file, f -> config = load(file));
     }
 
     /**
