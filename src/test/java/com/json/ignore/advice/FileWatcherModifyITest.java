@@ -36,7 +36,7 @@ public class FileWatcherModifyITest {
 
         modified = new AtomicBoolean(false);
 
-        file = resourceFile("config.xml");
+        file = resourceFile("config_io_exception.xml");
         assertNotNull(file);
 
         boolean add = fileWatcher.add(file, (f) -> modified.set(true));
