@@ -78,7 +78,7 @@ public class FileWatcherModifyITest {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
-    public void testOverflow2() throws IOException {
+    public void testOverflow() throws IOException {
         int fileCount = 200;
 
         Path directory = Files.createTempDirectory("watch-service-overflow");
