@@ -43,9 +43,7 @@ public class FilterRegisterITest {
     public void handleContextRefresh(ContextRefreshedEvent event) {
         FilterRegisterITest.registeredConverters.clear();
         FilterRegisterITest.registeredConverters.addAll(handlerAdapter.getMessageConverters());
-        System.out.println(registeredConverters);
         FilterRegisterITest.changed.set(true);
-        System.out.println(FilterRegisterITest.changed.get());
     }
 
     private boolean beanFilterJsonConverterLoaded() {
