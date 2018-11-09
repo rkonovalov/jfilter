@@ -12,17 +12,17 @@ When you used Jackson @JsonView interface and need more powerful and flexibility
 For information please follow the links below.
 
 ## Index
-* [Main page](https://rkonovalov.github.io/projects/jsonignore/1.0.7/)
-* [Requirements](https://rkonovalov.github.io/projects/jsonignore/1.0.7/requirements/)
-* [Installation](https://rkonovalov.github.io/projects/jsonignore/1.0.7/installation/)
-* [Getting started](https://rkonovalov.github.io/projects/jsonignore/1.0.7/getting-started/)
-* [Examples](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/)
-  * [Simple field filter](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-field/)  
-  * [Session strategy filter](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-strategy/) 
-  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-file/)
-  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-controller/)
-  * [Dynamic Filter](https://rkonovalov.github.io/projects/jsonignore/1.0.7/examples/filter-dynamic/)
-* [Release Notes](https://rkonovalov.github.io/projects/jsonignore/1.0.7/release-notes/)
+* [Main page](https://rkonovalov.github.io/projects/jsonignore/1.0.8/)
+* [Requirements](https://rkonovalov.github.io/projects/jsonignore/1.0.8/requirements/)
+* [Installation](https://rkonovalov.github.io/projects/jsonignore/1.0.8/installation/)
+* [Getting started](https://rkonovalov.github.io/projects/jsonignore/1.0.8/getting-started/)
+* [Examples](https://rkonovalov.github.io/projects/jsonignore/1.0.8/examples/)
+  * [Simple field filter](https://rkonovalov.github.io/projects/jsonignore/1.0.8/examples/filter-field/)  
+  * [Session strategy filter](https://rkonovalov.github.io/projects/jsonignore/1.0.8/examples/filter-strategy/) 
+  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jsonignore/1.0.8/examples/filter-file/)
+  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jsonignore/1.0.8/examples/filter-controller/)
+  * [Dynamic Filter](https://rkonovalov.github.io/projects/jsonignore/1.0.8/examples/filter-dynamic/)
+* [Release Notes](https://rkonovalov.github.io/projects/jsonignore/1.0.8/release-notes/)
 
 # Release notes
 
