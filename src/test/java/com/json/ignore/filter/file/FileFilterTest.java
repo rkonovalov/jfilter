@@ -1,6 +1,6 @@
 package com.json.ignore.filter.file;
 
-import com.json.ignore.FieldAccessException;
+import com.json.ignore.FilterException;
 import com.json.ignore.filter.FilterFields;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
@@ -55,7 +55,7 @@ public class FileFilterTest {
         Assert.assertEquals(0, filterFields.getFieldsMap().size());
     }
 
-    @Test(expected = FieldAccessException.class)
+    @Test(expected = FilterException.class)
     public void testIOException() throws IOException {
         String fileName = FileFilter.getFileName("config_io_exception.xml");
         File file = new File(fileName);
