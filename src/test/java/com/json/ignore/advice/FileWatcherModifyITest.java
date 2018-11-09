@@ -1,27 +1,22 @@
 package com.json.ignore.advice;
 
-import com.json.ignore.advice.FileWatcher;
+
 import com.json.ignore.mock.config.WSConfiguration;
-import com.json.ignore.mock.config.WSConfigurationEnabled;
-import org.awaitility.core.ConditionTimeoutException;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+@Component
 public class FileWatcherModifyITest {
     private FileWatcher fileWatcher;
     private AtomicBoolean modified;
