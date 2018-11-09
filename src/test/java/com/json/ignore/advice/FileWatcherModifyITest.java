@@ -102,9 +102,7 @@ public class FileWatcherModifyITest {
 
         assertEquals(2, filterFields.getFields(MockUser.class).size());
 
-        File file = FileFilter.resourceFile("config_dynamic.xml");
-
-        MockUtils.fileWrite(file, "bad content");
+        MockUtils.fileWrite(FileFilter.resourceFile("config_dynamic.xml"), "bad content");
 
         MockUtils.sleep(10);
 
