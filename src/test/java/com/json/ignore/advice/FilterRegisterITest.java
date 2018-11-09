@@ -1,13 +1,10 @@
 package com.json.ignore.advice;
 
-import com.json.ignore.EnableJsonFilter;
 import com.json.ignore.converter.FilterJsonConverter;
 import com.json.ignore.mock.config.WSConfiguration;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;

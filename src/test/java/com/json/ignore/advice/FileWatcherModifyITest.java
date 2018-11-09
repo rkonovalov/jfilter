@@ -1,18 +1,15 @@
 package com.json.ignore.advice;
 
-
 import com.json.ignore.mock.config.WSConfiguration;
 import org.awaitility.core.ConditionTimeoutException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -81,33 +78,27 @@ public class FileWatcherModifyITest {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
-    public void testOverflow2() throws IOException, InterruptedException {
-        int nfiles = 600;
+    public void testOverflow2() throws IOException {
+        int fileCount = 200;
         boolean overflowed = false;
 
         Path directory = Files.createTempDirectory("watch-service-overflow");
-        final WatchService watchService = FileSystems.getDefault().newWatchService();
+
         directory.register(
-                watchService,
+                fileWatcher.getWatcher(),
+                StandardWatchEventKinds.ENTRY_CREATE,
+                StandardWatchEventKinds.ENTRY_DELETE,
                 StandardWatchEventKinds.ENTRY_MODIFY);
-        final Path p = directory.resolve(Paths.get("Hello World!"));
-        for (int i = 0; i < nfiles; i++) {
+        final Path p = directory.resolve(Paths.get("TEMPORARY_FILE"));
+        for (int i = 0; i < fileCount; i++) {
             File createdFile = Files.createFile(p).toFile();
             createdFile.setLastModified(new Date().getTime() + 1);
             Files.delete(p);
         }
-        List<WatchEvent<?>> events = watchService.take().pollEvents();
-        for (final WatchEvent<?> event : events) {
-            if (event.kind() == StandardWatchEventKinds.OVERFLOW) {
-                overflowed = true;
-                System.out.println("Overflow.");
-                System.out.println("Number of events: " + events.size());
-                assertFalse(overflowed);
-                return;
-            }
-        }
-        System.out.println("No overflow.");
+
+        fileWatcher.scheduleModifiedFiles();
+
         Files.delete(directory);
-        assertFalse(overflowed);
+        assertFalse(fileWatcher.isClosed());
     }
 }
