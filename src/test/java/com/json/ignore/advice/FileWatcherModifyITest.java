@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
@@ -75,5 +77,39 @@ public class FileWatcherModifyITest {
         }
 
         assertFalse(modified.get());
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @Test
+    public void testOverflow2() throws IOException, InterruptedException {
+        int nfiles = 600;
+        boolean overflowed = false;
+
+        Path directory = Files.createTempDirectory("watch-service-overflow");
+        final WatchService watchService = FileSystems.getDefault().newWatchService();
+        directory.register(
+                watchService,
+                StandardWatchEventKinds.ENTRY_CREATE,
+                StandardWatchEventKinds.ENTRY_DELETE,
+                StandardWatchEventKinds.ENTRY_MODIFY);
+        final Path p = directory.resolve(Paths.get("Hello World!"));
+        for (int i = 0; i < nfiles; i++) {
+            File createdFile = Files.createFile(p).toFile();
+            createdFile.setLastModified(new Date().getTime() + 1);
+            Files.delete(p);
+        }
+        List<WatchEvent<?>> events = watchService.take().pollEvents();
+        for (final WatchEvent<?> event : events) {
+            if (event.kind() == StandardWatchEventKinds.OVERFLOW) {
+                overflowed = true;
+                System.out.println("Overflow.");
+                System.out.println("Number of events: " + events.size());
+                assertFalse(overflowed);
+                return;
+            }
+        }
+        System.out.println("No overflow.");
+        Files.delete(directory);
+        assertFalse(overflowed);
     }
 }
