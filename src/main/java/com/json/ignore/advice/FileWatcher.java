@@ -172,7 +172,7 @@ public final class FileWatcher implements DisposableBean {
      * <p>FILE_MODIFY_DELAY used for set schedule repeat delay
      */
     @Scheduled(fixedDelayString = FILE_MODIFY_DELAY)
-    public void scheduleModifiedFiles() throws InterruptedException {
+    public void scheduleModifiedFiles() {
         try {
             if (!closed)
                 processModifiedFiles();
@@ -180,7 +180,7 @@ public final class FileWatcher implements DisposableBean {
             closed = true;
         } catch (InterruptedException e) {
             closed = true;
-            throw new InterruptedException("scheduleModifiedFiles interrupted");
+            Thread.currentThread().interrupt();
         }
     }
 
