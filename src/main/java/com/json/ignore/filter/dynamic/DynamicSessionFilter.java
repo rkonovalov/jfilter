@@ -14,6 +14,15 @@ import org.springframework.core.MethodParameter;
 public class DynamicSessionFilter implements DynamicFilterEvent {
     public static final String ATTRIBUTE_FILTER_FIELDS = "ATTRIBUTE_FILTER_FIELDS";
 
+    /**
+     * Retrieves {@link FilterFields} from session
+     *
+     * <p>Method attempt to retrieve FilterFields from session if it exist
+     *
+     * @param methodParameter method parameter
+     * @param request service request
+     * @return {@link FilterFields} if found in session attributes, otherwise returns empty FilterFields
+     */
     @Override
     public FilterFields onGetFilterFields(MethodParameter methodParameter, RequestSession request) {
 
