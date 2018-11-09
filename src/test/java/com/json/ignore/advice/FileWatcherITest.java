@@ -101,7 +101,7 @@ public class FileWatcherITest {
     @Test
     public void testWatchSchedulerInterruptedException() {
         taskScheduler.destroy();
-        await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
+        await().atMost(10, SECONDS).until(() -> fileWatcher.isClosed());
         try {
             fileWatcher.scheduleModifiedFiles();
         } catch (Exception e) {
