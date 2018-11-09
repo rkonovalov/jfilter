@@ -1,5 +1,6 @@
 package com.json.ignore.advice;
 
+import com.json.ignore.EnableJsonFilter;
 import com.json.ignore.mock.MockClasses;
 import com.json.ignore.mock.MockHttpRequest;
 import com.json.ignore.mock.MockUser;

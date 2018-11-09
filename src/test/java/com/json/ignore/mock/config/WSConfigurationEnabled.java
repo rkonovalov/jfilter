@@ -17,19 +17,15 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @Configuration
 @ComponentScan({"com.json.ignore", "com.json.ignore.advice", "com.json.ignore.mock.webservice"})
-@EnableJsonFilter
 @EnableScheduling
+@EnableJsonFilter
 public class WSConfigurationEnabled extends WebMvcConfigurerAdapter {
-    private  FilterRegister filterRegister;
-
     @Autowired
-    public WSConfigurationEnabled setFilterRegister(FilterRegister filterRegister) {
-        this.filterRegister = filterRegister;
-        return this;
-    }
+    private  FilterRegister filterRegister;
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        if(filterRegister != null)
         filterRegister.configureMessageConverters(converters);
         converters.add(new MappingJackson2HttpMessageConverter());
         converters.add(new MappingJackson2XmlHttpMessageConverter());
