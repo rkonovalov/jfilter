@@ -39,7 +39,7 @@ public class RequestSessionTest {
     }
 
     @Test
-    public void testisPropertyExist() {
+    public void testPropertyExist() {
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
         boolean result = requestSession.isSessionPropertyExists("ROLE", "ADMIN");
 
@@ -47,7 +47,7 @@ public class RequestSessionTest {
     }
 
     @Test
-    public void testisPropertyNotExist() {
+    public void testPropertyNotExist() {
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
         boolean result = requestSession.isSessionPropertyExists("UN_EXIST", "UN_EXIST");
 
@@ -55,27 +55,39 @@ public class RequestSessionTest {
     }
 
     @Test
-    public void testisPropertyNotExistNullProperty() {
+    public void testPropertyNotExistNullProperty() {
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
         boolean result = requestSession.isSessionPropertyExists(null, "UN_EXIST");
         assertFalse(result);
     }
 
     @Test
-    public void testisPropertyNotExistNullValue() {
+    public void testPropertyNotExistNullValue() {
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
         boolean result = requestSession.isSessionPropertyExists("UN_EXIST", null);
         assertFalse(result);
     }
 
     @Test
-    public void testisPropertyNotExistNulls() {
+    public void testPropertyNotExistNulls() {
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
         boolean result = requestSession.isSessionPropertyExists(null, null);
         assertFalse(result);
     }
 
+    @Test
+    public void testGetSessionProperty() {
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
+        Object result = requestSession.getSessionProperty("ROLE");
+        assertNotNull(result);
+    }
 
+    @Test
+    public void testGetSessionPropertyFalse() {
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
+        Object result = requestSession.getSessionProperty("UN_EXIST");
+        assertNull(result);
+    }
 
 
 }
