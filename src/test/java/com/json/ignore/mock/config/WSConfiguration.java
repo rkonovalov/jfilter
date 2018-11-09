@@ -27,14 +27,14 @@ public class WSConfiguration {
     @ContextConfiguration(classes = WSConfigurationEnabled.class)
     @WebAppConfiguration("src/main/resources")
     @RunWith(SpringRunner.class)
-    public static class Enabled {
+    private class Enabled {
 
     }
 
     @ContextConfiguration(classes = WSConfigurationDisabled.class)
     @WebAppConfiguration("src/main/resources")
     @RunWith(SpringRunner.class)
-    public static class Disabled {
+    private class Disabled {
 
     }
 }
