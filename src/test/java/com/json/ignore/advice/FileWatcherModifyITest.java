@@ -89,8 +89,6 @@ public class FileWatcherModifyITest {
         final WatchService watchService = FileSystems.getDefault().newWatchService();
         directory.register(
                 watchService,
-                StandardWatchEventKinds.ENTRY_CREATE,
-                StandardWatchEventKinds.ENTRY_DELETE,
                 StandardWatchEventKinds.ENTRY_MODIFY);
         final Path p = directory.resolve(Paths.get("Hello World!"));
         for (int i = 0; i < nfiles; i++) {
