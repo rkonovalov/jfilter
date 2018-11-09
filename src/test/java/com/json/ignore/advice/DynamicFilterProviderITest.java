@@ -6,6 +6,7 @@ import com.json.ignore.mock.MockMethods;
 import com.json.ignore.mock.MockUser;
 import com.json.ignore.mock.config.WSConfigurationEnabled;
 import com.json.ignore.request.RequestSession;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import static org.junit.Assert.assertNotEquals;
 @WebAppConfiguration("src/main/resources")
 public class DynamicFilterProviderITest {
     private DynamicFilterProvider dynamicFilterProvider;
+    private FilterFields filterFields;
 
     @Autowired
     public DynamicFilterProviderITest setDynamicFilterProvider(DynamicFilterProvider dynamicFilterProvider) {
@@ -33,10 +35,14 @@ public class DynamicFilterProviderITest {
         return this;
     }
 
+    @Before
+    public void init() {
+        filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
+    }
+
     @Test
     public void testWithAnnotation() {
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
-        FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
 
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(filterFields));
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
@@ -47,7 +53,6 @@ public class DynamicFilterProviderITest {
     @Test
     public void testWithoutAnnotation() {
         MethodParameter methodParameter = MockMethods.withoutFileFilters();
-        FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
 
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(filterFields));
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
@@ -65,7 +70,6 @@ public class DynamicFilterProviderITest {
 
 
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
-        FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
 
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(filterFields));
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
