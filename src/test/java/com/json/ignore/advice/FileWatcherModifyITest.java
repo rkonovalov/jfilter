@@ -90,10 +90,9 @@ public class FileWatcherModifyITest {
 
 
     @Test
-    public void testDynamicChange() throws FilterException {
+    public void testDynamicChangeError() throws FilterException {
         boolean copyResult = MockUtils.fileCopy("config.xml", "config_dynamic.xml");
         assertTrue(copyResult);
-
 
         MethodParameter methodParameter = MockMethods.fileFilterDynamic();
         RequestSession request = new RequestSession(MockHttpRequest.getMockUserRequest());
@@ -112,8 +111,34 @@ public class FileWatcherModifyITest {
         filterFields = filter.getFields(MockClasses.getUserMock(), request);
 
         assertEquals(2, filterFields.getFields(MockUser.class).size());
+    }
 
-        System.out.println(filterFields);
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @Test
+    public void testDynamicChange() throws FilterException {
+        boolean copyResult = MockUtils.fileCopy("config.xml", "config_dynamic.xml");
+        assertTrue(copyResult);
+
+        MethodParameter methodParameter = MockMethods.fileFilterDynamic();
+        RequestSession request = new RequestSession(MockHttpRequest.getMockUserRequest());
+
+        BaseFilter filter = filterProvider.getFilter(methodParameter);
+        FilterFields filterFields = filter.getFields(MockClasses.getUserMock(), request);
+
+        assertEquals(2, filterFields.getFields(MockUser.class).size());
+
+        File file = FileFilter.resourceFile("config_dynamic.xml");
+
+        if (file != null)
+            file.setLastModified(new Date().getTime() + 1000);
+
+
+        MockUtils.sleep(10);
+
+        filterFields = filter.getFields(MockClasses.getUserMock(), request);
+
+        assertEquals(2, filterFields.getFields(MockUser.class).size());
 
     }
 }
