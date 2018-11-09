@@ -89,5 +89,12 @@ public class RequestSessionTest {
         assertNull(result);
     }
 
+    @Test
+    public void testGetSessionPropertyNull() {
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
+        Object result = requestSession.getSessionProperty(null);
+        assertNull(result);
+    }
+
 
 }
