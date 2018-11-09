@@ -39,4 +39,9 @@ public class FilterFields implements Serializable {
         FilterFields that = (FilterFields) object;
         return Objects.equals(fieldsMap, that.fieldsMap);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fieldsMap);
+    }
 }
