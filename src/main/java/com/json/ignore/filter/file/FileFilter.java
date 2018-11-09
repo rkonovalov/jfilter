@@ -7,19 +7,14 @@ import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.FilterFields;
 import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
-
-import javax.servlet.FilterConfig;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class used for filtration of object's fields based on xml file configuration
  */
 public class FileFilter extends BaseFilter {
-    private static final Logger logger = Logger.getLogger(FileFilter.class.getName());
 
     private FileConfig config;
     private Class controllerClass;
