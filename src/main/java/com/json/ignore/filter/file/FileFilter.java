@@ -1,7 +1,7 @@
 package com.json.ignore.filter.file;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.json.ignore.FieldAccessException;
+import com.json.ignore.FilterException;
 import com.json.ignore.advice.FileWatcher;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.FilterFields;
@@ -58,7 +58,7 @@ public class FileFilter extends BaseFilter {
         try {
             return file != null ? new XmlMapper().readValue(file, FileConfig.class) : null;
         } catch (IOException e) {
-            throw new FieldAccessException(e);
+            throw new FilterException(e);
         }
     }
 
