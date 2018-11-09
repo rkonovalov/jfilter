@@ -3,7 +3,6 @@ package com.json.ignore.advice;
 import com.json.ignore.FilterException;
 import com.json.ignore.filter.BaseFilter;
 import com.json.ignore.filter.FilterFields;
-import com.json.ignore.filter.file.FileFilter;
 import com.json.ignore.mock.*;
 import com.json.ignore.mock.config.WSConfiguration;
 import com.json.ignore.request.RequestSession;
@@ -19,6 +18,9 @@ import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
+import static com.json.ignore.mock.MockUtils.fileCopy;
+import static com.json.ignore.mock.MockUtils.fileWrite;
+import static com.json.ignore.mock.MockUtils.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.Assert.*;
@@ -91,7 +93,7 @@ public class FileWatcherModifyITest {
 
     @Test
     public void testDynamicChangeError() throws FilterException {
-        boolean copyResult = MockUtils.fileCopy("config.xml", "config_dynamic.xml");
+        boolean copyResult = fileCopy("config.xml", "config_dynamic.xml");
         assertTrue(copyResult);
 
         MethodParameter methodParameter = MockMethods.fileFilterDynamic();
@@ -102,9 +104,9 @@ public class FileWatcherModifyITest {
 
         assertEquals(2, filterFields.getFields(MockUser.class).size());
 
-        MockUtils.fileWrite(FileFilter.resourceFile("config_dynamic.xml"), "bad content");
+        fileWrite(resourceFile("config_dynamic.xml"), "bad content");
 
-        MockUtils.sleep(10);
+        sleep(10);
 
         filterFields = filter.getFields(MockClasses.getUserMock(), request);
 
@@ -115,7 +117,7 @@ public class FileWatcherModifyITest {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
     public void testDynamicChange() throws FilterException {
-        boolean copyResult = MockUtils.fileCopy("config.xml", "config_dynamic.xml");
+        boolean copyResult = fileCopy("config.xml", "config_dynamic.xml");
         assertTrue(copyResult);
 
         MethodParameter methodParameter = MockMethods.fileFilterDynamic();
@@ -126,13 +128,13 @@ public class FileWatcherModifyITest {
 
         assertEquals(2, filterFields.getFields(MockUser.class).size());
 
-        File file = FileFilter.resourceFile("config_dynamic.xml");
+        File file = resourceFile("config_dynamic.xml");
 
         if (file != null)
             file.setLastModified(new Date().getTime() + 1000);
 
 
-        MockUtils.sleep(10);
+        sleep(10);
 
         filterFields = filter.getFields(MockClasses.getUserMock(), request);
 
