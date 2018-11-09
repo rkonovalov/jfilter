@@ -1,13 +1,11 @@
 package com.json.ignore.advice;
 
 import com.json.ignore.filter.FilterFields;
-import com.json.ignore.filter.dynamic.DynamicFilterEvent;
 import com.json.ignore.mock.MockHttpRequest;
 import com.json.ignore.mock.MockMethods;
 import com.json.ignore.mock.MockUser;
 import com.json.ignore.mock.config.WSConfigurationEnabled;
 import com.json.ignore.request.RequestSession;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

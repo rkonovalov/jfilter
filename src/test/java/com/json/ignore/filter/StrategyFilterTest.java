@@ -11,12 +11,11 @@ import org.junit.Test;
 import org.springframework.core.MethodParameter;
 
 public class StrategyFilterTest {
-    private MethodParameter methodParameter;
     private StrategyFilter strategyFilter;
 
     @Before
     public void init() {
-        methodParameter = MockMethods.mockIgnoreStrategyMethod();
+        MethodParameter methodParameter = MockMethods.mockIgnoreStrategyMethod();
         strategyFilter = new StrategyFilter(methodParameter);
     }
 

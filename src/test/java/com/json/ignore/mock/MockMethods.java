@@ -5,7 +5,6 @@ import com.json.ignore.filter.dynamic.DynamicSessionFilter;
 import com.json.ignore.filter.field.FieldFilterSetting;
 import com.json.ignore.filter.file.FileFilterSetting;
 import com.json.ignore.filter.strategy.SessionStrategy;
-import com.json.ignore.mock.config.MockDynamicFilter;
 import org.springframework.core.MethodParameter;
 
 import java.lang.reflect.Method;

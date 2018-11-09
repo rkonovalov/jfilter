@@ -1,7 +1,6 @@
 package com.json.ignore.request;
 
 import com.json.ignore.mock.MockHttpRequest;
-import com.json.ignore.mock.MockMethods;
 import org.junit.Before;
 import org.junit.Test;
 
