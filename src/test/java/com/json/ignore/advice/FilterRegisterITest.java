@@ -25,9 +25,8 @@ import static org.junit.Assert.assertTrue;
 
 @Component
 public class FilterRegisterITest {
-
     private FilterRegister filterRegister;
-
+    private RequestMappingHandlerAdapter handlerAdapter;
     private static final List<Object> registeredConverters = new ArrayList<>();
     private static final AtomicBoolean changed = new AtomicBoolean(false);
 
@@ -36,9 +35,6 @@ public class FilterRegisterITest {
         this.filterRegister = filterRegister;
         return this;
     }
-
-
-    private RequestMappingHandlerAdapter handlerAdapter;
 
     @Autowired(required = false)
     public FilterRegisterITest setHandlerAdapter(RequestMappingHandlerAdapter handlerAdapter) {
