@@ -35,7 +35,7 @@ public class MockClasses {
     public static FileConfig getMockAdminFileConfig() {
 
         FileConfig.Filter filter = new FileConfig.Filter();
-        filter.setClassName("com.json.ignore.filter.file.FileConfigTest");
+        filter.setClassName("com.json.ignore.filter.file.FileWSConfigurationTest");
         filter.getFields().add(new FileConfig.Field().setName("id"));
         filter.getFields().add(new FileConfig.Field().setName("password"));
 
@@ -46,7 +46,7 @@ public class MockClasses {
                 .add(filter);
 
         FileConfig.Controller controller = new FileConfig.Controller();
-        controller.setClassName("com.json.ignore.filter.file.FileConfigTest")
+        controller.setClassName("com.json.ignore.filter.file.FileWSConfigurationTest")
                 .getStrategies()
                 .add(strategy);
 

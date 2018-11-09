@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class FileConfigTest {
+public class FileWSConfigurationTest {
     private FileConfig mockConfig;
 
     @Before
@@ -19,7 +19,7 @@ public class FileConfigTest {
     @Test
     public void testControllerClassName() {
         FileConfig.Controller controller = mockConfig.getControllers().get(0);
-        assertEquals("com.json.ignore.filter.file.FileConfigTest", controller.getClassName());
+        assertEquals("com.json.ignore.filter.file.FileWSConfigurationTest", controller.getClassName());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class FileConfigTest {
         FileConfig.Controller controller = mockConfig.getControllers().get(0);
         FileConfig.Strategy strategy = controller.getStrategies().get(0);
         FileConfig.Filter filter = strategy.getFilters().get(0);
-        assertEquals("com.json.ignore.filter.file.FileConfigTest", filter.getClassName());
+        assertEquals("com.json.ignore.filter.file.FileWSConfigurationTest", filter.getClassName());
     }
 
     @Test

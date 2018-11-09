@@ -2,7 +2,7 @@ package com.json.ignore.request;
 
 import com.json.ignore.filter.FilterFields;
 import com.json.ignore.filter.file.FileConfig;
-import com.json.ignore.filter.file.FileConfigTest;
+import com.json.ignore.filter.file.FileWSConfigurationTest;
 import com.json.ignore.mock.MockClasses;
 import org.junit.Test;
 
@@ -53,7 +53,7 @@ public class RequestMethodParameterTest {
         strategy.getFilters().add(filter);
 
         FilterFields filterFields = strategy.appendStrategyFields(new FilterFields());
-        assertEquals(3, filterFields.getFields(FileConfigTest.class).size());
+        assertEquals(3, filterFields.getFields(FileWSConfigurationTest.class).size());
     }
 
 
