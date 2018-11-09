@@ -190,6 +190,11 @@ public final class FileWatcher implements DisposableBean {
         return closed;
     }
 
+    public FileWatcher setClosed(boolean closed) {
+        this.closed = closed;
+        return this;
+    }
+
     public WatchService getWatcher() {
         return watcher;
     }
