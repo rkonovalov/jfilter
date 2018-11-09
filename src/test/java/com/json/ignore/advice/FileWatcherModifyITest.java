@@ -1,30 +1,44 @@
 package com.json.ignore.advice;
 
+import com.json.ignore.FilterException;
+import com.json.ignore.filter.BaseFilter;
+import com.json.ignore.filter.FilterFields;
+import com.json.ignore.filter.file.FileFilter;
+import com.json.ignore.mock.*;
 import com.json.ignore.mock.config.WSConfiguration;
+import com.json.ignore.request.RequestSession;
 import org.awaitility.core.ConditionTimeoutException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @Component
 public class FileWatcherModifyITest {
     private FileWatcher fileWatcher;
     private AtomicBoolean modified;
     private File file;
+    private FilterProvider filterProvider;
 
     @Autowired
     public void setFileWatcher(FileWatcher fileWatcher) {
         this.fileWatcher = fileWatcher;
+    }
+
+    @Autowired
+    public FileWatcherModifyITest setFilterProvider(FilterProvider filterProvider) {
+        this.filterProvider = filterProvider;
+        return this;
     }
 
     @Before
@@ -72,5 +86,34 @@ public class FileWatcherModifyITest {
         }
 
         assertFalse(modified.get());
+    }
+
+
+    @Test
+    public void testDynamicChange() throws FilterException {
+        boolean copyResult = MockUtils.fileCopy("config.xml", "config_dynamic.xml");
+        assertTrue(copyResult);
+
+
+        MethodParameter methodParameter = MockMethods.fileFilterDynamic();
+        RequestSession request = new RequestSession(MockHttpRequest.getMockUserRequest());
+
+        BaseFilter filter = filterProvider.getFilter(methodParameter);
+        FilterFields filterFields = filter.getFields(MockClasses.getUserMock(), request);
+
+        assertEquals(2, filterFields.getFields(MockUser.class).size());
+
+        File file = FileFilter.resourceFile("config_dynamic.xml");
+
+        MockUtils.fileWrite(file, "bad content");
+
+        MockUtils.sleep(10);
+
+        filterFields = filter.getFields(MockClasses.getUserMock(), request);
+
+        assertEquals(2, filterFields.getFields(MockUser.class).size());
+
+        System.out.println(filterFields);
+
     }
 }
