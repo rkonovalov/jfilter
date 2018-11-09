@@ -5,7 +5,6 @@ import com.json.ignore.mock.MockMethods;
 import com.json.ignore.mock.config.WSConfiguration;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.context.WebApplicationContext;
@@ -16,10 +15,6 @@ import static org.junit.Assert.*;
 public class FilterProviderITest {
     @Autowired
     private WebApplicationContext webApplicationContext;
-
-    @Autowired
-    private ConfigurableApplicationContext applicationContext;
-
 
     private FilterProvider filterProvider;
 

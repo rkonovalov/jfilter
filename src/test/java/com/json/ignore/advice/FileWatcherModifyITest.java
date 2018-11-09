@@ -80,7 +80,6 @@ public class FileWatcherModifyITest {
     @Test
     public void testOverflow2() throws IOException {
         int fileCount = 200;
-        boolean overflowed = false;
 
         Path directory = Files.createTempDirectory("watch-service-overflow");
 
