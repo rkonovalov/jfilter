@@ -128,6 +128,11 @@ public class MockMethods {
         return findMethodParameterByName("fileAnnotationEmpty");
     }
 
+    @FileFilterSetting(fileName = "config_io_exception.xml")
+    public static MethodParameter fileLocked() {
+        return findMethodParameterByName("fileLocked");
+    }
+
 
     private static Method findMethodByName(String methodName) {
         Method[] methods = MockMethods.class.getDeclaredMethods();
