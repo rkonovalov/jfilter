@@ -148,24 +148,22 @@ public final class FileWatcher implements DisposableBean {
     @SuppressWarnings("unchecked")
     private void processModifiedFiles() throws InterruptedException {
         WatchKey key = watcher.take();
-        if (key != null) {
-            for (WatchEvent<?> event : key.pollEvents()) {
-                WatchEvent.Kind<?> kind = event.kind();
+        for (WatchEvent<?> event : key.pollEvents()) {
+            WatchEvent.Kind<?> kind = event.kind();
 
-                if (kind == StandardWatchEventKinds.OVERFLOW)
-                    continue;
+            if (kind == StandardWatchEventKinds.OVERFLOW)
+                continue;
 
-                WatchEvent<Path> ev = (WatchEvent<Path>) event;
+            WatchEvent<Path> ev = (WatchEvent<Path>) event;
 
-                String filename = String.format("%s%s%s", watchKeys.get(key).toString(),
-                        File.separator, ev.context().toString());
-                File file = new File(filename);
+            String filename = String.format("%s%s%s", watchKeys.get(key).toString(),
+                    File.separator, ev.context().toString());
+            File file = new File(filename);
 
-                if (fileIsModified(file))
-                    fileRecords.get(file).onEvent();
-            }
-            key.reset();
+            if (fileIsModified(file))
+                fileRecords.get(file).onEvent();
         }
+        key.reset();
     }
 
     /**
@@ -180,7 +178,7 @@ public final class FileWatcher implements DisposableBean {
                 processModifiedFiles();
         } catch (ClosedWatchServiceException e) {
             closed = true;
-        }catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             closed = true;
             throw new InterruptedException("scheduleModifiedFiles interrupted");
         }
