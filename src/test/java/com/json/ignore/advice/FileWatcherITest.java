@@ -108,16 +108,20 @@ public class FileWatcherITest {
     }
 
     @Test
-    public void testWatchSchedulerInterruptedException() {
+    public void testWatchSchedulerInterruptedException() throws InterruptedException {
         taskScheduler.destroy();
         await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
-        fileWatcher.scheduleModifiedFiles();
+        try {
+            fileWatcher.scheduleModifiedFiles();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            fileWatcher.scheduleModifiedFiles();
+        }
         assertTrue(fileWatcher.isClosed());
-
     }
 
     @Test
-    public void testWatchSchedulerClosedException() throws IOException {
+    public void testWatchSchedulerClosedException() throws IOException, InterruptedException {
         fileWatcher.getWatcher().close();
         await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
         fileWatcher.scheduleModifiedFiles();
