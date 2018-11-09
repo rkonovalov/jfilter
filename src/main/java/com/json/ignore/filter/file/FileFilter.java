@@ -8,14 +8,19 @@ import com.json.ignore.filter.FilterFields;
 import com.json.ignore.request.RequestSession;
 import org.springframework.core.MethodParameter;
 
+import javax.servlet.FilterConfig;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class used for filtration of object's fields based on xml file configuration
  */
 public class FileFilter extends BaseFilter {
+    private static final Logger logger = Logger.getLogger(FileFilter.class.getName());
+
     private FileConfig config;
     private Class controllerClass;
     private File file;
@@ -32,7 +37,11 @@ public class FileFilter extends BaseFilter {
 
     public void setFileWatcher(FileWatcher fileWatcher) {
         if (fileWatcher != null)
-            fileWatcher.add(file, f -> config = load(file));
+            fileWatcher.add(file, f -> {
+                FileConfig fileConfig = load(file);
+                if (fileConfig != null)
+                    config = fileConfig;
+            });
     }
 
     /**
@@ -56,7 +65,7 @@ public class FileFilter extends BaseFilter {
     private FileConfig load(File file) {
         this.file = file;
         try {
-            return file != null ? new XmlMapper().readValue(file, FileConfig.class) : null;
+            return file != null ? new XmlMapper().readValue(file, FileConfig.class) : this.config;
         } catch (IOException e) {
             throw new FilterException(e);
         }
