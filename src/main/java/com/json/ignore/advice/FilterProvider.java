@@ -31,7 +31,6 @@ public class FilterProvider {
 
     /**
      * Creates a new instance of the {@link FilterProvider} class.
-     *
      */
     public FilterProvider() {
         this.filters = new ConcurrentHashMap<>();
@@ -53,6 +52,7 @@ public class FilterProvider {
 
     /**
      * Returns true if found EnableJsonFilter annotation in one of Spring beans
+     *
      * @param webApplicationContext {@link WebApplicationContext}
      * @return true if found, else false
      */
@@ -62,6 +62,7 @@ public class FilterProvider {
 
     /**
      * Returns one of filters which supports annotation specified in MethodParameter or in Spring Web Service where MethodParameter is declared
+     *
      * @param methodParameter {@link MethodParameter}
      * @return {@link BaseFilter}
      */
@@ -75,13 +76,12 @@ public class FilterProvider {
             } else {
                 //Create and put filter in cache
                 BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
-                if (filter != null) {
-                    if(filter instanceof FileFilter) {
-                        ((FileFilter)filter).setFileWatcher(fileWatcher);
-                    }
-                    filters.put(key, filter);
-                    return filter;
+
+                if (filter instanceof FileFilter) {
+                    ((FileFilter) filter).setFileWatcher(fileWatcher);
                 }
+                filters.put(key, filter);
+                return filter;
             }
         }
         return null;
