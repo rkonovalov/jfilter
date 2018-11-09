@@ -6,6 +6,7 @@ import org.junit.*;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -26,6 +27,14 @@ public class FileWatcherITest {
     private File file;
     private AtomicBoolean modified;
     private FileWatcher fileWatcher;
+
+    private ScheduledAnnotationBeanPostProcessor taskScheduler;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    public void setTaskScheduler(ScheduledAnnotationBeanPostProcessor taskScheduler) {
+        this.taskScheduler = taskScheduler;
+    }
 
     @Rule
     public TemporaryFolder temp = new TemporaryFolder();
@@ -92,15 +101,23 @@ public class FileWatcherITest {
         assertFalse(result);
     }
 
+    @Test
+    public void testClose() throws IOException {
+        fileWatcher.destroy();
+        assertTrue(fileWatcher.isClosed());
+    }
 
-    @After
-    public void testFinalize() {
-        try {
-            assertNotNull(fileWatcher);
-        } finally {
-            fileWatcher = null;
-            System.gc();
-            assertNull(fileWatcher);
-        }
+    @Test
+    public void testWatchSchedulerInterruptedException() {
+        taskScheduler.destroy();
+        await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
+        assertTrue(fileWatcher.isClosed());
+    }
+
+    @Test
+    public void testWatchSchedulerClosedException() throws IOException {
+        fileWatcher.getWatcher().close();
+        await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
+        assertTrue(fileWatcher.isClosed());
     }
 }
