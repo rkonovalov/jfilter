@@ -133,6 +133,11 @@ public class MockMethods {
         return findMethodParameterByName("fileLocked");
     }
 
+    @FileFilterSetting(fileName = "config_dynamic.xml")
+    public static MethodParameter fileFilterDynamic() {
+        return findMethodParameterByName("fileFilterDynamic");
+    }
+
 
     private static Method findMethodByName(String methodName) {
         Method[] methods = MockMethods.class.getDeclaredMethods();

@@ -1,5 +1,5 @@
 package com.json.ignore.mock.config;
-  
+
 import com.json.ignore.EnableJsonFilter;
 import com.json.ignore.advice.FilterRegister;
 import org.junit.runner.RunWith;
@@ -12,6 +12,7 @@ import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConve
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -21,12 +22,12 @@ import java.util.List;
 @EnableJsonFilter
 public class WSConfigurationEnabled extends WebMvcConfigurerAdapter {
     @Autowired
-    private  FilterRegister filterRegister;
+    private FilterRegister filterRegister;
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        if(filterRegister != null)
-        filterRegister.configureMessageConverters(converters);
+        if (filterRegister != null)
+            filterRegister.configureMessageConverters(converters);
         converters.add(new MappingJackson2HttpMessageConverter());
         converters.add(new MappingJackson2XmlHttpMessageConverter());
         super.configureMessageConverters(converters);

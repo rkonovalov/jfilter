@@ -8,7 +8,6 @@ import com.json.ignore.mock.MockMethods;
 import com.json.ignore.request.RequestSession;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.io.*;
 import java.util.Arrays;
 
@@ -73,5 +72,4 @@ public class FileFilterTest {
             }
         }
     }
-
 }
