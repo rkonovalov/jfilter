@@ -1,7 +1,3 @@
----
-product.name: test
----
-
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/rkonovalov/jsonignore.svg?branch=master)](https://travis-ci.org/rkonovalov/jsonignore)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/json-ignore/badge.svg?style=blue)](https://search.maven.org/search?q=a:json-ignore)
@@ -14,8 +10,6 @@ product.name: test
 This module could be used in Spring Web Service project for filter(exclude) of fields in Service response.
 When you used Jackson @JsonView interface and need more powerful and flexibility, this module could be useful.
 For information please follow the links below.
-
-Product : ${product.name}
 
 ## Index
 * [Main page](https://rkonovalov.github.io/projects/jsonignore/1.0.7/)
