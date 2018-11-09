@@ -111,6 +111,7 @@ public class FileWatcherITest {
     public void testWatchSchedulerInterruptedException() {
         taskScheduler.destroy();
         await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
+        fileWatcher.scheduleModifiedFiles();
         assertTrue(fileWatcher.isClosed());
     }
 
@@ -118,6 +119,7 @@ public class FileWatcherITest {
     public void testWatchSchedulerClosedException() throws IOException {
         fileWatcher.getWatcher().close();
         await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
+        fileWatcher.scheduleModifiedFiles();
         assertTrue(fileWatcher.isClosed());
     }
 }
