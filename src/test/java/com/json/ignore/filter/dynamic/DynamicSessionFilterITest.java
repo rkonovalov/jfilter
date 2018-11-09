@@ -73,7 +73,7 @@ public class DynamicSessionFilterITest {
         assertEquals(user.toString(), result);
     }
 
-    @Test
+   // @Test
     public void testOnGetFilterFieldsTrue() {
         FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
 
@@ -84,7 +84,7 @@ public class DynamicSessionFilterITest {
         assertEquals(filterFields, found);
     }
 
-    @Test
+ //   @Test
     public void testNotSetFilterFields() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);

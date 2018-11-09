@@ -55,7 +55,14 @@ public class RequestSessionTest {
     }
 
     @Test
-    public void testisPropertyNotExistNull() {
+    public void testisPropertyNotExistNullProperty() {
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
+        boolean result = requestSession.isSessionPropertyExists(null, "UN_EXIST");
+        assertFalse(result);
+    }
+
+    @Test
+    public void testisPropertyNotExistNullValue() {
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
         boolean result = requestSession.isSessionPropertyExists("UN_EXIST", null);
         assertFalse(result);
@@ -67,6 +74,8 @@ public class RequestSessionTest {
         boolean result = requestSession.isSessionPropertyExists(null, null);
         assertFalse(result);
     }
+
+
 
 
 }
