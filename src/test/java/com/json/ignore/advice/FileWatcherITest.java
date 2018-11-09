@@ -113,12 +113,17 @@ public class FileWatcherITest {
         await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
         fileWatcher.scheduleModifiedFiles();
         assertTrue(fileWatcher.isClosed());
+
     }
 
     @Test
     public void testWatchSchedulerClosedException() throws IOException {
         fileWatcher.getWatcher().close();
         await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
+        fileWatcher.scheduleModifiedFiles();
+        assertTrue(fileWatcher.isClosed());
+
+        fileWatcher.setClosed(false);
         fileWatcher.scheduleModifiedFiles();
         assertTrue(fileWatcher.isClosed());
     }
