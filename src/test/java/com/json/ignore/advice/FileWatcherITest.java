@@ -75,12 +75,6 @@ public class FileWatcherITest {
     }
 
     @Test
-    public void testFileNull() {
-        boolean result = fileWatcher.add(null, (f) -> modified.set(true));
-        assertFalse(result);
-    }
-
-    @Test
     public void testFileIsModifiedFalseInternally() {
         boolean result = fileWatcher.fileIsModified(file);
         assertFalse(result);
