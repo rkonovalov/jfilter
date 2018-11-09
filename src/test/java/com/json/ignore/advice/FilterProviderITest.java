@@ -65,8 +65,4 @@ public class FilterProviderITest {
 
         assertNull(filter);
     }
-
-
-
-
 }

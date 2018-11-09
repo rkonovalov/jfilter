@@ -57,7 +57,7 @@ public class FileFilterTest {
 
     @Test(expected = IOException.class)
     public void testIOException() throws IOException {
-        String fileName = FileFilter.getFileName("config.xml");
+        String fileName = FileFilter.getFileName("config_io_exception.xml");
         File file = new File(fileName);
 
         try (FileOutputStream in = new FileOutputStream(file)) {
