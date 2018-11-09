@@ -30,6 +30,7 @@ public final class FileWatcher implements DisposableBean {
     private Map<WatchKey, Path> watchKeys;
     private Map<File, FileRecord> fileRecords;
     private boolean closed;
+    private boolean overflowed;
 
     /**
      * File watcher record
@@ -80,6 +81,7 @@ public final class FileWatcher implements DisposableBean {
      */
     public FileWatcher() throws IOException {
         closed = false;
+        overflowed = false;
         watcher = FileSystems.getDefault().newWatchService();
         watchKeys = new HashMap<>();
         fileRecords = new HashMap<>();
@@ -152,10 +154,14 @@ public final class FileWatcher implements DisposableBean {
             WatchEvent.Kind<?> kind = event.kind();
 
 
-            if (kind == StandardWatchEventKinds.OVERFLOW)
+            if (kind == StandardWatchEventKinds.OVERFLOW) {
+                overflowed = true;
                 continue;
+            }
 
             WatchEvent<Path> ev = (WatchEvent<Path>) event;
+
+
 
             if (watchKeys.containsKey(key)) {
                 String filename = String.format("%s%s%s", watchKeys.get(key).toString(),
@@ -209,5 +215,9 @@ public final class FileWatcher implements DisposableBean {
             watcher.close();
             closed = true;
         }
+    }
+
+    public boolean isOverflowed() {
+        return overflowed;
     }
 }
