@@ -2,6 +2,7 @@ package com.json.ignore.mock.config;
 
 import com.json.ignore.EnableJsonFilter;
 import com.json.ignore.advice.FilterRegister;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,6 +21,7 @@ import java.util.List;
 @ComponentScan({"com.json.ignore", "com.json.ignore.advice", "com.json.ignore.mock.webservice"})
 @EnableScheduling
 @EnableJsonFilter
+@Ignore
 public class WSConfigurationEnabled extends WebMvcConfigurerAdapter {
     @Autowired
     private FilterRegister filterRegister;
