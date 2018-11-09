@@ -3,11 +3,11 @@ package com.json.ignore;
 import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 
-public class FieldAccessExceptionTest {
+public class FilterExceptionTest {
 
-    @Test(expected = FieldAccessException.class)
+    @Test(expected = FilterException.class)
     public void testException() {
-        FieldAccessException exception =new FieldAccessException(new IllegalAccessException());
+        FilterException exception =new FilterException(new IllegalAccessException());
         assertNotNull(exception);
 
         throw exception;
