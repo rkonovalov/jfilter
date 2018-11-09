@@ -1,4 +1,4 @@
-package com.json.ignore.test;
+package com.json.ignore.advice;
 
 import com.json.ignore.advice.FileWatcher;
 import com.json.ignore.mock.config.WSConfiguration;
@@ -50,10 +50,11 @@ public class FileWatcherModifyITest {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
-    public void testFileIsModifiedExternally() {
+    public void testFileIsModifiedExternally()  {
         System.out.println("modified-> " + modified.get());
         boolean result = file.setLastModified(new Date().getTime() + 5000);
         await().atMost(5, SECONDS).until(() -> modified.get());
+
         assertTrue(modified.get());
     }
 }
