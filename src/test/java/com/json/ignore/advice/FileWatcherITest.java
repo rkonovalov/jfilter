@@ -86,6 +86,13 @@ public class FileWatcherITest {
         assertFalse(add);
     }
 
+    @Test
+    public void testFileIsModified() {
+        boolean result = fileWatcher.fileIsModified(new File(""));
+        assertFalse(result);
+    }
+
+
     @After
     public void testFinalize() {
         try {

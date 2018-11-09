@@ -43,14 +43,14 @@ public class FileWatcherScheduleITest {
     @Test
     public void testWatchSchedulerInterruptedException() {
         taskScheduler.destroy();
-        await().atMost(10, SECONDS).until(() -> fileWatcher.isClosed());
+        await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
         assertTrue(fileWatcher.isClosed());
     }
 
     @Test
     public void testWatchSchedulerClosedException() throws IOException {
         fileWatcher.getWatcher().close();
-        await().atMost(10, SECONDS).until(() -> fileWatcher.isClosed());
+        await().atMost(5, SECONDS).until(() -> fileWatcher.isClosed());
         assertTrue(fileWatcher.isClosed());
     }
 }
