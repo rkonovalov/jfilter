@@ -3,7 +3,6 @@ package com.json.ignore.advice;
 import com.json.ignore.mock.MockFile;
 import com.json.ignore.mock.config.WSConfigurationEnabled;
 import org.junit.*;
-import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
@@ -25,7 +24,6 @@ public class FileWatcherITest {
     private File file;
     private AtomicBoolean modified;
     private FileWatcher fileWatcher;
-
     private ScheduledAnnotationBeanPostProcessor taskScheduler;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -33,9 +31,6 @@ public class FileWatcherITest {
     public void setTaskScheduler(ScheduledAnnotationBeanPostProcessor taskScheduler) {
         this.taskScheduler = taskScheduler;
     }
-
-    @Rule
-    public TemporaryFolder temp = new TemporaryFolder();
 
     @Autowired
     public FileWatcherITest setFileWatcher(FileWatcher fileWatcher) {
