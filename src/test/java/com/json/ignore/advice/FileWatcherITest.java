@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
 import static com.json.ignore.filter.file.FileFilter.resourceFile;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -57,13 +58,6 @@ public class FileWatcherITest {
     }
 
     @Test
-    public void testAAFileIsModifiedTrue() throws IOException {
-        Files.write(file.toPath(), " ".getBytes(), StandardOpenOption.APPEND);
-        await().atMost(5, SECONDS).untilTrue(modified);
-        assertTrue(modified.get());
-    }
-
-    @Test
     public void testAdd() {
         boolean result = fileWatcher.add(file, (f) -> modified.set(true));
         assertTrue(result);
@@ -95,11 +89,10 @@ public class FileWatcherITest {
     }
 
     @Test
-    public void testFileIsModifiedFalse() {
+    public void testFileIsModifiedFalseInternally() {
         boolean result = fileWatcher.fileIsModified(file);
         assertFalse(result);
     }
-
 
     @Test
     public void testAfterIOException() {
