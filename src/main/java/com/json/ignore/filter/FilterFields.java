@@ -25,13 +25,11 @@ public class FilterFields implements Serializable {
         return fieldsMap.containsKey(className) ? fieldsMap.get(className) : new ArrayList<>();
     }
 
-    public FilterFields appendToMap(Class classname, List<String> value) {
+    public void appendToMap(Class classname, List<String> value) {
         List<String> fields = fieldsMap.computeIfAbsent(classname, k -> new ArrayList<>());
         value.forEach(v -> {
             if (!fields.contains(v)) fields.add(v);
         });
-
-        return this;
     }
 
     @Override

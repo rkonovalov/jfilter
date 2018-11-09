@@ -15,7 +15,6 @@ import java.util.Objects;
  */
 public class RequestSession {
     private final HttpSession session;
-    private final ServletServerHttpRequest request;
 
     /**
      * Creates a new instance of the {@link RequestSession} class.
@@ -23,8 +22,7 @@ public class RequestSession {
      * @param request {@link ServerHttpRequest}
      */
     public RequestSession(ServerHttpRequest request) {
-        this.request = getRequest(request);
-        this.session = this.request.getServletRequest().getSession();
+        this.session = getRequest(request).getServletRequest().getSession();
     }
 
     /**
@@ -84,9 +82,5 @@ public class RequestSession {
             return Objects.equals(sessionObject, attributeValue);
         } else
             return false;
-
-        /*Object sessionObject = getSessionProperty(attributeName);
-        boolean defaultValue = StringUtils.isEmpty(attributeName) && StringUtils.isEmpty(attributeValue);
-        return (sessionObject != null && Objects.equals(sessionObject, attributeValue)) || defaultValue;*/
     }
 }
