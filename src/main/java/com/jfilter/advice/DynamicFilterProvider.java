@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Could be used for retrieving {@link FilterFields} from {@link MethodParameter} which annotated by {@link DynamicFilter}
  */
 @Component
-public class DynamicFilterProvider {
+public final class DynamicFilterProvider {
     private final ApplicationContext applicationContext;
     private final Map<Class, DynamicFilterEvent> dynamicFilterMap;
 

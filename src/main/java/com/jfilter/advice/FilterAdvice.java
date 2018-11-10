@@ -22,7 +22,7 @@ import java.io.Serializable;
  */
 
 @ControllerAdvice
-public class FilterAdvice implements ResponseBodyAdvice<Serializable> {
+public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     private FilterProvider filterProvider;
     private DynamicFilterProvider dynamicFilterProvider;
 

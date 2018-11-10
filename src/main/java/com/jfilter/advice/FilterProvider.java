@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * <p>This class also has cache for caching already found filter for better productivity
  */
 @Component
-public class FilterProvider {
+public final class FilterProvider {
     private final Map<Annotation, BaseFilter> filters;
     private boolean enabled;
     private FileWatcher fileWatcher;

@@ -1,5 +1,6 @@
 package com.jfilter.advice;
 
+import com.jfilter.FileWatcherEvent;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
