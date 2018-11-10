@@ -44,4 +44,16 @@ public class DynamicSessionFilterITest {
 
         assertNull(found);
     }
+
+    @Test
+    public void testDynamicSessionFilter() throws Exception {
+        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(new FilterFields(MockUser.class, Arrays.asList("id", "password"))));
+
+        FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
+
+        assertNotNull(found);
+    }
 }

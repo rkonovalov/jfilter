@@ -36,7 +36,7 @@ public class ConverterMapperITest {
     private MockMvc mockMvc;
 
     @Autowired
-    WebApplicationContext webApplicationContext;
+    private WebApplicationContext webApplicationContext;
 
     @Before
     public void init() {
