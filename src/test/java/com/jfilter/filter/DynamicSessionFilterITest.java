@@ -76,8 +76,8 @@ public class DynamicSessionFilterITest {
     @Test
     public void testDynamicFilter() {
         MockUser user = MockClasses.getUserMock();
-        //user.setId(null);
-        //user.setPassword(null);
+        user.setId(null);
+        user.setPassword(null);
 
         String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC, DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS,
                 new FilterFields(MockUser.class, Arrays.asList("id", "password")));
