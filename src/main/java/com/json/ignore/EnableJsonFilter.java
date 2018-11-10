@@ -1,5 +1,7 @@
 package com.json.ignore;
 
+import org.springframework.scheduling.annotation.EnableScheduling;
+
 import java.lang.annotation.*;
 
 /**
@@ -11,5 +13,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Documented
+@EnableScheduling
 public @interface EnableJsonFilter {
 }
