@@ -18,7 +18,7 @@ public class ConverterMapper {
     /**
      * Creates a new instance of the {@link ConverterMapper} class.
      *
-     * @param mapper  could be instance of {@link ObjectMapper} or {@link XmlMapper}
+     * @param mapper       could be instance of {@link ObjectMapper} or {@link XmlMapper}
      * @param filterFields {@link Map} map of fields which could be ignored
      */
     public ConverterMapper(ObjectMapper mapper, FilterFields filterFields) {
@@ -32,13 +32,15 @@ public class ConverterMapper {
      * Also see {@link ConverterMapperModifier}
      */
     private void setIgnoreModifier() {
-        SerializerFactory factory = BeanSerializerFactory.instance
-                .withSerializerModifier(new ConverterMapperModifier(filterFields));
+        SerializerFactory factory = filterFields != null ? BeanSerializerFactory.instance
+                .withSerializerModifier(new ConverterMapperModifier(filterFields)) : BeanSerializerFactory.instance;
+
         mapper.setSerializerFactory(factory);
     }
 
     /**
      * Returns configured object mapper
+     *
      * @return could be instance of {@link ObjectMapper} or {@link XmlMapper}
      */
     public ObjectMapper getMapper() {
