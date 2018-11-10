@@ -1,4 +1,4 @@
-package com.jfilter.advice;
+package com.jfilter.components;
 
 import com.jfilter.filter.FileFilter;
 import org.junit.Before;

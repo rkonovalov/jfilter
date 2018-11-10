@@ -2,7 +2,7 @@ package com.jfilter.filter;
 
 import java.lang.annotation.*;
 
-import com.jfilter.advice.DynamicFilterProvider;
+import com.jfilter.components.DynamicFilterProvider;
 
 /**
  * This annotation used for configuring of dynamic filter

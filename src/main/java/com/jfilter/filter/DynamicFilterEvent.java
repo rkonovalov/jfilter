@@ -1,6 +1,6 @@
 package com.jfilter.filter;
 
-import com.jfilter.advice.DynamicFilterProvider;
+import com.jfilter.components.DynamicFilterProvider;
 import com.jfilter.request.RequestSession;
 import org.springframework.core.MethodParameter;
 

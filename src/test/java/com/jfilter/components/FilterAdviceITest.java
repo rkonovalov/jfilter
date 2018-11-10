@@ -1,4 +1,4 @@
-package com.jfilter.advice;
+package com.jfilter.components;
 
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.webservice.WSClassFile;

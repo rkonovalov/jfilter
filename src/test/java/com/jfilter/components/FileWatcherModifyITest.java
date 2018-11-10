@@ -1,4 +1,4 @@
-package com.jfilter.advice;
+package com.jfilter.components;
 
 import com.jfilter.FilterException;
 import com.jfilter.mock.*;

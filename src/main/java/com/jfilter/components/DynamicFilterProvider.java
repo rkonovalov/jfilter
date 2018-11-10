@@ -1,4 +1,4 @@
-package com.jfilter.advice;
+package com.jfilter.components;
 
 import com.jfilter.filter.DynamicFilterComponent;
 import com.jfilter.filter.FilterFields;

@@ -1,4 +1,4 @@
-package com.jfilter.advice;
+package com.jfilter.components;
 
 import com.jfilter.filter.BaseFilter;
 import com.jfilter.converter.FilterClassWrapper;

@@ -1,7 +1,7 @@
 package com.jfilter.mock.config;
 
 import com.jfilter.EnableJsonFilter;
-import com.jfilter.advice.FilterRegister;
+import com.jfilter.components.FilterRegister;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.List;
 @SuppressWarnings("ALL")
 @RunWith(SpringRunner.class)
 @Configuration
-@ComponentScan({"com.jfilter", "com.jfilter.advice", "com.jfilter.mock.webservice"})
+@ComponentScan({"com.jfilter", "com.jfilter.components", "com.jfilter.mock.webservice"})
 
 @EnableJsonFilter
 @Ignore

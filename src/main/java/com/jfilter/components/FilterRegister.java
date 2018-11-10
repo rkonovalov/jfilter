@@ -1,4 +1,4 @@
-package com.jfilter.advice;
+package com.jfilter.components;
 
 import com.jfilter.EnableJsonFilter;
 import com.jfilter.converter.FilterXmlConverter;

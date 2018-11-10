@@ -1,7 +1,6 @@
 package com.jfilter.filter;
 
-import com.jfilter.advice.DynamicFilterProvider;
-import com.jfilter.filter.FilterFields;
+import com.jfilter.components.DynamicFilterProvider;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockHttpRequest;
 import com.jfilter.mock.MockMethods;

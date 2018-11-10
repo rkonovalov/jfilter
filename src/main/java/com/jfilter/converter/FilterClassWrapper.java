@@ -1,6 +1,6 @@
 package com.jfilter.converter;
 
-import com.jfilter.advice.FilterAdvice;
+import com.jfilter.components.FilterAdvice;
 import com.jfilter.filter.FilterFields;
 
 import java.io.Serializable;
