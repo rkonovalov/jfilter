@@ -2,7 +2,6 @@ package com.json.ignore.mock.config;
 
 import com.json.ignore.EnableJsonFilter;
 import org.junit.runner.RunWith;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContextManager;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -30,7 +29,6 @@ public class WSConfiguration {
     @ContextConfiguration(classes = WSConfigurationEnabled.class)
     @WebAppConfiguration("src/main/resources")
     @RunWith(SpringRunner.class)
-    @EnableScheduling
     @EnableJsonFilter
     private class Enabled {
 
@@ -39,7 +37,6 @@ public class WSConfiguration {
     @ContextConfiguration(classes = WSConfigurationDisabled.class)
     @WebAppConfiguration("src/main/resources")
     @RunWith(SpringRunner.class)
-    @EnableScheduling
     private class Disabled {
 
     }
@@ -47,7 +44,6 @@ public class WSConfiguration {
     @ContextConfiguration(classes = WSConfigurationDisabledFiltered.class)
     @WebAppConfiguration("src/main/resources")
     @RunWith(SpringRunner.class)
-    @EnableScheduling
     private class DisabledFiltered {
 
     }
