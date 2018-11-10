@@ -1,5 +1,8 @@
-package com.jfilter.filter;
+package com.jfilter.components;
 
+import com.jfilter.filter.DynamicFilterComponent;
+import com.jfilter.filter.DynamicFilterEvent;
+import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
 import org.springframework.core.MethodParameter;
 
