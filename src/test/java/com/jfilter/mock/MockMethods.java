@@ -1,10 +1,10 @@
 package com.jfilter.mock;
 
-import com.jfilter.filter.dynamic.DynamicFilter;
-import com.jfilter.filter.dynamic.DynamicSessionFilter;
-import com.jfilter.filter.field.FieldFilterSetting;
-import com.jfilter.filter.strategy.SessionStrategy;
-import com.jfilter.filter.file.FileFilterSetting;
+import com.jfilter.filter.DynamicFilter;
+import com.jfilter.filter.DynamicSessionFilter;
+import com.jfilter.filter.FieldFilterSetting;
+import com.jfilter.filter.SessionStrategy;
+import com.jfilter.filter.FileFilterSetting;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.MethodParameter;
 import java.lang.reflect.Method;

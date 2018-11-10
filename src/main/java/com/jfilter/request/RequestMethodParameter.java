@@ -1,9 +1,9 @@
 package com.jfilter.request;
 
-import com.jfilter.filter.field.FieldFilterSetting;
-import com.jfilter.filter.field.FieldFilterSettings;
-import com.jfilter.filter.strategy.SessionStrategies;
-import com.jfilter.filter.strategy.SessionStrategy;
+import com.jfilter.filter.FieldFilterSetting;
+import com.jfilter.filter.FieldFilterSettings;
+import com.jfilter.filter.SessionStrategies;
+import com.jfilter.filter.SessionStrategy;
 import org.springframework.core.MethodParameter;
 import java.lang.annotation.Annotation;
 

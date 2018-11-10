@@ -1,6 +1,6 @@
 package com.jfilter.advice;
 
-import com.jfilter.filter.file.FileFilter;
+import com.jfilter.filter.FileFilter;
 import com.jfilter.mock.MockFile;
 import com.jfilter.mock.config.WSConfigurationEnabled;
 import org.junit.*;

@@ -1,6 +1,6 @@
 package com.jfilter.mock.webservice;
 
-import com.jfilter.filter.field.FieldFilterSetting;
+import com.jfilter.filter.FieldFilterSetting;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockUser;
 import org.springframework.http.MediaType;

@@ -1,10 +1,10 @@
 package com.jfilter.advice;
 
-import com.jfilter.filter.dynamic.DynamicFilterComponent;
+import com.jfilter.filter.DynamicFilterComponent;
 import com.jfilter.filter.FilterFields;
-import com.jfilter.filter.dynamic.DynamicFilterEvent;
-import com.jfilter.filter.dynamic.DynamicFilter;
-import com.jfilter.filter.dynamic.DynamicSessionFilter;
+import com.jfilter.filter.DynamicFilterEvent;
+import com.jfilter.filter.DynamicFilter;
+import com.jfilter.filter.DynamicSessionFilter;
 import com.jfilter.request.RequestSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

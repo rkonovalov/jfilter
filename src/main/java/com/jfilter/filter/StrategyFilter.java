@@ -1,8 +1,5 @@
-package com.jfilter.filter.strategy;
+package com.jfilter.filter;
 
-import com.jfilter.filter.BaseFilter;
-import com.jfilter.filter.field.FieldFilterSetting;
-import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
 import org.springframework.core.MethodParameter;
 

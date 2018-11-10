@@ -1,7 +1,5 @@
 package com.jfilter.filter;
 
-import com.jfilter.filter.field.FieldFilter;
-import com.jfilter.filter.strategy.StrategyFilter;
 import com.jfilter.mock.MockMethods;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;

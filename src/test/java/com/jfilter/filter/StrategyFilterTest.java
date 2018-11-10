@@ -1,6 +1,5 @@
 package com.jfilter.filter;
 
-import com.jfilter.filter.strategy.StrategyFilter;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockHttpRequest;
 import com.jfilter.mock.MockMethods;

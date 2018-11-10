@@ -1,9 +1,8 @@
-package com.jfilter.filter.file;
+package com.jfilter.filter;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.jfilter.filter.FilterFields;
 
 import java.io.Serializable;
 import java.util.ArrayList;

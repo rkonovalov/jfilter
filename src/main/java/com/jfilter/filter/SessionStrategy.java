@@ -1,6 +1,4 @@
-package com.jfilter.filter.strategy;
-
-import com.jfilter.filter.field.FieldFilterSetting;
+package com.jfilter.filter;
 
 import java.lang.annotation.*;
 

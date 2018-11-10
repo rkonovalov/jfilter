@@ -1,4 +1,4 @@
-package com.jfilter.filter.field;
+package com.jfilter.filter;
 
 import java.lang.annotation.*;
 

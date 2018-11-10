@@ -1,6 +1,6 @@
 package com.jfilter.advice;
 
-import com.jfilter.filter.file.FileFilter;
+import com.jfilter.filter.FileFilter;
 import org.junit.Before;
 import org.junit.Test;
 

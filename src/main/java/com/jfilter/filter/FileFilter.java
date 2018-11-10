@@ -1,10 +1,8 @@
-package com.jfilter.filter.file;
+package com.jfilter.filter;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.jfilter.FilterException;
 import com.jfilter.advice.FileWatcher;
-import com.jfilter.filter.BaseFilter;
-import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
 import org.springframework.core.MethodParameter;
 

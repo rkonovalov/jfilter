@@ -1,6 +1,5 @@
 package com.jfilter.filter;
 
-import com.jfilter.filter.field.FieldFilter;
 import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 

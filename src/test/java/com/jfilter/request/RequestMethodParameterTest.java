@@ -1,9 +1,9 @@
 package com.jfilter.request;
 
-import com.jfilter.filter.file.FileWSConfigurationTest;
+import com.jfilter.filter.FileWSConfigurationTest;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.filter.FilterFields;
-import com.jfilter.filter.file.FileConfig;
+import com.jfilter.filter.FileConfig;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

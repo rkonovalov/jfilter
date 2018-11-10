@@ -1,4 +1,4 @@
-package com.jfilter.filter.field;
+package com.jfilter.filter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,16 +6,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Repeatable annotation of {@link FieldFilterSetting} interface
+ * Repeatable annotation of {@link SessionStrategy} interface
  */
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FieldFilterSettings {
-
+public @interface SessionStrategies {
     /**
-     * Array of {@link FieldFilterSetting}
+     *  Array of {@link SessionStrategy}
      *
-     * @return array of {@link FieldFilterSetting}
+     * @return array of {@link SessionStrategy}
      */
-    FieldFilterSetting[] value();
+    SessionStrategy[] value();
 }

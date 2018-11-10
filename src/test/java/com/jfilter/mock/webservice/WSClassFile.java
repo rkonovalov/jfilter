@@ -1,7 +1,7 @@
 package com.jfilter.mock.webservice;
 
 import com.jfilter.mock.MockClasses;
-import com.jfilter.filter.file.FileFilterSetting;
+import com.jfilter.filter.FileFilterSetting;
 import com.jfilter.mock.MockUser;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;

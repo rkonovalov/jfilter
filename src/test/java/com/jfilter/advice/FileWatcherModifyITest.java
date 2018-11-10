@@ -17,7 +17,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static com.jfilter.filter.file.FileFilter.resourceFile;
+import static com.jfilter.filter.FileFilter.resourceFile;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.Assert.*;

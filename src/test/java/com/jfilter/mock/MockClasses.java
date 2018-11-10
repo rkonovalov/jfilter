@@ -1,6 +1,6 @@
 package com.jfilter.mock;
 
-import com.jfilter.filter.file.FileConfig;
+import com.jfilter.filter.FileConfig;
 
 import java.util.*;
 
@@ -35,7 +35,7 @@ public class MockClasses {
     public static FileConfig getMockAdminFileConfig() {
 
         FileConfig.Filter filter = new FileConfig.Filter();
-        filter.setClassName("com.jfilter.filter.file.FileWSConfigurationTest");
+        filter.setClassName("com.jfilter.filter.FileWSConfigurationTest");
         filter.getFields().add(new FileConfig.Field().setName("id"));
         filter.getFields().add(new FileConfig.Field().setName("password"));
 
@@ -46,7 +46,7 @@ public class MockClasses {
                 .add(filter);
 
         FileConfig.Controller controller = new FileConfig.Controller();
-        controller.setClassName("com.jfilter.filter.file.FileWSConfigurationTest")
+        controller.setClassName("com.jfilter.filter.FileWSConfigurationTest")
                 .getStrategies()
                 .add(strategy);
 

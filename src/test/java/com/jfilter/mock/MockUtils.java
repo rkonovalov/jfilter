@@ -1,6 +1,6 @@
 package com.jfilter.mock;
 
-import com.jfilter.filter.file.FileFilter;
+import com.jfilter.filter.FileFilter;
 import org.awaitility.core.ConditionTimeoutException;
 
 import java.io.File;

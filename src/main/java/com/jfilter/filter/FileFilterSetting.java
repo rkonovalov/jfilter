@@ -1,4 +1,4 @@
-package com.jfilter.filter.file;
+package com.jfilter.filter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

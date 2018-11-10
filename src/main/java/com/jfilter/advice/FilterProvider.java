@@ -3,7 +3,7 @@ package com.jfilter.advice;
 import com.jfilter.EnableJsonFilter;
 import com.jfilter.filter.BaseFilter;
 import com.jfilter.filter.FilterFactory;
-import com.jfilter.filter.file.FileFilter;
+import com.jfilter.filter.FileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

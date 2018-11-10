@@ -1,4 +1,4 @@
-package com.jfilter.filter.dynamic;
+package com.jfilter.filter;
 
 import com.jfilter.advice.DynamicFilterProvider;
 import com.jfilter.filter.FilterFields;
@@ -23,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 
-import static com.jfilter.filter.dynamic.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
+import static com.jfilter.filter.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
 import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_DYNAMIC;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

@@ -1,8 +1,8 @@
 package com.jfilter.mock.webservice;
 
-import com.jfilter.filter.field.FieldFilterSetting;
-import com.jfilter.filter.strategy.SessionStrategies;
-import com.jfilter.filter.strategy.SessionStrategy;
+import com.jfilter.filter.FieldFilterSetting;
+import com.jfilter.filter.SessionStrategies;
+import com.jfilter.filter.SessionStrategy;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockUser;
 import org.springframework.http.MediaType;

@@ -1,6 +1,5 @@
-package com.jfilter.filter.dynamic;
+package com.jfilter.filter;
 
-import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
 import org.springframework.core.MethodParameter;
 
