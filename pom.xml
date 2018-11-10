@@ -10,8 +10,8 @@
     <packaging>jar</packaging>
 
     <name>JFilter module</name>
-    <description>JFilter module for Spring Framework</description>
-    <url>https://github.com/rkonovalov/jfilter</url>
+    <description>JFilter module</description>
+    <url>https://rkonovalov.github.io/projects/jfilter</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
