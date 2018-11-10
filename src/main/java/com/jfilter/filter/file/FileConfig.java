@@ -149,9 +149,9 @@ public class FileConfig implements Serializable {
         }
 
         /**
-         * Gets class by name
-         * <p>
-         * Try to get class by it full name. If class couldn't be found, returns null
+         * Get class by name
+         *
+         * <p>Try to get class by it full name. If class couldn't be found, returns null
          *
          * @param className {@link String} class name. Example: java.io.File
          * @return {@link Class} return class, else null
@@ -167,10 +167,10 @@ public class FileConfig implements Serializable {
                 return null;
         }
 
-
         /**
-         * Convert strategy class in Map
+         * Add filter fields
          *
+         * @param filterFields {@link FilterFields} source fields
          * @return {@link FilterFields} fields which should be filtered/excluded
          */
         public FilterFields appendStrategyFields(FilterFields filterFields) {
@@ -248,5 +248,4 @@ public class FileConfig implements Serializable {
             return this;
         }
     }
-
 }
