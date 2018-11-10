@@ -6,6 +6,7 @@
  * <li>Field filter annotations</li>
  * <li>Session strategy filter annotations</li>
  * <li>File configuration filter annotations</li>
+ * <li>Dynamic filter annotations</li>
  * </ul>
  */
 
