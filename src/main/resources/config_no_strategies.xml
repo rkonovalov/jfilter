@@ -3,7 +3,7 @@
         "-//json/json-ignore mapping DTD 1.0//EN"
         "https://rkonovalov.github.io/json-ignore-schema-1.0.dtd">
 <config>
-    <controller class-name="com.json.ignore.filter.file.FileFilterTest">
+    <controller class-name="com.jfilter.filter.file.FileFilterTest">
 
     </controller>
 </config>

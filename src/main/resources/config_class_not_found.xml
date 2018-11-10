@@ -4,10 +4,10 @@
         "https://rkonovalov.github.io/json-ignore-schema-1.0.dtd">
 <!--suppress RequiredAttributes -->
 <config>
-    <controller class-name="com.json.ignore.mock.MockMethods">
+    <controller class-name="com.jfilter.mock.MockMethods">
         <strategy attribute-name="ROLE" attribute-value="ADMIN">
 
-            <filter class="com.json.ignore.mock.ClassNotFound">
+            <filter class="com.jfilter.mock.ClassNotFound">
                 <field name="id"/>
                 <field name="password"/>
             </filter>

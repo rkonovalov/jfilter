@@ -1,0 +1,29 @@
+package com.jfilter.mock.webservice;
+
+import com.jfilter.filter.field.FieldFilterSetting;
+import com.jfilter.filter.strategy.SessionStrategy;
+import com.jfilter.mock.MockClasses;
+import com.jfilter.mock.MockUser;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+
+@SessionStrategy(attributeName = "ROLE", attributeValue = "ADMIN", ignoreFields = {
+        @FieldFilterSetting(fields = {"id", "password"})
+})
+public class WSClassStrategySingle {
+    public static final String MAPPING_SIGN_IN_STRATEGY_SINGLE = "/strategy-single/customers/signIn";
+
+    @RequestMapping(value = MAPPING_SIGN_IN_STRATEGY_SINGLE,
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public MockUser signInn(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return MockClasses.getUserMock();
+    }
+
+}

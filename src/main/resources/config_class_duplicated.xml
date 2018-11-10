@@ -3,25 +3,25 @@
         "-//json/json-ignore mapping DTD 1.0//EN"
         "https://rkonovalov.github.io/json-ignore-schema-1.0.dtd">
 <config>
-    <controller class-name="com.json.ignore.filter.file.FileFilterTest">
+    <controller class-name="com.jfilter.filter.file.FileFilterTest">
         <strategy attribute-name="ROLE" attribute-value="ADMIN">
-            <filter class="com.json.ignore.mock.MockUser">
+            <filter class="com.jfilter.mock.MockUser">
                 <field name="id"/>
             </filter>
-            <filter class="com.json.ignore.mock.MockUser">
+            <filter class="com.jfilter.mock.MockUser">
                 <field name="password"/>
             </filter>
-            <filter class="com.json.ignore.mock.MockUser">
+            <filter class="com.jfilter.mock.MockUser">
                 <field name="email"/>
                 <field name="hash"/>
             </filter>
         </strategy>
         <strategy attribute-name="ROLE" attribute-value="USER">
-            <filter class="com.json.ignore.mock.MockUser">
+            <filter class="com.jfilter.mock.MockUser">
                 <field name="id"/>
                 <field name="password"/>
             </filter>
-            <filter class="com.json.ignore.mock.MockUser">
+            <filter class="com.jfilter.mock.MockUser">
                 <field name="email"/>
                 <field name="hash"/>
             </filter>
