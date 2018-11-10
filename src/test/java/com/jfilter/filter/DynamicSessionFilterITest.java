@@ -4,29 +4,20 @@ import com.jfilter.components.DynamicFilterProvider;
 import com.jfilter.mock.MockHttpRequest;
 import com.jfilter.mock.MockMethods;
 import com.jfilter.mock.MockUser;
-import com.jfilter.mock.config.WSConfigurationEnabled;
+import com.jfilter.mock.config.WSConfiguration;
 import com.jfilter.request.RequestSession;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runner.notification.RunListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-
+import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-@ContextConfiguration(classes = WSConfigurationEnabled.class)
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration("src/main/resources")
-@RunListener.ThreadSafe
+@Component
 public class DynamicSessionFilterITest {
 
     @Autowired
@@ -36,7 +27,8 @@ public class DynamicSessionFilterITest {
     private DynamicFilterProvider dynamicFilterProvider;
 
     @Test
-    public void testOnGetFilterFieldsNotNull() {
+    public void testOnGetFilterFieldsNotNull() throws Exception {
+        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
         ServletServerHttpRequest request = MockHttpRequest.getMockDynamicFilterRequest(null);
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
@@ -45,12 +37,13 @@ public class DynamicSessionFilterITest {
     }
 
     @Test
-    public void testMockDynamicNullFilter() {
+    public void testMockDynamicNullFilter() throws Exception {
+        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
         MethodParameter methodParameter = MockMethods.mockDynamicNullFilter();
 
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(new FilterFields(MockUser.class, Arrays.asList("id", "password"))));
 
-        dynamicFilterProvider.findDynamicFilters();
+        //dynamicFilterProvider.findDynamicFilters();
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
         assertNull(found);

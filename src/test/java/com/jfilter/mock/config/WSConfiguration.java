@@ -4,7 +4,7 @@ import com.jfilter.EnableJsonFilter;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContextManager;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 public class WSConfiguration {
@@ -27,23 +27,23 @@ public class WSConfiguration {
     }
 
     @ContextConfiguration(classes = WSConfigurationEnabled.class)
-    @WebAppConfiguration("src/main/resources")
-    @RunWith(SpringRunner.class)
+    @WebAppConfiguration
+    @RunWith(SpringJUnit4ClassRunner.class)
     @EnableJsonFilter
     private class Enabled {
 
     }
 
     @ContextConfiguration(classes = WSConfigurationDisabled.class)
-    @WebAppConfiguration("src/main/resources")
-    @RunWith(SpringRunner.class)
+    @WebAppConfiguration
+    @RunWith(SpringJUnit4ClassRunner.class)
     private class Disabled {
 
     }
 
     @ContextConfiguration(classes = WSConfigurationDisabledFiltered.class)
-    @WebAppConfiguration("src/main/resources")
-    @RunWith(SpringRunner.class)
+    @WebAppConfiguration
+    @RunWith(SpringJUnit4ClassRunner.class)
     private class DisabledFiltered {
 
     }
