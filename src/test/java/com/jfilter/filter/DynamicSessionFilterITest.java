@@ -8,7 +8,6 @@ import com.jfilter.mock.config.WSConfiguration;
 import com.jfilter.request.RequestSession;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -19,9 +18,6 @@ import static org.junit.Assert.assertNull;
 
 @Component
 public class DynamicSessionFilterITest {
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Autowired
     private DynamicFilterProvider dynamicFilterProvider;
