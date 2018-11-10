@@ -9,9 +9,9 @@
     <version>1.0.7</version>
     <packaging>jar</packaging>
 
-    <name>Json filter module</name>
-    <description>Json filter module for spring framework</description>
-    <url>https://github.com/rkonovalov/jsonignore</url>
+    <name>JFilter module</name>
+    <description>JFilter module for Spring Framework</description>
+    <url>https://github.com/rkonovalov/jfilter</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,9 +40,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/rkonovalov/jsonignore.git</connection>
-        <developerConnection>scm:git:ssh://github.com:rkonovalov/jsonignore.git</developerConnection>
-        <url>https://github.com/rkonovalov/jsonignore</url>
+        <connection>scm:git:git://github.com/rkonovalov/jfilter.git</connection>
+        <developerConnection>scm:git:ssh://github.com:rkonovalov/jfilter.git</developerConnection>
+        <url>https://github.com/rkonovalov/jfilter</url>
     </scm>
 
     <dependencies>
