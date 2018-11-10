@@ -1,7 +1,7 @@
 package com.jfilter.mock;
 
 import com.jfilter.filter.DynamicFilter;
-import com.jfilter.filter.DynamicSessionFilter;
+import com.jfilter.components.DynamicSessionFilter;
 import com.jfilter.filter.FieldFilterSetting;
 import com.jfilter.filter.SessionStrategy;
 import com.jfilter.filter.FileFilterSetting;

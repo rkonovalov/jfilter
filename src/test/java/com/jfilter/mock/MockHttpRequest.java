@@ -1,6 +1,6 @@
 package com.jfilter.mock;
 
-import com.jfilter.filter.DynamicSessionFilter;
+import com.jfilter.components.DynamicSessionFilter;
 import com.jfilter.filter.FilterFields;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServletServerHttpRequest;

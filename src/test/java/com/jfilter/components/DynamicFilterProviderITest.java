@@ -21,6 +21,7 @@ import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
 @RunWith(SpringRunner.class)
@@ -52,12 +53,23 @@ public class DynamicFilterProviderITest {
 
     @Test
     public void testWithoutAnnotation() {
-        MethodParameter methodParameter = MockMethods.withoutFileFilters();
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
 
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(filterFields));
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
         assertNotEquals(filterFields, found);
+    }
+
+    @Test
+    public void testWithAnnotationWithEmptySession() {
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(null));
+
+        FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
+
+        assertNull(found);
     }
 
     @Test

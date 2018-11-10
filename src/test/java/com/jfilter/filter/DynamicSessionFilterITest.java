@@ -1,6 +1,7 @@
 package com.jfilter.filter;
 
 import com.jfilter.components.DynamicFilterProvider;
+import com.jfilter.components.DynamicSessionFilter;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockHttpRequest;
 import com.jfilter.mock.MockMethods;
@@ -22,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 
-import static com.jfilter.filter.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
+import static com.jfilter.components.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
 import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_DYNAMIC;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -71,6 +72,19 @@ public class DynamicSessionFilterITest {
 
         assertEquals(user.toString(), result);
     }
+
+    @Test
+    public void testDynamicFilter() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
+
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC, DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS,
+                new FilterFields(MockUser.class, Arrays.asList("id", "password")));
+
+        assertEquals(user.toString(), result);
+    }
+
 
    // @Test
     public void testOnGetFilterFieldsTrue() {

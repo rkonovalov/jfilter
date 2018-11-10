@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="jfilter" target="1.8" />
       <module name="json-filter" target="1.8" />
       <module name="jsonignore" target="1.8" />
     </bytecodeTargetLevel>
