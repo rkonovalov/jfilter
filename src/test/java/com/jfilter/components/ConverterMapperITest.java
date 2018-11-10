@@ -72,7 +72,7 @@ public class ConverterMapperITest {
         assertEquals(user.toString(), result);
     }
 
-    @Test
+  //  @Test
     public void testNotSetFilterFields() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
