@@ -19,9 +19,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
 @RunWith(SpringRunner.class)
@@ -69,7 +67,7 @@ public class DynamicFilterProviderITest {
 
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
-        assertNull(found);
+        assertNotNull(found);
     }
 
     @Test
