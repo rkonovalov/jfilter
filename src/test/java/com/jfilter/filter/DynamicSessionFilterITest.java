@@ -13,7 +13,6 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.web.context.WebApplicationContext;
 import static org.junit.Assert.assertNotNull;
 
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
@@ -24,14 +23,22 @@ public class DynamicSessionFilterITest {
     @Autowired
     private DynamicFilterProvider dynamicFilterProvider;
 
-    @Autowired
-    WebApplicationContext webApplicationContext;
-
     @Test
     public void testOnGetFilterFieldsNotNull() {
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
         ServletServerHttpRequest request = MockHttpRequest.getMockDynamicFilterRequest(null);
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
+
+        assertNotNull(found);
+    }
+
+    @Test
+    public void testMockDynamicNullFilter() {
+        MethodParameter methodParameter = MockMethods.mockDynamicNullFilter();
+
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(null));
+
+        FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
         assertNotNull(found);
     }

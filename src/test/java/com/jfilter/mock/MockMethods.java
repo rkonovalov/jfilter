@@ -5,6 +5,7 @@ import com.jfilter.components.DynamicSessionFilter;
 import com.jfilter.filter.FieldFilterSetting;
 import com.jfilter.filter.SessionStrategy;
 import com.jfilter.filter.FileFilterSetting;
+import com.jfilter.mock.config.MockDynamicNullFilter;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.MethodParameter;
 import java.lang.reflect.Method;
@@ -116,6 +117,11 @@ public class MockMethods {
     @DynamicFilter(DynamicSessionFilter.class)
     public static MethodParameter dynamicSessionFilter() {
         return findMethodParameterByName("dynamicSessionFilter");
+    }
+
+    @DynamicFilter(MockDynamicNullFilter.class)
+    public static MethodParameter mockDynamicNullFilter() {
+        return findMethodParameterByName("mockDynamicNullFilter");
     }
 
     @FileFilterSetting(fileName = "config_class_not_found.xml")
