@@ -24,6 +24,83 @@ For information please follow the links below.
   * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/filter-dynamic/)
 * [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.8/release-notes/)
 
+# Installation
+For using this module you need to import dependency
+
+```xml
+<dependency>
+    <groupId>com.github.rkonovalov</groupId>
+    <artifactId>json-ignore</artifactId>
+    <version>1.0.8</version>
+</dependency>
+```
+
+# Getting started
+For activation of JFilter module just add next annotations
+
+* Component scan and enable filter
+```java
+@ComponentScan({"com.jfilter.components"})
+@EnableJsonFilter
+```
+
+# Example o usage
+This example illustrates how easy you can configure Service Response.
+Just add FieldFilterSetting annotation with filterable fields and module will exclude them from response
+
+```java
+    @FieldFilterSetting(className = User.class, fields = {"id", "password", "secretKey"})
+    
+    @RequestMapping(value = "/users/signIn",
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})            
+    public User signIn(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return userController.signInUser(email, password);
+    }
+```
+
+* Service response **before** filtration
+
+```json
+{
+  "id": 10,
+  "email": "janedoe@gmail.com", 
+  "fullName": "Jane Doe",
+  "password": "12345",
+  "secretKey": "54321",
+  "address": {
+    "id": 15,
+    "apartmentNumber": 22,
+    "street": {
+      "id": 155,
+      "streetName": "Bourbon Street",
+      "streetNumber": 15
+    }
+  }
+}
+```
+
+* Service response **after** filtration
+
+```json
+{ 
+  "email": "janedoe@gmail.com", 
+  "fullName": "Jane Doe",
+  "address": {
+    "id": 15,
+    "apartmentNumber": 22,
+    "street": {
+      "id": 155,
+      "streetName": "Bourbon Street",
+      "streetNumber": 15
+    }
+  }
+}
+```
+
+For more examples please follow to the link [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/)
+
 # Release notes
 
 ## Version 1.0.8
