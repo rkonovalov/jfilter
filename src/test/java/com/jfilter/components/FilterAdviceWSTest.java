@@ -25,12 +25,12 @@ import static junit.framework.TestCase.assertEquals;
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-public class FilterAdviceITest {
+public class FilterAdviceWSTest {
     private MockMvc mockMvc;
     private WebApplicationContext webApplicationContext;
 
     @Autowired
-    public FilterAdviceITest setWebApplicationContext(WebApplicationContext webApplicationContext) {
+    public FilterAdviceWSTest setWebApplicationContext(WebApplicationContext webApplicationContext) {
         this.webApplicationContext = webApplicationContext;
         return this;
     }
