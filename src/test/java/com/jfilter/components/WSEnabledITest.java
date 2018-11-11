@@ -104,5 +104,4 @@ public class WSEnabledITest {
 
         assertEquals(user.toString(), result);
     }
-
 }

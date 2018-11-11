@@ -42,7 +42,7 @@ public final class DynamicFilterProvider {
      * and inherited from {@link DynamicFilterEvent}
      * For example of component please see {@link DynamicSessionFilter}
      */
-    public void findDynamicFilters() {
+    private void findDynamicFilters() {
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(DynamicFilterComponent.class);
 
         beans.forEach((k, v) -> {
