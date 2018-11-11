@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,8 +23,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public final class DynamicFilterProvider {
-    private final ApplicationContext applicationContext;
-    private final Map<Class, DynamicFilterEvent> dynamicFilterMap;
+    private ApplicationContext applicationContext;
+    private Map<Class, DynamicFilterEvent> dynamicFilterMap;
 
     /**
      * Creates a new instance of the {@link DynamicFilterProvider} class.
@@ -31,8 +34,7 @@ public final class DynamicFilterProvider {
     @Autowired
     public DynamicFilterProvider(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
-        this.dynamicFilterMap = new ConcurrentHashMap<>();
-        findDynamicFilters();
+        this.dynamicFilterMap = new HashMap<>();
     }
 
     /**
@@ -42,6 +44,7 @@ public final class DynamicFilterProvider {
      * and inherited from {@link DynamicFilterEvent}
      * For example of component please see {@link DynamicSessionFilter}
      */
+    @PostConstruct
     private void findDynamicFilters() {
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(DynamicFilterComponent.class);
 
@@ -72,6 +75,9 @@ public final class DynamicFilterProvider {
      */
     public FilterFields getFields(MethodParameter methodParameter, RequestSession request) {
         DynamicFilter dynamicFilterAnnotation = methodParameter.getMethod().getDeclaredAnnotation(DynamicFilter.class);
+
+        if(dynamicFilterMap.size() == 0)
+            findDynamicFilters();
 
         if (dynamicFilterAnnotation != null && dynamicFilterMap.containsKey(dynamicFilterAnnotation.value())) {
             DynamicFilterEvent filter = dynamicFilterMap.get(dynamicFilterAnnotation.value());
