@@ -5,7 +5,6 @@ import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockHttpRequest;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.WSConfigurationEnabled;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +24,11 @@ import static org.junit.Assert.assertEquals;
 @WebAppConfiguration
 public class ConverterMapperWSTest {
     private MockMvc mockMvc;
-    private WebApplicationContext webApplicationContext;
 
     @Autowired
     public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
-        this.webApplicationContext = webApplicationContext;
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
-
-   /* @Before
-    public void init() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }*/
 
     @Test
     public void testSetFilterFields() {

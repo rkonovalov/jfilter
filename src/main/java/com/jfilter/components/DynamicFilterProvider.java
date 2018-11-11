@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Dynamic filter provider
@@ -21,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * <p>This component finds and provides Dynamic filters which annotated by {@link DynamicFilterComponent} annotation.
  * Could be used for retrieving {@link FilterFields} from {@link MethodParameter} which annotated by {@link DynamicFilter}
  */
+@SuppressWarnings("CanBeFinal")
 @Component
 public final class DynamicFilterProvider {
     private ApplicationContext applicationContext;
