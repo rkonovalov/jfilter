@@ -65,21 +65,4 @@ public class DynamicFilterProviderITest {
 
         assertNotNull(found);
     }
-
-    @Test
-    public void testWithAnnotationClear() {
-
-        //Clear dynamicList of dynamicFilterProvider
-       // Field field = DynamicFilterProvider.class.getDeclaredField("dynamicFilterMap");
-      //  field.setAccessible(true);
-      //  field.set(dynamicFilterProvider, new HashMap<>());
-
-
-        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
-
-        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(filterFields));
-        FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
-
-        assertEquals(filterFields, found);
-    }
 }
