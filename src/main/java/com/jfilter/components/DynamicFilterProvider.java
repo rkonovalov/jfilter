@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +33,7 @@ public final class DynamicFilterProvider {
     public DynamicFilterProvider(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
         this.dynamicFilterMap = new HashMap<>();
+        findDynamicFilters();
     }
 
     /**
@@ -44,7 +43,6 @@ public final class DynamicFilterProvider {
      * and inherited from {@link DynamicFilterEvent}
      * For example of component please see {@link DynamicSessionFilter}
      */
-    @PostConstruct
     private void findDynamicFilters() {
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(DynamicFilterComponent.class);
 

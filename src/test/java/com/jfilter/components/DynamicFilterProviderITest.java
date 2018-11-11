@@ -70,13 +70,13 @@ public class DynamicFilterProviderITest {
         assertNotNull(found);
     }
 
-    //@Test
-    public void testWithAnnotationClear() throws NoSuchFieldException, IllegalAccessException {
+    @Test
+    public void testWithAnnotationClear() {
 
         //Clear dynamicList of dynamicFilterProvider
-        Field field = DynamicFilterProvider.class.getDeclaredField("dynamicFilterMap");
-        field.setAccessible(true);
-        field.set(dynamicFilterProvider, new HashMap<>());
+       // Field field = DynamicFilterProvider.class.getDeclaredField("dynamicFilterMap");
+      //  field.setAccessible(true);
+      //  field.set(dynamicFilterProvider, new HashMap<>());
 
 
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
