@@ -76,9 +76,6 @@ public final class DynamicFilterProvider {
     public FilterFields getFields(MethodParameter methodParameter, RequestSession request) {
         DynamicFilter dynamicFilterAnnotation = methodParameter.getMethod().getDeclaredAnnotation(DynamicFilter.class);
 
-        if(dynamicFilterMap.size() == 0)
-            findDynamicFilters();
-
         if (dynamicFilterAnnotation != null && dynamicFilterMap.containsKey(dynamicFilterAnnotation.value())) {
             DynamicFilterEvent filter = dynamicFilterMap.get(dynamicFilterAnnotation.value());
             return filter.onGetFilterFields(methodParameter, request);
