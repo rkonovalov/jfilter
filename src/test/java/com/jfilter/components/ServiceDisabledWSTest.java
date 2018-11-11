@@ -21,12 +21,12 @@ import static org.junit.Assert.assertNotEquals;
 @ContextConfiguration(classes = WSConfigurationDisabled.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-public class WSDisabledITest {
+public class ServiceDisabledWSTest {
     private MockMvc mockMvc;
     private WebApplicationContext webApplicationContext;
 
     @Autowired
-    public WSDisabledITest setWebApplicationContext(WebApplicationContext webApplicationContext) {
+    public ServiceDisabledWSTest setWebApplicationContext(WebApplicationContext webApplicationContext) {
         this.webApplicationContext = webApplicationContext;
         return this;
     }
