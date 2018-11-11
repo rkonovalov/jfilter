@@ -1,6 +1,5 @@
 package com.jfilter.filter;
 
-import com.jfilter.filter.FileConfig;
 import com.jfilter.mock.MockClasses;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class FileWSConfigurationTest {
+public class FileConfigurationTest {
     private FileConfig mockConfig;
 
     @Before
@@ -20,7 +19,7 @@ public class FileWSConfigurationTest {
     @Test
     public void testControllerClassName() {
         FileConfig.Controller controller = mockConfig.getControllers().get(0);
-        assertEquals("com.jfilter.filter.FileWSConfigurationTest", controller.getClassName());
+        assertEquals("com.jfilter.filter.FileConfigurationTest", controller.getClassName());
     }
 
     @Test
@@ -36,7 +35,7 @@ public class FileWSConfigurationTest {
         FileConfig.Controller controller = mockConfig.getControllers().get(0);
         FileConfig.Strategy strategy = controller.getStrategies().get(0);
         FileConfig.Filter filter = strategy.getFilters().get(0);
-        assertEquals("com.jfilter.filter.FileWSConfigurationTest", filter.getClassName());
+        assertEquals("com.jfilter.filter.FileConfigurationTest", filter.getClassName());
     }
 
     @Test

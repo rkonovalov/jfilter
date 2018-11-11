@@ -1,6 +1,6 @@
 package com.jfilter.request;
 
-import com.jfilter.filter.FileWSConfigurationTest;
+import com.jfilter.filter.FileConfigurationTest;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.filter.FilterFields;
 import com.jfilter.filter.FileConfig;
@@ -53,7 +53,7 @@ public class RequestMethodParameterTest {
         strategy.getFilters().add(filter);
 
         FilterFields filterFields = strategy.appendStrategyFields(new FilterFields());
-        assertEquals(3, filterFields.getFields(FileWSConfigurationTest.class).size());
+        assertEquals(3, filterFields.getFields(FileConfigurationTest.class).size());
     }
 
 

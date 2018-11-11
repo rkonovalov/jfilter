@@ -7,7 +7,6 @@ import com.jfilter.mock.MockMethods;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.WSConfigurationEnabled;
 import com.jfilter.request.RequestSession;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -35,11 +33,7 @@ public class ConverterMapperITest {
 
     private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @Before
-    public void init() {
+    public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
@@ -66,9 +60,7 @@ public class ConverterMapperITest {
     @Test
     public void testSetFilterFields() {
         MockUser user = MockClasses.getUserMock();
-
         String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC, null, null);
-
         assertEquals(user.toString(), result);
     }
 

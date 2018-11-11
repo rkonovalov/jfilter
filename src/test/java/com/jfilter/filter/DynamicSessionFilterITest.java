@@ -38,8 +38,7 @@ public class DynamicSessionFilterITest {
         MethodParameter methodParameter = MockMethods.mockDynamicNullFilter();
 
         RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(new FilterFields(MockUser.class, Arrays.asList("id", "password"))));
-
-        //dynamicFilterProvider.findDynamicFilters();
+        
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
         assertNull(found);
