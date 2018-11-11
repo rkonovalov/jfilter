@@ -70,7 +70,7 @@ public class DynamicFilterProviderITest {
         assertNotNull(found);
     }
 
-    //@Test
+    @Test
     public void testWithAnnotationClear() throws NoSuchFieldException, IllegalAccessException {
 
         //Clear dynamicList of dynamicFilterProvider
