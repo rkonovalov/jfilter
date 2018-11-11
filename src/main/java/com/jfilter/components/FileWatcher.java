@@ -31,10 +31,6 @@ public final class FileWatcher implements DisposableBean {
     private boolean closed;
     private boolean overflowed;
 
-
-    private String test;
-
-
     /**
      * File watcher record
      */
