@@ -207,7 +207,7 @@ public final class FileWatcher implements DisposableBean {
     }
 
     /**
-     * Finalizing watcher
+     * Destroying watcher
      *
      * @throws IOException if this watch service is closed
      */
