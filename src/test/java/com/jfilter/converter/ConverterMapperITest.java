@@ -6,17 +6,13 @@ import com.jfilter.mock.MockHttpRequest;
 import com.jfilter.mock.MockMethods;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.WSConfiguration;
-import com.jfilter.mock.config.WSConfigurationEnabled;
 import com.jfilter.request.RequestSession;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+
 import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
