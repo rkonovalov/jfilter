@@ -1,13 +1,16 @@
-package com.jfilter.components;
+package com.jfilter.converter;
 
+import com.jfilter.components.DynamicFilterProvider;
 import com.jfilter.filter.FilterFields;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockHttpRequest;
 import com.jfilter.mock.MockUser;
+import com.jfilter.mock.config.WSConfiguration;
 import com.jfilter.mock.config.WSConfigurationEnabled;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -20,9 +23,7 @@ import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_DYNAMIC;
 import static org.junit.Assert.assertEquals;
 
 
-@ContextConfiguration(classes = WSConfigurationEnabled.class)
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
+@Component
 public class ConverterMapperWSTest {
     @Autowired
     private DynamicFilterProvider dynamicFilterProvider;
@@ -35,14 +36,18 @@ public class ConverterMapperWSTest {
     }
 
     @Test
-    public void testSetFilterFields() {
+    public void testSetFilterFields() throws Exception {
+        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+
         MockUser user = MockClasses.getUserMock();
         String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC, null, null);
         assertEquals(user.toString(), result);
     }
 
     @Test
-    public void testNotSetFilterFields() {
+    public void testNotSetFilterFields() throws Exception {
+        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
         user.setPassword(null);
