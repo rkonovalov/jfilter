@@ -20,7 +20,7 @@ import static com.jfilter.mock.webservice.WSDynamicFilter.MAPPING_NULL_DYNAMIC_F
 import static junit.framework.TestCase.assertEquals;
 
 @Component
-public class WSDynamicITest {
+public class DynamicFilterWSTest {
     private MockMvc mockMvc;
 
     @Autowired
