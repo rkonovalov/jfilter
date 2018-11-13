@@ -13,7 +13,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jfilter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jfilter&amp;utm_campaign=Badge_Grade)
 [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=jfilter&metric=alert_status)](https://sonarcloud.io/dashboard?id=jfilter)
 
-# Overview
+# About
 This module could be used in Spring Web Service project for filter(exclude) of fields in Service response.
 When you used Jackson @JsonView interface and need more powerful and flexibility, this module could be useful.
 For information please follow the links below.
