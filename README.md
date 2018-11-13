@@ -26,7 +26,7 @@ For information please follow the links below.
 
 
 # Diagram of module flowchart
-![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram.png)
+![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram.png?1.0.8)
 
 
 # Installation
