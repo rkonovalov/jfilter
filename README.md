@@ -1,3 +1,10 @@
+<div align="center">
+  <a href="https://rkonovalov.github.io/projects/jfilter/1.0.8/">
+    <img width="780" height="300" src="https://rkonovalov.github.io/assets/images/jfilter-logo.png">
+  </a>
+  <br>
+</div>
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/rkonovalov/jfilter.svg?branch=master)](https://travis-ci.org/rkonovalov/jfilter)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.rkonovalov/json-ignore/badge.svg?style=blue)](https://search.maven.org/search?q=a:json-ignore)
