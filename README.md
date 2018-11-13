@@ -24,6 +24,11 @@ For information please follow the links below.
   * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/filter-dynamic/)
 * [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.8/release-notes/)
 
+
+# Diagram of module flowchart
+![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram.png)
+
+
 # Installation
 For using this module you need to import dependency
 
