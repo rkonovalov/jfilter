@@ -1,14 +1,3 @@
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129288434-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-129288434-1');
-</script>
-
-
 <div align="center">
   <a href="https://rkonovalov.github.io/projects/jfilter/1.0.8/">
     <img width="780" height="300" src="https://rkonovalov.github.io/assets/images/jfilter-logo.png">
