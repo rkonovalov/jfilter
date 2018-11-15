@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://rkonovalov.github.io/projects/jfilter/1.0.8/">
-    <div style="-webkit-filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2)); filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));" src="https://rkonovalov.github.io/assets/images/jfilter-logo.svg">
+    <img width="720px" height="288px" src="https://rkonovalov.github.io/assets/images/jfilter-logo.svg" alt="JFilter Main page">
   </a>
   <br>
 </div>
