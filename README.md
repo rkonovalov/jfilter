@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://rkonovalov.github.io/projects/jfilter/1.0.8/">
-    <img width="720px" height="288px" src="https://rkonovalov.github.io/assets/images/jfilter-logo.svg" alt="JFilter Main page">
+    <img src="https://rkonovalov.github.io/assets/images/jfilter-logo.svg" alt="JFilter Main page">
   </a>
   <br>
 </div>
