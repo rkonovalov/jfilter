@@ -20,6 +20,7 @@ For information please follow the links below.
 
 ## Publications
 Publication on [medium.com](https://medium.com/spring-web-service-response-filtering/spring-web-service-response-filtering-5dcff6679327)
+
 Publication on [dzone.com](https://dzone.com/articles/spring-web-service-response-filtering)
 
 ## Index
