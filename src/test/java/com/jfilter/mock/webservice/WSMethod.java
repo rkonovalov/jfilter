@@ -24,6 +24,7 @@ public class WSMethod {
     public static final String MAPPING_SIGN_IN_STRATEGY_DEFAULT = "/customers/signInStrategyDefault";
     public static final String MAPPING_SIGN_IN_DYNAMIC = "/customers/signInDynamic";
     public static final String MAPPING_SIGN_IN_DEFAULT = "/signInDefault";
+    public static final String MAPPING_SIGN_IN_WITHOUT_PRODUCE = "/signInWithoutProduce";
 
     @FieldFilterSetting(fields = {"id", "password"})
     @RequestMapping(value = MAPPING_SIGN_IN_SINGLE_ANNOTATION,
@@ -106,6 +107,14 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInDynamic(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return MockClasses.getUserMock();
+    }
+
+    @FieldFilterSetting(fields = {"id", "password"})
+    @RequestMapping(value = MAPPING_SIGN_IN_WITHOUT_PRODUCE,
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public MockUser signInWithoutProduce(@RequestParam("email") String email, @RequestParam("password") String password) {
         return MockClasses.getUserMock();
     }
 }

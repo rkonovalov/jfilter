@@ -138,4 +138,15 @@ public class FilterAdviceWSTest {
 
         assertEquals(user.toString(), result);
     }
+
+    @Test
+    public void testSignInWithoutProduce() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
+
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_WITHOUT_PRODUCE, null, null);
+
+        assertEquals(user.toString(), result);
+    }
 }
