@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class intercepts all responses of Spring Web Service which returns objects instance FilterClassWrapper
@@ -51,7 +52,7 @@ public abstract class FilterConverter implements HttpMessageConverter<Object> {
      */
     @Override
     public boolean canWrite(Class<?> aClass, MediaType mediaType) {
-        return supportedMedia.indexOf(mediaType) >= 0;
+        return supportedMedia.indexOf(mediaType) >= 0 || Objects.isNull(mediaType);
     }
 
     /**
