@@ -20,7 +20,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
  */
 @EnableScheduling
 @Controller
-public final class FileWatcher implements DisposableBean {
+public class FileWatcher implements DisposableBean {
 
     private static final Long FILE_MODIFY_THRESHOLD = 1000L;
     private static final String FILE_MODIFY_DELAY = "2000";
