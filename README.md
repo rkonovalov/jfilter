@@ -24,18 +24,18 @@ Publication on [medium.com](https://medium.com/spring-web-service-response-filte
 Publication on [dzone.com](https://dzone.com/articles/spring-web-service-response-filtering)
 
 ## Index
-* [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.8/)
-* [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.8/requirements/)
-* [Diagram](https://rkonovalov.github.io/projects/jfilter/1.0.8/diagram/)
-* [Installation](https://rkonovalov.github.io/projects/jfilter/1.0.8/installation/)
-* [Getting started](https://rkonovalov.github.io/projects/jfilter/1.0.8/getting-started/)
-* [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/)
-  * [Simple field filter](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/filter-field/)  
-  * [Session strategy filter](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/filter-strategy/) 
-  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/filter-file/)
-  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/filter-controller/)
-  * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/filter-dynamic/)
-* [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.8/release-notes/)
+* [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.9/)
+* [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.9/requirements/)
+* [Diagram](https://rkonovalov.github.io/projects/jfilter/1.0.9/diagram/)
+* [Installation](https://rkonovalov.github.io/projects/jfilter/1.0.9/installation/)
+* [Getting started](https://rkonovalov.github.io/projects/jfilter/1.0.9/getting-started/)
+* [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.9/examples/)
+  * [Simple field filter](https://rkonovalov.github.io/projects/jfilter/1.0.9/examples/filter-field/)  
+  * [Session strategy filter](https://rkonovalov.github.io/projects/jfilter/1.0.9/examples/filter-strategy/) 
+  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jfilter/1.0.9/examples/filter-file/)
+  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jfilter/1.0.9/examples/filter-controller/)
+  * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.9/examples/filter-dynamic/)
+* [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.9/release-notes/)
 
 
 # Diagram of module flowchart
@@ -49,16 +49,15 @@ For using this module you need to import dependency
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
 </dependency>
 ```
 
 # Getting started
 For activation of JFilter module just add next annotations
 
-* Component scan and enable filter
+* Enable filter
 ```java
-@ComponentScan({"com.jfilter.components"})
 @EnableJsonFilter
 ```
 
@@ -117,9 +116,13 @@ Just add FieldFilterSetting annotation with filterable fields and module will ex
 }
 ```
 
-For more examples please follow to the link [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.8/examples/)
+For more examples please follow to the link [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.9/examples/)
 
 # Release notes
+
+## Version 1.0.9
+    * Fixed bug "No converter found for return value of type" Case #1
+    * Added little features from Case #4, Case #5 
 
 ## Version 1.0.8
     * Added Dynamic Filter which allows to create own filters with custom behaviour
