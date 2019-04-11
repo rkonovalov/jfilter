@@ -1,5 +1,7 @@
 package com.jfilter;
 
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.lang.annotation.*;
@@ -14,5 +16,6 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Documented
 @EnableScheduling
+@ComponentScans(value = @ComponentScan({"com.jfilter", "com.jfilter.components"}))
 public @interface EnableJsonFilter {
 }
