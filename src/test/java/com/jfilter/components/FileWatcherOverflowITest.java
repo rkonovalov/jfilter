@@ -49,7 +49,7 @@ public class FileWatcherOverflowITest {
         final Path p = directory.resolve(Paths.get("TEMPORARY_FILE"));
         for (int i = 0; i < fileCount; i++) {
             File createdFile = Files.createFile(p).toFile();
-            createdFile.setLastModified(new Date().getTime() + 1);
+            createdFile.setLastModified(new Date().getTime() + 5);
             Files.delete(p);
         }
 
