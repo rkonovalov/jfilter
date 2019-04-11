@@ -54,9 +54,8 @@ For using this module you need to import dependency
 ```
 
 # Getting started
-For activation of JFilter module just add next annotations
+For activation of JFilter module just add next annotation
 
-* Enable filter
 ```java
 @EnableJsonFilter
 ```
