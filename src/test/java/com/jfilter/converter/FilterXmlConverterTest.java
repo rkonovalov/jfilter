@@ -13,7 +13,7 @@ public class FilterXmlConverterTest {
 
     @Before
     public void init() {
-        filterXmlConverter = new FilterXmlConverter();
+        filterXmlConverter = new FilterXmlConverter(null);
     }
 
     @Test

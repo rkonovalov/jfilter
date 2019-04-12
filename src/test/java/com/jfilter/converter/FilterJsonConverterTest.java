@@ -13,7 +13,7 @@ public class FilterJsonConverterTest {
 
     @Before
     public void init() {
-        filterJsonConverter = new FilterJsonConverter();
+        filterJsonConverter = new FilterJsonConverter(null);
     }
 
     @Test
