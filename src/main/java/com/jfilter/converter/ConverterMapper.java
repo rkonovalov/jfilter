@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
 import com.fasterxml.jackson.databind.ser.SerializerFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.jfilter.filter.FilterFields;
-
 import java.util.Map;
 
 /**
@@ -24,7 +23,9 @@ public class ConverterMapper {
     public ConverterMapper(ObjectMapper mapper, FilterFields filterFields) {
         this.mapper = mapper;
         this.filterFields = filterFields;
-        setIgnoreModifier();
+
+        if (filterFields != null)
+            setIgnoreModifier();
     }
 
     /**
@@ -32,9 +33,7 @@ public class ConverterMapper {
      * Also see {@link ConverterMapperModifier}
      */
     private void setIgnoreModifier() {
-        SerializerFactory factory = filterFields != null ? BeanSerializerFactory.instance
-                .withSerializerModifier(new ConverterMapperModifier(filterFields)) : BeanSerializerFactory.instance;
-
+        SerializerFactory factory = BeanSerializerFactory.instance.withSerializerModifier(new ConverterMapperModifier(filterFields));
         mapper.setSerializerFactory(factory);
     }
 
