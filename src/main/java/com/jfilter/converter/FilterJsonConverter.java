@@ -1,8 +1,10 @@
 package com.jfilter.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
@@ -10,6 +12,9 @@ import java.util.Arrays;
  * This class represents of JSON serialization from response of Spring Web Service
  */
 public class FilterJsonConverter extends FilterConverter {
+
+    @Autowired
+    private MappingJackson2HttpMessageConverter jsonConverter;
 
     /**
      * Creates a new instance of the {@link FilterJsonConverter} class.
@@ -25,12 +30,14 @@ public class FilterJsonConverter extends FilterConverter {
     }
 
     /**
-     * Returns JSON object mapper
+     * Returns JSON ObjectMapper
+     * If envrimoment is Spring Boot, trying to get ObjectMapper from MappingJackson2HttpMessageConverter class which already created by Spring Boot.
+     * Otherwise get ObjectMapper from Jackson2ObjectMapperBuilder
      *
      * @return {@link ObjectMapper}
      */
     @Override
     public ObjectMapper getObjectMapper() {
-        return Jackson2ObjectMapperBuilder.json().build();
+        return jsonConverter != null ? jsonConverter.getObjectMapper() : Jackson2ObjectMapperBuilder.json().build();
     }
 }
