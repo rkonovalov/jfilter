@@ -14,7 +14,6 @@ import java.util.Arrays;
  */
 public class FilterXmlConverter extends FilterConverter {
 
-    @Autowired
     private MappingJackson2XmlHttpMessageConverter xmlConverter;
 
     /**
@@ -22,7 +21,8 @@ public class FilterXmlConverter extends FilterConverter {
      *
      * And specify supported media types
      */
-    public FilterXmlConverter() {
+    public FilterXmlConverter(MappingJackson2XmlHttpMessageConverter xmlConverter) {
+        this.xmlConverter = xmlConverter;
         getSupportedMediaTypes().addAll(Arrays.asList(
                 MediaType.APPLICATION_XML,
                 new MediaType("application", "xml", Charset.defaultCharset()),

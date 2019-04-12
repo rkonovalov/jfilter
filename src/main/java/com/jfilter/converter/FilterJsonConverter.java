@@ -13,7 +13,6 @@ import java.util.Arrays;
  */
 public class FilterJsonConverter extends FilterConverter {
 
-    @Autowired
     private MappingJackson2HttpMessageConverter jsonConverter;
 
     /**
@@ -21,7 +20,8 @@ public class FilterJsonConverter extends FilterConverter {
      *
      * And specify supported media types
      */
-    public FilterJsonConverter() {
+    public FilterJsonConverter(MappingJackson2HttpMessageConverter jsonConverter) {
+        this.jsonConverter = jsonConverter;
         getSupportedMediaTypes().addAll(Arrays.asList(
                 MediaType.APPLICATION_JSON,
                 new MediaType("application", "json", Charset.defaultCharset()),
