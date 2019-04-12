@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 
 import static org.junit.Assert.assertNull;
 
@@ -13,7 +14,7 @@ public class FilterXmlConverterTest {
 
     @Before
     public void init() {
-        filterXmlConverter = new FilterXmlConverter(null);
+        filterXmlConverter = new FilterXmlConverter(new MappingJackson2XmlHttpMessageConverter());
     }
 
     @Test

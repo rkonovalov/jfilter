@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import static org.junit.Assert.assertNull;
 
@@ -13,7 +14,7 @@ public class FilterJsonConverterTest {
 
     @Before
     public void init() {
-        filterJsonConverter = new FilterJsonConverter(null);
+        filterJsonConverter = new FilterJsonConverter(new MappingJackson2HttpMessageConverter());
     }
 
     @Test
