@@ -7,6 +7,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 public class ConverterUtil {
 
+    public ConverterUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static <T> T getBean(WebApplicationContext webApplicationContext, Class<T> tClass) {
         try {
             return webApplicationContext.getBean(tClass);
