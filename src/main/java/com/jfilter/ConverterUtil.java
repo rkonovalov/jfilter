@@ -7,7 +7,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 public class ConverterUtil {
 
-    public ConverterUtil() {
+    ConverterUtil() {
         throw new IllegalStateException("Utility class");
     }
 
