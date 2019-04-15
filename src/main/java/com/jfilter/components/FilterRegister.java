@@ -35,12 +35,6 @@ public class FilterRegister implements WebMvcConfigurer {
     private ObjectMapper objectMapper;
 
     @Autowired
-    public FilterRegister setObjectMapper(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-        return this;
-    }
-
-    @Autowired
     public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
         /*
          * Important! For enabling filtration, should be specified one of application bean with EnableJsonFilter annotation
@@ -49,6 +43,7 @@ public class FilterRegister implements WebMvcConfigurer {
 
         defaultJsonConverter = ConverterUtil.getDefaultJsonConverter(webApplicationContext);
         defaultXmlConverter = ConverterUtil.getDefaultXmlConverter(webApplicationContext);
+        objectMapper = ConverterUtil.getBean(webApplicationContext, ObjectMapper.class);
     }
 
     /**

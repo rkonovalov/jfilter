@@ -7,7 +7,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 public class ConverterUtil {
 
-    private static <T> T getBean(WebApplicationContext webApplicationContext, Class<T> tClass) {
+    public static <T> T getBean(WebApplicationContext webApplicationContext, Class<T> tClass) {
         try {
             return webApplicationContext.getBean(tClass);
         } catch (BeansException e) {
