@@ -14,7 +14,7 @@ public class FilterJsonConverterTest {
 
     @Before
     public void init() {
-        filterJsonConverter = new FilterJsonConverter(new MappingJackson2HttpMessageConverter());
+        filterJsonConverter = new FilterJsonConverter(new MappingJackson2HttpMessageConverter(), null);
     }
 
     @Test
