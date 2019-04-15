@@ -11,7 +11,6 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
 import org.springframework.web.context.WebApplicationContext;
@@ -48,6 +47,7 @@ public class FilterRegister implements WebMvcConfigurer {
 
     /**
      * Add converters if {@link EnableJsonFilter} annotation is found in project
+     *
      * @param converters list of {@link HttpMessageConverter}
      */
     @Override
@@ -60,77 +60,77 @@ public class FilterRegister implements WebMvcConfigurer {
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-
+        // Do nothing
     }
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-
+        // Do nothing
     }
 
     @Override
     public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
-
+        // Do nothing
     }
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-
+        // Do nothing
     }
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-
+        // Do nothing
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
+        // Do nothing
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
+        // Do nothing
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-
+        // Do nothing
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-
+        // Do nothing
     }
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
-
+        // Do nothing
     }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-
+        // Do nothing
     }
 
     @Override
     public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
-
+        // Do nothing
     }
 
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-
+        // Do nothing
     }
 
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
-
+        // Do nothing
     }
 
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
-
+        // Do nothing
     }
 
     @Override
