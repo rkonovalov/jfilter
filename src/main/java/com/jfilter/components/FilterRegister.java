@@ -33,8 +33,12 @@ public class FilterRegister implements WebMvcConfigurer {
     private MappingJackson2XmlHttpMessageConverter defaultXmlConverter;
     private ObjectMapper objectMapper;
 
+    private final WebApplicationContext webApplicationContext;
+
     @Autowired
-    public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
+    public FilterRegister(WebApplicationContext webApplicationContext) {
+        this.webApplicationContext = webApplicationContext;
+
         /*
          * Important! For enabling filtration, should be specified one of application bean with EnableJsonFilter annotation
          */
