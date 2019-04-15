@@ -1,5 +1,6 @@
 package com.jfilter.components;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfilter.ConverterUtil;
 import com.jfilter.EnableJsonFilter;
 import com.jfilter.converter.FilterXmlConverter;
@@ -31,6 +32,13 @@ public class FilterRegister implements WebMvcConfigurer {
     private boolean enabled;
     private MappingJackson2HttpMessageConverter defaultJsonConverter;
     private MappingJackson2XmlHttpMessageConverter defaultXmlConverter;
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    public FilterRegister setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+        return this;
+    }
 
     @Autowired
     public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
@@ -50,7 +58,7 @@ public class FilterRegister implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         if (enabled) {
-            converters.add(new FilterJsonConverter(defaultJsonConverter));
+            converters.add(new FilterJsonConverter(defaultJsonConverter, objectMapper));
             converters.add(new FilterXmlConverter(defaultXmlConverter));
         }
     }
