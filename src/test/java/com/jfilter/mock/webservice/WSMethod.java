@@ -16,6 +16,7 @@ public class WSMethod {
     public static final String MAPPING_SIGN_IN_KEEP_SINGLE_ANNOTATION = "/customers/signInKeepSingleAnnotation";
     public static final String MAPPING_SIGN_IN_SINGLE_ANNOTATION_XML = "/customers/signInSingleAnnotationXml";
     public static final String MAPPING_SIGN_IN_FILE_ANNOTATION = "/customers/signInFileAnnotation";
+    public static final String MAPPING_SIGN_IN_FILE_KEEP_ANNOTATION = "/customers/signInFileKeepAnnotation";
     public static final String MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY = "/customers/signInFileDefaultStrategy";
     public static final String MAPPING_SIGN_IN_UN_EXIST_FILE = "/customers/signInUnExistedFile";
     private static final String MAPPING_SIGN_IN_STRATEGY_ANNOTATION = "/customers/signInStrategyAnnotation";
@@ -122,6 +123,16 @@ public class WSMethod {
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public MockUser signInWithoutProduce(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return MockClasses.getUserMock();
+    }
+
+
+    @FileFilterSetting(fileName = "config_with_behaviour.xml")
+    @RequestMapping(value = MAPPING_SIGN_IN_FILE_KEEP_ANNOTATION,
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public MockUser signInFileKeepAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
         return MockClasses.getUserMock();
     }
 }
