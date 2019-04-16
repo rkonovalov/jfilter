@@ -65,6 +65,12 @@ public class FilterAdviceWSTest {
     }
 
     @Test
+    public void testSignInKeepSingleAnnotation() {
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_KEEP_SINGLE_ANNOTATION, null, null);
+        assertEquals("{\"id\":100,\"email\":\"mail@mail.com\"}", result);
+    }
+
+    @Test
     public void testSignInSingleAnnotationXml() {
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
