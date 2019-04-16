@@ -183,6 +183,7 @@ public class FileConfig implements Serializable {
                         items.add(field.getName());
                 });
                 filterFields.appendToMap(clazz, items);
+                filterFields.setFilterBehaviour(filter.getFilterBehaviour());
             });
 
             return filterFields;
@@ -203,11 +204,15 @@ public class FileConfig implements Serializable {
         @JacksonXmlElementWrapper(useWrapping = false)
         private List<Field> fields;
 
+        @JacksonXmlProperty(localName = "behaviour")
+        private FilterBehaviour filterBehaviour;
+
         /**
          * Creates a new instance of the {@link Filter} class.
          */
         public Filter() {
             this.fields = new ArrayList<>();
+            this.filterBehaviour = FilterBehaviour.HIDE_FIELDS;
         }
 
         public String getClassName() {
@@ -224,6 +229,15 @@ public class FileConfig implements Serializable {
 
         public Filter setFields(List<Field> fields) {
             this.fields = fields;
+            return this;
+        }
+
+        public FilterBehaviour getFilterBehaviour() {
+            return filterBehaviour;
+        }
+
+        public Filter setFilterBehaviour(FilterBehaviour filterBehaviour) {
+            this.filterBehaviour = filterBehaviour;
             return this;
         }
     }
