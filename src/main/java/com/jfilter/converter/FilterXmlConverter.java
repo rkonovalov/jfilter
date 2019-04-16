@@ -19,6 +19,7 @@ public class FilterXmlConverter extends FilterConverter {
      * Creates a new instance of the {@link FilterXmlConverter} class.
      *
      * And specify supported media types
+     * @param xmlConverter {@link MappingJackson2XmlHttpMessageConverter} default Spring xml converter
      */
     public FilterXmlConverter(MappingJackson2XmlHttpMessageConverter xmlConverter) {
         this.xmlConverter = xmlConverter;

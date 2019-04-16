@@ -20,6 +20,8 @@ public class FilterJsonConverter extends FilterConverter {
      * Creates a new instance of the {@link FilterJsonConverter} class.
      * <p>
      * And specify supported media types
+     * @param jsonConverter {@link MappingJackson2HttpMessageConverter} default Spring json converter
+     * @param objectMapper {@link ObjectMapper} default object mapper if envrimoment is Spring Boot
      */
     public FilterJsonConverter(MappingJackson2HttpMessageConverter jsonConverter, ObjectMapper objectMapper) {
         this.jsonConverter = jsonConverter;
