@@ -4,6 +4,7 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 import java.util.Objects;
@@ -15,14 +16,20 @@ import java.util.Objects;
  */
 public class RequestSession {
     private final HttpSession session;
+    private final HttpServletRequest request;
+
 
     /**
      * Creates a new instance of the {@link RequestSession} class.
      *
-     * @param request {@link ServerHttpRequest}
+     * @param request {@link HttpServletRequest}
+     * @throws NullPointerException request is null.
      */
-    public RequestSession(ServerHttpRequest request) {
-        this.session = getRequest(request).getServletRequest().getSession();
+    public RequestSession(HttpServletRequest request) {
+        if (request == null)
+            throw new NullPointerException();
+        this.request = request;
+        this.session = request.getSession();
     }
 
     /**
@@ -32,6 +39,15 @@ public class RequestSession {
      */
     public HttpSession getSession() {
         return session;
+    }
+
+    /**
+     * Return initial request {@link HttpServletRequest}
+     *
+     * @return {@link HttpServletRequest}
+     */
+    public HttpServletRequest getRequest() {
+        return request;
     }
 
     private ServletServerHttpRequest getRequest(ServerHttpRequest serverHttpRequest) {
@@ -74,8 +90,7 @@ public class RequestSession {
     public boolean isSessionPropertyExists(String attributeName, String attributeValue) {
         if (attributeName == null && attributeValue == null) {
             return false;
-        } else
-            if (StringUtils.isEmpty(attributeName) && StringUtils.isEmpty(attributeValue)) {
+        } else if (StringUtils.isEmpty(attributeName) && StringUtils.isEmpty(attributeValue)) {
             return true;
         } else if (hasSessionProperty(attributeName)) {
             Object sessionObject = getSessionProperty(attributeName);
