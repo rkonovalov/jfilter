@@ -44,6 +44,7 @@ public class StrategyFilter extends BaseFilter {
 
                 for (FieldFilterSetting setting : strategy.ignoreFields()) {
                     result.appendToMap(setting.className(), Arrays.asList(setting.fields()));
+                    result.setFilterBehaviour(setting.behaviour());
                 }
             }
         }

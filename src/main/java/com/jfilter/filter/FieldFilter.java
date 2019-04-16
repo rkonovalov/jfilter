@@ -40,6 +40,7 @@ public class FieldFilter extends BaseFilter {
 
         for (FieldFilterSetting setting : config) {
             result.appendToMap(setting.className(), Arrays.asList(setting.fields()));
+            result.setFilterBehaviour(setting.behaviour());
         }
 
         return result;

@@ -12,12 +12,14 @@ public class FilterFields implements Serializable {
     private static final long serialVersionUID = -2354837314560228182L;
 
     private final Map<Class, List<String>> fieldsMap;
+    private FilterBehaviour filterBehaviour;
 
     /**
      * Creates a new instance of the {@link FilterFields} class.
      */
     public FilterFields() {
         this.fieldsMap = new HashMap<>();
+        this.filterBehaviour = FilterBehaviour.HIDE_FIELDS;
     }
 
     /**
@@ -33,6 +35,15 @@ public class FilterFields implements Serializable {
 
     public Map<Class, List<String>> getFieldsMap() {
         return fieldsMap;
+    }
+
+    public FilterBehaviour getFilterBehaviour() {
+        return filterBehaviour;
+    }
+
+    public FilterFields setFilterBehaviour(FilterBehaviour filterBehaviour) {
+        this.filterBehaviour = filterBehaviour;
+        return this;
     }
 
     /**
@@ -67,11 +78,12 @@ public class FilterFields implements Serializable {
         if (this == object) return true;
         if (!(object instanceof FilterFields)) return false;
         FilterFields that = (FilterFields) object;
-        return Objects.equals(fieldsMap, that.fieldsMap);
+        return Objects.equals(fieldsMap, that.fieldsMap) &&
+                filterBehaviour == that.filterBehaviour;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fieldsMap);
+        return Objects.hash(fieldsMap, filterBehaviour);
     }
 }

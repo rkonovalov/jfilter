@@ -22,4 +22,10 @@ public @interface FieldFilterSetting {
      * @return array of filterable items
      */
     String[] fields() default {};
+
+    /**
+     *
+     * @return behaviour of filter {@link FilterBehaviour}
+     */
+    FilterBehaviour behaviour() default FilterBehaviour.HIDE_FIELDS;
 }
