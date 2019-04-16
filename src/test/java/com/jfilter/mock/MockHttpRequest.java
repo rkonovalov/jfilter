@@ -2,10 +2,11 @@ package com.jfilter.mock;
 
 import com.jfilter.filter.FilterFields;
 import org.springframework.http.MediaType;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static com.jfilter.components.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -13,26 +14,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 public class MockHttpRequest {
 
-    private static ServletServerHttpRequest getMocRequest(String attributeName, Object attributeValue) {
+    private static HttpServletRequest getMocRequest(String attributeName, Object attributeValue) {
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "");
         if (attributeName != null && !attributeName.isEmpty())
             request.getSession().setAttribute(attributeName, attributeValue);
-        return new ServletServerHttpRequest(request);
+        return request;
     }
 
-    public static ServletServerHttpRequest getMockAdminRequest() {
+    public static HttpServletRequest getMockAdminRequest() {
         return getMocRequest("ROLE", "ADMIN");
     }
 
-    public static ServletServerHttpRequest getMockUserRequest() {
+    public static HttpServletRequest getMockUserRequest() {
         return getMocRequest("ROLE", "USER");
     }
 
-    public static ServletServerHttpRequest getMockClearRequest() {
+    public static HttpServletRequest getMockClearRequest() {
         return getMocRequest("", "");
     }
 
-    public static ServletServerHttpRequest getMockDynamicFilterRequest(FilterFields filterFields) {
+    public static HttpServletRequest getMockDynamicFilterRequest(FilterFields filterFields) {
         return getMocRequest(ATTRIBUTE_FILTER_FIELDS, filterFields);
     }
 

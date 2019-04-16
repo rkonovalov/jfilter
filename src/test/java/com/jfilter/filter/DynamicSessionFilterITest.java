@@ -9,8 +9,9 @@ import com.jfilter.request.RequestSession;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertNotNull;
@@ -26,7 +27,7 @@ public class DynamicSessionFilterITest {
     public void testOnGetFilterFieldsNotNull() throws Exception {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
-        ServletServerHttpRequest request = MockHttpRequest.getMockDynamicFilterRequest(null);
+        HttpServletRequest request = MockHttpRequest.getMockDynamicFilterRequest(null);
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
 
         assertNotNull(found);

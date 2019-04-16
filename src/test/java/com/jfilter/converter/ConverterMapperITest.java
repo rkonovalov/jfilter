@@ -13,6 +13,7 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
@@ -29,7 +30,7 @@ public class ConverterMapperITest {
         FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
 
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
-        ServletServerHttpRequest request = MockHttpRequest.getMockDynamicFilterRequest(filterFields);
+        HttpServletRequest request = MockHttpRequest.getMockDynamicFilterRequest(filterFields);
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
 
         assertEquals(filterFields, found);
@@ -40,7 +41,7 @@ public class ConverterMapperITest {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
 
         MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
-        ServletServerHttpRequest request = MockHttpRequest.getMockDynamicFilterRequest(null);
+        HttpServletRequest request = MockHttpRequest.getMockDynamicFilterRequest(null);
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
 
         assertEquals(0, found.getFieldsMap().size());
