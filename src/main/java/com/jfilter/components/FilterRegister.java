@@ -52,10 +52,7 @@ public class FilterRegister implements WebMvcConfigurer {
      */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        if (enabled) {
-            converters.add(0, new FilterJsonConverter(defaultJsonConverter, objectMapper));
-            converters.add(0, new FilterXmlConverter(defaultXmlConverter));
-        }
+        // Do nothing
     }
 
     @Override
@@ -120,7 +117,10 @@ public class FilterRegister implements WebMvcConfigurer {
 
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        // Do nothing
+        if (enabled) {
+            converters.add(0, new FilterJsonConverter(defaultJsonConverter, objectMapper));
+            converters.add(0, new FilterXmlConverter(defaultXmlConverter));
+        }
     }
 
     @Override
