@@ -147,6 +147,6 @@ public class FilterAdviceWSTest {
 
         String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_WITHOUT_PRODUCE, null, null);
 
-        assertEquals(user.toString(), result);
+        assertEquals(user.toXmlString(), result);
     }
 }
