@@ -50,13 +50,6 @@ public class RequestSession {
         return request;
     }
 
-    private ServletServerHttpRequest getRequest(ServerHttpRequest serverHttpRequest) {
-        if (serverHttpRequest instanceof ServletServerHttpRequest) {
-            return (ServletServerHttpRequest) serverHttpRequest;
-        } else
-            throw new IllegalArgumentException();
-    }
-
     private boolean hasSessionProperty(String propertyName) {
         Enumeration<String> e = session.getAttributeNames();
 

@@ -8,6 +8,8 @@ import com.jfilter.filter.FilterFields;
 
 import java.util.List;
 
+import static com.jfilter.filter.FilterBehaviour.HIDE_FIELDS;
+
 /**
  * This class is  inherited from BeanSerializerModifier
  *
@@ -50,16 +52,11 @@ public class ConverterMapperModifier extends BeanSerializerModifier {
     private void removeFieldsByClass(Class clazz, List<BeanPropertyWriter> beanProperties) {
         List<String> ignores = filterFields.getFields(clazz);
 
-        if (ignores.size() > 0)
-            switch (filterFields.getFilterBehaviour()) {
-                case HIDE_FIELDS:
-                    beanProperties.removeIf(beanProperty -> ignores.contains(beanProperty.getName()));
-                    break;
-                case KEEP_FIELDS:
-                    beanProperties.removeIf(beanProperty -> !ignores.contains(beanProperty.getName()));
-                    break;
-            }
-
+        if (!ignores.isEmpty())
+            if (filterFields.getFilterBehaviour() == HIDE_FIELDS) {
+                beanProperties.removeIf(beanProperty -> ignores.contains(beanProperty.getName()));
+            } else
+                beanProperties.removeIf(beanProperty -> !ignores.contains(beanProperty.getName()));
     }
 
     /**
