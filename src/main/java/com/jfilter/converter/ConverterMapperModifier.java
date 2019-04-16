@@ -29,8 +29,8 @@ public class ConverterMapperModifier extends BeanSerializerModifier {
     /**
      * Trying to change properties
      *
-     * @param config serialization config
-     * @param beanDesc bean description
+     * @param config         serialization config
+     * @param beanDesc       bean description
      * @param beanProperties list of bean properties
      * @return list of bean properties
      */
@@ -43,18 +43,29 @@ public class ConverterMapperModifier extends BeanSerializerModifier {
     /**
      * Search matches of field name in ignoreList and bean properties list
      * If match is found then bean property will be removed from list
-     * @param clazz class
+     *
+     * @param clazz          class
      * @param beanProperties list of bean properties
      */
     private void removeFieldsByClass(Class clazz, List<BeanPropertyWriter> beanProperties) {
         List<String> ignores = filterFields.getFields(clazz);
-        beanProperties.removeIf(beanProperty -> ignores.contains(beanProperty.getName()));
+
+        if (ignores.size() > 0)
+            switch (filterFields.getFilterBehaviour()) {
+                case HIDE_FIELDS:
+                    beanProperties.removeIf(beanProperty -> ignores.contains(beanProperty.getName()));
+                    break;
+                case KEEP_FIELDS:
+                    beanProperties.removeIf(beanProperty -> !ignores.contains(beanProperty.getName()));
+                    break;
+            }
+
     }
 
     /**
      * Attempt to remove bean property from bean properties list
      *
-     * @param beanDesc bean description
+     * @param beanDesc       bean description
      * @param beanProperties list of bean properties
      */
     private void removeFields(BeanDescription beanDesc, List<BeanPropertyWriter> beanProperties) {
