@@ -9,9 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
@@ -66,7 +68,9 @@ public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
 
-        RequestSession requestSession = new RequestSession(serverHttpRequest);
+        HttpServletRequest servletServerHttpRequest = ((ServletServerHttpRequest) serverHttpRequest).getServletRequest();
+
+        RequestSession requestSession = new RequestSession(servletServerHttpRequest);
 
         BaseFilter filter = filterProvider.getFilter(methodParameter);
         if (filter != null) {
