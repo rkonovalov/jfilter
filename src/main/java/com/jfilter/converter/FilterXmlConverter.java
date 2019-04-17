@@ -1,7 +1,6 @@
 package com.jfilter.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.jfilter.components.FilterMapperConfig;
 import org.springframework.http.MediaType;
 import java.nio.charset.Charset;
@@ -33,7 +32,7 @@ public class FilterXmlConverter extends FilterConverter {
      * Returns XML object mapper
      * If envrimoment is Spring Boot, trying to get XmlMapper from MappingJackson2XmlHttpMessageConverter class which already created by Spring Boot.
      * Otherwise get XmlMapper from Jackson2ObjectMapperBuilder
-     * @return {@link XmlMapper}
+     * @return {@link ObjectMapper}
      */
     @Override
     public ObjectMapper getObjectMapper() {

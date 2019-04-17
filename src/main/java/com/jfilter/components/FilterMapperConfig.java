@@ -10,12 +10,10 @@ public class FilterMapperConfig {
     private ObjectMapper defaultXmlMapper;
 
     public FilterMapperConfig() {
-        defaultJsonMapper = Jackson2ObjectMapperBuilder.json().build();
-        defaultXmlMapper = Jackson2ObjectMapperBuilder.xml().build();
     }
 
     public ObjectMapper getDefaultJsonMapper() {
-        return Jackson2ObjectMapperBuilder.json().build();
+        return defaultJsonMapper != null ? defaultJsonMapper : Jackson2ObjectMapperBuilder.json().build();
     }
 
     public FilterMapperConfig setDefaultJsonMapper(ObjectMapper defaultJsonMapper) {
@@ -24,7 +22,7 @@ public class FilterMapperConfig {
     }
 
     public ObjectMapper getDefaultXmlMapper() {
-        return Jackson2ObjectMapperBuilder.xml().build();
+        return defaultXmlMapper != null ? defaultXmlMapper : Jackson2ObjectMapperBuilder.xml().build();
     }
 
     public FilterMapperConfig setDefaultXmlMapper(ObjectMapper defaultXmlMapper) {
