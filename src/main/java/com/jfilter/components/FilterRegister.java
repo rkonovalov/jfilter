@@ -1,7 +1,5 @@
 package com.jfilter.components;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jfilter.ConverterUtil;
 import com.jfilter.EnableJsonFilter;
 import com.jfilter.converter.FilterXmlConverter;
 import com.jfilter.converter.FilterJsonConverter;
@@ -9,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
 import org.springframework.web.context.WebApplicationContext;
@@ -29,20 +25,15 @@ import java.util.List;
 @Configuration
 public class FilterRegister implements WebMvcConfigurer {
     private boolean enabled;
-    private MappingJackson2HttpMessageConverter defaultJsonConverter;
-    private MappingJackson2XmlHttpMessageConverter defaultXmlConverter;
-    private ObjectMapper objectMapper;
+    private FilterMapperConfig filterMapperConfig;
 
     @Autowired
-    public FilterRegister(WebApplicationContext webApplicationContext) {
+    public FilterRegister(WebApplicationContext webApplicationContext, FilterMapperConfig filterMapperConfig) {
+        this.filterMapperConfig = filterMapperConfig;
         /*
          * Important! For enabling filtration, should be specified one of application bean with EnableJsonFilter annotation
          */
         enabled = FilterProvider.isFilterEnabled(webApplicationContext);
-
-        defaultJsonConverter = ConverterUtil.getDefaultJsonConverter(webApplicationContext);
-        defaultXmlConverter = ConverterUtil.getDefaultXmlConverter(webApplicationContext);
-        objectMapper = ConverterUtil.getBean(webApplicationContext, ObjectMapper.class);
     }
 
     /**
@@ -118,8 +109,8 @@ public class FilterRegister implements WebMvcConfigurer {
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         if (enabled) {
-            converters.add(0, new FilterJsonConverter(defaultJsonConverter, objectMapper));
-            converters.add(0, new FilterXmlConverter(defaultXmlConverter));
+            converters.add(0, new FilterJsonConverter(filterMapperConfig));
+            converters.add(0, new FilterXmlConverter(filterMapperConfig));
         }
     }
 

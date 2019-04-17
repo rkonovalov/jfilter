@@ -2,9 +2,8 @@ package com.jfilter.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.jfilter.components.FilterMapperConfig;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
@@ -12,17 +11,16 @@ import java.util.Arrays;
  * This class represents of XML serialization from response of Spring Web Service
  */
 public class FilterXmlConverter extends FilterConverter {
-
-    private MappingJackson2XmlHttpMessageConverter xmlConverter;
+    private FilterMapperConfig filterMapperConfig;
 
     /**
      * Creates a new instance of the {@link FilterXmlConverter} class.
      *
      * And specify supported media types
-     * @param xmlConverter {@link MappingJackson2XmlHttpMessageConverter} default Spring xml converter
+     * @param filterMapperConfig {@link FilterMapperConfig} filter configuration
      */
-    public FilterXmlConverter(MappingJackson2XmlHttpMessageConverter xmlConverter) {
-        this.xmlConverter = xmlConverter;
+    public FilterXmlConverter(FilterMapperConfig filterMapperConfig) {
+        this.filterMapperConfig = filterMapperConfig;
         getSupportedMediaTypes().addAll(Arrays.asList(
                 MediaType.APPLICATION_XML,
                 new MediaType("application", "xml", Charset.defaultCharset()),
@@ -39,6 +37,6 @@ public class FilterXmlConverter extends FilterConverter {
      */
     @Override
     public ObjectMapper getObjectMapper() {
-        return xmlConverter != null ? xmlConverter.getObjectMapper() : Jackson2ObjectMapperBuilder.xml().build();
+        return filterMapperConfig.getDefaultXmlMapper().copy();
     }
 }

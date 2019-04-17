@@ -1,10 +1,8 @@
 package com.jfilter.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jfilter.components.FilterMapperConfig;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
@@ -13,19 +11,16 @@ import java.util.Arrays;
  */
 public class FilterJsonConverter extends FilterConverter {
 
-    private MappingJackson2HttpMessageConverter jsonConverter;
-    private ObjectMapper objectMapper;
+    private FilterMapperConfig filterMapperConfig;
 
     /**
      * Creates a new instance of the {@link FilterJsonConverter} class.
      * <p>
      * And specify supported media types
-     * @param jsonConverter {@link MappingJackson2HttpMessageConverter} default Spring json converter
-     * @param objectMapper {@link ObjectMapper} default object mapper if envrimoment is Spring Boot
+     * @param filterMapperConfig {@link FilterMapperConfig} filter configuration
      */
-    public FilterJsonConverter(MappingJackson2HttpMessageConverter jsonConverter, ObjectMapper objectMapper) {
-        this.jsonConverter = jsonConverter;
-        this.objectMapper = objectMapper;
+    public FilterJsonConverter(FilterMapperConfig filterMapperConfig) {
+        this.filterMapperConfig = filterMapperConfig;
         getSupportedMediaTypes().addAll(Arrays.asList(
                 MediaType.APPLICATION_JSON,
                 new MediaType("application", "json", Charset.defaultCharset()),
@@ -42,9 +37,6 @@ public class FilterJsonConverter extends FilterConverter {
      */
     @Override
     public ObjectMapper getObjectMapper() {
-        if (objectMapper != null) {
-            return objectMapper;
-        } else
-            return jsonConverter != null ? jsonConverter.getObjectMapper() : Jackson2ObjectMapperBuilder.json().build();
+        return filterMapperConfig.getDefaultJsonMapper().copy();
     }
 }
