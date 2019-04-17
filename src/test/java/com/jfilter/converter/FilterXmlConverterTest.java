@@ -1,20 +1,22 @@
 package com.jfilter.converter;
 
+import com.jfilter.components.FilterMapperConfig;
 import com.jfilter.mock.MockUser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 
 import static org.junit.Assert.assertNull;
 
 public class FilterXmlConverterTest {
     private FilterXmlConverter filterXmlConverter;
+    private FilterMapperConfig filterMapperConfig;
 
     @Before
     public void init() {
-        filterXmlConverter = new FilterXmlConverter(new MappingJackson2XmlHttpMessageConverter());
+        filterMapperConfig = new FilterMapperConfig();
+        filterXmlConverter = new FilterXmlConverter(filterMapperConfig);
     }
 
     @Test
