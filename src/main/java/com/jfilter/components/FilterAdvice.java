@@ -1,7 +1,9 @@
 package com.jfilter.components;
 
+import com.jfilter.converter.MethodParameterDetails;
 import com.jfilter.filter.BaseFilter;
 import com.jfilter.converter.FilterClassWrapper;
+import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -27,6 +29,7 @@ import java.io.Serializable;
 public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     private FilterProvider filterProvider;
     private DynamicFilterProvider dynamicFilterProvider;
+    private FilterConfiguration filterConfiguration;
 
     @Autowired
     public void setFilterProvider(FilterProvider filterProvider) {
@@ -36,6 +39,12 @@ public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     @Autowired
     public FilterAdvice setDynamicFilterProvider(DynamicFilterProvider dynamicFilterProvider) {
         this.dynamicFilterProvider = dynamicFilterProvider;
+        return this;
+    }
+
+    @Autowired
+    public FilterAdvice setFilterConfiguration(FilterConfiguration filterConfiguration) {
+        this.filterConfiguration = filterConfiguration;
         return this;
     }
 
@@ -67,15 +76,24 @@ public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
+        FilterFields filterFields;
 
+        //Getting HttpServletRequest from serverHttpRequest
         HttpServletRequest servletServerHttpRequest = ((ServletServerHttpRequest) serverHttpRequest).getServletRequest();
-
         RequestSession requestSession = new RequestSession(servletServerHttpRequest);
 
+        //Proccess filters
         BaseFilter filter = filterProvider.getFilter(methodParameter);
         if (filter != null) {
-            return new FilterClassWrapper(obj, filter.getFields(obj, requestSession));
-        } else
-            return new FilterClassWrapper(obj, dynamicFilterProvider.getFields(methodParameter, requestSession));
+            //Get fields from static filter
+            filterFields = filter.getFields(obj, requestSession);
+        } else {
+            //Get fields from dynamic filter
+            filterFields = dynamicFilterProvider.getFields(methodParameter, requestSession);
+        }
+
+        MethodParameterDetails methodParameterDetails = new MethodParameterDetails(methodParameter.getMethod().hashCode(), mediaType, filterFields);
+
+        return new FilterClassWrapper(obj, methodParameterDetails);
     }
 }
