@@ -1,12 +1,17 @@
 package com.jfilter;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class FilterConstantsTest {
 
-    @Test(expected = IllegalAccessException.class)
-    public void testConstructor() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        Class<?> clazz = Class.forName("com.jfilter.FilterConstants");
-        Object date = clazz.newInstance();
+    @Test
+    public void testConstructor() {
+        try {
+            Class<?> clazz = Class.forName("com.jfilter.FilterConstants");
+            Object date = clazz.newInstance();
+        } catch (Exception e) {
+            Assert.assertTrue(e instanceof IllegalAccessException);
+        }
     }
 }
