@@ -22,7 +22,7 @@ public class DynamicSessionFilter implements DynamicFilterEvent {
      * <p>Method attempt to retrieve FilterFields from session if it exist
      *
      * @param methodParameter method parameter
-     * @param request service request
+     * @param request         service request
      * @return {@link FilterFields} if found in session attributes, otherwise returns empty FilterFields
      */
     @Override

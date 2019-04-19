@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,7 +69,7 @@ public final class DynamicFilterProvider {
      * <p>Attempts to find and return dynamic filter from dynamicFilterMap
      *
      * @param methodParameter method parameter
-     * @param request service request
+     * @param request         service request
      * @return if found dynamic filter returns {@link FilterFields}, otherwise empty FilterFields
      */
     public FilterFields getFields(MethodParameter methodParameter, RequestSession request) {

@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Object filter provide bean
+ * Object filter provider bean
  *
  * <p>This class will be detected and instantiated automatically by Spring Framework
  *
@@ -104,14 +104,14 @@ public final class FilterProvider {
     }
 
     /**
-     * Clear cache.
+     * Clear cache of filter list
      */
     public void clearCache() {
         filters.clear();
     }
 
     /**
-     * Cache size int.
+     * Cache size int
      *
      * @return the int
      */
