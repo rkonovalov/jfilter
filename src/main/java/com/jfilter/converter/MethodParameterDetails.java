@@ -1,16 +1,12 @@
 package com.jfilter.converter;
 
 import com.jfilter.filter.FilterFields;
-import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
-import org.springframework.http.server.ServerHttpRequest;
-import org.springframework.http.server.ServerHttpResponse;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * This class contains details retrieved from {@link com.jfilter.components.FilterAdvice#beforeBodyWrite(Serializable, MethodParameter, MediaType, Class, ServerHttpRequest, ServerHttpResponse)}
+ * This class contains details retrieved from {@link com.jfilter.components.FilterAdvice#beforeBodyWrite}
  */
 public class MethodParameterDetails implements Serializable {
     private static final long serialVersionUID = 2481023447068160651L;
