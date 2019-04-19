@@ -40,4 +40,18 @@ public class FilterFieldsTest {
         assertNotSame(filterFields, filterFields2);
         assertNotEquals(filterFields.hashCode(), filterFields2.hashCode());
     }
+
+    @Test
+    public void testEquals() {
+        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
+        FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("id", "password"));
+        assertEquals(filterFields, filterFields2);
+    }
+
+    @Test
+    public void testNotEquals() {
+        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
+        FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("some_id", "some_password"));
+        assertNotEquals(filterFields, filterFields2);
+    }
 }
