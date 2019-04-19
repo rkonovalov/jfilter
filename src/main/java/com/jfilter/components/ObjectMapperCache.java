@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
 import com.fasterxml.jackson.databind.ser.SerializerFactory;
 import com.jfilter.converter.ConverterMapperModifier;
-import com.jfilter.converter.MethodParameterWrapper;
+import com.jfilter.converter.MethodParameterDetails;
 import com.jfilter.filter.FilterFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpOutputMessage;
@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Component
 public class ObjectMapperCache {
-    private ConcurrentMap<MethodParameterWrapper, ObjectMapper> items;
+    private ConcurrentMap<MethodParameterDetails, ObjectMapper> items;
     private FilterConfiguration filterConfiguration;
 
     public ObjectMapperCache() {
@@ -41,12 +41,12 @@ public class ObjectMapperCache {
     }
 
     /**
-     * Find ObjectMapper by MethodParameterWrapper
+     * Find ObjectMapper by MethodParameterDetails
      *
-     * @param item {@link MethodParameterWrapper}
+     * @param item {@link MethodParameterDetails}
      * @return {@link ObjectMapper}
      */
-    public ObjectMapper findObjectMapper(MethodParameterWrapper item) {
+    public ObjectMapper findObjectMapper(MethodParameterDetails item) {
 
         ObjectMapper objectMapper = items.get(item);
         if(objectMapper == null)
@@ -58,12 +58,12 @@ public class ObjectMapperCache {
      * Add new ObjectMapper in cache
      * <p>
      * Method creates copy of ObjectMapper by media type which listed in filterConfiguration
-     * Also if MethodParameterWrapper has filter fields method tries to set ignore modifier to ObjectMapper
+     * Also if MethodParameterDetails has filter fields method tries to set ignore modifier to ObjectMapper
      *
-     * @param item {@link MethodParameterWrapper}
+     * @param item {@link MethodParameterDetails}
      * @return {@link ObjectMapper}
      */
-    private ObjectMapper addNewMapper(MethodParameterWrapper item) {
+    private ObjectMapper addNewMapper(MethodParameterDetails item) {
         ObjectMapper objectMapper = filterConfiguration.getMapper(item.getMediaType()).copy();
 
         if (item.getFilterFields() != null)
