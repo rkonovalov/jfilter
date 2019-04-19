@@ -56,6 +56,7 @@ public class FilterConfiguration {
      * @return {@link FilterConfiguration}
      */
     @Autowired
+    @SuppressWarnings("WeakerAccess")
     private FilterConfiguration setObjectMapperCache(ObjectMapperCache objectMapperCache) {
         this.objectMapperCache = objectMapperCache;
         return this;
@@ -68,6 +69,7 @@ public class FilterConfiguration {
      * @return {@link FilterConfiguration}
      */
     @Autowired
+    @SuppressWarnings("WeakerAccess")
     private FilterConfiguration setWebApplicationContext(WebApplicationContext webApplicationContext) {
         /*
          * Important! For enabling filtration, should be specified one of application bean with EnableJsonFilter annotation
@@ -92,6 +94,7 @@ public class FilterConfiguration {
      * @param mediaType    {@link MediaType} media type of http message
      * @param objectMapper {@link ObjectMapper} ObjectMapper
      */
+    @SuppressWarnings("WeakerAccess")
     public void setMapper(MediaType mediaType, ObjectMapper objectMapper) {
         mapperList.put(mediaType, objectMapper);
     }
