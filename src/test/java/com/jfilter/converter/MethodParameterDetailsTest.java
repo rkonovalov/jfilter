@@ -28,6 +28,12 @@ public class MethodParameterDetailsTest {
     }
 
     @Test
+    public void testNullNotEquals() {
+        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, MediaType.APPLICATION_JSON, new FilterFields());
+        Assert.assertNotEquals(methodParameterDetails1, null);
+    }
+
+    @Test
     public void testEqualsHashCode() {
         MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, null, null);
         MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, null, null);
