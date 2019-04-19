@@ -26,7 +26,7 @@ public class RequestSessionTest {
         assertNull(object);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testNullSession() {
         RequestSession requestSession = new RequestSession(null);
         assertNotNull(requestSession);
