@@ -27,5 +27,26 @@ public class MethodParameterDetailsTest {
         Assert.assertNotEquals(methodParameterDetails1, methodParameterDetails2);
     }
 
+    @Test
+    public void testEqualsHashCode() {
+        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, null, null);
+        MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, null, null);
+        Assert.assertEquals(methodParameterDetails1, methodParameterDetails2);
+    }
+
+    @Test
+    public void testEqualsMediaType() {
+        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, MediaType.APPLICATION_JSON, null);
+        MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, MediaType.APPLICATION_JSON, null);
+        Assert.assertEquals(methodParameterDetails1, methodParameterDetails2);
+    }
+
+    @Test
+    public void testEqualsFilterFields() {
+        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, null, new FilterFields());
+        MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, null, new FilterFields());
+        Assert.assertEquals(methodParameterDetails1, methodParameterDetails2);
+    }
+
 
 }
