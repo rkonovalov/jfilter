@@ -21,6 +21,12 @@ public class MethodParameterDetailsTest {
     }
 
     @Test
+    public void testEqualsCurrentMethod() {
+        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, MediaType.APPLICATION_JSON, new FilterFields());
+        Assert.assertEquals(methodParameterDetails1, methodParameterDetails1);
+    }
+
+    @Test
     public void testNotEquals() {
         MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, MediaType.APPLICATION_JSON, new FilterFields());
         MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, MediaType.APPLICATION_XML, null);
