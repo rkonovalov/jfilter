@@ -29,6 +29,7 @@ import java.io.Serializable;
 public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     private FilterProvider filterProvider;
     private DynamicFilterProvider dynamicFilterProvider;
+    private FilterConfiguration filterConfiguration;
 
     @Autowired
     public void setFilterProvider(FilterProvider filterProvider) {
@@ -41,6 +42,12 @@ public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
         return this;
     }
 
+    @Autowired
+    public FilterAdvice setFilterConfiguration(FilterConfiguration filterConfiguration) {
+        this.filterConfiguration = filterConfiguration;
+        return this;
+    }
+
     /**
      * Attempt to find annotations in method and associated filter
      *
@@ -50,7 +57,8 @@ public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
      */
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        return filterProvider.isAccept(methodParameter) || DynamicFilterProvider.isAccept(methodParameter);
+        return filterConfiguration.isEnabled() &&
+                (filterProvider.isAccept(methodParameter) || DynamicFilterProvider.isAccept(methodParameter));
     }
 
     /**
