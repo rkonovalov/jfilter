@@ -4,6 +4,8 @@ import com.jfilter.mock.MockHttpRequest;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.junit.Assert.*;
 
 public class RequestSessionTest {
@@ -95,5 +97,10 @@ public class RequestSessionTest {
         assertNull(result);
     }
 
-
+    @Test
+    public void testRequestNotNull() {
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockAdminRequest());
+        HttpServletRequest request = requestSession.getRequest();
+        assertNotNull(request);
+    }
 }
