@@ -47,6 +47,13 @@ public class MethodParameterDetailsTest {
     }
 
     @Test
+    public void testNotEqualsHashCode() {
+        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(0, null, null);
+        MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, null, null);
+        Assert.assertNotEquals(methodParameterDetails1, methodParameterDetails2);
+    }
+
+    @Test
     public void testEqualsMediaType() {
         MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, MediaType.APPLICATION_JSON, null);
         MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, MediaType.APPLICATION_JSON, null);
@@ -54,10 +61,24 @@ public class MethodParameterDetailsTest {
     }
 
     @Test
+    public void testNotEqualsMediaType() {
+        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, MediaType.APPLICATION_JSON, null);
+        MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, MediaType.APPLICATION_XML, null);
+        Assert.assertNotEquals(methodParameterDetails1, methodParameterDetails2);
+    }
+
+    @Test
     public void testEqualsFilterFields() {
         MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, null, new FilterFields());
         MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, null, new FilterFields());
         Assert.assertEquals(methodParameterDetails1, methodParameterDetails2);
+    }
+
+    @Test
+    public void testNotEqualsFilterFields() {
+        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(100, null, new FilterFields());
+        MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(100, null, null);
+        Assert.assertNotEquals(methodParameterDetails1, methodParameterDetails2);
     }
 
 
