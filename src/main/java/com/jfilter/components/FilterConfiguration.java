@@ -84,7 +84,7 @@ public class FilterConfiguration {
      * @param mediaType {@link MediaType} media type of http message
      * @return {@link ObjectMapper} ObjectMapper if found, otherwise returns null
      */
-    ObjectMapper getMapper(MediaType mediaType) {
+    protected ObjectMapper getMapper(MediaType mediaType) {
         return mapperList.get(mediaType);
     }
 
@@ -104,7 +104,7 @@ public class FilterConfiguration {
      *
      * @return {@link List}, {@link MediaType} list of supported media types
      */
-    List<MediaType> supportedMediaTypes() {
+    protected List<MediaType> supportedMediaTypes() {
         return new ArrayList<>(mapperList.keySet());
     }
 
@@ -113,7 +113,7 @@ public class FilterConfiguration {
      *
      * @return {@link ObjectMapperCache}
      */
-    ObjectMapperCache getObjectMapperCache() {
+    protected ObjectMapperCache getObjectMapperCache() {
         return objectMapperCache;
     }
 
