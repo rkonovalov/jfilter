@@ -56,7 +56,7 @@ public class FilterConfiguration {
      * @return {@link FilterConfiguration}
      */
     @Autowired
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings("unused")
     private FilterConfiguration setObjectMapperCache(ObjectMapperCache objectMapperCache) {
         this.objectMapperCache = objectMapperCache;
         return this;
@@ -69,7 +69,7 @@ public class FilterConfiguration {
      * @return {@link FilterConfiguration}
      */
     @Autowired
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings("unused")
     private FilterConfiguration setWebApplicationContext(WebApplicationContext webApplicationContext) {
         /*
          * Important! For enabling filtration, should be specified one of application bean with EnableJsonFilter annotation
