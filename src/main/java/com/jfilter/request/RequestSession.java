@@ -21,11 +21,11 @@ public class RequestSession {
      * Creates a new instance of the {@link RequestSession} class.
      *
      * @param request {@link HttpServletRequest}
-     * @throws NullPointerException request is null.
+     * @throws IllegalArgumentException if  request is null.
      */
     public RequestSession(HttpServletRequest request) {
         if (request == null)
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         this.request = request;
         this.session = request.getSession();
     }
