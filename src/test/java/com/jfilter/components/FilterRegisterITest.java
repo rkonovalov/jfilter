@@ -1,8 +1,6 @@
 package com.jfilter.components;
 
 import com.jfilter.mock.config.WSConfiguration;
-import com.jfilter.converter.FilterJsonConverter;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -46,10 +44,10 @@ public class FilterRegisterITest {
         FilterRegisterITest.changed.set(true);
     }
 
-    private boolean beanFilterJsonConverterLoaded() {
+    private boolean beanFilterConverterLoaded() {
         final AtomicBoolean result = new AtomicBoolean(false);
         FilterRegisterITest.registeredConverters.forEach(i -> {
-            if (i instanceof FilterJsonConverter)
+            if (i instanceof FilterConverter)
                 result.set(true);
         });
         return result.get();
@@ -59,7 +57,7 @@ public class FilterRegisterITest {
     public void testConfigureMessageConvertersEnabled() throws Exception {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
         await().atMost(5, TimeUnit.SECONDS).untilTrue(FilterRegisterITest.changed);
-        boolean contain = FilterRegisterITest.registeredConverters.size() > 2 && beanFilterJsonConverterLoaded();
+        boolean contain = FilterRegisterITest.registeredConverters.size() > 2 && beanFilterConverterLoaded();
         assertTrue(contain);
     }
 
@@ -69,7 +67,7 @@ public class FilterRegisterITest {
         filterRegister.configureMessageConverters(new ArrayList<>());
         await().atMost(5, TimeUnit.SECONDS).untilTrue(FilterRegisterITest.changed);
         System.out.println( FilterRegisterITest.registeredConverters.size());
-        boolean contain = beanFilterJsonConverterLoaded();
+        boolean contain = beanFilterConverterLoaded();
         assertFalse(contain);
     }
 }
