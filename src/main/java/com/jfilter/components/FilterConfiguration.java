@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import static com.jfilter.FilterConstants.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.http.MediaType.APPLICATION_XML;
@@ -38,14 +39,14 @@ public class FilterConfiguration {
         //Default JSON mappers
         setMapper(APPLICATION_JSON, Jackson2ObjectMapperBuilder.json().build());
         setMapper(APPLICATION_JSON_UTF8, Jackson2ObjectMapperBuilder.json().build());
-        setMapper(new MediaType("application", "json", Charset.defaultCharset()), Jackson2ObjectMapperBuilder.json().build());
-        setMapper(new MediaType("application", "*+json"), Jackson2ObjectMapperBuilder.json().build());
+        setMapper(new MediaType(MEDIA_TYPE_APPLICATION, MEDIA_SUB_TYPE_JSON, Charset.defaultCharset()), Jackson2ObjectMapperBuilder.json().build());
+        setMapper(new MediaType(MEDIA_TYPE_APPLICATION, MEDIA_SUB_TYPE_JSON2), Jackson2ObjectMapperBuilder.json().build());
 
         //Default XML mappers
         setMapper(APPLICATION_XML, Jackson2ObjectMapperBuilder.xml().build());
-        setMapper(new MediaType("application", "xml", Charset.defaultCharset()), Jackson2ObjectMapperBuilder.xml().build());
-        setMapper(new MediaType("application", "*+xml"), Jackson2ObjectMapperBuilder.xml().build());
-        setMapper(new MediaType("text", "xml"), Jackson2ObjectMapperBuilder.xml().build());
+        setMapper(new MediaType(MEDIA_TYPE_APPLICATION, MEDIA_SUB_TYPE_XML, Charset.defaultCharset()), Jackson2ObjectMapperBuilder.xml().build());
+        setMapper(new MediaType(MEDIA_TYPE_APPLICATION, MEDIA_SUB_TYPE_XML2), Jackson2ObjectMapperBuilder.xml().build());
+        setMapper(new MediaType(MEDIA_TYPE_APPLICATION, MEDIA_SUB_TYPE_XML), Jackson2ObjectMapperBuilder.xml().build());
     }
 
     /**
