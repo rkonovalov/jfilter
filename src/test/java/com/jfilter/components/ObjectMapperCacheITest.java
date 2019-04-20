@@ -12,18 +12,18 @@ import org.springframework.stereotype.Component;
 import static org.junit.Assert.*;
 
 @Component
-public class ObjectMapperCacheWSTest {
+public class ObjectMapperCacheITest {
     private ObjectMapperCache  objectMapperCache;
     private FilterConfiguration filterConfiguration;
 
     @Autowired
-    public ObjectMapperCacheWSTest setObjectMapperCache(ObjectMapperCache objectMapperCache) {
+    public ObjectMapperCacheITest setObjectMapperCache(ObjectMapperCache objectMapperCache) {
         this.objectMapperCache = objectMapperCache;
         return this;
     }
 
     @Autowired
-    public ObjectMapperCacheWSTest setFilterConfiguration(FilterConfiguration filterConfiguration) {
+    public ObjectMapperCacheITest setFilterConfiguration(FilterConfiguration filterConfiguration) {
         this.filterConfiguration = filterConfiguration;
         return this;
     }
