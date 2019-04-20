@@ -40,15 +40,15 @@ public class FilterConfigurationITest {
     }
 
     @Test
-    public void testEnabled() {
-        filterConfiguration.setEnabled(true);
-        assertTrue(filterConfiguration.isEnabled());
-    }
-
-    @Test
     public void testDisabled() {
         filterConfiguration.setEnabled(false);
         assertFalse(filterConfiguration.isEnabled());
+    }
+
+    @Test
+    public void testEnabled() {
+        filterConfiguration.setEnabled(true);
+        assertTrue(filterConfiguration.isEnabled());
     }
 
     @Test
