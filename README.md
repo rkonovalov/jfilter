@@ -29,6 +29,7 @@ Publication on [dzone.com](https://dzone.com/articles/spring-web-service-respons
 * [Diagram](https://rkonovalov.github.io/projects/jfilter/1.0.12/diagram/)
 * [Installation](https://rkonovalov.github.io/projects/jfilter/1.0.12/installation/)
 * [Getting started](https://rkonovalov.github.io/projects/jfilter/1.0.12/getting-started/)
+* [Configuration](https://rkonovalov.github.io/projects/jfilter/1.0.12/configuration/)
 * [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.12/examples/)
   * [Simple field filter](https://rkonovalov.github.io/projects/jfilter/1.0.12/examples/filter-field/)  
   * [Session strategy filter](https://rkonovalov.github.io/projects/jfilter/1.0.12/examples/filter-strategy/) 
