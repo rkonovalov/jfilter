@@ -1,14 +1,10 @@
 package com.jfilter.components;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jfilter.converter.MethodParameterDetails;
-import com.jfilter.filter.FilterFields;
 import com.jfilter.mock.MockMethods;
 import com.jfilter.mock.config.WSConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 import static org.junit.Assert.*;
