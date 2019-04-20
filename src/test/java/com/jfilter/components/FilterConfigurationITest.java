@@ -25,7 +25,7 @@ public class FilterConfigurationITest {
 
     @Before
     public void init() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED2, this);
     }
 
     @Autowired

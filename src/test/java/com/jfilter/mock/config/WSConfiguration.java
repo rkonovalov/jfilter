@@ -11,6 +11,7 @@ public class WSConfiguration {
 
     public enum Instance {
         FILTER_ENABLED(Enabled.class),
+        FILTER_ENABLED2(Enabled2.class),
         FILTER_DISABLED(Disabled.class),
         FILTER_DISABLED_FILTERED(DisabledFiltered .class);
 
@@ -31,6 +32,14 @@ public class WSConfiguration {
     @RunWith(SpringJUnit4ClassRunner.class)
     @EnableJsonFilter
     private class Enabled {
+
+    }
+
+    @ContextConfiguration(classes = WSConfigurationEnabled.class)
+    @WebAppConfiguration
+    @RunWith(SpringJUnit4ClassRunner.class)
+    @EnableJsonFilter
+    private class Enabled2 {
 
     }
 
