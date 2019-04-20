@@ -1,21 +1,32 @@
 package com.jfilter.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jfilter.mock.config.WSConfigurationEnabled;
+import com.jfilter.mock.config.WSConfiguration;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.stereotype.Component;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.*;
 
-@ContextConfiguration(classes = WSConfigurationEnabled.class)
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
+@Component
 public class FilterConfigurationITest {
     private FilterConfiguration filterConfiguration;
+    private MockMvc mockMvc;
+
+    @Autowired
+    public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
+
+    @Before
+    public void init() throws Exception {
+        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+    }
 
     @Autowired
     public FilterConfigurationITest setFilterConfiguration(FilterConfiguration filterConfiguration) {
