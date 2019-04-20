@@ -22,6 +22,13 @@ import static junit.framework.TestCase.assertEquals;
 @Component
 public class DynamicFilterWSTest {
     private MockMvc mockMvc;
+    private FilterConfiguration filterConfiguration;
+
+    @Autowired
+    public DynamicFilterWSTest setFilterConfiguration(FilterConfiguration filterConfiguration) {
+        this.filterConfiguration = filterConfiguration;
+        return this;
+    }
 
     @Autowired
     public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
@@ -31,6 +38,7 @@ public class DynamicFilterWSTest {
     @Test
     public void testWSDynamicNotNullFilter() throws Exception {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        filterConfiguration.setEnabled(true);
         MockUser user = MockClasses.getUserMock();
         user.setId(null);
         user.setPassword(null);
