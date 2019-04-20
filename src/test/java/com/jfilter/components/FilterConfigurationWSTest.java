@@ -11,11 +11,11 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.*;
 
 @Component
-public class FilterConfigurationITest {
+public class FilterConfigurationWSTest {
     private FilterConfiguration filterConfiguration;
 
     @Autowired
-    public FilterConfigurationITest setFilterConfiguration(FilterConfiguration filterConfiguration) {
+    public FilterConfigurationWSTest setFilterConfiguration(FilterConfiguration filterConfiguration) {
         this.filterConfiguration = filterConfiguration;
         return this;
     }
