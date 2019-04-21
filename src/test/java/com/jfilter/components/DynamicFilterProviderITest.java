@@ -1,5 +1,6 @@
 package com.jfilter.components;
 
+import com.jfilter.filter.DynamicFilterEvent;
 import com.jfilter.mock.MockHttpRequest;
 import com.jfilter.mock.MockMethods;
 import com.jfilter.mock.MockUser;
@@ -14,7 +15,11 @@ import org.springframework.core.MethodParameter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
@@ -64,5 +69,23 @@ public class DynamicFilterProviderITest {
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
         assertNotNull(found);
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testWithAnnotationAndEmptyMap() throws NoSuchFieldException, IllegalAccessException {
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+
+        Field field = dynamicFilterProvider.getClass().getDeclaredField("dynamicFilterMap");
+        field.setAccessible(true);
+
+        Map<Class, DynamicFilterEvent> dynamicFilterMap = (Map<Class, DynamicFilterEvent>)field.get(dynamicFilterProvider);
+        dynamicFilterMap.clear();
+
+
+        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(filterFields));
+        FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
+
+        assertEquals(new FilterFields(), found);
     }
 }
