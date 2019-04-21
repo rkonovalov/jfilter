@@ -54,4 +54,24 @@ public class FilterFieldsTest {
         FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("some_id", "some_password"));
         assertNotEquals(filterFields, filterFields2);
     }
+
+    @Test
+    public void testEqualsBehaviour() {
+        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
+        filterFields.setFilterBehaviour(FilterBehaviour.KEEP_FIELDS);
+
+        FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("id", "password"));
+        filterFields2.setFilterBehaviour(FilterBehaviour.KEEP_FIELDS);
+        assertEquals(filterFields, filterFields2);
+    }
+
+    @Test
+    public void testNotEqualsBehaviour() {
+        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
+        filterFields.setFilterBehaviour(FilterBehaviour.KEEP_FIELDS);
+
+        FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("id", "password"));
+        filterFields2.setFilterBehaviour(FilterBehaviour.HIDE_FIELDS);
+        assertNotEquals(filterFields, filterFields2);
+    }
 }
