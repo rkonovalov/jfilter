@@ -7,6 +7,7 @@ import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.WSConfigurationEnabled;
 import com.jfilter.request.RequestSession;
 import com.jfilter.filter.FilterFields;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -38,6 +41,13 @@ public class DynamicFilterProviderITest {
     @Before
     public void init() {
         filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
+    }
+
+    @After
+    public void deInit() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = dynamicFilterProvider.getClass().getDeclaredMethod("findDynamicFilters");
+        method.setAccessible(true);
+        method.invoke(dynamicFilterProvider);
     }
 
     @Test
