@@ -1,11 +1,8 @@
 package com.jfilter.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
-import com.fasterxml.jackson.databind.ser.SerializerFactory;
-import com.jfilter.converter.ConverterMapperModifier;
+import com.jfilter.converter.FilterObjectMapper;
 import com.jfilter.converter.MethodParameterDetails;
-import com.jfilter.filter.FilterFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -17,7 +14,6 @@ import java.util.concurrent.ConcurrentMap;
  * ObjectMapper cache
  * <p>
  * This class contains cached list of ObjectMappers which used in {@link FilterConverter#write(Object, MediaType, HttpOutputMessage)}
- *
  */
 @Component
 public class ObjectMapperCache {
@@ -49,10 +45,11 @@ public class ObjectMapperCache {
     public ObjectMapper findObjectMapper(MethodParameterDetails item) {
 
         ObjectMapper objectMapper = items.get(item);
-        if(objectMapper == null)
+        if (objectMapper == null)
             objectMapper = addNewMapper(item);
         return objectMapper;
     }
+
 
     /**
      * Add new ObjectMapper in cache
@@ -64,24 +61,18 @@ public class ObjectMapperCache {
      * @return {@link ObjectMapper}
      */
     private ObjectMapper addNewMapper(MethodParameterDetails item) {
-        ObjectMapper objectMapper = filterConfiguration.getMapper(item.getMediaType()).copy();
 
-        if (item.getFilterFields() != null)
-            setIgnoreModifier(item.getFilterFields(), objectMapper);
+        //Make copy of configured ObjectMapper
+        ObjectMapper configuredObjectMapper = filterConfiguration.getMapper(item.getMediaType()).copy();
+
+        //Build modified objectMapper
+        ObjectMapper objectMapper =  new FilterObjectMapper.Builder(configuredObjectMapper)
+                .withFilterFields(item.getFilterFields())
+                .enableDateTimeModule(filterConfiguration.isDateTimeModule())
+                .enableDefaultSerializers(filterConfiguration.isDateTimeModule())
+                .build();
 
         items.put(item, objectMapper);
         return objectMapper;
-    }
-
-    /**
-     * Method sets serialize modifier in ObjectMapper
-     *
-     * @param filterFields {@link FilterFields} list of fields which should be hide or keep by ObjectMapper
-     * @param objectMapper {@link ObjectMapper}
-     */
-    private void setIgnoreModifier(FilterFields filterFields, ObjectMapper objectMapper) {
-        SerializerFactory factory = BeanSerializerFactory.instance
-                .withSerializerModifier(new ConverterMapperModifier(filterFields));
-        objectMapper.setSerializerFactory(factory);
     }
 }
