@@ -26,10 +26,14 @@ public class FilterConfiguration {
     private boolean enabled;
     private ConcurrentMap<MediaType, ObjectMapper> mapperList;
     private ObjectMapperCache objectMapperCache;
+    private boolean defaultSerializers;
+    private boolean dateTimeModule;
 
     public FilterConfiguration() {
         mapperList = new ConcurrentHashMap<>();
         configureDefaultMappers();
+        defaultSerializers = true;
+        dateTimeModule = true;
     }
 
     /**
@@ -139,4 +143,24 @@ public class FilterConfiguration {
         this.enabled = enabled;
         return this;
     }
+
+    public FilterConfiguration enableDefaultSerializers(boolean defaultSerializers) {
+        this.defaultSerializers = defaultSerializers;
+        return this;
+    }
+
+    public FilterConfiguration enableDateTimeModule(boolean dateTimeModule) {
+        this.dateTimeModule = dateTimeModule;
+        return this;
+    }
+
+    public boolean isDefaultSerializers() {
+        return defaultSerializers;
+    }
+
+    public boolean isDateTimeModule() {
+        return dateTimeModule;
+    }
 }
+
+
