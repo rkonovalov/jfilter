@@ -43,6 +43,18 @@ public class FilterConfigurationITest {
     }
 
     @Test
+    public void testEnableDateTimeModule() {
+        filterConfiguration.enableDateTimeModule(true);
+        assertTrue(filterConfiguration.isDateTimeModule());
+    }
+
+    @Test
+    public void testEnableDefaultSerializers() {
+        filterConfiguration.enableDefaultSerializers(true);
+        assertTrue(filterConfiguration.isDefaultSerializers());
+    }
+
+    @Test
     public void testSetMapperOverride() {
         ObjectMapper objectMapper = new ObjectMapper();
         filterConfiguration.setMapper(MediaType.APPLICATION_JSON, objectMapper);
