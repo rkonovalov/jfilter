@@ -1,4 +1,4 @@
-package com.jfilter.converter;
+package com.jfilter.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleSerializers;
@@ -12,6 +12,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import com.jfilter.converter.ConverterMapperModifier;
 import com.jfilter.filter.FilterFields;
 
 import java.time.LocalDate;
