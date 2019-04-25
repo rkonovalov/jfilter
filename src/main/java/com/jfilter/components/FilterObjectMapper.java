@@ -49,17 +49,12 @@ public class FilterObjectMapper {
             return this;
         }
 
-        public ObjectMapper build() {
-            FilterObjectMapper mapper = new FilterObjectMapper();
-            return configure();
-        }
-
         /**
-         * Configure ObjectMapper
+         * Build configured ObjectMapper
          *
          * @return {@link ObjectMapper}
          */
-        private ObjectMapper configure() {
+        public ObjectMapper build() {
             //Create SerializerFactory and set default Serializers
             SerializerFactory factory;
 
