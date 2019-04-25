@@ -68,7 +68,7 @@ public class FileWatcherModifyITest {
         /*
            Try to modify file, result should be modified
          */
-        file.setLastModified(new Date().getTime() + 1000);
+        file.setLastModified(new Date().getTime() + 5000);
         await().atMost(5, SECONDS).until(() -> modified.get());
 
         assertTrue(modified.get());
