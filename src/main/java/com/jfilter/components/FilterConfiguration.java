@@ -137,27 +137,49 @@ public class FilterConfiguration {
      * If true the filter is working, else filter stops working
      *
      * @param enabled {@link Boolean}
-     * @return {@link FilterConfiguration}
+     * @return instance of {@link FilterConfiguration}
      */
     public FilterConfiguration setEnabled(boolean enabled) {
         this.enabled = enabled;
         return this;
     }
 
+    /**
+     * Enabling/disabling using of default Serializers
+     *
+     * @param defaultSerializers if true {@link FilterObjectMapper} will add default Serializers to ObjectMappers, otherwise not
+     * @return instance of {@link FilterConfiguration}
+     */
     public FilterConfiguration enableDefaultSerializers(boolean defaultSerializers) {
         this.defaultSerializers = defaultSerializers;
         return this;
     }
 
+    /**
+     * Enabling/disabling using of JavaDateTimeModule in ObjectMappers
+     *
+     * @param dateTimeModule if true {@link FilterObjectMapper} will add JavaTimeModule to ObjectMappers, otherwise not
+     * @return instance of {@link FilterConfiguration}
+     */
     public FilterConfiguration enableDateTimeModule(boolean dateTimeModule) {
         this.dateTimeModule = dateTimeModule;
         return this;
     }
 
+    /**
+     * Get using of default Serializers state
+     *
+     * @return true if adding is enabled, otherwise false
+     */
     public boolean isDefaultSerializers() {
         return defaultSerializers;
     }
 
+    /**
+     * Get using of JavaDateTimeModule state
+     *
+     * @return true if using is enabled, otherwise false
+     */
     public boolean isDateTimeModule() {
         return dateTimeModule;
     }
