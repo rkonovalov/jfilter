@@ -23,10 +23,6 @@ import java.time.LocalTime;
  * This class allows to add SerializerModifier to ObjectMapper
  */
 public class FilterObjectMapper {
-    private ObjectMapper objectMapper;
-    private FilterFields filterFields;
-    private boolean defaultSerializers;
-    private boolean dateTimeModule;
 
     public static class Builder {
         private ObjectMapper objectMapper;
@@ -55,10 +51,6 @@ public class FilterObjectMapper {
 
         public ObjectMapper build() {
             FilterObjectMapper mapper = new FilterObjectMapper();
-            mapper.objectMapper = this.objectMapper;
-            mapper.filterFields = this.filterFields;
-            mapper.defaultSerializers = this.defaultSerializers;
-            mapper.dateTimeModule = this.dateTimeModule;
             return configure();
         }
 
