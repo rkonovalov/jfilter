@@ -59,47 +59,47 @@ public class FilterObjectMapper {
             mapper.filterFields = this.filterFields;
             mapper.defaultSerializers = this.defaultSerializers;
             mapper.dateTimeModule = this.dateTimeModule;
-            return mapper.configure();
-        }
-    }
-
-    /**
-     * Configure ObjectMapper
-     *
-     * @return {@link ObjectMapper}
-     */
-    private ObjectMapper configure() {
-        //Create SerializerFactory and set default Serializers
-        SerializerFactory factory;
-
-        //Set SerializerModifier if filterFields not null
-        factory = filterFields != null ? BeanSerializerFactory.instance
-                .withSerializerModifier(new ConverterMapperModifier(filterFields)) : BeanSerializerFactory.instance;
-
-        //Set default serializers if option is enabled
-        if (defaultSerializers) {
-            factory.withAdditionalSerializers(new SimpleSerializers())
-                    .withAdditionalSerializers(new Jdk8Serializers())
-                    .withAdditionalKeySerializers(new SimpleSerializers());
+            return configure();
         }
 
-        objectMapper.setSerializerFactory(factory);
+        /**
+         * Configure ObjectMapper
+         *
+         * @return {@link ObjectMapper}
+         */
+        private ObjectMapper configure() {
+            //Create SerializerFactory and set default Serializers
+            SerializerFactory factory;
 
-        //Set dateTimeModule if option is enabled
-        if (dateTimeModule) {
-            //Add JavaTimeModule to fix issue with LocalDate/LocalDateTime serialization
-            JavaTimeModule javaTimeModule = new JavaTimeModule();
-            javaTimeModule.addSerializer(LocalTime.class, LocalTimeSerializer.INSTANCE);
-            javaTimeModule.addSerializer(LocalDate.class, LocalDateSerializer.INSTANCE);
-            javaTimeModule.addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE);
-            javaTimeModule.addDeserializer(LocalTime.class, LocalTimeDeserializer.INSTANCE);
-            javaTimeModule.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
-            javaTimeModule.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
-            objectMapper.registerModule(javaTimeModule);
-            objectMapper.findAndRegisterModules();
+            //Set SerializerModifier if filterFields not null
+            factory = filterFields != null ? BeanSerializerFactory.instance
+                    .withSerializerModifier(new ConverterMapperModifier(filterFields)) : BeanSerializerFactory.instance;
+
+            //Set default serializers if option is enabled
+            if (defaultSerializers) {
+                factory.withAdditionalSerializers(new SimpleSerializers())
+                        .withAdditionalSerializers(new Jdk8Serializers())
+                        .withAdditionalKeySerializers(new SimpleSerializers());
+            }
+
+            objectMapper.setSerializerFactory(factory);
+
+            //Set dateTimeModule if option is enabled
+            if (dateTimeModule) {
+                //Add JavaTimeModule to fix issue with LocalDate/LocalDateTime serialization
+                JavaTimeModule javaTimeModule = new JavaTimeModule();
+                javaTimeModule.addSerializer(LocalTime.class, LocalTimeSerializer.INSTANCE);
+                javaTimeModule.addSerializer(LocalDate.class, LocalDateSerializer.INSTANCE);
+                javaTimeModule.addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE);
+                javaTimeModule.addDeserializer(LocalTime.class, LocalTimeDeserializer.INSTANCE);
+                javaTimeModule.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
+                javaTimeModule.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
+                objectMapper.registerModule(javaTimeModule);
+                objectMapper.findAndRegisterModules();
+            }
+
+            return objectMapper;
         }
-
-        return objectMapper;
     }
 
     private FilterObjectMapper() {
