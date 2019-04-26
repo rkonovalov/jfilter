@@ -11,6 +11,6 @@ public class FilterConstantsTest {
     public void constructorTest() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         Constructor<FilterConstants> constructor = FilterConstants.class.getDeclaredConstructor();
         constructor.setAccessible(true);
-        FilterConstants filterConstants = constructor.newInstance();
+        constructor.newInstance();
     }
 }
