@@ -65,7 +65,7 @@ public class ObjectMapperCache {
         ObjectMapper configuredObjectMapper = filterConfiguration.getMapper(item.getMediaType()).copy();
 
         //Build modified objectMapper
-        ObjectMapper objectMapper =  new FilterObjectMapper.Builder(configuredObjectMapper)
+        ObjectMapper objectMapper =  new FilterObjectMapper(configuredObjectMapper)
                 .withFilterFields(item.getFilterFields())
                 .enableDateTimeModule(filterConfiguration.isDateTimeModule())
                 .enableDefaultSerializers(filterConfiguration.isDateTimeModule())

@@ -23,72 +23,66 @@ import java.time.LocalTime;
  * This class allows to add SerializerModifier to ObjectMapper
  */
 public class FilterObjectMapper {
+    private ObjectMapper objectMapper;
+    private FilterFields filterFields;
+    private boolean defaultSerializers;
+    private boolean dateTimeModule;
 
-    public static class Builder {
-        private ObjectMapper objectMapper;
-        private FilterFields filterFields;
-        private boolean defaultSerializers;
-        private boolean dateTimeModule;
-
-        public Builder(ObjectMapper objectMapper) {
-            this.objectMapper = objectMapper;
-        }
-
-        public Builder withFilterFields(FilterFields filterFields) {
-            this.filterFields = filterFields;
-            return this;
-        }
-
-        public Builder enableDefaultSerializers(boolean defaultSerializers) {
-            this.defaultSerializers = defaultSerializers;
-            return this;
-        }
-
-        public Builder enableDateTimeModule(boolean dateTimeModule) {
-            this.dateTimeModule = dateTimeModule;
-            return this;
-        }
-
-        /**
-         * Build configured ObjectMapper
-         *
-         * @return {@link ObjectMapper}
-         */
-        public ObjectMapper build() {
-            //Create SerializerFactory and set default Serializers
-            SerializerFactory factory;
-
-            //Set SerializerModifier if filterFields not null
-            factory = filterFields != null ? BeanSerializerFactory.instance
-                    .withSerializerModifier(new ConverterMapperModifier(filterFields)) : BeanSerializerFactory.instance;
-
-            //Set default serializers if option is enabled
-            if (defaultSerializers) {
-                factory.withAdditionalSerializers(new SimpleSerializers())
-                        .withAdditionalSerializers(new Jdk8Serializers())
-                        .withAdditionalKeySerializers(new SimpleSerializers());
-            }
-
-            objectMapper.setSerializerFactory(factory);
-
-            //Set dateTimeModule if option is enabled
-            if (dateTimeModule) {
-                //Add JavaTimeModule to fix issue with LocalDate/LocalDateTime serialization
-                JavaTimeModule javaTimeModule = new JavaTimeModule();
-                javaTimeModule.addSerializer(LocalTime.class, LocalTimeSerializer.INSTANCE);
-                javaTimeModule.addSerializer(LocalDate.class, LocalDateSerializer.INSTANCE);
-                javaTimeModule.addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE);
-                javaTimeModule.addDeserializer(LocalTime.class, LocalTimeDeserializer.INSTANCE);
-                javaTimeModule.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
-                javaTimeModule.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
-                objectMapper.registerModule(javaTimeModule);
-                objectMapper.findAndRegisterModules();
-            }
-
-            return objectMapper;
-        }
+    public FilterObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 
-    private FilterObjectMapper() {
+    public FilterObjectMapper withFilterFields(FilterFields filterFields) {
+        this.filterFields = filterFields;
+        return this;
+    }
+
+    public FilterObjectMapper enableDefaultSerializers(boolean defaultSerializers) {
+        this.defaultSerializers = defaultSerializers;
+        return this;
+    }
+
+    public FilterObjectMapper enableDateTimeModule(boolean dateTimeModule) {
+        this.dateTimeModule = dateTimeModule;
+        return this;
+    }
+
+    /**
+     * Build configured ObjectMapper
+     *
+     * @return {@link ObjectMapper}
+     */
+    public ObjectMapper build() {
+        //Create SerializerFactory and set default Serializers
+        SerializerFactory factory;
+
+        //Set SerializerModifier if filterFields not null
+        factory = filterFields != null ? BeanSerializerFactory.instance
+                .withSerializerModifier(new ConverterMapperModifier(filterFields)) : BeanSerializerFactory.instance;
+
+        //Set default serializers if option is enabled
+        if (defaultSerializers) {
+            factory.withAdditionalSerializers(new SimpleSerializers())
+                    .withAdditionalSerializers(new Jdk8Serializers())
+                    .withAdditionalKeySerializers(new SimpleSerializers());
+        }
+
+        objectMapper.setSerializerFactory(factory);
+
+        //Set dateTimeModule if option is enabled
+        if (dateTimeModule) {
+            //Add JavaTimeModule to fix issue with LocalDate/LocalDateTime serialization
+            JavaTimeModule javaTimeModule = new JavaTimeModule();
+            javaTimeModule.addSerializer(LocalTime.class, LocalTimeSerializer.INSTANCE);
+            javaTimeModule.addSerializer(LocalDate.class, LocalDateSerializer.INSTANCE);
+            javaTimeModule.addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE);
+            javaTimeModule.addDeserializer(LocalTime.class, LocalTimeDeserializer.INSTANCE);
+            javaTimeModule.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
+            javaTimeModule.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
+            objectMapper.registerModule(javaTimeModule);
+            objectMapper.findAndRegisterModules();
+        }
+
+        return objectMapper;
     }
 }
