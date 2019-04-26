@@ -38,13 +38,13 @@ public class FilterObjectMapperTest {
 
     @Before
     public void init() {
-        filterObjectMapperTrue = new FilterObjectMapper.Builder(new ObjectMapper())
+        filterObjectMapperTrue = new FilterObjectMapper(new ObjectMapper())
                 .withFilterFields(new FilterFields())
                 .enableDateTimeModule(true)
                 .enableDefaultSerializers(true)
                 .build();
 
-        filterObjectMapperFalse = new FilterObjectMapper.Builder(new ObjectMapper())
+        filterObjectMapperFalse = new FilterObjectMapper(new ObjectMapper())
                 .withFilterFields(null)
                 .enableDateTimeModule(false)
                 .enableDefaultSerializers(false)
