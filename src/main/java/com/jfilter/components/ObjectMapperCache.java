@@ -67,8 +67,7 @@ public class ObjectMapperCache {
         //Build modified objectMapper
         ObjectMapper objectMapper =  new FilterObjectMapper(configuredObjectMapper)
                 .withFilterFields(item.getFilterFields())
-                .enableDateTimeModule(filterConfiguration.isDateTimeModule())
-                .enableDefaultSerializers(filterConfiguration.isDateTimeModule())
+                .withSetSerializationConfig(filterConfiguration.getSerializationConfig())
                 .build();
 
         items.put(item, objectMapper);

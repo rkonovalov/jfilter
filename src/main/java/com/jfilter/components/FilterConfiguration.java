@@ -1,6 +1,7 @@
 package com.jfilter.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jfilter.converter.SerializationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -26,14 +27,12 @@ public class FilterConfiguration {
     private boolean enabled;
     private ConcurrentMap<MediaType, ObjectMapper> mapperList;
     private ObjectMapperCache objectMapperCache;
-    private boolean defaultSerializers;
-    private boolean dateTimeModule;
+    private SerializationConfig serializationConfig;
 
     public FilterConfiguration() {
         mapperList = new ConcurrentHashMap<>();
+        serializationConfig = new SerializationConfig();
         configureDefaultMappers();
-        defaultSerializers = true;
-        dateTimeModule = true;
     }
 
     /**
@@ -144,44 +143,8 @@ public class FilterConfiguration {
         return this;
     }
 
-    /**
-     * Enabling/disabling using of default Serializers
-     *
-     * @param defaultSerializers if true {@link FilterObjectMapper} will add default Serializers to ObjectMappers, otherwise not
-     * @return instance of {@link FilterConfiguration}
-     */
-    public FilterConfiguration enableDefaultSerializers(boolean defaultSerializers) {
-        this.defaultSerializers = defaultSerializers;
-        return this;
-    }
-
-    /**
-     * Enabling/disabling using of JavaDateTimeModule in ObjectMappers
-     *
-     * @param dateTimeModule if true {@link FilterObjectMapper} will add JavaTimeModule to ObjectMappers, otherwise not
-     * @return instance of {@link FilterConfiguration}
-     */
-    public FilterConfiguration enableDateTimeModule(boolean dateTimeModule) {
-        this.dateTimeModule = dateTimeModule;
-        return this;
-    }
-
-    /**
-     * Get using of default Serializers state
-     *
-     * @return true if adding is enabled, otherwise false
-     */
-    public boolean isDefaultSerializers() {
-        return defaultSerializers;
-    }
-
-    /**
-     * Get using of JavaDateTimeModule state
-     *
-     * @return true if using is enabled, otherwise false
-     */
-    public boolean isDateTimeModule() {
-        return dateTimeModule;
+    public SerializationConfig getSerializationConfig() {
+        return serializationConfig;
     }
 }
 

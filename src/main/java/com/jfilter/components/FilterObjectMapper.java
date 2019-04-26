@@ -13,6 +13,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.jfilter.converter.ConverterMapperModifier;
+import com.jfilter.converter.SerializationConfig;
 import com.jfilter.filter.FilterFields;
 
 import java.time.LocalDate;
@@ -25,8 +26,7 @@ import java.time.LocalTime;
 public class FilterObjectMapper {
     private ObjectMapper objectMapper;
     private FilterFields filterFields;
-    private boolean defaultSerializers;
-    private boolean dateTimeModule;
+    private SerializationConfig serializationConfig;
 
     public FilterObjectMapper(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
@@ -37,13 +37,8 @@ public class FilterObjectMapper {
         return this;
     }
 
-    public FilterObjectMapper enableDefaultSerializers(boolean defaultSerializers) {
-        this.defaultSerializers = defaultSerializers;
-        return this;
-    }
-
-    public FilterObjectMapper enableDateTimeModule(boolean dateTimeModule) {
-        this.dateTimeModule = dateTimeModule;
+    public FilterObjectMapper withSetSerializationConfig(SerializationConfig serializationConfig) {
+        this.serializationConfig = serializationConfig;
         return this;
     }
 
@@ -61,7 +56,7 @@ public class FilterObjectMapper {
                 .withSerializerModifier(new ConverterMapperModifier(filterFields)) : BeanSerializerFactory.instance;
 
         //Set default serializers if option is enabled
-        if (defaultSerializers) {
+        if (serializationConfig.isDefaultSerializersEnabled()) {
             factory.withAdditionalSerializers(new SimpleSerializers())
                     .withAdditionalSerializers(new Jdk8Serializers())
                     .withAdditionalKeySerializers(new SimpleSerializers());
@@ -70,7 +65,7 @@ public class FilterObjectMapper {
         objectMapper.setSerializerFactory(factory);
 
         //Set dateTimeModule if option is enabled
-        if (dateTimeModule) {
+        if (serializationConfig.isDateTimeModuleEnabled()) {
             //Add JavaTimeModule to fix issue with LocalDate/LocalDateTime serialization
             JavaTimeModule javaTimeModule = new JavaTimeModule();
             javaTimeModule.addSerializer(LocalTime.class, LocalTimeSerializer.INSTANCE);
