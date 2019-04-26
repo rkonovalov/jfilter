@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Serializers;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jfilter.converter.ConverterMapperModifier;
+import com.jfilter.converter.SerializationConfig;
 import com.jfilter.filter.FilterFields;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,16 +39,19 @@ public class FilterObjectMapperTest {
 
     @Before
     public void init() {
+        SerializationConfig configTrue = new SerializationConfig();
+        SerializationConfig configFalse = new SerializationConfig()
+                .enableDateTimeModule(false)
+                .enableDefaultSerializers(false);
+
         filterObjectMapperTrue = new FilterObjectMapper(new ObjectMapper())
                 .withFilterFields(new FilterFields())
-                .enableDateTimeModule(true)
-                .enableDefaultSerializers(true)
+                .withSetSerializationConfig(configTrue)
                 .build();
 
         filterObjectMapperFalse = new FilterObjectMapper(new ObjectMapper())
                 .withFilterFields(null)
-                .enableDateTimeModule(false)
-                .enableDefaultSerializers(false)
+                .withSetSerializationConfig(configFalse)
                 .build();
     }
 

@@ -44,14 +44,14 @@ public class FilterConfigurationITest {
 
     @Test
     public void testEnableDateTimeModule() {
-        filterConfiguration.enableDateTimeModule(true);
-        assertTrue(filterConfiguration.isDateTimeModule());
+        filterConfiguration.getSerializationConfig().enableDateTimeModule(true);
+        assertTrue(filterConfiguration.getSerializationConfig().isDateTimeModuleEnabled());
     }
 
     @Test
     public void testEnableDefaultSerializers() {
-        filterConfiguration.enableDefaultSerializers(true);
-        assertTrue(filterConfiguration.isDefaultSerializers());
+        filterConfiguration.getSerializationConfig().enableDefaultSerializers(true);
+        assertTrue(filterConfiguration.getSerializationConfig().isDefaultSerializersEnabled());
     }
 
     @Test
