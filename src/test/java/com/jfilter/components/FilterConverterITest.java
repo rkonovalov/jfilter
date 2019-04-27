@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.http.MockHttpInputMessage;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 @Component
@@ -37,8 +39,8 @@ public class FilterConverterITest {
     }
 
     @Test
-    public void testRead() {
-        FilterClassWrapper wrapper = filterConverter.read(null, new MockHttpInputMessage("test".getBytes()));
+    public void testRead() throws IOException {
+        FilterClassWrapper wrapper = (FilterClassWrapper) filterConverter.read(null, new MockHttpInputMessage("test".getBytes()));
         assertNull(wrapper);
     }
 
