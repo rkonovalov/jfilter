@@ -120,6 +120,9 @@ For more examples please follow to the link [Examples](https://rkonovalov.github
 
 # Release notes
 
+## Version 1.0.13
+    * Fixed bug with LocalDateTime serializing
+    
 ## Version 1.0.12
     * Added ObjectMapperCache for caching of ObjectMapper from each method in Spring controller
     * Added FilterConfiguration for extending of exist list of ObjectMappers and enabling/disabling of module
