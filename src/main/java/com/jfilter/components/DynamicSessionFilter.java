@@ -6,6 +6,8 @@ import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
 import org.springframework.core.MethodParameter;
 
+import static com.jfilter.filter.FilterFields.EMPTY_FIELDS;
+
 /**
  * Dynamic session filter
  *
@@ -31,6 +33,6 @@ public class DynamicSessionFilter implements DynamicFilterEvent {
         if (FilterFields.class.isInstance(request.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS))) {
             return (FilterFields) request.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS);
         } else
-            return new FilterFields();
+            return EMPTY_FIELDS;
     }
 }

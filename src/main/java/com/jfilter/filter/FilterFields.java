@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class FilterFields implements Serializable {
     private static final long serialVersionUID = -2354837314560228182L;
+    public static final FilterFields EMPTY_FIELDS = new FilterFields();
 
     private final Map<Class, List<String>> fieldsMap;
     private FilterBehaviour filterBehaviour;
