@@ -4,9 +4,8 @@ import com.jfilter.filter.DynamicFilterComponent;
 import com.jfilter.filter.DynamicFilterEvent;
 import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
+import com.jfilter.util.Comparator;
 import org.springframework.core.MethodParameter;
-
-import java.util.Optional;
 
 import static com.jfilter.filter.FilterFields.EMPTY_FIELDS;
 
@@ -31,9 +30,8 @@ public class DynamicSessionFilter implements DynamicFilterEvent {
      */
     @Override
     public FilterFields onGetFilterFields(MethodParameter methodParameter, RequestSession request) {
-        return Optional.of(request.getSession())
-                .filter(s -> FilterFields.class.isInstance(s.getAttribute(ATTRIBUTE_FILTER_FIELDS)))
-                .map(s -> (FilterFields) s.getAttribute(ATTRIBUTE_FILTER_FIELDS))
+        return (FilterFields) Comparator.of(request.getSession())
+                .match((s -> FilterFields.class.isInstance(s.getAttribute(ATTRIBUTE_FILTER_FIELDS))), (s -> s.getAttribute(ATTRIBUTE_FILTER_FIELDS)))
                 .orElse(EMPTY_FIELDS);
     }
 }
