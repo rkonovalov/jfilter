@@ -120,6 +120,11 @@ For more examples please follow to the link [Examples](https://rkonovalov.github
 
 # Release notes
 
+## Version 1.0.14
+    * Refactored FilterConverter class for inheriting AbstractHttpMessageConverter instead of HttpMessageConverter
+    * Added Comparator class for simplify if...else branching. Including in dynamic filter components
+    * Refactored DynamicSessionFilter component
+    
 ## Version 1.0.13
     * Fixed bug with LocalDateTime serializing
     
