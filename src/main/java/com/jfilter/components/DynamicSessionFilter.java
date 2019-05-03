@@ -30,8 +30,8 @@ public class DynamicSessionFilter implements DynamicFilterEvent {
      */
     @Override
     public FilterFields onGetFilterFields(MethodParameter methodParameter, RequestSession request) {
-        return Comparator.of(request.getSession(), FilterFields.class)
-                .match((s -> FilterFields.class.isInstance(s.getAttribute(ATTRIBUTE_FILTER_FIELDS))), (s -> (FilterFields) s.getAttribute(ATTRIBUTE_FILTER_FIELDS)))
+        return Comparator.of(request.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS), FilterFields.class)
+                .match((FilterFields.class::isInstance), (s -> (FilterFields) s))
                 .orElse(EMPTY_FIELDS);
     }
 }
