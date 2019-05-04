@@ -1,5 +1,6 @@
 package com.jfilter.components;
 
+import com.comparator.Comparator;
 import com.jfilter.filter.DynamicFilterComponent;
 import com.jfilter.filter.FilterFields;
 import com.jfilter.filter.DynamicFilterEvent;
@@ -77,7 +78,15 @@ public final class DynamicFilterProvider {
 
         if (dynamicFilterAnnotation != null && dynamicFilterMap.containsKey(dynamicFilterAnnotation.value())) {
             DynamicFilterEvent filter = dynamicFilterMap.get(dynamicFilterAnnotation.value());
-            return filter.onGetFilterFields(methodParameter, request);
+
+            //Deprecated since 1.0.14 version
+            //return filter.onGetFilterFields(methodParameter, request);
+
+            Comparator<RequestSession, FilterFields> comparator = Comparator.of(request, FilterFields.class);
+            filter.onRequest(comparator);
+
+            //Get FilterFields from comparator or EMPTY_FIELDS if comparator not modified or conditions in compare method returned false
+            return comparator.orElse(FilterFields.EMPTY_FIELDS);
         } else
             return new FilterFields();
     }
