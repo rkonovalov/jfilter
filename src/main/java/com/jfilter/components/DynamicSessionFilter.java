@@ -5,9 +5,6 @@ import com.jfilter.filter.DynamicFilterComponent;
 import com.jfilter.filter.DynamicFilterEvent;
 import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
-import org.springframework.core.MethodParameter;
-
-import static com.jfilter.filter.FilterFields.EMPTY_FIELDS;
 
 /**
  * Dynamic session filter
@@ -20,18 +17,16 @@ public class DynamicSessionFilter implements DynamicFilterEvent {
     public static final String ATTRIBUTE_FILTER_FIELDS = "ATTRIBUTE_FILTER_FIELDS";
 
     /**
-     * Retrieves {@link FilterFields} from session
+     * Request event handler
      *
-     * <p>Method attempt to retrieve FilterFields from session if it exist
+     * <p>Retrieve FilterFields object from session attributes by name ATTRIBUTE_FILTER_FIELDS if it instance of FilterFields
      *
-     * @param methodParameter method parameter
-     * @param request         service request
-     * @return {@link FilterFields} if found in session attributes, otherwise returns empty FilterFields
+     * @param comparator {@link Comparator} comparator object which will be used by {@link DynamicFilterProvider} for retrieve {@link FilterFields}
      */
     @Override
-    public FilterFields onGetFilterFields(MethodParameter methodParameter, RequestSession request) {
-        return Comparator.of(request.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS), FilterFields.class)
-                .match((FilterFields.class::isInstance), (s -> (FilterFields) s))
-                .orElse(EMPTY_FIELDS);
+    public void onRequest(Comparator<RequestSession, FilterFields> comparator) {
+
+        comparator.compare((request -> FilterFields.class.isInstance(request.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS))),
+                (result -> (FilterFields) result.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS)));
     }
 }
