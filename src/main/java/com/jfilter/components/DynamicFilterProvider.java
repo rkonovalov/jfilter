@@ -79,9 +79,6 @@ public final class DynamicFilterProvider {
         if (dynamicFilterAnnotation != null && dynamicFilterMap.containsKey(dynamicFilterAnnotation.value())) {
             DynamicFilterEvent filter = dynamicFilterMap.get(dynamicFilterAnnotation.value());
 
-            //Deprecated since 1.0.14 version
-            //return filter.onGetFilterFields(methodParameter, request);
-
             Comparator<RequestSession, FilterFields> comparator = Comparator.of(request, FilterFields.class);
             filter.onRequest(comparator);
 
