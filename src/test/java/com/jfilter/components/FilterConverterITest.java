@@ -1,6 +1,7 @@
 package com.jfilter.components;
 
 import com.jfilter.converter.FilterClassWrapper;
+import com.jfilter.filter.FilterFields;
 import com.jfilter.mock.config.WSConfiguration;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.springframework.mock.http.MockHttpInputMessage;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import static org.junit.Assert.*;
 
@@ -61,6 +63,24 @@ public class FilterConverterITest {
         filterConfiguration.setEnabled(false);
         boolean canWrite = filterConverter.canWrite(null, MediaType.APPLICATION_JSON);
         assertFalse(canWrite);
+    }
+
+    boolean supports(Class<?> clazz) {
+        return Serializable.class.isAssignableFrom(clazz);
+    }
+
+    @Test
+    public void testSupportsTrue() {
+        filterConfiguration.setEnabled(true);
+        boolean supports = filterConverter.supports(FilterFields.class);
+        assertTrue(supports);
+    }
+
+    @Test
+    public void testSupportsFalse() {
+        filterConfiguration.setEnabled(true);
+        boolean supports = filterConverter.supports(MockHttpInputMessage.class);
+        assertFalse(supports);
     }
 
 }
