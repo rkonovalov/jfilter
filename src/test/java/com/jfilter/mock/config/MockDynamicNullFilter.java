@@ -11,6 +11,6 @@ public class MockDynamicNullFilter implements DynamicFilterEvent {
 
     @Override
     public void onRequest(Comparator<RequestSession, FilterFields> comparator) {
-
+        //Do nothing
     }
 }
