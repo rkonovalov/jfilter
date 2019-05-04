@@ -27,7 +27,7 @@ public class FilterFields implements Serializable {
      * Creates a new instance of the {@link FilterFields} class.
      *
      * @param className class name
-     * @param fields list of field name
+     * @param fields    list of field name
      */
     public FilterFields(Class className, List<String> fields) {
         this();
@@ -50,7 +50,7 @@ public class FilterFields implements Serializable {
     /**
      * Returns filterable field names of defined class
      *
-     * @param className class name
+     * @param className class name whose fields will be filtered
      * @return list of fields, if defined class not found returns empty array list
      */
     public List<String> getFields(Class className) {
@@ -64,14 +64,57 @@ public class FilterFields implements Serializable {
      * If class is found then adds filterable fields in exist list, else
      * creates new array list and adds fields in it
      *
-     * @param classname class name
-     * @param fields list of filterable fields
+     * @param classname class name whose fields will be filtered
+     * @param fields    list of filterable fields
      */
     public void appendToMap(Class classname, List<String> fields) {
         List<String> foundFields = fieldsMap.computeIfAbsent(classname, k -> new ArrayList<>());
         fields.forEach(v -> {
             if (!foundFields.contains(v)) foundFields.add(v);
         });
+    }
+
+    /**
+     * Create instance of FilterFields
+     *
+     * @param classname class name whose fields will be filtered
+     * @param fields    list of filterable fields
+     * @return instance of FilterFields
+     */
+    @SuppressWarnings("WeakerAccess")
+    public static FilterFields getFieldsBy(Class classname, List<String> fields) {
+        return new FilterFields(classname, fields);
+    }
+
+    /**
+     * Create instance of FilterFields without direction to filterable class
+     *
+     * @param fields list of filterable fields
+     * @return instance of FilterFields
+     */
+    public static FilterFields getFieldsBy(List<String> fields) {
+        return getFieldsBy(void.class, fields);
+    }
+
+    /**
+     * Create instance of FilterFields
+     *
+     * @param classname class name whose fields will be filtered
+     * @param fields    string array of filterable fields
+     * @return instance of FilterFields
+     */
+    public static FilterFields getFieldsBy(Class classname, String[] fields) {
+        return getFieldsBy(classname, Arrays.asList(fields));
+    }
+
+    /**
+     * Create instance of FilterFields without direction to filterable class
+     *
+     * @param fields string array of filterable fields
+     * @return instance of FilterFields
+     */
+    public static FilterFields getFieldsBy(String[] fields) {
+        return getFieldsBy(void.class, Arrays.asList(fields));
     }
 
     @Override
@@ -85,7 +128,6 @@ public class FilterFields implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(fieldsMap, filterBehaviour);
     }
 }
