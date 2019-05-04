@@ -50,7 +50,7 @@ For using this module you need to import dependency
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
-    <version>1.0.12</version>
+    <version>1.0.14</version>
 </dependency>
 ```
 
