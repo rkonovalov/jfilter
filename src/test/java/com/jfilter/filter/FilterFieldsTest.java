@@ -1,10 +1,19 @@
 package com.jfilter.filter;
 
+import org.junit.Before;
 import org.junit.Test;
 import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public class FilterFieldsTest {
+    private FilterFields filterFields;
+    private FilterFields filterFieldsNull;
+
+    @Before
+    public void init() {
+        filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
+        filterFieldsNull = new FilterFields(void.class, Arrays.asList("id", "password"));
+    }
 
     @Test
     public void testEqualsTrue() {
@@ -25,7 +34,6 @@ public class FilterFieldsTest {
 
     @Test
     public void testHashCodeEquals() {
-        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
         FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("id", "password"));
 
         assertNotSame(filterFields, filterFields2);
@@ -34,7 +42,6 @@ public class FilterFieldsTest {
 
     @Test
     public void testHashCodeNotEquals() {
-        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
         FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("some_id", "some_password"));
 
         assertNotSame(filterFields, filterFields2);
@@ -43,21 +50,18 @@ public class FilterFieldsTest {
 
     @Test
     public void testEquals() {
-        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
         FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("id", "password"));
         assertEquals(filterFields, filterFields2);
     }
 
     @Test
     public void testNotEquals() {
-        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
         FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("some_id", "some_password"));
         assertNotEquals(filterFields, filterFields2);
     }
 
     @Test
     public void testEqualsBehaviour() {
-        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
         filterFields.setFilterBehaviour(FilterBehaviour.KEEP_FIELDS);
 
         FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("id", "password"));
@@ -67,11 +71,38 @@ public class FilterFieldsTest {
 
     @Test
     public void testNotEqualsBehaviour() {
-        FilterFields filterFields = new FilterFields(String.class, Arrays.asList("id", "password"));
         filterFields.setFilterBehaviour(FilterBehaviour.KEEP_FIELDS);
 
         FilterFields filterFields2 = new FilterFields(String.class, Arrays.asList("id", "password"));
         filterFields2.setFilterBehaviour(FilterBehaviour.HIDE_FIELDS);
         assertNotEquals(filterFields, filterFields2);
+    }
+
+    @Test
+    public void testgetFieldsByClassAndList() {
+        FilterFields filterFields2 = FilterFields.getFieldsBy(String.class, Arrays.asList("id", "password"));
+
+        assertEquals(filterFields, filterFields2);
+    }
+
+    @Test
+    public void testgetFieldsByList() {
+        FilterFields filterFields2 = FilterFields.getFieldsBy(Arrays.asList("id", "password"));
+
+        assertEquals(filterFieldsNull, filterFields2);
+    }
+
+    @Test
+    public void testgetFieldsByClassAndArray() {
+        FilterFields filterFields2 = FilterFields.getFieldsBy(String.class, new String[]{"id", "password"});
+
+        assertEquals(filterFields, filterFields2);
+    }
+
+    @Test
+    public void testgetFieldsByArray() {
+        FilterFields filterFields2 = FilterFields.getFieldsBy(new String[]{"id", "password"});
+
+        assertEquals(filterFieldsNull, filterFields2);
     }
 }
