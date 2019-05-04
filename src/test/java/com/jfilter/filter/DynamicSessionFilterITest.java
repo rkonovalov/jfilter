@@ -14,8 +14,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @Component
 public class DynamicSessionFilterITest {
@@ -42,7 +41,7 @@ public class DynamicSessionFilterITest {
         
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
-        assertNull(found);
+        assertEquals(FilterFields.EMPTY_FIELDS, found);
     }
 
     @Test
