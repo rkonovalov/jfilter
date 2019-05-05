@@ -40,7 +40,7 @@ Publication on [dzone.com](https://dzone.com/articles/spring-web-service-respons
 
 
 # Diagram of module flowchart
-![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram.1.0.8.png)
+![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram-1.0.14.svg)
 
 
 # Installation
