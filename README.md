@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://rkonovalov.github.io/projects/jfilter/1.0.12/">
+  <a href="https://rkonovalov.github.io/projects/jfilter/1.0.14/">
     <img src="https://rkonovalov.github.io/assets/images/jfilter-logo.svg" alt="JFilter Main page">
   </a>
   <br>
