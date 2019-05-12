@@ -49,11 +49,12 @@ public class FilterConverter extends AbstractHttpMessageConverter<Object> {
     protected void writeInternal(Object object, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         MediaType contentType = outputMessage.getHeaders().getContentType();
 
+
         //If object is FilterClassWrapper try to serialize object using filters(if configured)
         if (object instanceof FilterClassWrapper) {
             FilterClassWrapper wrapper = (FilterClassWrapper) object;
 
-            //Retrieving ObjectMapper from ObjectMapperProvider
+            //Retrieving ObjectMapper from ObjectMapperCache
             ObjectMapper objectMapper = filterConfiguration.getObjectMapperCache()
                     .findObjectMapper(wrapper.getMethodParameterDetails());
 
