@@ -93,7 +93,7 @@ public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
             filterFields = dynamicFilterProvider.getFields(methodParameter, requestSession);
         }
 
-        MethodParameterDetails methodParameterDetails = new MethodParameterDetails(methodParameter.getMethod().hashCode(), mediaType, filterFields);
+        MethodParameterDetails methodParameterDetails = new MethodParameterDetails(methodParameter, mediaType, filterFields);
 
         return new FilterClassWrapper(obj, methodParameterDetails);
     }
