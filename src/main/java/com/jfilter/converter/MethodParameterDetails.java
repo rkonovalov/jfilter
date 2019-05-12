@@ -1,8 +1,11 @@
 package com.jfilter.converter;
 
 import com.jfilter.filter.FilterFields;
+import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
+
 import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
@@ -11,6 +14,7 @@ import java.util.Objects;
 public class MethodParameterDetails implements Serializable {
     private static final long serialVersionUID = 2481023447068160651L;
 
+    private MethodParameter methodParameter;
     private int methodHashCode;
     private MediaType mediaType;
     private FilterFields filterFields;
@@ -18,14 +22,19 @@ public class MethodParameterDetails implements Serializable {
     /**
      * Constructor
      *
-     * @param methodHashCode hash code of method in Spring controller
-     * @param mediaType      {@link MediaType} media type of http message
-     * @param filterFields   {@link FilterFields} fields whish should be kept or hidden
+     * @param methodParameter       method of Spring controller
+     * @param mediaType    {@link MediaType} media type of http message
+     * @param filterFields {@link FilterFields} fields whish should be kept or hidden
      */
-    public MethodParameterDetails(int methodHashCode, MediaType mediaType, FilterFields filterFields) {
-        this.methodHashCode = methodHashCode;
+    public MethodParameterDetails(MethodParameter methodParameter, MediaType mediaType, FilterFields filterFields) {
+        this.methodParameter = methodParameter;
+        this.methodHashCode = methodParameter.getMethod().hashCode();
         this.mediaType = mediaType;
         this.filterFields = filterFields;
+    }
+
+    public MethodParameter getMethodParameter() {
+        return methodParameter;
     }
 
     public int getMethodHashCode() {
@@ -41,17 +50,18 @@ public class MethodParameterDetails implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof MethodParameterDetails)) return false;
-        MethodParameterDetails that = (MethodParameterDetails) object;
-        return Objects.equals(methodHashCode, that.methodHashCode) &&
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MethodParameterDetails)) return false;
+        MethodParameterDetails that = (MethodParameterDetails) o;
+        return methodHashCode == that.methodHashCode &&
+                Objects.equals(methodParameter, that.methodParameter) &&
                 Objects.equals(mediaType, that.mediaType) &&
                 Objects.equals(filterFields, that.filterFields);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(methodHashCode, mediaType, filterFields);
+        return Objects.hash(methodParameter, methodHashCode, mediaType, filterFields);
     }
 }
