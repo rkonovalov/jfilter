@@ -70,8 +70,6 @@ public class FilterObjectWriter extends ObjectWriter {
             ObjectMapper objectMapper = filterConfiguration.getObjectMapperCache()
                     .findObjectMapper(wrapper.getMethodParameterDetails());
 
-
-
             objectMapper.writeValue(gen, wrapper.getObject());
         } else
             super.writeValue(gen, value);
