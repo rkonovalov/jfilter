@@ -15,9 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import static com.jfilter.FilterConstants.*;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
-import static org.springframework.http.MediaType.APPLICATION_XML;
+import static org.springframework.http.MediaType.*;
 
 /**
  * This class give access to extending of ObjectMapper lists and control of filter functionality
@@ -28,6 +26,7 @@ public class FilterConfiguration {
     private ConcurrentMap<MediaType, ObjectMapper> mapperList;
     private ObjectMapperCache objectMapperCache;
     private SerializationConfig serializationConfig;
+    private boolean useDefaultConverters;
 
     public FilterConfiguration() {
         mapperList = new ConcurrentHashMap<>();
@@ -116,7 +115,7 @@ public class FilterConfiguration {
      *
      * @return {@link ObjectMapperCache}
      */
-    protected ObjectMapperCache getObjectMapperCache() {
+    public ObjectMapperCache getObjectMapperCache() {
         return objectMapperCache;
     }
 
@@ -145,6 +144,15 @@ public class FilterConfiguration {
 
     public SerializationConfig getSerializationConfig() {
         return serializationConfig;
+    }
+
+    public boolean isUseDefaultConverters() {
+        return useDefaultConverters;
+    }
+
+    public FilterConfiguration setUseDefaultConverters(boolean useDefaultConverters) {
+        this.useDefaultConverters = useDefaultConverters;
+        return this;
     }
 }
 
