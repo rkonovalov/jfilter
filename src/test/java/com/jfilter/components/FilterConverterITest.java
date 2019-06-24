@@ -11,7 +11,6 @@ import org.springframework.mock.http.MockHttpInputMessage;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 import static org.junit.Assert.*;
 
@@ -63,10 +62,6 @@ public class FilterConverterITest {
         filterConfiguration.setEnabled(false);
         boolean canWrite = filterConverter.canWrite(null, MediaType.APPLICATION_JSON);
         assertFalse(canWrite);
-    }
-
-    boolean supports(Class<?> clazz) {
-        return Serializable.class.isAssignableFrom(clazz);
     }
 
     @Test
