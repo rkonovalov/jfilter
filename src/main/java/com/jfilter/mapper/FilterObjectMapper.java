@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.jfilter.components.FilterConfiguration;
 
+@SuppressWarnings("Duplicates")
 public class FilterObjectMapper extends ObjectMapper {
     private static final long serialVersionUID = -7353120387497261652L;
     private FilterConfiguration filterConfiguration;
@@ -15,17 +16,17 @@ public class FilterObjectMapper extends ObjectMapper {
 
     @Override
     public ObjectWriter writer() {
-        return FilterObjectWriter.congfiguredWriter(this, getSerializationConfig(), filterConfiguration);
+        return FilterObjectWriter.congfiguredWriter(this, filterConfiguration);
     }
 
     @Override
     public ObjectWriter writerWithView(Class<?> serializationView) {
-        return FilterObjectWriter.congfiguredWriter(this, getSerializationConfig().withView(serializationView), filterConfiguration);
+        return FilterObjectWriter.congfiguredWriter(this, serializationView, filterConfiguration);
     }
 
     @Override
     public ObjectWriter writer(FilterProvider filterProvider) {
-        return FilterObjectWriter.congfiguredWriter(this, getSerializationConfig().withFilters(filterProvider), filterConfiguration);
+        return FilterObjectWriter.congfiguredWriter(this, filterProvider, filterConfiguration);
     }
 
 

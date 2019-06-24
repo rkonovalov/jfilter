@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.jfilter.components.FilterConfiguration;
 import com.jfilter.converter.FilterClassWrapper;
 
@@ -15,10 +16,24 @@ public class FilterObjectWriter extends ObjectWriter {
     private static final long serialVersionUID = -5795887415761168717L;
     private FilterConfiguration filterConfiguration;
 
+    public static FilterObjectWriter congfiguredWriter(ObjectMapper mapper, FilterConfiguration filterConfiguration) {
+        return new FilterObjectWriter(mapper, mapper.getSerializationConfig())
+                .setFilterConfiguration(filterConfiguration);
+    }
+
     public static FilterObjectWriter congfiguredWriter(ObjectMapper mapper, SerializationConfig config, FilterConfiguration filterConfiguration) {
         return new FilterObjectWriter(mapper, config)
                 .setFilterConfiguration(filterConfiguration);
     }
+
+    public static FilterObjectWriter congfiguredWriter(ObjectMapper mapper, Class<?> serializationView, FilterConfiguration filterConfiguration) {
+        return congfiguredWriter(mapper, mapper.getSerializationConfig().withView(serializationView), filterConfiguration);
+    }
+
+    public static FilterObjectWriter congfiguredWriter(ObjectMapper mapper, FilterProvider filterProvider, FilterConfiguration filterConfiguration) {
+        return congfiguredWriter(mapper, mapper.getSerializationConfig().withFilters(filterProvider), filterConfiguration);
+    }
+
 
     protected FilterObjectWriter(ObjectMapper mapper, SerializationConfig config) {
         super(mapper, config);
