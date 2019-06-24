@@ -15,20 +15,17 @@ public class FilterXmlMapper extends XmlMapper {
 
     @Override
     public ObjectWriter writer() {
-        return new FilterObjectWriter(this, getSerializationConfig())
-                .setFilterConfiguration(filterConfiguration);
+        return FilterObjectWriter.congfiguredWriter(this, getSerializationConfig(), filterConfiguration);
     }
 
     @Override
     public ObjectWriter writerWithView(Class<?> serializationView) {
-        return new FilterObjectWriter(this, getSerializationConfig().withView(serializationView))
-                .setFilterConfiguration(filterConfiguration);
+        return FilterObjectWriter.congfiguredWriter(this, getSerializationConfig().withView(serializationView), filterConfiguration);
     }
 
     @Override
     public ObjectWriter writer(FilterProvider filterProvider) {
-        return new FilterObjectWriter(this, getSerializationConfig().withFilters(filterProvider))
-                .setFilterConfiguration(filterConfiguration);
+        return FilterObjectWriter.congfiguredWriter(this, getSerializationConfig().withFilters(filterProvider), filterConfiguration);
     }
 
 

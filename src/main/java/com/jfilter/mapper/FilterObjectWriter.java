@@ -15,6 +15,11 @@ public class FilterObjectWriter extends ObjectWriter {
     private static final long serialVersionUID = -5795887415761168717L;
     private FilterConfiguration filterConfiguration;
 
+    public static FilterObjectWriter congfiguredWriter(ObjectMapper mapper, SerializationConfig config, FilterConfiguration filterConfiguration) {
+        return new FilterObjectWriter(mapper, config)
+                .setFilterConfiguration(filterConfiguration);
+    }
+
     protected FilterObjectWriter(ObjectMapper mapper, SerializationConfig config) {
         super(mapper, config);
     }
