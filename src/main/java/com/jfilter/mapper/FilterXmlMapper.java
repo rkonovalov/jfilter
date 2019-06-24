@@ -28,6 +28,4 @@ public class FilterXmlMapper extends XmlMapper {
     public ObjectWriter writer(FilterProvider filterProvider) {
         return FilterObjectWriter.congfiguredWriter(this, getSerializationConfig().withFilters(filterProvider), filterConfiguration);
     }
-
-
 }
