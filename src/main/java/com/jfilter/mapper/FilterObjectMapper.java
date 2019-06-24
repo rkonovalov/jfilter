@@ -28,6 +28,4 @@ public class FilterObjectMapper extends ObjectMapper {
     public ObjectWriter writer(FilterProvider filterProvider) {
         return FilterObjectWriter.congfiguredWriter(this, filterProvider, filterConfiguration);
     }
-
-
 }
