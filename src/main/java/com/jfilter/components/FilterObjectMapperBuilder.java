@@ -23,21 +23,21 @@ import java.time.LocalTime;
 /**
  * This class allows to add SerializerModifier to ObjectMapper
  */
-public class FilterObjectMapper {
+public class FilterObjectMapperBuilder {
     private ObjectMapper objectMapper;
     private FilterFields filterFields;
     private SerializationConfig serializationConfig;
 
-    public FilterObjectMapper(ObjectMapper objectMapper) {
+    public FilterObjectMapperBuilder(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    public FilterObjectMapper withFilterFields(FilterFields filterFields) {
+    public FilterObjectMapperBuilder withFilterFields(FilterFields filterFields) {
         this.filterFields = filterFields;
         return this;
     }
 
-    public FilterObjectMapper withSetSerializationConfig(SerializationConfig serializationConfig) {
+    public FilterObjectMapperBuilder withSetSerializationConfig(SerializationConfig serializationConfig) {
         this.serializationConfig = serializationConfig;
         return this;
     }
