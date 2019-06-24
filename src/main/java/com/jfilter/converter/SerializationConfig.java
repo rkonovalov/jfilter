@@ -1,7 +1,7 @@
 package com.jfilter.converter;
 
 import com.jfilter.components.FilterConfiguration;
-import com.jfilter.components.FilterObjectMapper;
+import com.jfilter.components.FilterObjectMapperBuilder;
 
 public class SerializationConfig {
     private boolean defaultSerializers;
@@ -24,7 +24,7 @@ public class SerializationConfig {
     /**
      * Enabling/disabling using of default Serializers
      *
-     * @param defaultSerializers if true {@link FilterObjectMapper} will add default Serializers to ObjectMappers, otherwise not
+     * @param defaultSerializers if true {@link FilterObjectMapperBuilder} will add default Serializers to ObjectMappers, otherwise not
      * @return instance of {@link FilterConfiguration}
      */
     public SerializationConfig enableDefaultSerializers(boolean defaultSerializers) {
@@ -44,7 +44,7 @@ public class SerializationConfig {
     /**
      * Enabling/disabling using of JavaDateTimeModule in ObjectMappers
      *
-     * @param dateTimeModule if true {@link FilterObjectMapper} will add JavaTimeModule to ObjectMappers, otherwise not
+     * @param dateTimeModule if true {@link FilterObjectMapperBuilder} will add JavaTimeModule to ObjectMappers, otherwise not
      * @return instance of {@link FilterConfiguration}
      */
     public SerializationConfig enableDateTimeModule(boolean dateTimeModule) {
