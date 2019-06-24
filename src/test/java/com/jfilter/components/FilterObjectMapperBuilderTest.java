@@ -17,7 +17,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class FilterObjectMapperTest {
+public class FilterObjectMapperBuilderTest {
     private ObjectMapper filterObjectMapperTrue;
     private ObjectMapper filterObjectMapperFalse;
 
@@ -44,12 +44,12 @@ public class FilterObjectMapperTest {
                 .enableDateTimeModule(false)
                 .enableDefaultSerializers(false);
 
-        filterObjectMapperTrue = new FilterObjectMapper(new ObjectMapper())
+        filterObjectMapperTrue = new FilterObjectMapperBuilder(new ObjectMapper())
                 .withFilterFields(new FilterFields())
                 .withSetSerializationConfig(configTrue)
                 .build();
 
-        filterObjectMapperFalse = new FilterObjectMapper(new ObjectMapper())
+        filterObjectMapperFalse = new FilterObjectMapperBuilder(new ObjectMapper())
                 .withFilterFields(null)
                 .withSetSerializationConfig(configFalse)
                 .build();

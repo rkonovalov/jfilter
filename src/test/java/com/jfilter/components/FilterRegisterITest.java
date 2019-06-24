@@ -1,10 +1,14 @@
 package com.jfilter.components;
 
+import com.jfilter.mapper.FilterObjectMapper;
+import com.jfilter.mapper.FilterXmlMapper;
 import com.jfilter.mock.config.WSConfiguration;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
@@ -47,8 +51,15 @@ public class FilterRegisterITest {
     private boolean beanFilterConverterLoaded() {
         final AtomicBoolean result = new AtomicBoolean(false);
         FilterRegisterITest.registeredConverters.forEach(i -> {
-            if (i instanceof FilterConverter)
+            if (i instanceof FilterConverter) {
                 result.set(true);
+            } else if (i instanceof MappingJackson2HttpMessageConverter &&
+                    ((MappingJackson2HttpMessageConverter) i).getObjectMapper() instanceof FilterObjectMapper) {
+                result.set(true);
+            } else if (i instanceof MappingJackson2XmlHttpMessageConverter &&
+                    ((MappingJackson2XmlHttpMessageConverter) i).getObjectMapper() instanceof FilterXmlMapper) {
+                result.set(true);
+            }
         });
         return result.get();
     }
@@ -66,7 +77,7 @@ public class FilterRegisterITest {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_DISABLED_FILTERED, this);
         filterRegister.configureMessageConverters(new ArrayList<>());
         await().atMost(5, TimeUnit.SECONDS).untilTrue(FilterRegisterITest.changed);
-        System.out.println( FilterRegisterITest.registeredConverters.size());
+        System.out.println(FilterRegisterITest.registeredConverters.size());
         boolean contain = beanFilterConverterLoaded();
         assertFalse(contain);
     }
