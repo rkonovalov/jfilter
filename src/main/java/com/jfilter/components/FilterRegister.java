@@ -1,10 +1,14 @@
 package com.jfilter.components;
 
 import com.jfilter.EnableJsonFilter;
+import com.jfilter.mapper.FilterObjectMapper;
+import com.jfilter.mapper.FilterXmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -22,6 +26,7 @@ import java.util.List;
 @Configuration
 public class FilterRegister implements WebMvcConfigurer {
     private FilterConfiguration filterConfiguration;
+
 
     @Autowired
     public FilterRegister(FilterConfiguration filterConfiguration) {
@@ -94,14 +99,23 @@ public class FilterRegister implements WebMvcConfigurer {
     }
 
     /**
-     * Add converter if filtration is enabled
+     * Add filter converters if filtration is enabled
+     * If isUseDefaultConverters enabled, JFilter uses default message converters MappingJackson2HttpMessageConverter
+     * and MappingJackson2XmlHttpMessageConverter
+     *
+     * Otherwise uses FilterConverter
      *
      * @param converters list of {@link HttpMessageConverter}
      */
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        if (filterConfiguration.isEnabled())
-            converters.add(0, new FilterConverter(filterConfiguration));
+        if (filterConfiguration.isEnabled()) {
+            if (filterConfiguration.isUseDefaultConverters()) {
+                converters.add(0, new MappingJackson2HttpMessageConverter(new FilterObjectMapper(filterConfiguration)));
+                converters.add(0, new MappingJackson2XmlHttpMessageConverter(new FilterXmlMapper(filterConfiguration)));
+            } else
+                converters.add(0, new FilterConverter(filterConfiguration));
+        }
     }
 
     @Override
