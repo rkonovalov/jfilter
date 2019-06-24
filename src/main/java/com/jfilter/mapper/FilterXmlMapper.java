@@ -7,7 +7,6 @@ import com.jfilter.components.FilterConfiguration;
 
 public class FilterXmlMapper extends XmlMapper {
     private static final long serialVersionUID = 3983476365887537283L;
-    private FilterObjectWriter objectWriter;
     private FilterConfiguration filterConfiguration;
 
     public FilterXmlMapper(FilterConfiguration filterConfiguration) {
