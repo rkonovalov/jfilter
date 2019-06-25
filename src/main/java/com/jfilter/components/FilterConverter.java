@@ -21,7 +21,7 @@ public class FilterConverter extends AbstractHttpMessageConverter<Object> {
 
     @Override
     protected boolean supports(Class<?> clazz) {
-        return Serializable.class.isAssignableFrom(clazz);
+        return true;
     }
 
     @Override

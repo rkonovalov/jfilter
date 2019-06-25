@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 public class FilterClassWrapper implements Serializable {
     private static final long serialVersionUID = -6250969684778521840L;
-    private final Serializable object;
+    private final Object object;
     private MethodParameterDetails methodParameterDetails;
 
     /**
@@ -25,22 +25,22 @@ public class FilterClassWrapper implements Serializable {
      * @param object                 Serializable object
      * @param methodParameterDetails objectMapper item
      */
-    public FilterClassWrapper(Serializable object, MethodParameterDetails methodParameterDetails) {
+    public FilterClassWrapper(Object object, MethodParameterDetails methodParameterDetails) {
         this.object = object;
         this.methodParameterDetails = methodParameterDetails;
     }
 
     /**
-     * Serializable object retrieved from {@link FilterAdvice#beforeBodyWrite(Serializable, MethodParameter, MediaType, Class, ServerHttpRequest, ServerHttpResponse)}
+     * Serializable object retrieved from {@link FilterAdvice#beforeBodyWrite(Object, MethodParameter, MediaType, Class, ServerHttpRequest, ServerHttpResponse)}
      *
      * @return {@link Serializable}
      */
-    public Serializable getObject() {
+    public Object getObject() {
         return object;
     }
 
     /**
-     * MethodParameter details retrieved from {@link FilterAdvice#beforeBodyWrite(Serializable, MethodParameter, MediaType, Class, ServerHttpRequest, ServerHttpResponse)}
+     * MethodParameter details retrieved from {@link FilterAdvice#beforeBodyWrite(Object, MethodParameter, MediaType, Class, ServerHttpRequest, ServerHttpResponse)}
      *
      * @return {@link MethodParameterDetails}
      */

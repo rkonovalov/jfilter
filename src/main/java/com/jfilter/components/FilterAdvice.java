@@ -26,7 +26,7 @@ import java.io.Serializable;
  */
 
 @ControllerAdvice
-public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
+public final class FilterAdvice implements ResponseBodyAdvice<Object> {
     private FilterProvider filterProvider;
     private DynamicFilterProvider dynamicFilterProvider;
     private FilterConfiguration filterConfiguration;
@@ -64,7 +64,7 @@ public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
     /**
      * Attempt to find filter and extract ignorable fields from methodParameter
      *
-     * @param obj                {@link Serializable} object sent from response of Spring Web Service
+     * @param obj                {@link Object} object sent from response of Spring Web Service
      * @param methodParameter    {@link MethodParameter}
      * @param mediaType          {@link MediaType}
      * @param aClass             {@link HttpMessageConverter}
@@ -74,7 +74,7 @@ public final class FilterAdvice implements ResponseBodyAdvice<Serializable> {
      * else returns FilterClassWrapper with HashMap zero length
      */
     @Override
-    public Serializable beforeBodyWrite(Serializable obj, MethodParameter methodParameter, MediaType mediaType,
+    public Serializable beforeBodyWrite(Object obj, MethodParameter methodParameter, MediaType mediaType,
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
         FilterFields filterFields;
