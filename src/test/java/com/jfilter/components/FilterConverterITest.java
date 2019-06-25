@@ -70,12 +70,4 @@ public class FilterConverterITest {
         boolean supports = filterConverter.supports(FilterFields.class);
         assertTrue(supports);
     }
-
-    @Test
-    public void testSupportsFalse() {
-        filterConfiguration.setEnabled(true);
-        boolean supports = filterConverter.supports(MockHttpInputMessage.class);
-        assertFalse(supports);
-    }
-
 }
