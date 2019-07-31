@@ -54,16 +54,4 @@ public class DynamicFilterWSTest {
                 new FilterFields(MockUser.class, Arrays.asList("id", "password")));
         assertEquals(user.toString(), result);
     }
-
-    @Test
-    public void testWSDynamicAttributeFields() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
-        MockUser user = MockClasses.getUserMock();
-        user.setId(null)
-                .setEmail(null)
-                .setPassword(null);
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_DYNAMIC_SESSION_ATTRIBUTE_FIELDS);
-        assertEquals(user.toString(), result);
-    }
-
 }
