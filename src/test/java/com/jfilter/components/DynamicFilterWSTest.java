@@ -15,8 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 
 import static com.jfilter.components.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
-import static com.jfilter.mock.webservice.WSDynamicFilter.MAPPING_NOT_NULL_DYNAMIC_FILTER;
-import static com.jfilter.mock.webservice.WSDynamicFilter.MAPPING_NULL_DYNAMIC_FILTER;
+import static com.jfilter.mock.webservice.WSDynamicFilter.*;
 import static junit.framework.TestCase.assertEquals;
 
 @Component
@@ -53,6 +52,17 @@ public class DynamicFilterWSTest {
         MockUser user = MockClasses.getUserMock();
         String result = MockHttpRequest.doRequest(mockMvc, MAPPING_NULL_DYNAMIC_FILTER, ATTRIBUTE_FILTER_FIELDS,
                 new FilterFields(MockUser.class, Arrays.asList("id", "password")));
+        assertEquals(user.toString(), result);
+    }
+
+    @Test
+    public void testWSDynamicAttributeFields() throws Exception {
+        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null)
+                .setEmail(null)
+                .setPassword(null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_DYNAMIC_SESSION_ATTRIBUTE_FIELDS);
         assertEquals(user.toString(), result);
     }
 
