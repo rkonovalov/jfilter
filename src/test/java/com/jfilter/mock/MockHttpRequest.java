@@ -60,4 +60,8 @@ public class MockHttpRequest {
             requestBuilder.sessionAttr(attributeName, attributeValue);
         return MockHttpRequest.getContent(mockMvc, requestBuilder);
     }
+
+    public static String doRequest(MockMvc mockMvc, String url) {
+        return doRequest(mockMvc, url, null, null);
+    }
 }
