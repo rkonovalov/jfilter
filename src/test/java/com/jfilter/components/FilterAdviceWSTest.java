@@ -59,14 +59,14 @@ public class FilterAdviceWSTest {
         user.setId(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_SINGLE_ANNOTATION, null, null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_SINGLE_ANNOTATION);
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testSignInKeepSingleAnnotation() {
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_KEEP_SINGLE_ANNOTATION, null, null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_KEEP_SINGLE_ANNOTATION);
         assertEquals("{\"id\":100,\"email\":\"mail@mail.com\"}", result);
     }
 
@@ -76,7 +76,7 @@ public class FilterAdviceWSTest {
         user.setId(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_SINGLE_ANNOTATION_XML, null, null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_SINGLE_ANNOTATION_XML);
 
         assertEquals(user.toXmlString(), result);
     }
@@ -95,7 +95,7 @@ public class FilterAdviceWSTest {
     public void testSignInUnExistedFile() {
         MockUser user = MockClasses.getUserMock();
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_UN_EXIST_FILE, null, null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_UN_EXIST_FILE);
 
         assertEquals(user.toString(), result);
     }
@@ -107,7 +107,7 @@ public class FilterAdviceWSTest {
         user.setEmail(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY, null, null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY);
 
         assertEquals(user.toString(), result);
     }
@@ -130,7 +130,7 @@ public class FilterAdviceWSTest {
         user.setPassword(null);
         user.setEmail(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGY_DEFAULT, null, null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGY_DEFAULT);
 
         assertEquals(user.toString(), result);
     }
@@ -151,7 +151,7 @@ public class FilterAdviceWSTest {
         user.setId(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_WITHOUT_PRODUCE, null, null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_WITHOUT_PRODUCE);
 
         assertEquals(user.toXmlString(), result);
     }

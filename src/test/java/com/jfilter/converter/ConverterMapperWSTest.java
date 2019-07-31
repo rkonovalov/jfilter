@@ -33,7 +33,7 @@ public class ConverterMapperWSTest {
     @Test
     public void testSetFilterFields() {
         MockUser user = MockClasses.getUserMock();
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC, null, null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC);
         assertEquals(user.toString(), result);
     }
 
