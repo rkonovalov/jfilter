@@ -35,11 +35,7 @@ public class FileWatcherOverflowITest {
     @Test
     public void testOverflowKey() throws IOException {
         int fileCount = 200;
-
-        System.out.println("testOverflowKey");
-
         Path directory = Files.createTempDirectory("watch-service-overflow");
-
 
         directory.register(
                 fileWatcher.getWatcher(),
@@ -52,10 +48,9 @@ public class FileWatcherOverflowITest {
             createdFile.setLastModified(new Date().getTime() + 60);
             Files.delete(p);
         }
-
         Files.delete(directory);
 
-        await().atMost(5, SECONDS).until(() -> fileWatcher.isOverflowed());
+        await().atMost(10, SECONDS).until(() -> fileWatcher.isOverflowed());
         assertTrue(fileWatcher.isOverflowed());
     }
 }
