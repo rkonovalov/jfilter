@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 public class FilterClassWrapper implements Serializable {
     private static final long serialVersionUID = -6250969684778521840L;
-    private final Object object;
+    private final transient Object object;
     private MethodParameterDetails methodParameterDetails;
 
     /**
