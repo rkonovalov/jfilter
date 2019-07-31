@@ -43,6 +43,18 @@ public class FilterConfigurationITest {
     }
 
     @Test
+    public void testSetUseDefaultConvertersTrue() {
+        filterConfiguration.setUseDefaultConverters(true);
+        assertTrue(filterConfiguration.isUseDefaultConverters());
+    }
+
+    @Test
+    public void testSetUseDefaultConvertersFalse() {
+        filterConfiguration.setUseDefaultConverters(false);
+        assertFalse(filterConfiguration.isUseDefaultConverters());
+    }
+
+    @Test
     public void testEnableDateTimeModule() {
         filterConfiguration.getSerializationConfig().enableDateTimeModule(true);
         assertTrue(filterConfiguration.getSerializationConfig().isDateTimeModuleEnabled());
