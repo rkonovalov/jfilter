@@ -15,7 +15,6 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
-
 import java.util.List;
 
 /**
@@ -99,10 +98,20 @@ public class FilterRegister implements WebMvcConfigurer {
     }
 
     /**
+     * Remove default Spring MessageConverters MappingJackson2HttpMessageConverter and MappingJackson2XmlHttpMessageConverter
+     *
+     * @param converters list of HttpMessageConverter
+     */
+    private void removeDefaultConverters(List<HttpMessageConverter<?>> converters) {
+        converters.removeIf(converter -> converter instanceof MappingJackson2HttpMessageConverter ||
+                converter instanceof MappingJackson2XmlHttpMessageConverter);
+    }
+
+    /**
      * Add filter converters if filtration is enabled
      * If isUseDefaultConverters enabled, JFilter uses default message converters MappingJackson2HttpMessageConverter
      * and MappingJackson2XmlHttpMessageConverter
-     *
+     * <p>
      * Otherwise uses FilterConverter
      *
      * @param converters list of {@link HttpMessageConverter}
@@ -111,6 +120,7 @@ public class FilterRegister implements WebMvcConfigurer {
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         if (filterConfiguration.isEnabled()) {
             if (filterConfiguration.isUseDefaultConverters()) {
+                removeDefaultConverters(converters);
                 converters.add(0, new MappingJackson2HttpMessageConverter(new FilterObjectMapper(filterConfiguration)));
                 converters.add(0, new MappingJackson2XmlHttpMessageConverter(new FilterXmlMapper(filterConfiguration)));
             } else
