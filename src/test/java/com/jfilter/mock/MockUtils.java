@@ -1,11 +1,18 @@
 package com.jfilter.mock;
 
+import com.jfilter.components.FilterConverter;
 import com.jfilter.filter.FileFilter;
+import com.jfilter.mapper.FilterObjectMapper;
+import com.jfilter.mapper.FilterXmlMapper;
 import org.awaitility.core.ConditionTimeoutException;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -55,5 +62,27 @@ public class MockUtils {
             return false;
         }
     }
+
+    public static boolean beanFilterConverterLoaded(List<Object> registeredConverters) {
+        final AtomicBoolean result = new AtomicBoolean(false);
+        registeredConverters.forEach(i -> {
+            if (i instanceof FilterConverter) {
+                result.set(true);
+            } else if (i instanceof MappingJackson2HttpMessageConverter &&
+                    ((MappingJackson2HttpMessageConverter) i).getObjectMapper() instanceof FilterObjectMapper) {
+                result.set(true);
+            } else if (i instanceof MappingJackson2XmlHttpMessageConverter &&
+                    ((MappingJackson2XmlHttpMessageConverter) i).getObjectMapper() instanceof FilterXmlMapper) {
+                result.set(true);
+            }
+        });
+        return result.get();
+    }
+
+    public static void copyConverters(List<Object> registeredConverters, RequestMappingHandlerAdapter handlerAdapter) {
+        registeredConverters.clear();
+        registeredConverters.addAll(handlerAdapter.getMessageConverters());
+    }
+
 
 }
