@@ -50,7 +50,7 @@ For using this module you need to import dependency
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>json-ignore</artifactId>
-    <version>1.0.14</version>
+    <version>1.0.15</version>
 </dependency>
 ```
 
@@ -120,6 +120,11 @@ For more examples please follow to the link [Examples](https://rkonovalov.github
 
 # Release notes
 
+## Version 1.0.15
+    * Added ability to use default Spring MessageConverters MappingJackson2HttpMessageConverter and MappingJackson2XmlHttpMessageConverter instead of FilterConverter
+    * Added FilterXmlMapper and FilterObjectMapper for overriding default ObjectMapper and XmlMapper when using default Spring MessageConverters
+    * Changed generic type from Serializable to Object in FilterConverter
+    
 ## Version 1.0.14
     * Refactored FilterConverter class for inheriting AbstractHttpMessageConverter instead of HttpMessageConverter
     * Added Comparator class for simplify if...else branching. Including in dynamic filter components
