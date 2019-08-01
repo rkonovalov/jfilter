@@ -68,7 +68,7 @@ public class FilterRegisterITest {
     public void testConfigureMessageConvertersEnabled() throws Exception {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
         await().atMost(5, TimeUnit.SECONDS).untilTrue(FilterRegisterITest.changed);
-        boolean contain = FilterRegisterITest.registeredConverters.size() > 2 && beanFilterConverterLoaded();
+        boolean contain = FilterRegisterITest.registeredConverters.size() >= 2 && beanFilterConverterLoaded();
         assertTrue(contain);
     }
 
