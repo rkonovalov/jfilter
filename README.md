@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://rkonovalov.github.io/projects/jfilter/1.0.14/">
+  <a href="https://rkonovalov.github.io/projects/jfilter/1.0.15/">
     <img src="https://rkonovalov.github.io/assets/images/jfilter-logo.svg" alt="JFilter Main page">
   </a>
   <br>
@@ -24,19 +24,19 @@ Publication on [medium.com](https://medium.com/spring-web-service-response-filte
 Publication on [dzone.com](https://dzone.com/articles/spring-web-service-response-filtering)
 
 ## Index
-* [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.14/)
-* [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.14/requirements/)
-* [Diagram](https://rkonovalov.github.io/projects/jfilter/1.0.14/diagram/)
-* [Installation](https://rkonovalov.github.io/projects/jfilter/1.0.14/installation/)
-* [Getting started](https://rkonovalov.github.io/projects/jfilter/1.0.14/getting-started/)
-* [Configuration](https://rkonovalov.github.io/projects/jfilter/1.0.14/configuration/)
-* [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.14/examples/)
-  * [Simple field filter](https://rkonovalov.github.io/projects/jfilter/1.0.14/examples/filter-field/)  
-  * [Session strategy filter](https://rkonovalov.github.io/projects/jfilter/1.0.14/examples/filter-strategy/) 
-  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jfilter/1.0.14/examples/filter-file/)
-  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jfilter/1.0.14/examples/filter-controller/)
-  * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.14/examples/filter-dynamic/)
-* [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.14/release-notes/)
+* [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.15/)
+* [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.15/requirements/)
+* [Diagram](https://rkonovalov.github.io/projects/jfilter/1.0.15/diagram/)
+* [Installation](https://rkonovalov.github.io/projects/jfilter/1.0.15/installation/)
+* [Getting started](https://rkonovalov.github.io/projects/jfilter/1.0.15/getting-started/)
+* [Configuration](https://rkonovalov.github.io/projects/jfilter/1.0.15/configuration/)
+* [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.15/examples/)
+  * [Simple field filter](https://rkonovalov.github.io/projects/jfilter/1.0.15/examples/filter-field/)  
+  * [Session strategy filter](https://rkonovalov.github.io/projects/jfilter/1.0.15/examples/filter-strategy/) 
+  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jfilter/1.0.15/examples/filter-file/)
+  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jfilter/1.0.15/examples/filter-controller/)
+  * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.15/examples/filter-dynamic/)
+* [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.15/release-notes/)
 
 
 # Diagram of module flowchart
@@ -116,7 +116,7 @@ Just add FieldFilterSetting annotation with filterable fields and module will ex
 }
 ```
 
-For more examples please follow to the link [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.14/examples/)
+For more examples please follow to the link [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.15/examples/)
 
 # Release notes
 
