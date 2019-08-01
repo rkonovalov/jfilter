@@ -18,7 +18,11 @@ public class WSUseDefaultConvertersEnabled extends WebMvcConfigurerAdapter {
         super.configureMessageConverters(converters);
     }
 
-    public void configure(@Autowired FilterConfiguration filterConfiguration) {
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
+    @Autowired
+    public void configure(FilterConfiguration filterConfiguration) {
         filterConfiguration.setUseDefaultConverters(true);
     }
+
+
 }
