@@ -28,11 +28,9 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 public class FilterObjectWriterITest {
-    private FilterObjectMapper objectMapper;
     private FilterObjectWriter writer;
     private MockUser user;
     private ByteArrayOutputStream out;
-    private JsonEncoding encoding;
     private JsonGenerator generator;
 
     @Autowired
@@ -43,13 +41,12 @@ public class FilterObjectWriterITest {
 
     @Before
     public void init() throws IOException {
-        objectMapper = new FilterObjectMapper(filterConfiguration);
+        FilterObjectMapper objectMapper = new FilterObjectMapper(filterConfiguration);
         writer = (FilterObjectWriter) objectMapper.writer();
         user = new MockUser();
 
         out = new ByteArrayOutputStream();
-        encoding = JsonEncoding.UTF8;
-        generator = this.objectMapper.getFactory().createGenerator(out, encoding);
+        generator = objectMapper.getFactory().createGenerator(out, JsonEncoding.UTF8);
     }
 
     @Test
