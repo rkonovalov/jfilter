@@ -2,7 +2,6 @@ package com.jfilter.converter;
 
 import com.jfilter.filter.FilterFields;
 import com.jfilter.mock.MockMethods;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.MethodParameter;
