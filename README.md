@@ -117,6 +117,7 @@ Just add FieldFilterSetting annotation with filterable fields and module will ex
 ```
 
 For more examples please follow to the link [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.15/examples/)
+Also you can wiew samples in GitHub [Samples](https://github.com/rkonovalov/jfilter-samples)
 
 # Release notes
 
