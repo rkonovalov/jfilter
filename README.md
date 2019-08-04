@@ -26,6 +26,8 @@ Publication on [dzone.com](https://dzone.com/articles/spring-web-service-respons
 ## Samples
 You can view all samples in GitHub [Samples](https://github.com/rkonovalov/jfilter-samples)
 
+Or you can try it [Online](https://jfilter-samples-248816.appspot.com/swagger-ui.html)
+
 ## Index
 * [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.15/)
 * [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.15/requirements/)
