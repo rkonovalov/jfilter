@@ -23,6 +23,9 @@ Publication on [medium.com](https://medium.com/spring-web-service-response-filte
 
 Publication on [dzone.com](https://dzone.com/articles/spring-web-service-response-filtering)
 
+# Samples
+You can view all samples in GitHub [Samples](https://github.com/rkonovalov/jfilter-samples)
+
 ## Index
 * [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.15/)
 * [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.15/requirements/)
@@ -115,10 +118,6 @@ Just add FieldFilterSetting annotation with filterable fields and module will ex
   }
 }
 ```
-
-For more examples please follow to the link [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.15/examples/)
-
-Also you can view samples in GitHub [Samples](https://github.com/rkonovalov/jfilter-samples)
 
 # Release notes
 
