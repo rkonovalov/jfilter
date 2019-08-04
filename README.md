@@ -23,7 +23,7 @@ Publication on [medium.com](https://medium.com/spring-web-service-response-filte
 
 Publication on [dzone.com](https://dzone.com/articles/spring-web-service-response-filtering)
 
-# Samples
+## Samples
 You can view all samples in GitHub [Samples](https://github.com/rkonovalov/jfilter-samples)
 
 ## Index
