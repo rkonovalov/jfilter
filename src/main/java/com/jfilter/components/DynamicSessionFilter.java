@@ -9,7 +9,8 @@ import com.jfilter.request.RequestSession;
 /**
  * Dynamic session filter
  *
- * <p>This filter get FilterFields from session if it exist
+ * <p>
+ * This filter get FilterFields from session's or request's attributes if it exist
  */
 @SuppressWarnings("WeakerAccess")
 @DynamicFilterComponent
@@ -26,7 +27,14 @@ public class DynamicSessionFilter implements DynamicFilterEvent {
     @Override
     public void onRequest(Comparator<RequestSession, FilterFields> comparator) {
 
-        comparator.compare((request -> FilterFields.class.isInstance(request.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS))),
-                (result -> (FilterFields) result.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS)));
+        comparator
+                //Check and use if FilterFields exists in request
+                .compare((request -> FilterFields.class.isInstance(request.getRequest().getAttribute(ATTRIBUTE_FILTER_FIELDS))),
+                (result -> (FilterFields) result.getRequest().getAttribute(ATTRIBUTE_FILTER_FIELDS)))
+
+                //Check and use if FilterFields exists in session
+                .compare((request -> FilterFields.class.isInstance(request.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS))),
+                (result -> (FilterFields) result.getSession().getAttribute(ATTRIBUTE_FILTER_FIELDS)))
+        ;
     }
 }

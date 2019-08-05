@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static com.jfilter.mock.webservice.WSDynamicFilter.MAPPING_DYNAMIC_REQUEST_ATTRIBUTE_FIELDS;
 import static com.jfilter.mock.webservice.WSDynamicFilter.MAPPING_DYNAMIC_SESSION_ATTRIBUTE_FIELDS;
 import static junit.framework.TestCase.assertEquals;
 
@@ -30,13 +31,24 @@ public class DynamicSessionFilterITest {
     }
 
     @Test
-    public void testDynamicAttributeFields() throws Exception {
+    public void testDynamicSessionAttributeFields() throws Exception {
         WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
         MockUser user = MockClasses.getUserMock();
         user.setId(null)
                 .setEmail(null)
                 .setPassword(null);
         String result = MockHttpRequest.doRequest(mockMvc, MAPPING_DYNAMIC_SESSION_ATTRIBUTE_FIELDS);
+        assertEquals(user.toString(), result);
+    }
+
+    @Test
+    public void testDynamicRequestAttributeFields() throws Exception {
+        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null)
+                .setEmail(null)
+                .setPassword(null);
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_DYNAMIC_REQUEST_ATTRIBUTE_FIELDS);
         assertEquals(user.toString(), result);
     }
 }

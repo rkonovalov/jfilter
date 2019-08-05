@@ -6,12 +6,14 @@ import com.jfilter.filter.FilterFields;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.MockDynamicNullFilter;
+import com.jfilter.util.FilterUtil;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
@@ -20,6 +22,7 @@ public class WSDynamicFilter {
     public static final String MAPPING_NOT_NULL_DYNAMIC_FILTER = "/dynamic/notNullFilter";
     public static final String MAPPING_NULL_DYNAMIC_FILTER = "/dynamic/nullFilter";
     public static final String MAPPING_DYNAMIC_SESSION_ATTRIBUTE_FIELDS = "/dynamic/sessionAttributeFields";
+    public static final String MAPPING_DYNAMIC_REQUEST_ATTRIBUTE_FIELDS = "/dynamic/requestAttributeFields";
 
     @DynamicFilter(DynamicSessionFilter.class)
     @RequestMapping(value = MAPPING_NOT_NULL_DYNAMIC_FILTER,
@@ -45,7 +48,19 @@ public class WSDynamicFilter {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser sessionAttributeFields(HttpSession session,  @RequestParam("email") String email, @RequestParam("password") String password) {
-        session.setAttribute(DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS, FilterFields.getFieldsBy(Arrays.asList("id", "password", "email")));
+
+        FilterUtil.useFilter(session, FilterFields.getFieldsBy(Arrays.asList("id", "password", "email")));
+        return MockClasses.getUserMock();
+    }
+
+    @DynamicFilter(DynamicSessionFilter.class)
+    @RequestMapping(value = MAPPING_DYNAMIC_REQUEST_ATTRIBUTE_FIELDS,
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public MockUser sessionAttributeFields(HttpServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password) {
+
+        FilterUtil.useFilter(request, FilterFields.getFieldsBy(Arrays.asList("id", "password", "email")));
         return MockClasses.getUserMock();
     }
 
