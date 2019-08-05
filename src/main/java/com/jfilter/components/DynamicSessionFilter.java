@@ -15,7 +15,7 @@ import com.jfilter.request.RequestSession;
 @SuppressWarnings("WeakerAccess")
 @DynamicFilterComponent
 public class DynamicSessionFilter implements DynamicFilterEvent {
-    public static final String ATTRIBUTE_FILTER_FIELDS = "ATTRIBUTE_FILTER_FIELDS";
+    public static final String ATTRIBUTE_FILTER_FIELDS = FilterFields.class.getName();
 
     /**
      * Request event handler
