@@ -1,8 +1,6 @@
 package com.jfilter.filter;
 
 import com.jfilter.FilterException;
-import com.jfilter.filter.FileFilter;
-import com.jfilter.filter.FilterFields;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockHttpRequest;
 import com.jfilter.mock.MockMethods;
