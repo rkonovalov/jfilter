@@ -86,7 +86,7 @@ public class FilterConfiguration {
      * @param mediaType {@link MediaType} media type of http message
      * @return {@link ObjectMapper} ObjectMapper if found, otherwise returns null
      */
-    protected ObjectMapper getMapper(MediaType mediaType) {
+    public ObjectMapper getMapper(MediaType mediaType) {
         return mapperList.get(mediaType);
     }
 
