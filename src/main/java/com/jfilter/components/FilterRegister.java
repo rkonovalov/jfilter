@@ -15,6 +15,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
+
 import java.util.List;
 
 /**
@@ -119,7 +120,10 @@ public class FilterRegister implements WebMvcConfigurer {
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         if (filterConfiguration.isEnabled()) {
-            if (filterConfiguration.isUseDefaultConverters()) {
+
+            if (filterConfiguration.getCustomConverters().size() > 0) {
+                converters.addAll(0, filterConfiguration.getCustomConverters());
+            } else if (filterConfiguration.isUseDefaultConverters()) {
                 removeDefaultConverters(converters);
                 converters.add(0, new MappingJackson2HttpMessageConverter(new FilterObjectMapper(filterConfiguration)));
                 converters.add(0, new MappingJackson2XmlHttpMessageConverter(new FilterXmlMapper(filterConfiguration)));

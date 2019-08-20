@@ -2,8 +2,12 @@ package com.jfilter.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfilter.converter.SerializationConfig;
+import com.jfilter.mapper.FilterObjectMapper;
+import com.jfilter.mapper.FilterXmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
@@ -27,9 +31,11 @@ public class FilterConfiguration {
     private ObjectMapperCache objectMapperCache;
     private SerializationConfig serializationConfig;
     private boolean useDefaultConverters;
+    private List<HttpMessageConverter<?>> customConverters;
 
     public FilterConfiguration() {
         mapperList = new ConcurrentHashMap<>();
+        customConverters = new ArrayList<>();
         serializationConfig = new SerializationConfig();
         configureDefaultMappers();
     }
@@ -153,6 +159,18 @@ public class FilterConfiguration {
     public FilterConfiguration setUseDefaultConverters(boolean useDefaultConverters) {
         this.useDefaultConverters = useDefaultConverters;
         return this;
+    }
+
+    public <T extends AbstractJackson2HttpMessageConverter> FilterConfiguration withCustomConverter(T converter) {
+        if (!(converter.getObjectMapper() instanceof FilterObjectMapper) ||
+                !(converter.getObjectMapper() instanceof FilterXmlMapper))
+            throw new IllegalArgumentException("Converter should contain FilterObjectMapper or FilterXmlMapper in objectMapper property for correct filtering");
+        customConverters.add(converter);
+        return this;
+    }
+
+    public List<HttpMessageConverter<?>> getCustomConverters() {
+        return customConverters;
     }
 }
 
