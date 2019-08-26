@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Consumer;
 
 import static com.jfilter.FilterConstants.*;
 import static org.springframework.http.MediaType.*;
@@ -92,7 +93,7 @@ public class FilterConfiguration {
      * @param mediaType {@link MediaType} media type of http message
      * @return {@link ObjectMapper} ObjectMapper if found, otherwise returns null
      */
-    public ObjectMapper getMapper(MediaType mediaType) {
+    protected ObjectMapper getMapper(MediaType mediaType) {
         return mapperList.get(mediaType);
     }
 
@@ -161,6 +162,14 @@ public class FilterConfiguration {
         return this;
     }
 
+    /**
+     * Add custom converter extemded from AbstractJackson2HttpMessageConverter
+     * Message converter should contain FilterObjectMapper or FilterXmlMapper in objectMapper property for correct filtering
+     *
+     * @param converter instance of message converter extended from {@link AbstractJackson2HttpMessageConverter}
+     * @param <T>       {@link AbstractJackson2HttpMessageConverter}
+     * @return instance of {@link FilterConfiguration}
+     */
     public <T extends AbstractJackson2HttpMessageConverter> FilterConfiguration withCustomConverter(T converter) {
         if (!(converter.getObjectMapper() instanceof FilterObjectMapper) ||
                 !(converter.getObjectMapper() instanceof FilterXmlMapper))
@@ -169,8 +178,36 @@ public class FilterConfiguration {
         return this;
     }
 
+    /**
+     * Returns list of custom converters
+     *
+     * @return {@link HttpMessageConverter}
+     */
     public List<HttpMessageConverter<?>> getCustomConverters() {
         return customConverters;
+    }
+
+    /**
+     * Find ObjectMapper by mediaType and perform consumer operation
+     *
+     * @param mediaType {@link MediaType} supported media type
+     * @param onFind    consumer operation which performs when ObjectMapper will be found
+     */
+    public void findObjectMapper(MediaType mediaType, Consumer<ObjectMapper> onFind) {
+        ObjectMapper objectMapper = getMapper(mediaType);
+        if (onFind != null && objectMapper != null) {
+            onFind.accept(objectMapper);
+        }
+    }
+
+    /**
+     * Find all ObjectMappers and perform consumer operation
+     *
+     * @param onFind consumer operation which performs when ObjectMapper will be found
+     */
+    public void findObjectMapper(Consumer<ObjectMapper> onFind) {
+        if (onFind != null)
+            mapperList.forEach((mediaType, objectMapper) -> onFind.accept(objectMapper));
     }
 }
 
