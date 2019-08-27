@@ -164,7 +164,7 @@ public class FilterConfiguration {
 
     /**
      * Add custom converter extemded from AbstractJackson2HttpMessageConverter
-     * Message converter should contain FilterObjectMapper or FilterXmlMapper in objectMapper property for correct filtering
+     * Note: Message converter should contain FilterObjectMapper or FilterXmlMapper in objectMapper property for correct filtering
      *
      * @param converter instance of message converter extended from {@link AbstractJackson2HttpMessageConverter}
      * @param <T>       {@link AbstractJackson2HttpMessageConverter}
