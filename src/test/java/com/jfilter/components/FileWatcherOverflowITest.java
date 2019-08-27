@@ -50,7 +50,7 @@ public class FileWatcherOverflowITest {
         }
         Files.delete(directory);
 
-        await().atMost(10, SECONDS).until(() -> fileWatcher.isOverflowed());
+        await().atMost(60, SECONDS).until(() -> fileWatcher.isOverflowed());
         assertTrue(fileWatcher.isOverflowed());
     }
 }
