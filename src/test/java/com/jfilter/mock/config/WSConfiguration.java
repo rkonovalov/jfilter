@@ -14,7 +14,8 @@ public class WSConfiguration {
         FILTER_ENABLED2(Enabled2.class),
         FILTER_DISABLED(Disabled.class),
         FILTER_DISABLED_FILTERED(DisabledFiltered .class),
-        FILTER_USE_DEFAULT_CONVERTERS(UseDefaultConverters .class);
+        FILTER_USE_DEFAULT_CONVERTERS(UseDefaultConverters .class),
+        FILTER_USE_CUSTOM_CONVERTERS(UseCustomConverters .class);
 
         private final Class className;
 
@@ -62,6 +63,13 @@ public class WSConfiguration {
     @WebAppConfiguration
     @RunWith(SpringJUnit4ClassRunner.class)
     private class UseDefaultConverters {
+
+    }
+
+    @ContextConfiguration(classes = WSConfigurationCustomConverter.class)
+    @WebAppConfiguration
+    @RunWith(SpringJUnit4ClassRunner.class)
+    private class UseCustomConverters {
 
     }
 }
