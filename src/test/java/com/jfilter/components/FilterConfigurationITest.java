@@ -1,12 +1,18 @@
 package com.jfilter.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jfilter.mapper.FilterObjectMapper;
+import com.jfilter.mapper.FilterXmlMapper;
 import com.jfilter.mock.config.WSConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.*;
@@ -81,4 +87,64 @@ public class FilterConfigurationITest {
         filterConfiguration.setMapper(mediaType, objectMapper);
         assertEquals(filterConfiguration.getMapper(mediaType), objectMapper);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWithCustomConverteNull() {
+        filterConfiguration.withCustomConverter(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWithCustomConverterIncorrect() {
+        MappingJackson2HttpMessageConverter incorrectConverter = new MappingJackson2HttpMessageConverter();
+        filterConfiguration.withCustomConverter(incorrectConverter);
+    }
+
+    @Test
+    public void testWithCustomConverterCorrectObjectMapper() {
+        MappingJackson2HttpMessageConverter correctConverter = new MappingJackson2HttpMessageConverter(new FilterObjectMapper(filterConfiguration));
+        filterConfiguration.withCustomConverter(correctConverter);
+    }
+
+    @Test
+    public void testWithCustomConverterCorrectXmlMapper() {
+        MappingJackson2HttpMessageConverter correctConverter = new MappingJackson2HttpMessageConverter(new FilterXmlMapper(filterConfiguration));
+        filterConfiguration.withCustomConverter(correctConverter);
+    }
+
+    @Test
+    public void testFindObjectMapperFound() {
+        ObjectMapper[] foundObjectMapper = new ObjectMapper[1];
+        filterConfiguration.findObjectMapper(MediaType.APPLICATION_JSON, (objectMapper) -> foundObjectMapper[0] = objectMapper);
+        assertNotNull(foundObjectMapper[0]);
+    }
+
+    @Test
+    public void testFindObjectMapperNotFound() {
+        ObjectMapper[] foundObjectMapper = new ObjectMapper[1];
+        filterConfiguration.findObjectMapper(MediaType.IMAGE_GIF, (objectMapper) -> foundObjectMapper[0] = objectMapper);
+        assertNull(foundObjectMapper[0]);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindObjectMapperMediaTypeNull() {
+        filterConfiguration.findObjectMapper(null, (objectMapper) -> {});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindObjectMapperOnFindNull() {
+        filterConfiguration.findObjectMapper(MediaType.APPLICATION_JSON, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindObjectMapperAllNull() {
+        filterConfiguration.findObjectMapper(null);
+    }
+
+    @Test
+    public void testFindObjectMapperAll() {
+        List<ObjectMapper> foundObjectMappers = new ArrayList<>();
+        filterConfiguration.findObjectMapper(foundObjectMappers::add);
+        assertEquals(6, foundObjectMappers.size());
+    }
+
 }
