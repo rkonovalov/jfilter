@@ -5,6 +5,11 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.jfilter.components.FilterConfiguration;
 
+/**
+ * FilterObjectMapper class extends standard XmlMapper
+ *
+ * <p>This class uses FilterObjectWriter insstead of standard ObjectWriter
+ */
 @SuppressWarnings("Duplicates")
 public class FilterXmlMapper extends XmlMapper {
     private static final long serialVersionUID = 3983476365887537283L;

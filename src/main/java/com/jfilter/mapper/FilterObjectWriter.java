@@ -12,6 +12,11 @@ import com.jfilter.converter.FilterClassWrapper;
 
 import java.io.IOException;
 
+/**
+ * FilterObjectWriter class extends ObjectWriter
+ *
+ * <p>This class allows using of field filtration features
+ */
 public class FilterObjectWriter extends ObjectWriter {
     private static final long serialVersionUID = -5795887415761168717L;
     private FilterConfiguration filterConfiguration;
@@ -62,6 +67,14 @@ public class FilterObjectWriter extends ObjectWriter {
         return this;
     }
 
+    /**
+     * Method that can be used to serialize any Java value as
+     * JSON output, using provided {@link JsonGenerator}
+     *
+     * @param gen {@link JsonGenerator}
+     * @param value serializable object
+     * @throws IOException exception
+     */
     @Override
     public void writeValue(JsonGenerator gen, Object value) throws IOException {
         if (value instanceof FilterClassWrapper) {
