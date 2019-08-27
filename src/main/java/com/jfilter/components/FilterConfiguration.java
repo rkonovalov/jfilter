@@ -171,7 +171,10 @@ public class FilterConfiguration {
      * @return instance of {@link FilterConfiguration}
      */
     public <T extends AbstractJackson2HttpMessageConverter> FilterConfiguration withCustomConverter(T converter) {
-        if (!(converter.getObjectMapper() instanceof FilterObjectMapper) ||
+        if (converter == null)
+            throw new IllegalArgumentException("Converter coudn't be null");
+
+        if (!(converter.getObjectMapper() instanceof FilterObjectMapper) &&
                 !(converter.getObjectMapper() instanceof FilterXmlMapper))
             throw new IllegalArgumentException("Converter should contain FilterObjectMapper or FilterXmlMapper in objectMapper property for correct filtering");
         customConverters.add(converter);
@@ -194,10 +197,12 @@ public class FilterConfiguration {
      * @param onFind    consumer operation which performs when ObjectMapper will be found
      */
     public void findObjectMapper(MediaType mediaType, Consumer<ObjectMapper> onFind) {
+        if (mediaType == null || onFind == null)
+            throw new IllegalArgumentException("mediaType or onFind operation can't be null");
+
         ObjectMapper objectMapper = getMapper(mediaType);
-        if (onFind != null && objectMapper != null) {
-            onFind.accept(objectMapper);
-        }
+        if(objectMapper != null)
+        onFind.accept(objectMapper);
     }
 
     /**
@@ -206,7 +211,8 @@ public class FilterConfiguration {
      * @param onFind consumer operation which performs when ObjectMapper will be found
      */
     public void findObjectMapper(Consumer<ObjectMapper> onFind) {
-        if (onFind != null)
+        if (onFind == null)
+            throw new IllegalArgumentException("onFind operation can't be null");
             mapperList.forEach((mediaType, objectMapper) -> onFind.accept(objectMapper));
     }
 }
