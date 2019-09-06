@@ -4,11 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig;
 import com.fasterxml.jackson.databind.module.SimpleSerializers;
 import com.fasterxml.jackson.databind.ser.BasicSerializerFactory;
-import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Serializers;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.jfilter.converter.ConverterMapperModifier;
 import com.jfilter.converter.SerializationConfig;
 import com.jfilter.filter.FilterFields;
 import org.junit.Before;
@@ -20,14 +18,6 @@ import static org.junit.Assert.assertTrue;
 public class FilterObjectMapperBuilderTest {
     private ObjectMapper filterObjectMapperTrue;
     private ObjectMapper filterObjectMapperFalse;
-
-    private boolean modifierExist(Iterable<BeanSerializerModifier> modifiers, Class modifier) {
-        while (modifiers.iterator().hasNext()) {
-            if (modifiers.iterator().next().getClass().equals(modifier))
-                return true;
-        }
-        return false;
-    }
 
     private boolean serializerExist(Iterable<Serializers> serializers, Class serializer) {
         while (serializers.iterator().hasNext()) {
@@ -41,8 +31,7 @@ public class FilterObjectMapperBuilderTest {
     public void init() {
         SerializationConfig configTrue = new SerializationConfig();
         SerializationConfig configFalse = new SerializationConfig()
-                .enableDateTimeModule(false)
-                .enableDefaultSerializers(false);
+                .enableDateTimeModule(false);
 
         filterObjectMapperTrue = new FilterObjectMapperBuilder(new ObjectMapper())
                 .withFilterFields(new FilterFields())
@@ -69,14 +58,6 @@ public class FilterObjectMapperBuilderTest {
     }
 
     @Test
-    public void testConfigureModifierTrue() {
-        SerializerFactoryConfig serializerFactoryConfig = getFactoryConfig(filterObjectMapperTrue);
-
-        boolean modifierExist = modifierExist(serializerFactoryConfig.serializerModifiers(), ConverterMapperModifier.class);
-        assertTrue(modifierExist);
-    }
-
-    @Test
     public void testConfigureSerializersTrue() {
         SerializerFactoryConfig serializerFactoryConfig = getFactoryConfig(filterObjectMapperTrue);
 
@@ -91,15 +72,6 @@ public class FilterObjectMapperBuilderTest {
     public void testRegisteredModulesTrue() {
         boolean timeModuleExist = registeredModule(filterObjectMapperTrue, JavaTimeModule.class.getName());
         assertTrue(timeModuleExist);
-    }
-
-
-    @Test
-    public void testConfigureModifierFalse() {
-        SerializerFactoryConfig serializerFactoryConfig = getFactoryConfig(filterObjectMapperFalse);
-
-        boolean modifierExist = modifierExist(serializerFactoryConfig.serializerModifiers(), ConverterMapperModifier.class);
-        assertFalse(modifierExist);
     }
 
     @Test
