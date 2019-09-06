@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 public class WSMethod {
     public static final String MAPPING_SIGN_IN_SINGLE_ANNOTATION = "/customers/signInSingleAnnotation";
@@ -24,6 +26,7 @@ public class WSMethod {
     public static final String MAPPING_SIGN_IN_DYNAMIC = "/customers/signInDynamic";
     public static final String MAPPING_SIGN_IN_DEFAULT = "/signInDefault";
     public static final String MAPPING_SIGN_IN_WITHOUT_PRODUCE = "/signInWithoutProduce";
+    public static final String MAPPING_SIGN_IN_OPTIONAL_SINGLE_ANNOTATION = "/customers/signInOptionalSingleAnnotation";
 
     @FieldFilterSetting(fields = {"id", "password"})
     @RequestMapping(value = MAPPING_SIGN_IN_SINGLE_ANNOTATION,
@@ -134,5 +137,14 @@ public class WSMethod {
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInFileKeepAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
         return MockClasses.getUserMock();
+    }
+
+    @FieldFilterSetting(fields = {"id", "password"})
+    @RequestMapping(value = MAPPING_SIGN_IN_OPTIONAL_SINGLE_ANNOTATION,
+            params = {"email", "password"}, method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Optional<MockUser> signInOptionalSingleAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return Optional.of(MockClasses.getUserMock());
     }
 }
