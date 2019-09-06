@@ -161,4 +161,15 @@ public class FilterAdviceWSTest {
         String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_KEEP_ANNOTATION, "ROLE", "USER");
         assertEquals("{\"id\":100,\"email\":\"mail@mail.com\"}", result);
     }
+
+    @Test
+    public void testSignInOptionalSingleAnnotation() {
+        MockUser user = MockClasses.getUserMock();
+        user.setId(null);
+        user.setPassword(null);
+
+        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_OPTIONAL_SINGLE_ANNOTATION);
+
+        assertEquals(user.toString(), result);
+    }
 }
