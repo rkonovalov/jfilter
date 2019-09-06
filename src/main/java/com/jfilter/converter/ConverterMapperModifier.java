@@ -18,6 +18,7 @@ import static com.jfilter.filter.FilterBehaviour.HIDE_FIELDS;
  *
  * @deprecated since 1.0.16
  */
+@Deprecated
 public class ConverterMapperModifier extends BeanSerializerModifier {
     private final FilterFields filterFields;
 
