@@ -6,7 +6,7 @@ import com.jfilter.filter.FileFilterSetting;
 import com.jfilter.filter.SessionStrategy;
 import com.jfilter.filter.DynamicFilter;
 import com.jfilter.components.DynamicSessionFilter;
-import com.jfilter.mock.MockClasses;
+import com.jfilter.mock.MockClassesHelper;
 import com.jfilter.mock.MockUser;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +38,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInSingleAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
-       return MockClasses.getUserMock();
+       return MockClassesHelper.getUserMock();
     }
 
     @FieldFilterSetting(fields = {"id", "email"}, behaviour = FilterBehaviour.KEEP_FIELDS)
@@ -47,7 +47,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInKeepSingleAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @FieldFilterSetting(fields = {"id", "password"})
@@ -56,7 +56,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_XML_VALUE})
     public MockUser signInSingleAnnotationXml(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @FileFilterSetting(fileName = "configMockWebService.xml")
@@ -65,7 +65,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInFileAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
@@ -76,7 +76,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInStrategyAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @SessionStrategy(ignoreFields = {
@@ -87,7 +87,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInStrategyDefault(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @FileFilterSetting(fileName = "unExistFile.xml")
@@ -96,7 +96,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInUnExistedFile(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @FileFilterSetting(fileName = "config_default_strategy.xml")
@@ -105,7 +105,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInDefaultStrategyFile(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @RequestMapping(value = MAPPING_SIGN_IN_DEFAULT,
@@ -113,7 +113,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInDefault(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @DynamicFilter(DynamicSessionFilter.class)
@@ -122,7 +122,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInDynamic(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @FieldFilterSetting(fields = {"id", "password"})
@@ -130,7 +130,7 @@ public class WSMethod {
             params = {"email", "password"}, method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public MockUser signInWithoutProduce(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
 
@@ -140,7 +140,7 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signInFileKeepAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @FieldFilterSetting(fields = {"id", "password"})
@@ -149,6 +149,6 @@ public class WSMethod {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public Optional<MockUser> signInOptionalSingleAnnotation(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return Optional.of(MockClasses.getUserMock());
+        return Optional.of(MockClassesHelper.getUserMock());
     }
 }

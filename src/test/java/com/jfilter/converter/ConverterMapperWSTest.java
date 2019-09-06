@@ -1,8 +1,8 @@
 package com.jfilter.converter;
 
 import com.jfilter.filter.FilterFields;
-import com.jfilter.mock.MockClasses;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockClassesHelper;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.WSConfigurationEnabled;
 import org.junit.Test;
@@ -32,19 +32,19 @@ public class ConverterMapperWSTest {
 
     @Test
     public void testSetFilterFields() {
-        MockUser user = MockClasses.getUserMock();
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC);
+        MockUser user = MockClassesHelper.getUserMock();
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC);
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testNotSetFilterFields() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
         user.setPassword(null);
 
         FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC, ATTRIBUTE_FILTER_FIELDS, filterFields);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_DYNAMIC, ATTRIBUTE_FILTER_FIELDS, filterFields);
         assertEquals(user.toString(), result);
     }
 }

@@ -3,7 +3,7 @@ package com.jfilter.components;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfilter.mapper.FilterObjectMapper;
 import com.jfilter.mapper.FilterXmlMapper;
-import com.jfilter.mock.config.WSConfiguration;
+import com.jfilter.mock.config.WSConfigurationHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class FilterConfigurationITest {
 
     @Before
     public void init() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED2, this);
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED2, this);
     }
 
     @Test

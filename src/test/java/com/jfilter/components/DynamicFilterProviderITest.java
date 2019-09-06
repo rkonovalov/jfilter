@@ -1,7 +1,7 @@
 package com.jfilter.components;
 
 import com.jfilter.filter.DynamicFilterEvent;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockMethods;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.WSConfigurationEnabled;
@@ -56,7 +56,7 @@ public class DynamicFilterProviderITest {
     public void testWithAnnotation() {
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
 
-        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(filterFields));
+        RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(filterFields));
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
         assertEquals(filterFields, found);
@@ -66,7 +66,7 @@ public class DynamicFilterProviderITest {
     public void testWithoutAnnotation() {
         MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
 
-        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(filterFields));
+        RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(filterFields));
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
         assertNotEquals(filterFields, found);
@@ -76,7 +76,7 @@ public class DynamicFilterProviderITest {
     public void testWithAnnotationWithEmptySession() {
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
 
-        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(null));
+        RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(null));
 
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
@@ -95,7 +95,7 @@ public class DynamicFilterProviderITest {
         dynamicFilterMap.clear();
 
 
-        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(filterFields));
+        RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(filterFields));
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
         assertEquals(new FilterFields(), found);

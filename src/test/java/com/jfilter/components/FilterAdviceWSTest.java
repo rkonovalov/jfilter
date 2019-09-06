@@ -1,8 +1,8 @@
 package com.jfilter.components;
 
-import com.jfilter.mock.MockClasses;
+import com.jfilter.mock.MockClassesHelper;
 import com.jfilter.mock.webservice.WSClassFile;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.WSConfigurationEnabled;
 import org.junit.Assert;
@@ -65,120 +65,120 @@ public class FilterAdviceWSTest {
 
     @Test
     public void testSignInSingleAnnotation() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_SINGLE_ANNOTATION);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_SINGLE_ANNOTATION);
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testSignInKeepSingleAnnotation() {
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_KEEP_SINGLE_ANNOTATION);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_KEEP_SINGLE_ANNOTATION);
         assertEquals("{\"id\":100,\"email\":\"mail@mail.com\"}", result);
     }
 
     @Test
     public void testSignInSingleAnnotationXml() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_SINGLE_ANNOTATION_XML);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_SINGLE_ANNOTATION_XML);
 
         assertEquals(user.toXmlString(), result);
     }
 
     @Test
     public void testSignInFileAnnotationAdmin() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_ANNOTATION, "ROLE", "ADMIN");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_ANNOTATION, "ROLE", "ADMIN");
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testSignInUnExistedFile() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_UN_EXIST_FILE);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_UN_EXIST_FILE);
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testSignInDefaultStrategyFile() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
         user.setEmail(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY);
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testSignInFileAnnotationUser() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_ANNOTATION, "ROLE", "USER");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_ANNOTATION, "ROLE", "USER");
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testSignInStrategyDefault() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
         user.setPassword(null);
         user.setEmail(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGY_DEFAULT);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGY_DEFAULT);
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testSignInFileClassAnnotationAdmin() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, WSClassFile.MAPPING_SIGN_IN_FILE, "ROLE", "ADMIN");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, WSClassFile.MAPPING_SIGN_IN_FILE, "ROLE", "ADMIN");
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testSignInWithoutProduce() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_WITHOUT_PRODUCE);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_WITHOUT_PRODUCE);
 
         assertEquals(user.toXmlString(), result);
     }
 
     @Test
     public void testSignInFileKeepAnnotationUser() {
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_KEEP_ANNOTATION, "ROLE", "USER");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_FILE_KEEP_ANNOTATION, "ROLE", "USER");
         assertEquals("{\"id\":100,\"email\":\"mail@mail.com\"}", result);
     }
 
     @Test
     public void testSignInOptionalSingleAnnotation() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
         user.setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_OPTIONAL_SINGLE_ANNOTATION);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_OPTIONAL_SINGLE_ANNOTATION);
 
         assertEquals(user.toString(), result);
     }

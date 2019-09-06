@@ -1,8 +1,8 @@
 package com.jfilter.components;
 
 import com.jfilter.mock.webservice.WSClassFieldSingle;
-import com.jfilter.mock.MockClasses;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockClassesHelper;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.WSConfigurationEnabled;
 import org.junit.Before;
@@ -42,65 +42,65 @@ public class ServiceEnabledWSTest {
 
     @Test
     public void testWSClassFieldSingle() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, WSClassFieldSingle.MAPPING_SIGN_IN_FIELD_SINGLE, "ROLE", "ADMIN");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, WSClassFieldSingle.MAPPING_SIGN_IN_FIELD_SINGLE, "ROLE", "ADMIN");
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testWSClassFieldMultiple() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null)
                 .setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_FIELD_MULTIPLE, "ROLE", "ADMIN");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_FIELD_MULTIPLE, "ROLE", "ADMIN");
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testWSClassStrategySingle() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null)
                 .setPassword(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGY_SINGLE, "ROLE", "ADMIN");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGY_SINGLE, "ROLE", "ADMIN");
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testWSClassStrategyMultiple() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null)
                 .setPassword(null)
                 .setEmail(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGY_MULTIPLE, "ROLE", "ADMIN");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGY_MULTIPLE, "ROLE", "ADMIN");
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testWSClassStrategies() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null)
                 .setPassword(null)
                 .setEmail(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGIES, "ROLE", "ADMIN");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_STRATEGIES, "ROLE", "ADMIN");
 
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testWSSignInDefault() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
 
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_SIGN_IN_DEFAULT, "ROLE", "ADMIN");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_SIGN_IN_DEFAULT, "ROLE", "ADMIN");
 
         assertEquals(user.toString(), result);
     }

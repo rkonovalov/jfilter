@@ -1,8 +1,8 @@
 package com.jfilter.components;
 
 import com.jfilter.mock.webservice.WSClassFieldSingle;
-import com.jfilter.mock.MockClasses;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockClassesHelper;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.WSConfigurationDisabled;
 import org.junit.Before;
@@ -38,10 +38,10 @@ public class ServiceDisabledWSTest {
 
     @Test
     public void testWSClassFieldSingle() {
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
 
-        String result = MockHttpRequest.doRequest(mockMvc, WSClassFieldSingle.MAPPING_SIGN_IN_FIELD_SINGLE, "ROLE", "ADMIN");
+        String result = MockHttpRequestHelper.doRequest(mockMvc, WSClassFieldSingle.MAPPING_SIGN_IN_FIELD_SINGLE, "ROLE", "ADMIN");
 
         assertNotEquals(user.toString(), result);
     }

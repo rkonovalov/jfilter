@@ -1,7 +1,7 @@
 package com.jfilter.filter;
 
-import com.jfilter.mock.MockClasses;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockClassesHelper;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockMethods;
 import com.jfilter.request.RequestSession;
 import org.junit.Assert;
@@ -20,15 +20,15 @@ public class StrategyFilterTest {
 
     @Test
     public void testUserSession() {
-        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockUserRequest());
-        FilterFields filterFields = strategyFilter.getFields(MockClasses.getUserMock(), requestSession);
+        RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockUserRequest());
+        FilterFields filterFields = strategyFilter.getFields(MockClassesHelper.getUserMock(), requestSession);
         Assert.assertEquals(1, filterFields.getFieldsMap().size());
     }
 
     @Test
     public void testClearSession() {
-        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockClearRequest());
-        FilterFields filterFields = strategyFilter.getFields(MockClasses.getUserMock(), requestSession);
+        RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockClearRequest());
+        FilterFields filterFields = strategyFilter.getFields(MockClassesHelper.getUserMock(), requestSession);
         Assert.assertEquals(0, filterFields.getFieldsMap().size());
     }
 }

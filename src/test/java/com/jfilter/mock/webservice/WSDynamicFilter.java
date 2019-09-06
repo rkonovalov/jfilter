@@ -3,7 +3,7 @@ package com.jfilter.mock.webservice;
 import com.jfilter.components.DynamicSessionFilter;
 import com.jfilter.filter.DynamicFilter;
 import com.jfilter.filter.FilterFields;
-import com.jfilter.mock.MockClasses;
+import com.jfilter.mock.MockClassesHelper;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.config.MockDynamicNullFilter;
 import com.jfilter.util.FilterUtil;
@@ -30,7 +30,7 @@ public class WSDynamicFilter {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser notNullFilter(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @DynamicFilter(MockDynamicNullFilter.class)
@@ -39,7 +39,7 @@ public class WSDynamicFilter {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser nullFilter(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @DynamicFilter(DynamicSessionFilter.class)
@@ -50,7 +50,7 @@ public class WSDynamicFilter {
     public MockUser sessionAttributeFields(HttpSession session,  @RequestParam("email") String email, @RequestParam("password") String password) {
 
         FilterUtil.useFilter(session, FilterFields.getFieldsBy(Arrays.asList("id", "password", "email")));
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
     @DynamicFilter(DynamicSessionFilter.class)
@@ -61,7 +61,7 @@ public class WSDynamicFilter {
     public MockUser sessionAttributeFields(HttpServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password) {
 
         FilterUtil.useFilter(request, FilterFields.getFieldsBy(Arrays.asList("id", "password", "email")));
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
 }

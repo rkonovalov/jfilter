@@ -12,7 +12,7 @@ import static com.jfilter.components.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELD
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-public class MockHttpRequest {
+public class MockHttpRequestHelper {
 
     private static HttpServletRequest getMockRequest(String attributeName, Object attributeValue) {
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "");
@@ -58,7 +58,7 @@ public class MockHttpRequest {
 
         if (attributeName != null && attributeValue != null)
             requestBuilder.sessionAttr(attributeName, attributeValue);
-        return MockHttpRequest.getContent(mockMvc, requestBuilder);
+        return MockHttpRequestHelper.getContent(mockMvc, requestBuilder);
     }
 
     public static String doRequest(MockMvc mockMvc, String url) {

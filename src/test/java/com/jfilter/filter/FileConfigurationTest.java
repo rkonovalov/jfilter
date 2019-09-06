@@ -1,6 +1,6 @@
 package com.jfilter.filter;
 
-import com.jfilter.mock.MockClasses;
+import com.jfilter.mock.MockClassesHelper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class FileConfigurationTest {
 
     @Before
     public void init() {
-        mockConfig = MockClasses.getMockAdminFileConfig();
+        mockConfig = MockClassesHelper.getMockAdminFileConfig();
         assertNotNull(mockConfig);
     }
 

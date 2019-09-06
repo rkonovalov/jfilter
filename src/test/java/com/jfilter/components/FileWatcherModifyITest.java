@@ -3,12 +3,12 @@ package com.jfilter.components;
 import com.jfilter.FilterException;
 import com.jfilter.filter.BaseFilter;
 import com.jfilter.filter.FilterFields;
-import com.jfilter.mock.MockClasses;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockClassesHelper;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockMethods;
 import com.jfilter.mock.MockUser;
 import com.jfilter.mock.MockUtils;
-import com.jfilter.mock.config.WSConfiguration;
+import com.jfilter.mock.config.WSConfigurationHelper;
 import com.jfilter.request.RequestSession;
 import org.awaitility.core.ConditionTimeoutException;
 import org.junit.Before;
@@ -47,7 +47,7 @@ public class FileWatcherModifyITest {
 
     @Before
     public void init() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
 
         modified = new AtomicBoolean(false);
 
@@ -99,10 +99,10 @@ public class FileWatcherModifyITest {
         assertTrue(copyResult);
 
         MethodParameter methodParameter = MockMethods.fileFilterDynamic();
-        RequestSession request = new RequestSession(MockHttpRequest.getMockUserRequest());
+        RequestSession request = new RequestSession(MockHttpRequestHelper.getMockUserRequest());
 
         BaseFilter filter = filterProvider.getFilter(methodParameter);
-        FilterFields filterFields = filter.getFields(MockClasses.getUserMock(), request);
+        FilterFields filterFields = filter.getFields(MockClassesHelper.getUserMock(), request);
 
         assertEquals(2, filterFields.getFields(MockUser.class).size());
 
@@ -110,7 +110,7 @@ public class FileWatcherModifyITest {
 
         MockUtils.sleep(10);
 
-        filterFields = filter.getFields(MockClasses.getUserMock(), request);
+        filterFields = filter.getFields(MockClassesHelper.getUserMock(), request);
 
         assertEquals(2, filterFields.getFields(MockUser.class).size());
     }
@@ -123,10 +123,10 @@ public class FileWatcherModifyITest {
         assertTrue(copyResult);
 
         MethodParameter methodParameter = MockMethods.fileFilterDynamic();
-        RequestSession request = new RequestSession(MockHttpRequest.getMockUserRequest());
+        RequestSession request = new RequestSession(MockHttpRequestHelper.getMockUserRequest());
 
         BaseFilter filter = filterProvider.getFilter(methodParameter);
-        FilterFields filterFields = filter.getFields(MockClasses.getUserMock(), request);
+        FilterFields filterFields = filter.getFields(MockClassesHelper.getUserMock(), request);
 
         assertEquals(2, filterFields.getFields(MockUser.class).size());
 
@@ -138,7 +138,7 @@ public class FileWatcherModifyITest {
 
         MockUtils.sleep(10);
 
-        filterFields = filter.getFields(MockClasses.getUserMock(), request);
+        filterFields = filter.getFields(MockClassesHelper.getUserMock(), request);
 
         assertEquals(2, filterFields.getFields(MockUser.class).size());
 

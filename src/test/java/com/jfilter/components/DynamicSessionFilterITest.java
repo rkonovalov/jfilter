@@ -1,9 +1,9 @@
 package com.jfilter.components;
 
-import com.jfilter.mock.MockClasses;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockClassesHelper;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockUser;
-import com.jfilter.mock.config.WSConfiguration;
+import com.jfilter.mock.config.WSConfigurationHelper;
 import com.jfilter.mock.config.WSConfigurationEnabled;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,23 +32,23 @@ public class DynamicSessionFilterITest {
 
     @Test
     public void testDynamicSessionAttributeFields() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
-        MockUser user = MockClasses.getUserMock();
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null)
                 .setEmail(null)
                 .setPassword(null);
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_DYNAMIC_SESSION_ATTRIBUTE_FIELDS);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_DYNAMIC_SESSION_ATTRIBUTE_FIELDS);
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testDynamicRequestAttributeFields() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
-        MockUser user = MockClasses.getUserMock();
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null)
                 .setEmail(null)
                 .setPassword(null);
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_DYNAMIC_REQUEST_ATTRIBUTE_FIELDS);
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_DYNAMIC_REQUEST_ATTRIBUTE_FIELDS);
         assertEquals(user.toString(), result);
     }
 }

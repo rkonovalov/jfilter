@@ -1,10 +1,10 @@
 package com.jfilter.filter;
 
 import com.jfilter.components.DynamicFilterProvider;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockMethods;
 import com.jfilter.mock.MockUser;
-import com.jfilter.mock.config.WSConfiguration;
+import com.jfilter.mock.config.WSConfigurationHelper;
 import com.jfilter.request.RequestSession;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +25,9 @@ public class DynamicSessionFilterITest {
 
     @Test
     public void testOnGetFilterFieldsNotNull() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
-        HttpServletRequest request = MockHttpRequest.getMockDynamicFilterRequest(null);
+        HttpServletRequest request = MockHttpRequestHelper.getMockDynamicFilterRequest(null);
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
 
         assertNotNull(found);
@@ -35,10 +35,10 @@ public class DynamicSessionFilterITest {
 
     @Test
     public void testMockDynamicNullFilter() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
         MethodParameter methodParameter = MockMethods.mockDynamicNullFilter();
 
-        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(new FilterFields(MockUser.class, Arrays.asList("id", "password"))));
+        RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(new FilterFields(MockUser.class, Arrays.asList("id", "password"))));
         
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
@@ -47,10 +47,10 @@ public class DynamicSessionFilterITest {
 
     @Test
     public void testDynamicSessionFilter() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
 
-        RequestSession requestSession = new RequestSession(MockHttpRequest.getMockDynamicFilterRequest(new FilterFields(MockUser.class, Arrays.asList("id", "password"))));
+        RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(new FilterFields(MockUser.class, Arrays.asList("id", "password"))));
 
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 

@@ -1,10 +1,10 @@
 package com.jfilter.components;
 
 import com.jfilter.filter.FilterFields;
-import com.jfilter.mock.MockClasses;
-import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockClassesHelper;
+import com.jfilter.mock.MockHttpRequestHelper;
 import com.jfilter.mock.MockUser;
-import com.jfilter.mock.config.WSConfiguration;
+import com.jfilter.mock.config.WSConfigurationHelper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,21 +35,21 @@ public class DynamicFilterWSTest {
 
     @Test
     public void testWSDynamicNotNullFilter() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
         filterConfiguration.setEnabled(true);
-        MockUser user = MockClasses.getUserMock();
+        MockUser user = MockClassesHelper.getUserMock();
         user.setId(null);
         user.setPassword(null);
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_NOT_NULL_DYNAMIC_FILTER, ATTRIBUTE_FILTER_FIELDS,
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_NOT_NULL_DYNAMIC_FILTER, ATTRIBUTE_FILTER_FIELDS,
                 new FilterFields(MockUser.class, Arrays.asList("id", "password")));
         assertEquals(user.toString(), result);
     }
 
     @Test
     public void testWSDynamicNullFilter() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED, this);
-        MockUser user = MockClasses.getUserMock();
-        String result = MockHttpRequest.doRequest(mockMvc, MAPPING_NULL_DYNAMIC_FILTER, ATTRIBUTE_FILTER_FIELDS,
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
+        MockUser user = MockClassesHelper.getUserMock();
+        String result = MockHttpRequestHelper.doRequest(mockMvc, MAPPING_NULL_DYNAMIC_FILTER, ATTRIBUTE_FILTER_FIELDS,
                 new FilterFields(MockUser.class, Arrays.asList("id", "password")));
         assertEquals(user.toString(), result);
     }

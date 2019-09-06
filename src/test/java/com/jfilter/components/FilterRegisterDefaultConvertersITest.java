@@ -1,7 +1,7 @@
 package com.jfilter.components;
 
 import com.jfilter.mock.MockUtils;
-import com.jfilter.mock.config.WSConfiguration;
+import com.jfilter.mock.config.WSConfigurationHelper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -37,7 +37,7 @@ public class FilterRegisterDefaultConvertersITest {
 
     @Test
     public void testConfigureMessageConvertersEnabled() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_USE_DEFAULT_CONVERTERS, this);
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_USE_DEFAULT_CONVERTERS, this);
         await().atMost(5, TimeUnit.SECONDS).untilTrue(FilterRegisterDefaultConvertersITest.changed);
         boolean contain = FilterRegisterDefaultConvertersITest.registeredConverters.size() >= 2 &&
                 MockUtils.beanFilterConverterLoaded(FilterRegisterDefaultConvertersITest.registeredConverters);

@@ -1,7 +1,7 @@
 package com.jfilter.request;
 
 import com.jfilter.filter.FileConfigurationTest;
-import com.jfilter.mock.MockClasses;
+import com.jfilter.mock.MockClassesHelper;
 import com.jfilter.filter.FilterFields;
 import com.jfilter.filter.FileConfig;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class RequestMethodParameterTest {
 
     @Test
     public void testGetStrategyFieldsNotNull() {
-        FileConfig config = MockClasses.getMockAdminFileConfig();
+        FileConfig config = MockClassesHelper.getMockAdminFileConfig();
         assertNotNull(config);
 
         FileConfig.Strategy strategy = config.getControllers().get(0).getStrategies().get(0);
@@ -40,7 +40,7 @@ public class RequestMethodParameterTest {
 
     @Test
     public void testGetStrategyFieldsMultiple() {
-        FileConfig mockConfig = MockClasses.getMockAdminFileConfig();
+        FileConfig mockConfig = MockClassesHelper.getMockAdminFileConfig();
 
         FileConfig.Strategy strategy = mockConfig.getControllers().get(0).getStrategies().get(0);
 

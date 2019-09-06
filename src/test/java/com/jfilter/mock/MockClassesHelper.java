@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Arrays;
 
 
-public class MockClasses {
+public class MockClassesHelper {
 
     public static MockUser getUserMock() {
         MockUser mockUser = new MockUser();

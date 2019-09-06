@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfilter.converter.MethodParameterDetails;
 import com.jfilter.filter.FilterFields;
 import com.jfilter.mock.MockMethods;
-import com.jfilter.mock.config.WSConfiguration;
+import com.jfilter.mock.config.WSConfigurationHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class ObjectMapperCacheITest {
 
     @Before
     public void init() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED2, this);
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED2, this);
         filterConfiguration.setEnabled(true);
         methodParameter = MockMethods.mockIgnoreSettingsMethod();
     }

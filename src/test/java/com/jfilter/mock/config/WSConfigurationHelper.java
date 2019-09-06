@@ -7,7 +7,7 @@ import org.springframework.test.context.TestContextManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-public class WSConfiguration {
+public class WSConfigurationHelper {
 
     public enum Instance {
         FILTER_ENABLED(Enabled.class),

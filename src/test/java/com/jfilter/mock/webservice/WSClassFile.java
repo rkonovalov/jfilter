@@ -1,6 +1,6 @@
 package com.jfilter.mock.webservice;
 
-import com.jfilter.mock.MockClasses;
+import com.jfilter.mock.MockClassesHelper;
 import com.jfilter.filter.FileFilterSetting;
 import com.jfilter.mock.MockUser;
 import org.springframework.http.MediaType;
@@ -19,7 +19,7 @@ public class WSClassFile {
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public MockUser signIn(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return MockClasses.getUserMock();
+        return MockClassesHelper.getUserMock();
     }
 
 }

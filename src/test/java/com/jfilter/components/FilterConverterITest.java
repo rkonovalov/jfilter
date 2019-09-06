@@ -2,7 +2,7 @@ package com.jfilter.components;
 
 import com.jfilter.converter.FilterClassWrapper;
 import com.jfilter.filter.FilterFields;
-import com.jfilter.mock.config.WSConfiguration;
+import com.jfilter.mock.config.WSConfigurationHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class FilterConverterITest {
 
     @Before
     public void init() throws Exception {
-        WSConfiguration.instance(WSConfiguration.Instance.FILTER_ENABLED2, this);
+        WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED2, this);
         filterConfiguration.setEnabled(true);
 
         filterConverter = new FilterConverter(filterConfiguration);
