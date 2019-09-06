@@ -46,9 +46,13 @@ public class FilterObjectMapperBuilder {
      * @return {@link ObjectMapper}
      */
     public ObjectMapper build() {
-        //Add mixin filter
-        objectMapper.addMixIn(Object.class, MixinFilter.class);
-        objectMapper.setFilterProvider(new SimpleFilterProvider().addFilter("com.jfilter.converter.MixinFilter", new MixinFilter(filterFields)));
+
+        //Add mixin filter if filterFields isn't null and has filterable fields
+        if(filterFields != null && filterFields.getFieldsMap().size() > 0) {
+            objectMapper.addMixIn(Object.class, MixinFilter.class);
+            objectMapper.setFilterProvider(new SimpleFilterProvider()
+                    .addFilter("com.jfilter.converter.MixinFilter", new MixinFilter(filterFields)));
+        }
 
         //Set dateTimeModule if option is enabled
         if (serializationConfig.isDateTimeModuleEnabled()) {
