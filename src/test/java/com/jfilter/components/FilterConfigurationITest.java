@@ -68,12 +68,6 @@ public class FilterConfigurationITest {
     }
 
     @Test
-    public void testEnableDefaultSerializers() {
-        filterConfiguration.getSerializationConfig().enableDefaultSerializers(true);
-        assertTrue(filterConfiguration.getSerializationConfig().isDefaultSerializersEnabled());
-    }
-
-    @Test
     public void testSetMapperOverride() {
         ObjectMapper objectMapper = new ObjectMapper();
         filterConfiguration.setMapper(MediaType.APPLICATION_JSON, objectMapper);
@@ -103,12 +97,14 @@ public class FilterConfigurationITest {
     public void testWithCustomConverterCorrectObjectMapper() {
         MappingJackson2HttpMessageConverter correctConverter = new MappingJackson2HttpMessageConverter(new FilterObjectMapper(filterConfiguration));
         filterConfiguration.withCustomConverter(correctConverter);
+        assertTrue(filterConfiguration.getCustomConverters().size() > 0);
     }
 
     @Test
     public void testWithCustomConverterCorrectXmlMapper() {
         MappingJackson2HttpMessageConverter correctConverter = new MappingJackson2HttpMessageConverter(new FilterXmlMapper(filterConfiguration));
         filterConfiguration.withCustomConverter(correctConverter);
+        assertTrue(filterConfiguration.getCustomConverters().size() > 0);
     }
 
     @Test
