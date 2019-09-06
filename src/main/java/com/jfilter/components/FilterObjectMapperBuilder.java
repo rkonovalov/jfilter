@@ -1,10 +1,8 @@
 package com.jfilter.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleSerializers;
-import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
-import com.fasterxml.jackson.databind.ser.SerializerFactory;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Serializers;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -12,7 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-import com.jfilter.converter.ConverterMapperModifier;
+import com.jfilter.converter.MixinFilter;
 import com.jfilter.converter.SerializationConfig;
 import com.jfilter.filter.FilterFields;
 
@@ -48,21 +46,9 @@ public class FilterObjectMapperBuilder {
      * @return {@link ObjectMapper}
      */
     public ObjectMapper build() {
-        //Create SerializerFactory and set default Serializers
-        SerializerFactory factory;
-
-        //Set SerializerModifier if filterFields not null
-        factory = filterFields != null ? BeanSerializerFactory.instance
-                .withSerializerModifier(new ConverterMapperModifier(filterFields)) : BeanSerializerFactory.instance;
-
-        //Set default serializers if option is enabled
-        if (serializationConfig.isDefaultSerializersEnabled()) {
-            factory.withAdditionalSerializers(new SimpleSerializers())
-                    .withAdditionalSerializers(new Jdk8Serializers())
-                    .withAdditionalKeySerializers(new SimpleSerializers());
-        }
-
-        objectMapper.setSerializerFactory(factory);
+        //Add mixin filter
+        objectMapper.addMixIn(Object.class, MixinFilter.class);
+        objectMapper.setFilterProvider(new SimpleFilterProvider().addFilter("com.jfilter.converter.MixinFilter", new MixinFilter(filterFields)));
 
         //Set dateTimeModule if option is enabled
         if (serializationConfig.isDateTimeModuleEnabled()) {
@@ -75,6 +61,7 @@ public class FilterObjectMapperBuilder {
             javaTimeModule.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
             javaTimeModule.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
             objectMapper.registerModule(javaTimeModule);
+            objectMapper.registerModule(new Jdk8Module());
             objectMapper.findAndRegisterModules();
         }
 
