@@ -17,6 +17,7 @@ public class SerializationConfig {
      *
      * @return true if adding is enabled, otherwise false
      */
+    @Deprecated
     public boolean isDefaultSerializersEnabled() {
         return defaultSerializers;
     }
@@ -27,6 +28,7 @@ public class SerializationConfig {
      * @param defaultSerializers if true {@link FilterObjectMapperBuilder} will add default Serializers to ObjectMappers, otherwise not
      * @return instance of {@link FilterConfiguration}
      */
+    @Deprecated
     public SerializationConfig enableDefaultSerializers(boolean defaultSerializers) {
         this.defaultSerializers = defaultSerializers;
         return this;
