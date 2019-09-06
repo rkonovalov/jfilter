@@ -1,8 +1,12 @@
 package com.jfilter.filter;
 
-import java.lang.annotation.*;
-
 import com.jfilter.components.DynamicFilterProvider;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * This annotation used for configuring of dynamic filter

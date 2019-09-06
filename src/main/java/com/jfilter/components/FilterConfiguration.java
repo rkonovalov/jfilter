@@ -19,8 +19,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
 
-import static com.jfilter.FilterConstants.*;
-import static org.springframework.http.MediaType.*;
+import static com.jfilter.FilterConstants.MEDIA_SUB_TYPE_JSON;
+import static com.jfilter.FilterConstants.MEDIA_SUB_TYPE_JSON2;
+import static com.jfilter.FilterConstants.MEDIA_SUB_TYPE_XML;
+import static com.jfilter.FilterConstants.MEDIA_SUB_TYPE_XML2;
+import static com.jfilter.FilterConstants.MEDIA_TYPE_APPLICATION;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.http.MediaType.APPLICATION_XML;
 
 /**
  * This class give access to extending of ObjectMapper lists and control of filter functionality

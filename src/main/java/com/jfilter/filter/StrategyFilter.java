@@ -3,7 +3,7 @@ package com.jfilter.filter;
 import com.jfilter.request.RequestSession;
 import org.springframework.core.MethodParameter;
 
-import java.util.*;
+import java.util.Arrays;
 
 /**
  * This class used for strategy filtration of object's fields based on SessionStrategy configuration
