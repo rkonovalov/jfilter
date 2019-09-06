@@ -15,7 +15,7 @@ import java.util.Date;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 @Component
 public class FileWatcherOverflowITest {

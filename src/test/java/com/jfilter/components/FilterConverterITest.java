@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 @Component
 public class FilterConverterITest {

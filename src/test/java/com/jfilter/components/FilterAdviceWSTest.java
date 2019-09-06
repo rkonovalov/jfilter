@@ -17,9 +17,19 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 import javax.servlet.ServletContext;
 
-import static com.jfilter.mock.webservice.WSMethod.*;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_SINGLE_ANNOTATION;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_KEEP_SINGLE_ANNOTATION;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_SINGLE_ANNOTATION_XML;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_FILE_ANNOTATION;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_UN_EXIST_FILE;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_FILE_DEFAULT_STRATEGY;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_STRATEGY_DEFAULT;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_WITHOUT_PRODUCE;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_FILE_KEEP_ANNOTATION;
+import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_OPTIONAL_SINGLE_ANNOTATION;
 import static junit.framework.TestCase.assertEquals;
 
 @ContextConfiguration(classes = WSConfigurationEnabled.class)

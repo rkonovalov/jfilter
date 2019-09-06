@@ -7,7 +7,9 @@ import com.jfilter.mock.MockMethods;
 import com.jfilter.request.RequestSession;
 import org.junit.Assert;
 import org.junit.Test;
-import java.io.*;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Arrays;
 
 public class FileFilterTest {

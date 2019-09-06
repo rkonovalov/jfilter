@@ -3,7 +3,11 @@ package com.jfilter.filter;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.Arrays;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class FilterFieldsTest {
     private FilterFields filterFields;

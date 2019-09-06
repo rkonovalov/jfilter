@@ -20,9 +20,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.io.*;
 
-import static org.junit.Assert.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -11,11 +11,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
 import java.util.Arrays;
-
 import static com.jfilter.components.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
-import static com.jfilter.mock.webservice.WSDynamicFilter.*;
+import static com.jfilter.mock.webservice.WSDynamicFilter.MAPPING_NOT_NULL_DYNAMIC_FILTER;
+import static com.jfilter.mock.webservice.WSDynamicFilter.MAPPING_NULL_DYNAMIC_FILTER;
 import static junit.framework.TestCase.assertEquals;
 
 @Component

@@ -1,9 +1,13 @@
 package com.jfilter.components;
 
 import com.jfilter.FilterException;
-import com.jfilter.mock.*;
 import com.jfilter.filter.BaseFilter;
 import com.jfilter.filter.FilterFields;
+import com.jfilter.mock.MockClasses;
+import com.jfilter.mock.MockHttpRequest;
+import com.jfilter.mock.MockMethods;
+import com.jfilter.mock.MockUser;
+import com.jfilter.mock.MockUtils;
 import com.jfilter.mock.config.WSConfiguration;
 import com.jfilter.request.RequestSession;
 import org.awaitility.core.ConditionTimeoutException;
@@ -12,15 +16,16 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
-
 import java.io.File;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import static com.jfilter.filter.FileFilter.resourceFile;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @Component
 public class FileWatcherModifyITest {

@@ -3,7 +3,8 @@ package com.jfilter.components;
 import com.jfilter.filter.FileFilter;
 import com.jfilter.mock.MockFile;
 import com.jfilter.mock.config.WSConfigurationEnabled;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
@@ -13,10 +14,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @ContextConfiguration(classes = WSConfigurationEnabled.class)
 @RunWith(SpringJUnit4ClassRunner.class)

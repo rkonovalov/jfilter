@@ -1,6 +1,10 @@
 package com.jfilter.mock.webservice;
 
-import com.jfilter.filter.*;
+import com.jfilter.filter.FieldFilterSetting;
+import com.jfilter.filter.FilterBehaviour;
+import com.jfilter.filter.FileFilterSetting;
+import com.jfilter.filter.SessionStrategy;
+import com.jfilter.filter.DynamicFilter;
 import com.jfilter.components.DynamicSessionFilter;
 import com.jfilter.mock.MockClasses;
 import com.jfilter.mock.MockUser;

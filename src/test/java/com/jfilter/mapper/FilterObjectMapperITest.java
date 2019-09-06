@@ -2,7 +2,7 @@ package com.jfilter.mapper;
 
 import com.jfilter.components.FilterConfiguration;
 import com.jfilter.mock.config.WSConfigurationEnabled;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
