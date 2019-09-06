@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 public class MockHttpRequest {
 
-    private static HttpServletRequest getMocRequest(String attributeName, Object attributeValue) {
+    private static HttpServletRequest getMockRequest(String attributeName, Object attributeValue) {
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "");
         if (attributeName != null && !attributeName.isEmpty())
             request.getSession().setAttribute(attributeName, attributeValue);
@@ -22,19 +22,19 @@ public class MockHttpRequest {
     }
 
     public static HttpServletRequest getMockAdminRequest() {
-        return getMocRequest("ROLE", "ADMIN");
+        return getMockRequest("ROLE", "ADMIN");
     }
 
     public static HttpServletRequest getMockUserRequest() {
-        return getMocRequest("ROLE", "USER");
+        return getMockRequest("ROLE", "USER");
     }
 
     public static HttpServletRequest getMockClearRequest() {
-        return getMocRequest("", "");
+        return getMockRequest("", "");
     }
 
     public static HttpServletRequest getMockDynamicFilterRequest(FilterFields filterFields) {
-        return getMocRequest(ATTRIBUTE_FILTER_FIELDS, filterFields);
+        return getMockRequest(ATTRIBUTE_FILTER_FIELDS, filterFields);
     }
 
     private static String getContent(MockMvc mockMvc, MockHttpServletRequestBuilder requestBuilder) {
