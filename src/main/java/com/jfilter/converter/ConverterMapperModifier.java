@@ -15,6 +15,8 @@ import static com.jfilter.filter.FilterBehaviour.HIDE_FIELDS;
  *
  * <p>Extends functionality of standard {@link BeanSerializerModifier} and
  * give ability to filter ignorable fields from object
+ *
+ * @deprecated since 1.0.16
  */
 public class ConverterMapperModifier extends BeanSerializerModifier {
     private final FilterFields filterFields;
