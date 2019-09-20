@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://rkonovalov.github.io/projects/jfilter/1.0.16/">
+  <a href="https://rkonovalov.github.io/projects/jfilter/1.0.17/">
     <img src="https://rkonovalov.github.io/assets/images/jfilter-logo.svg" alt="JFilter Main page">
   </a>
   <br>
@@ -19,9 +19,9 @@ When you used Jackson @JsonView interface and need more powerful and flexibility
 For information please follow the links below.
 
 ## Publications
-Publication on [medium.com](https://medium.com/spring-web-service-response-filtering/spring-web-service-response-filtering-5dcff6679327)
+Article in [medium.com](https://medium.com/spring-web-service-response-filtering/spring-web-service-response-filtering-5dcff6679327)
 
-Publication on [dzone.com](https://dzone.com/articles/spring-web-service-response-filtering)
+Article in [dzone.com](https://dzone.com/articles/spring-web-service-response-filtering)
 
 ## Samples
 You can view all samples in GitHub [Samples](https://github.com/rkonovalov/jfilter-samples)
@@ -29,23 +29,23 @@ You can view all samples in GitHub [Samples](https://github.com/rkonovalov/jfilt
 Or you can try it [Online](https://jfilter-samples-248816.appspot.com/swagger-ui.html)
 
 ## Index
-* [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.16/)
-* [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.16/requirements/)
-* [Diagram](https://rkonovalov.github.io/projects/jfilter/1.0.16/diagram/)
-* [Installation](https://rkonovalov.github.io/projects/jfilter/1.0.16/installation/)
-* [Getting started](https://rkonovalov.github.io/projects/jfilter/1.0.16/getting-started/)
-* [Configuration](https://rkonovalov.github.io/projects/jfilter/1.0.16/configuration/)
-* [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.16/examples/)
-  * [Simple field filter](https://rkonovalov.github.io/projects/jfilter/1.0.16/examples/filter-field/)  
-  * [Session strategy filter](https://rkonovalov.github.io/projects/jfilter/1.0.16/examples/filter-strategy/) 
-  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jfilter/1.0.16/examples/filter-file/)
-  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jfilter/1.0.16/examples/filter-controller/)
-  * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.16/examples/filter-dynamic/)
-* [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.16/release-notes/)
+* [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.17/)
+* [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.17/requirements/)
+* [Diagram](https://rkonovalov.github.io/projects/jfilter/1.0.17/diagram/)
+* [Installation](https://rkonovalov.github.io/projects/jfilter/1.0.17/installation/)
+* [Getting started](https://rkonovalov.github.io/projects/jfilter/1.0.17/getting-started/)
+* [Configuration](https://rkonovalov.github.io/projects/jfilter/1.0.17/configuration/)
+* [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/)
+  * [Simple field filter](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-field/)  
+  * [Session strategy filter](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-strategy/) 
+  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-file/)
+  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-controller/)
+  * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-dynamic/)
+* [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.17/release-notes/)
 
 
 # Diagram of module flowchart
-![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram-1.0.14.svg)
+![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram-1.0.17.svg)
 
 
 # Installation
@@ -55,7 +55,7 @@ For using this module you need to import dependency
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>jfilter</artifactId>
-    <version>1.0.16</version>
+    <version>1.0.17</version>
 </dependency>
 ```
 * Attention: if you have used previous versions of module please rename artifactId from **json-ignore** to **jfilter**
@@ -124,6 +124,12 @@ Just add FieldFilterSetting annotation with filterable fields and module will ex
 
 # Release notes
 
+## Version 1.0.17
+    * Added ability to using custom Message Converters, Case #11
+    * Added ability to change configuration of exist ObjectMappers, Case #11
+    * Removed of using ConverterMapperModifier, instead module uses MixinFilter for field filtering.
+      It's need for correct filtering of Java 8 types Case #12
+    
 ## Version 1.0.16
     * Simplified setting FilterFields into session or request attibutes for using DynamicSessionFilter
     * Changed artifactId of project from json-ignore to jfilter
