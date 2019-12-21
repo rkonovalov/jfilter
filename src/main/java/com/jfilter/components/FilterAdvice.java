@@ -83,7 +83,7 @@ public final class FilterAdvice implements ResponseBodyAdvice<Object> {
         HttpServletRequest servletServerHttpRequest = ((ServletServerHttpRequest) serverHttpRequest).getServletRequest();
         RequestSession requestSession = new RequestSession(servletServerHttpRequest);
 
-        //Proccess filters
+        //Process filters
         BaseFilter filter = filterProvider.getFilter(methodParameter);
         if (filter != null) {
             //Get fields from static filter
