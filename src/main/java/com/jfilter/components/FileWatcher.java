@@ -4,7 +4,7 @@ import com.jfilter.FileWatcherEvent;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
  * Also class uses Spring Scheduling mechanism for periodically checking files
  */
 @EnableScheduling
-@Controller
+@Component
 public class FileWatcher implements DisposableBean {
 
     private static final Long FILE_MODIFY_THRESHOLD = 1000L;
@@ -112,9 +112,8 @@ public class FileWatcher implements DisposableBean {
             Path path = file.isDirectory() ? Paths.get(file.getPath()) : Paths.get(file.getParent());
             if (!watchKeys.containsValue(path)) {
                 watchKeys.put(path.register(watcher, ENTRY_MODIFY), path);
-                return true;
-            } else
-                return true;
+            }
+            return true;
         } catch (IOException e) {
             return false;
         }
