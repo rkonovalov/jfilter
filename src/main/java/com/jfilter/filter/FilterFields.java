@@ -14,6 +14,7 @@ import java.util.function.Supplier;
  *
  * <p>This class contains map of fields which could be filtered
  */
+@SuppressWarnings("rawtypes")
 public class FilterFields implements Serializable {
     private static final long serialVersionUID = -2354837314560228182L;
     public static final Supplier<FilterFields> EMPTY_FIELDS = FilterFields::new;
@@ -130,6 +131,15 @@ public class FilterFields implements Serializable {
         FilterFields that = (FilterFields) object;
         return Objects.equals(fieldsMap, that.fieldsMap) &&
                 filterBehaviour == that.filterBehaviour;
+    }
+
+    /**
+     * Return size of fields HashMap
+     *
+     * @return size
+     */
+    public int size() {
+        return fieldsMap.size();
     }
 
     @Override
