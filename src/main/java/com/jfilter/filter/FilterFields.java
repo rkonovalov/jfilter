@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * Class used in filters
@@ -15,7 +16,7 @@ import java.util.Objects;
  */
 public class FilterFields implements Serializable {
     private static final long serialVersionUID = -2354837314560228182L;
-    public static final FilterFields EMPTY_FIELDS = new FilterFields();
+    public static final Supplier<FilterFields> EMPTY_FIELDS = FilterFields::new;
 
     private final Map<Class, List<String>> fieldsMap;
     private FilterBehaviour filterBehaviour;

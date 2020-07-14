@@ -83,7 +83,7 @@ public final class DynamicFilterProvider {
             filter.onRequest(comparator);
 
             //Get FilterFields from comparator or EMPTY_FIELDS if comparator not modified or conditions in compare method returned false
-            return comparator.orElse(FilterFields.EMPTY_FIELDS);
+            return comparator.orElse(FilterFields.EMPTY_FIELDS.get());
         } else
             return new FilterFields();
     }

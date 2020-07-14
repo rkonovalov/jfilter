@@ -42,7 +42,7 @@ public class DynamicSessionFilterITest {
         
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
-        assertEquals(FilterFields.EMPTY_FIELDS, found);
+        assertEquals(FilterFields.EMPTY_FIELDS.get(), found);
     }
 
     @Test
