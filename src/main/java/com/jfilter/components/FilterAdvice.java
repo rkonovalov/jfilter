@@ -18,6 +18,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
+
+import static com.jfilter.filter.FilterFields.EMPTY_FIELDS;
+
 /**
  * Class which handle all responses from web service and tries to filter it
  *
@@ -77,22 +80,22 @@ public final class FilterAdvice implements ResponseBodyAdvice<Object> {
     public Serializable beforeBodyWrite(Object obj, MethodParameter methodParameter, MediaType mediaType,
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
-        FilterFields filterFields = FilterFields.EMPTY_FIELDS;
+
+        FilterFields filterFields = EMPTY_FIELDS.get();
 
         //Getting HttpServletRequest from serverHttpRequest
         HttpServletRequest servletServerHttpRequest = ((ServletServerHttpRequest) serverHttpRequest).getServletRequest();
         RequestSession requestSession = new RequestSession(servletServerHttpRequest);
 
-        //Process filters
+        //Retrieve filterable fields from static filters
         BaseFilter filter = filterProvider.getFilter(methodParameter);
-        if (filter != null) {
-            //Get fields from static filter
+        if (filter != null)
             filterFields = filter.getFields(obj, requestSession);
-        }
 
-        //Get fields from dynamic filter
+        //Retrieve filterable fields from dynamic filters
         FilterFields dynamicFilterFields = dynamicFilterProvider.getFields(methodParameter, requestSession);
-        dynamicFilterFields.getFieldsMap().forEach(filterFields::appendToMap);
+        if (dynamicFilterFields.size() > 0)
+            dynamicFilterFields.getFieldsMap().forEach(filterFields::appendToMap);
 
         MethodParameterDetails methodParameterDetails = new MethodParameterDetails(methodParameter, mediaType, filterFields);
 
