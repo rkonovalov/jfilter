@@ -77,7 +77,7 @@ public final class FilterAdvice implements ResponseBodyAdvice<Object> {
     public Serializable beforeBodyWrite(Object obj, MethodParameter methodParameter, MediaType mediaType,
                                         Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
                                         ServerHttpResponse serverHttpResponse) {
-        FilterFields filterFields;
+        FilterFields filterFields = FilterFields.EMPTY_FIELDS;
 
         //Getting HttpServletRequest from serverHttpRequest
         HttpServletRequest servletServerHttpRequest = ((ServletServerHttpRequest) serverHttpRequest).getServletRequest();
@@ -88,10 +88,11 @@ public final class FilterAdvice implements ResponseBodyAdvice<Object> {
         if (filter != null) {
             //Get fields from static filter
             filterFields = filter.getFields(obj, requestSession);
-        } else {
-            //Get fields from dynamic filter
-            filterFields = dynamicFilterProvider.getFields(methodParameter, requestSession);
         }
+
+        //Get fields from dynamic filter
+        FilterFields dynamicFilterFields = dynamicFilterProvider.getFields(methodParameter, requestSession);
+        dynamicFilterFields.getFieldsMap().forEach(filterFields::appendToMap);
 
         MethodParameterDetails methodParameterDetails = new MethodParameterDetails(methodParameter, mediaType, filterFields);
 
