@@ -1,10 +1,15 @@
 package com.jfilter.util;
 
 import com.jfilter.components.DynamicSessionFilter;
+import com.jfilter.filter.DynamicFilter;
 import com.jfilter.filter.FilterFields;
+import org.springframework.core.MethodParameter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Filter utils class
@@ -33,5 +38,29 @@ public class FilterUtil {
      */
     public static void useFilter(HttpSession session, FilterFields filterFields) {
         session.setAttribute(DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS, filterFields);
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public static <T> T getClassDeclaredAnnotation(MethodParameter methodParameter, Class annotationClass) {
+        return (T) methodParameter.getContainingClass().getDeclaredAnnotation(annotationClass);
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public static <T> T getMethodDeclaredAnnotation(MethodParameter methodParameter, Class annotationClass) {
+        return (T) methodParameter.getMethod().getDeclaredAnnotation(annotationClass);
+    }
+
+    @SuppressWarnings("rawtypes")
+    public static  <T> List<T> getDeclaredAnnotations(MethodParameter methodParameter, Class annotationClass) {
+        List<T> annotations = new ArrayList<>();
+        T classAnnotation = getClassDeclaredAnnotation(methodParameter, annotationClass);
+        T methodAnnotation = getMethodDeclaredAnnotation(methodParameter, annotationClass);
+
+        if(classAnnotation != null)
+            annotations.add(classAnnotation);
+        if(methodAnnotation != null)
+            annotations.add(methodAnnotation);
+
+        return annotations;
     }
 }

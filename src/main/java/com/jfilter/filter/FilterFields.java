@@ -74,11 +74,20 @@ public class FilterFields implements Serializable {
      * @param classname class name whose fields will be filtered
      * @param fields    list of filterable fields
      */
-    public void appendToMap(Class classname, List<String> fields) {
+    public FilterFields appendToMap(Class classname, List<String> fields) {
         List<String> foundFields = fieldsMap.computeIfAbsent(classname, k -> new ArrayList<>());
         fields.forEach(v -> {
             if (!foundFields.contains(v)) foundFields.add(v);
         });
+        return this;
+    }
+
+    public FilterFields appendToMap(FilterFields filterFields) {
+        if (filterFields != null && filterFields.size() > 0) {
+            filterFields.getFieldsMap().forEach(this::appendToMap);
+            this.filterBehaviour = filterFields.filterBehaviour;
+        }
+        return this;
     }
 
     /**

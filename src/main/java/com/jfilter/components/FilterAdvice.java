@@ -88,14 +88,11 @@ public final class FilterAdvice implements ResponseBodyAdvice<Object> {
         RequestSession requestSession = new RequestSession(servletServerHttpRequest);
 
         //Retrieve filterable fields from static filters
-        BaseFilter filter = filterProvider.getFilter(methodParameter);
-        if (filter != null)
-            filterFields = filter.getFields(obj, requestSession);
+        filterProvider.getOptionalFilter(methodParameter)
+                .ifPresent(filter -> filterFields.appendToMap(filter.getFields(obj, requestSession)));
 
         //Retrieve filterable fields from dynamic filters
-        FilterFields dynamicFilterFields = dynamicFilterProvider.getFields(methodParameter, requestSession);
-        if (dynamicFilterFields.size() > 0)
-            dynamicFilterFields.getFieldsMap().forEach(filterFields::appendToMap);
+        filterFields.appendToMap(dynamicFilterProvider.getFields(methodParameter, requestSession));
 
         MethodParameterDetails methodParameterDetails = new MethodParameterDetails(methodParameter, mediaType, filterFields);
 

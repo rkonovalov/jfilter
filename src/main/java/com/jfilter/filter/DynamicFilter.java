@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  * Value should be class which implements {@link DynamicFilterEvent}
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.TYPE})
 @Documented
 public @interface DynamicFilter {
     Class<? extends DynamicFilterEvent> value();

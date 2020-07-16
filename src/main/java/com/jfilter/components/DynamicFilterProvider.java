@@ -1,11 +1,12 @@
 package com.jfilter.components;
 
 import com.comparator.Comparator;
-import com.jfilter.filter.DynamicFilterComponent;
-import com.jfilter.filter.FilterFields;
-import com.jfilter.filter.DynamicFilterEvent;
 import com.jfilter.filter.DynamicFilter;
+import com.jfilter.filter.DynamicFilterComponent;
+import com.jfilter.filter.DynamicFilterEvent;
+import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
+import com.jfilter.util.FilterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
@@ -20,7 +21,7 @@ import java.util.Map;
  * <p>This component finds and provides Dynamic filters which annotated by {@link DynamicFilterComponent} annotation.
  * Could be used for retrieving {@link FilterFields} from {@link MethodParameter} which annotated by {@link DynamicFilter}
  */
-@SuppressWarnings("CanBeFinal")
+@SuppressWarnings({"CanBeFinal", "rawtypes"})
 @Component
 public final class DynamicFilterProvider {
     private ApplicationContext applicationContext;
@@ -49,7 +50,7 @@ public final class DynamicFilterProvider {
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(DynamicFilterComponent.class);
 
         beans.forEach((k, v) -> {
-            if (DynamicFilterEvent.class.isInstance(v))
+            if (v instanceof DynamicFilterEvent)
                 dynamicFilterMap.put(v.getClass(), (DynamicFilterEvent) v);
         });
     }
@@ -61,7 +62,7 @@ public final class DynamicFilterProvider {
      * @return true if annotation is found, otherwise false
      */
     public static boolean isAccept(MethodParameter methodParameter) {
-        return methodParameter.getMethod().getDeclaredAnnotation(DynamicFilter.class) != null;
+        return FilterUtil.getDeclaredAnnotations(methodParameter, DynamicFilter.class).size() > 0;
     }
 
     /**
@@ -74,10 +75,18 @@ public final class DynamicFilterProvider {
      * @return if found dynamic filter returns {@link FilterFields}, otherwise empty FilterFields
      */
     public FilterFields getFields(MethodParameter methodParameter, RequestSession request) {
-        DynamicFilter dynamicFilterAnnotation = methodParameter.getMethod().getDeclaredAnnotation(DynamicFilter.class);
+        FilterFields filterFields = FilterFields.EMPTY_FIELDS.get();
 
-        if (dynamicFilterAnnotation != null && dynamicFilterMap.containsKey(dynamicFilterAnnotation.value())) {
-            DynamicFilterEvent filter = dynamicFilterMap.get(dynamicFilterAnnotation.value());
+        //Retrieve filterable fields from dynamic filters from whole class and method
+        FilterUtil.getDeclaredAnnotations(methodParameter, DynamicFilter.class)
+                .forEach(annotation -> filterFields.appendToMap(getFilterFields((DynamicFilter) annotation, request)));
+
+        return filterFields;
+    }
+
+    private FilterFields getFilterFields(DynamicFilter dynamicFilter, RequestSession request) {
+        if (dynamicFilter != null && dynamicFilterMap.containsKey(dynamicFilter.value())) {
+            DynamicFilterEvent filter = dynamicFilterMap.get(dynamicFilter.value());
 
             Comparator<RequestSession, FilterFields> comparator = Comparator.of(request, FilterFields.class);
             filter.onRequest(comparator);
