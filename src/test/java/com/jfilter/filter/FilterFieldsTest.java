@@ -129,7 +129,7 @@ public class FilterFieldsTest {
     @Test
     public void testEqualsSameObject() {
         FilterFields filterFields2 = FilterFields.getFieldsBy(new String[]{"id", "password"});
-        assertEquals(filterFields2, filterFields2);
+        assertTrue(filterFields2.equals(filterFields2));
     }
 
 }
