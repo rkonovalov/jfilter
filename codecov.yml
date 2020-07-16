@@ -1,2 +1,3 @@
 ignore:
   - "/src/main/java/com/jfilter/filter/FilterFactory.java"
+  - "/src/main/java/com/jfilter/converter/ConverterMapperModifier.java"

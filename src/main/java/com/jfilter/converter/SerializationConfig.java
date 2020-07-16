@@ -13,28 +13,6 @@ public class SerializationConfig {
     }
 
     /**
-     * Get using of default Serializers state
-     *
-     * @return true if adding is enabled, otherwise false
-     */
-    @Deprecated
-    public boolean isDefaultSerializersEnabled() {
-        return defaultSerializers;
-    }
-
-    /**
-     * Enabling/disabling using of default Serializers
-     *
-     * @param defaultSerializers if true {@link FilterObjectMapperBuilder} will add default Serializers to ObjectMappers, otherwise not
-     * @return instance of {@link FilterConfiguration}
-     */
-    @Deprecated
-    public SerializationConfig enableDefaultSerializers(boolean defaultSerializers) {
-        this.defaultSerializers = defaultSerializers;
-        return this;
-    }
-
-    /**
      * Get using of JavaDateTimeModule state
      *
      * @return true if using is enabled, otherwise false
