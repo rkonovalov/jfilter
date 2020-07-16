@@ -83,30 +83,53 @@ public class FilterFieldsTest {
     }
 
     @Test
-    public void testgetFieldsByClassAndList() {
+    public void testGetFieldsByClassAndList() {
         FilterFields filterFields2 = FilterFields.getFieldsBy(String.class, Arrays.asList("id", "password"));
 
         assertEquals(filterFields, filterFields2);
     }
 
     @Test
-    public void testgetFieldsByList() {
+    public void testGetFieldsByList() {
         FilterFields filterFields2 = FilterFields.getFieldsBy(Arrays.asList("id", "password"));
 
         assertEquals(filterFieldsNull, filterFields2);
     }
 
     @Test
-    public void testgetFieldsByClassAndArray() {
+    public void testGetFieldsByClassAndArray() {
         FilterFields filterFields2 = FilterFields.getFieldsBy(String.class, new String[]{"id", "password"});
 
         assertEquals(filterFields, filterFields2);
     }
 
     @Test
-    public void testgetFieldsByArray() {
+    public void testGetFieldsByArray() {
         FilterFields filterFields2 = FilterFields.getFieldsBy(new String[]{"id", "password"});
 
         assertEquals(filterFieldsNull, filterFields2);
     }
+
+    @Test
+    public void testAppendFieldsNull() {
+        FilterFields filterFields2 = FilterFields.getFieldsBy(new String[]{"id", "password"});
+        filterFields2.appendToMap(null);
+
+        assertEquals(filterFieldsNull, filterFields2);
+    }
+
+    @Test
+    public void testAppendFieldsSizeZero() {
+        FilterFields filterFields2 = FilterFields.getFieldsBy(new String[]{"id", "password"});
+        filterFields2.appendToMap(FilterFields.EMPTY_FIELDS.get());
+
+        assertEquals(filterFieldsNull, filterFields2);
+    }
+
+    @Test
+    public void testEqualsSameObject() {
+        FilterFields filterFields2 = FilterFields.getFieldsBy(new String[]{"id", "password"});
+        assertEquals(filterFields2, filterFields2);
+    }
+
 }
