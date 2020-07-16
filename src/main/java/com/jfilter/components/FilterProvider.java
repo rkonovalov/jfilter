@@ -11,6 +11,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -99,8 +100,24 @@ public final class FilterProvider {
         return enabled && FilterFactory.isAccept(methodParameter);
     }
 
+    /**
+     * Returns one of filters which supports annotation specified in MethodParameter or in Spring Web Service where MethodParameter is declared
+     *
+     * @param methodParameter {@link MethodParameter}
+     * @return {@link BaseFilter}
+     */
     public BaseFilter getFilter(MethodParameter methodParameter) {
         return getBaseFilter(methodParameter);
+    }
+
+    /**
+     * Returns Optional of filters which supports annotation specified in MethodParameter or in Spring Web Service where MethodParameter is declared
+     *
+     * @param methodParameter {@link MethodParameter}
+     * @return {@link BaseFilter}
+     */
+    public Optional<BaseFilter> getOptionalFilter(MethodParameter methodParameter) {
+        return Optional.ofNullable(getFilter(methodParameter));
     }
 
     /**
