@@ -4,11 +4,9 @@ import com.jfilter.components.FilterConfiguration;
 import com.jfilter.components.FilterObjectMapperBuilder;
 
 public class SerializationConfig {
-    private boolean defaultSerializers;
     private boolean dateTimeModule;
 
     public SerializationConfig() {
-        this.defaultSerializers = true;
         this.dateTimeModule = true;
     }
 
