@@ -124,9 +124,13 @@ Just add FieldFilterSetting annotation with filterable fields and module will ex
 
 # Release notes
 
+## Version 1.0.18
+    * Added ability of using DynamicFilter along with FilterSettings, Case #16
+    * Added ability of using DynamicFilter on class level, Case #18
+
 ## Version 1.0.17
-    * Added ability to using custom Message Converters, Case #11
-    * Added ability to change configuration of exist ObjectMappers, Case #11
+    * Added ability of using custom Message Converters, Case #11
+    * Added ability of change configuration of exist ObjectMappers, Case #11
     * Removed of using ConverterMapperModifier, instead module uses MixinFilter for field filtering.
       It's need for correct filtering of Java 8 types Case #12
     
@@ -135,7 +139,7 @@ Just add FieldFilterSetting annotation with filterable fields and module will ex
     * Changed artifactId of project from json-ignore to jfilter
 
 ## Version 1.0.15
-    * Added ability to use default Spring MessageConverters MappingJackson2HttpMessageConverter and MappingJackson2XmlHttpMessageConverter instead of FilterConverter
+    * Added ability of using default Spring MessageConverters MappingJackson2HttpMessageConverter and MappingJackson2XmlHttpMessageConverter instead of FilterConverter
     * Added FilterXmlMapper and FilterObjectMapper for overriding default ObjectMapper and XmlMapper when using default Spring MessageConverters
     * Changed generic type from Serializable to Object in FilterConverter
     
