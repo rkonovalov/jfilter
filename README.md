@@ -12,6 +12,7 @@
 [![codecov](https://codecov.io/gh/rkonovalov/jfilter/branch/master/graph/badge.svg)](https://codecov.io/gh/rkonovalov/jfilter)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0133be1929145eabe7d50217587b896)](https://www.codacy.com/app/rkonovalov/jfilter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/jfilter&amp;utm_campaign=Badge_Grade)
 [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=jfilter&metric=alert_status)](https://sonarcloud.io/dashboard?id=jfilter)
+[![CircleCI](https://circleci.com/gh/rkonovalov/jfilter.svg?style=svg)](https://circleci.com/gh/rkonovalov/jfilter)
 
 # About
 This module could be used in Spring Web Service project for filter(exclude) of fields in Service response.
