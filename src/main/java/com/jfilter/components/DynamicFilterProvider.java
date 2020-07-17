@@ -84,7 +84,7 @@ public final class DynamicFilterProvider {
         return filterFields;
     }
 
-    private FilterFields getFilterFields(DynamicFilter dynamicFilter, RequestSession request) {
+    public FilterFields getFilterFields(DynamicFilter dynamicFilter, RequestSession request) {
         if (dynamicFilter != null && dynamicFilterMap.containsKey(dynamicFilter.value())) {
             DynamicFilterEvent filter = dynamicFilterMap.get(dynamicFilter.value());
 
@@ -94,6 +94,6 @@ public final class DynamicFilterProvider {
             //Get FilterFields from comparator or EMPTY_FIELDS if comparator not modified or conditions in compare method returned false
             return comparator.orElse(FilterFields.EMPTY_FIELDS.get());
         } else
-            return new FilterFields();
+            return FilterFields.EMPTY_FIELDS.get();
     }
 }

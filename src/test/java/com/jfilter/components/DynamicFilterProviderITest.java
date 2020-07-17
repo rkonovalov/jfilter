@@ -34,6 +34,7 @@ public class DynamicFilterProviderITest {
     private DynamicFilterProvider dynamicFilterProvider;
     private FilterFields filterFields;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     public DynamicFilterProviderITest setDynamicFilterProvider(DynamicFilterProvider dynamicFilterProvider) {
         this.dynamicFilterProvider = dynamicFilterProvider;
@@ -84,7 +85,7 @@ public class DynamicFilterProviderITest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void testWithAnnotationAndEmptyMap() throws NoSuchFieldException, IllegalAccessException {
         MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
 
@@ -99,5 +100,12 @@ public class DynamicFilterProviderITest {
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
 
         assertEquals(new FilterFields(), found);
+    }
+
+    @Test
+    public void testGetFilterFieldsDynamicFilterNull() {
+        RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(filterFields));
+        FilterFields filterFields = dynamicFilterProvider.getFilterFields(null, requestSession);
+        assertEquals(filterFields, FilterFields.EMPTY_FIELDS.get());
     }
 }
