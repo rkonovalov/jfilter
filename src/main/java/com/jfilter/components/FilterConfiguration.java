@@ -38,7 +38,7 @@ public class FilterConfiguration {
     private ObjectMapperCache objectMapperCache;
     private SerializationConfig serializationConfig;
     private boolean useDefaultConverters;
-    private List<HttpMessageConverter<?>> customConverters;
+    private List<HttpMessageConverter<Object>> customConverters;
 
     public FilterConfiguration() {
         mapperList = new ConcurrentHashMap<>();
@@ -192,7 +192,7 @@ public class FilterConfiguration {
      *
      * @return {@link HttpMessageConverter}
      */
-    public List<HttpMessageConverter<?>> getCustomConverters() {
+    public List<HttpMessageConverter<Object>> getCustomConverters() {
         return customConverters;
     }
 
@@ -207,8 +207,8 @@ public class FilterConfiguration {
             throw new IllegalArgumentException("mediaType or onFind operation can't be null");
 
         ObjectMapper objectMapper = getMapper(mediaType);
-        if(objectMapper != null)
-        onFind.accept(objectMapper);
+        if (objectMapper != null)
+            onFind.accept(objectMapper);
     }
 
     /**
@@ -217,9 +217,10 @@ public class FilterConfiguration {
      * @param onFind consumer operation which performs when ObjectMapper will be found
      */
     public void findObjectMapper(Consumer<ObjectMapper> onFind) {
-        if (onFind == null)
-            throw new IllegalArgumentException("onFind operation can't be null");
+        if (onFind != null) {
             mapperList.forEach((mediaType, objectMapper) -> onFind.accept(objectMapper));
+        } else
+            throw new IllegalArgumentException("onFind operation can't be null");
     }
 }
 
