@@ -16,8 +16,6 @@ import java.util.Arrays;
 
 import static com.jfilter.components.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
 import static com.jfilter.mock.webservice.WSClassDynamicFilter.MAPPING_NOT_NULL_DYNAMIC_CLASS_FILTER;
-import static com.jfilter.mock.webservice.WSDynamicFilter.MAPPING_NOT_NULL_DYNAMIC_FILTER;
-import static com.jfilter.mock.webservice.WSDynamicFilter.MAPPING_NULL_DYNAMIC_FILTER;
 import static junit.framework.TestCase.assertEquals;
 
 @Component

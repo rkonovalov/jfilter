@@ -1,7 +1,6 @@
 package com.jfilter.components;
 
 import com.jfilter.converter.MethodParameterDetails;
-import com.jfilter.filter.BaseFilter;
 import com.jfilter.converter.FilterClassWrapper;
 import com.jfilter.filter.FilterFields;
 import com.jfilter.request.RequestSession;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-
 
 import static com.jfilter.filter.FilterFields.EMPTY_FIELDS;
 

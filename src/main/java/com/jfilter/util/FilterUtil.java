@@ -1,7 +1,6 @@
 package com.jfilter.util;
 
 import com.jfilter.components.DynamicSessionFilter;
-import com.jfilter.filter.DynamicFilter;
 import com.jfilter.filter.FilterFields;
 import org.springframework.core.MethodParameter;
 
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Filter utils class
@@ -23,7 +21,7 @@ public class FilterUtil {
     /**
      * Sets filterFields object into http request ATTRIBUTE_FILTER_FIELDS attribute
      *
-     * @param request {@link HttpServletRequest} http request
+     * @param request      {@link HttpServletRequest} http request
      * @param filterFields {@link FilterFields} instance of FilterFields
      */
     public static void useFilter(HttpServletRequest request, FilterFields filterFields) {
@@ -33,7 +31,7 @@ public class FilterUtil {
     /**
      * Sets filterFields object into http session ATTRIBUTE_FILTER_FIELDS attribute
      *
-     * @param session {@link HttpSession} http session
+     * @param session      {@link HttpSession} http session
      * @param filterFields {@link FilterFields} instance of FilterFields
      */
     public static void useFilter(HttpSession session, FilterFields filterFields) {
@@ -51,14 +49,14 @@ public class FilterUtil {
     }
 
     @SuppressWarnings("rawtypes")
-    public static  <T> List<T> getDeclaredAnnotations(MethodParameter methodParameter, Class annotationClass) {
+    public static <T> List<T> getDeclaredAnnotations(MethodParameter methodParameter, Class annotationClass) {
         List<T> annotations = new ArrayList<>();
         T classAnnotation = getClassDeclaredAnnotation(methodParameter, annotationClass);
         T methodAnnotation = getMethodDeclaredAnnotation(methodParameter, annotationClass);
 
-        if(classAnnotation != null)
+        if (classAnnotation != null)
             annotations.add(classAnnotation);
-        if(methodAnnotation != null)
+        if (methodAnnotation != null)
             annotations.add(methodAnnotation);
 
         return annotations;

@@ -3,7 +3,6 @@ package com.jfilter.filter;
 import com.comparator.Comparator;
 import com.jfilter.components.DynamicFilterProvider;
 import com.jfilter.request.RequestSession;
-import org.springframework.core.MethodParameter;
 
 /**
  * Dynamic filter event
