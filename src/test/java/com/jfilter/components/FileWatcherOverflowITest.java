@@ -2,7 +2,6 @@ package com.jfilter.components;
 
 import com.jfilter.mock.config.WSConfigurationHelper;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,7 +33,6 @@ public class FileWatcherOverflowITest {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
-    @Ignore
     public void testOverflowKey() throws IOException {
         int fileCount = 200;
         Path directory = Files.createTempDirectory("watch-service-overflow");
