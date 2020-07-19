@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://rkonovalov.github.io/projects/jfilter/1.0.17/">
+  <a href="https://rkonovalov.github.io/projects/jfilter/1.0.18/">
     <img src="https://rkonovalov.github.io/assets/images/jfilter-logo.svg" alt="JFilter Main page">
   </a>
   <br>
@@ -15,7 +15,7 @@
 [![CircleCI](https://circleci.com/gh/rkonovalov/jfilter.svg?style=svg)](https://circleci.com/gh/rkonovalov/jfilter)
 
 # About
-JFilter library could be used in Spring Web Service project for filter(exclude) of fields in Service response.
+JFilter library could be used in Spring Web Service project for the filter(exclude) of fields in Service response.
 When you used Jackson @JsonView interface and need more powerful and flexibility, this library could be useful.
 For information please follow the links below.
 
@@ -30,19 +30,19 @@ You can view all samples in GitHub [Samples](https://github.com/rkonovalov/jfilt
 Or you can try it [Online](https://jfilter-samples-248816.appspot.com/swagger-ui.html)
 
 ## Index
-* [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.17/)
-* [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.17/requirements/)
-* [Diagram](https://rkonovalov.github.io/projects/jfilter/1.0.17/diagram/)
-* [Installation](https://rkonovalov.github.io/projects/jfilter/1.0.17/installation/)
-* [Getting started](https://rkonovalov.github.io/projects/jfilter/1.0.17/getting-started/)
-* [Configuration](https://rkonovalov.github.io/projects/jfilter/1.0.17/configuration/)
-* [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/)
-  * [Simple field filter](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-field/)  
-  * [Session strategy filter](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-strategy/) 
-  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-file/)
-  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-controller/)
-  * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.17/examples/filter-dynamic/)
-* [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.17/release-notes/)
+* [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.18/)
+* [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.18/requirements/)
+* [Diagram](https://rkonovalov.github.io/projects/jfilter/1.0.18/diagram/)
+* [Installation](https://rkonovalov.github.io/projects/jfilter/1.0.18/installation/)
+* [Getting started](https://rkonovalov.github.io/projects/jfilter/1.0.18/getting-started/)
+* [Configuration](https://rkonovalov.github.io/projects/jfilter/1.0.18/configuration/)
+* [Examples](https://rkonovalov.github.io/projects/jfilter/1.0.18/examples/)
+  * [Simple field filter](https://rkonovalov.github.io/projects/jfilter/1.0.18/examples/filter-field/)  
+  * [Session strategy filter](https://rkonovalov.github.io/projects/jfilter/1.0.18/examples/filter-strategy/) 
+  * [XML Schema-based filter configuration](https://rkonovalov.github.io/projects/jfilter/1.0.18/examples/filter-file/)
+  * [Whole Spring Controller filtration](https://rkonovalov.github.io/projects/jfilter/1.0.18/examples/filter-controller/)
+  * [Dynamic Filter](https://rkonovalov.github.io/projects/jfilter/1.0.18/examples/filter-dynamic/)
+* [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.18/release-notes/)
 
 
 # Diagram of library flowchart
@@ -56,7 +56,7 @@ For using this library you need to import dependency
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>jfilter</artifactId>
-    <version>1.0.17</version>
+    <version>1.0.18</version>
 </dependency>
 ```
 * Attention: if you have used previous versions of library please rename artifactId from **json-ignore** to **jfilter**
