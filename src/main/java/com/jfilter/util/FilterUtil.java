@@ -1,6 +1,7 @@
 package com.jfilter.util;
 
 import com.jfilter.components.DynamicSessionFilter;
+import com.jfilter.filter.DynamicFilter;
 import com.jfilter.filter.FilterFields;
 import org.springframework.core.MethodParameter;
 
@@ -38,18 +39,17 @@ public class FilterUtil {
         session.setAttribute(DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS, filterFields);
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    public static <T> T getClassDeclaredAnnotation(MethodParameter methodParameter, Class annotationClass) {
+    @SuppressWarnings("unchecked")
+    public static <T> T getClassDeclaredAnnotation(MethodParameter methodParameter, Class<? extends DynamicFilter> annotationClass) {
         return (T) methodParameter.getContainingClass().getDeclaredAnnotation(annotationClass);
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    public static <T> T getMethodDeclaredAnnotation(MethodParameter methodParameter, Class annotationClass) {
+    @SuppressWarnings("unchecked")
+    public static <T> T getMethodDeclaredAnnotation(MethodParameter methodParameter, Class<? extends DynamicFilter> annotationClass) {
         return (T) methodParameter.getMethod().getDeclaredAnnotation(annotationClass);
     }
 
-    @SuppressWarnings("rawtypes")
-    public static <T> List<T> getDeclaredAnnotations(MethodParameter methodParameter, Class annotationClass) {
+    public static <T> List<T> getDeclaredAnnotations(MethodParameter methodParameter, Class<? extends DynamicFilter> annotationClass) {
         List<T> annotations = new ArrayList<>();
         T classAnnotation = getClassDeclaredAnnotation(methodParameter, annotationClass);
         T methodAnnotation = getMethodDeclaredAnnotation(methodParameter, annotationClass);
