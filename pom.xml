@@ -9,8 +9,8 @@
     <version>1.0.17</version>
     <packaging>jar</packaging>
 
-    <name>JFilter module</name>
-    <description>JFilter module</description>
+    <name>JFilter library</name>
+    <description>JFilter library</description>
     <url>https://rkonovalov.github.io/projects/jfilter</url>
 
     <properties>
@@ -65,7 +65,6 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

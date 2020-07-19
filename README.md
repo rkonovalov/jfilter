@@ -15,8 +15,8 @@
 [![CircleCI](https://circleci.com/gh/rkonovalov/jfilter.svg?style=svg)](https://circleci.com/gh/rkonovalov/jfilter)
 
 # About
-This module could be used in Spring Web Service project for filter(exclude) of fields in Service response.
-When you used Jackson @JsonView interface and need more powerful and flexibility, this module could be useful.
+JFilter library could be used in Spring Web Service project for filter(exclude) of fields in Service response.
+When you used Jackson @JsonView interface and need more powerful and flexibility, this library could be useful.
 For information please follow the links below.
 
 ## Publications
@@ -45,12 +45,12 @@ Or you can try it [Online](https://jfilter-samples-248816.appspot.com/swagger-ui
 * [Release Notes](https://rkonovalov.github.io/projects/jfilter/1.0.17/release-notes/)
 
 
-# Diagram of module flowchart
+# Diagram of library flowchart
 ![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram-1.0.17.svg)
 
 
 # Installation
-For using this module you need to import dependency
+For using this library you need to import dependency
 
 ```xml
 <dependency>
@@ -59,10 +59,10 @@ For using this module you need to import dependency
     <version>1.0.17</version>
 </dependency>
 ```
-* Attention: if you have used previous versions of module please rename artifactId from **json-ignore** to **jfilter**
+* Attention: if you have used previous versions of library please rename artifactId from **json-ignore** to **jfilter**
 
 # Getting started
-For activation of JFilter module just add next annotation
+For activation of JFilter library just add next annotation
 
 ```java
 @EnableJsonFilter
@@ -70,7 +70,7 @@ For activation of JFilter module just add next annotation
 
 # Example o usage
 This example illustrates how easy you can configure Service Response.
-Just add FieldFilterSetting annotation with filterable fields and module will exclude them from response
+Just add FieldFilterSetting annotation with filterable fields and library will exclude them from response.
 
 ```java
     @FieldFilterSetting(className = User.class, fields = {"id", "password", "secretKey"})
