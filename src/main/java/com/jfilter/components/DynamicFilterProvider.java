@@ -21,11 +21,11 @@ import java.util.Map;
  * <p>This component finds and provides Dynamic filters which annotated by {@link DynamicFilterComponent} annotation.
  * Could be used for retrieving {@link FilterFields} from {@link MethodParameter} which annotated by {@link DynamicFilter}
  */
-@SuppressWarnings({"CanBeFinal", "rawtypes"})
+@SuppressWarnings("CanBeFinal")
 @Component
 public final class DynamicFilterProvider {
     private ApplicationContext applicationContext;
-    private Map<Class, DynamicFilterEvent> dynamicFilterMap;
+    private Map<Class<? extends DynamicFilterEvent>, DynamicFilterEvent> dynamicFilterMap;
 
     /**
      * Creates a new instance of the {@link DynamicFilterProvider} class.
@@ -51,7 +51,7 @@ public final class DynamicFilterProvider {
 
         beans.forEach((k, v) -> {
             if (v instanceof DynamicFilterEvent)
-                dynamicFilterMap.put(v.getClass(), (DynamicFilterEvent) v);
+                dynamicFilterMap.put(((DynamicFilterEvent) v).getClass(), (DynamicFilterEvent) v);
         });
     }
 

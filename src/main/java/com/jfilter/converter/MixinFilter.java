@@ -35,12 +35,12 @@ public class MixinFilter extends SimpleBeanPropertyFilter implements Serializabl
         return !isFilterable(writer.getMember().getDeclaringClass(), writer.getName());
     }
 
-    private boolean fieldSpecified(List<Class> classes, String fieldName) {
+    private boolean fieldSpecified(List<Class<?>> classes, String fieldName) {
         return classes.stream()
                 .anyMatch(clazz -> fieldSpecified(clazz, fieldName));
     }
 
-    private boolean fieldSpecified(Class clazz, String fieldName) {
+    private boolean fieldSpecified(Class<?> clazz, String fieldName) {
         List<String> classFields = filterFields.getFieldsMap().get(clazz);
 
         if (classFields != null) {
@@ -50,7 +50,7 @@ public class MixinFilter extends SimpleBeanPropertyFilter implements Serializabl
             return false;
     }
 
-    private boolean isFilterable(Class clazz, String fieldName) {
+    private boolean isFilterable(Class<?> clazz, String fieldName) {
         boolean fieldFound = fieldSpecified(Arrays.asList(void.class, clazz), fieldName);
         return (filterFields.getFilterBehaviour() == KEEP_FIELDS) != fieldFound;
     }

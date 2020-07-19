@@ -20,7 +20,7 @@ public @interface FieldFilterSetting {
      * @return {@link Class} class name of filterable class
      * May be null
      */
-    Class className() default void.class;
+    Class<?> className() default void.class;
 
     /**
      *

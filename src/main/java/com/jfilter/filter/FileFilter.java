@@ -16,7 +16,7 @@ import java.net.URL;
 public class FileFilter extends BaseFilter {
 
     private FileConfig config;
-    private Class controllerClass;
+    private Class<?> controllerClass;
     private File file;
 
     /**

@@ -155,7 +155,7 @@ public class FileConfig implements Serializable {
          * @param className {@link String} class name. Example: java.io.File
          * @return {@link Class} return class, else null
          */
-        private Class getClassByName(String className) {
+        private Class<?> getClassByName(String className) {
             if (className != null && !className.isEmpty()) {
                 try {
                     return Class.forName(className);
@@ -174,7 +174,7 @@ public class FileConfig implements Serializable {
          */
         public FilterFields appendStrategyFields(FilterFields filterFields) {
             this.getFilters().forEach(filter -> {
-                Class clazz = getClassByName(filter.getClassName());
+                Class<?> clazz = getClassByName(filter.getClassName());
                 List<String> items = filterFields.getFields(clazz);
 
                 filter.getFields().forEach(field -> {

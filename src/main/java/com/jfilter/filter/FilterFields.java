@@ -14,12 +14,12 @@ import java.util.function.Supplier;
  *
  * <p>This class contains map of fields which could be filtered
  */
-@SuppressWarnings("rawtypes")
+
 public class FilterFields implements Serializable {
     private static final long serialVersionUID = -2354837314560228182L;
     public static final Supplier<FilterFields> EMPTY_FIELDS = FilterFields::new;
 
-    private final Map<Class, List<String>> fieldsMap;
+    private final Map<Class<?>, List<String>> fieldsMap;
     private FilterBehaviour filterBehaviour;
 
     /**
@@ -36,12 +36,12 @@ public class FilterFields implements Serializable {
      * @param className class name
      * @param fields    list of field name
      */
-    public FilterFields(Class className, List<String> fields) {
+    public FilterFields(Class<?> className, List<String> fields) {
         this();
         this.fieldsMap.put(className, fields);
     }
 
-    public Map<Class, List<String>> getFieldsMap() {
+    public Map<Class<?>, List<String>> getFieldsMap() {
         return fieldsMap;
     }
 
@@ -60,7 +60,7 @@ public class FilterFields implements Serializable {
      * @param className class name whose fields will be filtered
      * @return list of fields, if defined class not found returns empty array list
      */
-    public List<String> getFields(Class className) {
+    public List<String> getFields(Class<?> className) {
         return fieldsMap.containsKey(className) ? fieldsMap.get(className) : new ArrayList<>();
     }
 
@@ -74,7 +74,7 @@ public class FilterFields implements Serializable {
      * @param classname class name whose fields will be filtered
      * @param fields    list of filterable fields
      */
-    public FilterFields appendToMap(Class classname, List<String> fields) {
+    public FilterFields appendToMap(Class<?> classname, List<String> fields) {
         List<String> foundFields = fieldsMap.computeIfAbsent(classname, k -> new ArrayList<>());
         fields.forEach(v -> {
             if (!foundFields.contains(v)) foundFields.add(v);
@@ -98,7 +98,7 @@ public class FilterFields implements Serializable {
      * @return instance of FilterFields
      */
     @SuppressWarnings("WeakerAccess")
-    public static FilterFields getFieldsBy(Class classname, List<String> fields) {
+    public static FilterFields getFieldsBy(Class<?> classname, List<String> fields) {
         return new FilterFields(classname, fields);
     }
 
@@ -119,7 +119,7 @@ public class FilterFields implements Serializable {
      * @param fields    string array of filterable fields
      * @return instance of FilterFields
      */
-    public static FilterFields getFieldsBy(Class classname, String[] fields) {
+    public static FilterFields getFieldsBy(Class<?> classname, String[] fields) {
         return getFieldsBy(classname, Arrays.asList(fields));
     }
 

@@ -12,7 +12,7 @@ public abstract class FilterFactory {
     /**
      * List of available filters
      */
-    private static final Map<Class, FilterEvent> filterList = initFilterList();
+    private static final Map<Class<?>, FilterEvent> filterList = initFilterList();
 
     /**
      * Creates a new instance of the {@link FilterFactory} class.
@@ -28,8 +28,8 @@ public abstract class FilterFactory {
      *
      * @return {@link HashMap} map of filters which can process specified annotations
      */
-    private static Map<Class, FilterEvent> initFilterList() {
-        Map<Class, FilterEvent> items = new HashMap<>();
+    private static Map<Class<?>, FilterEvent> initFilterList() {
+        Map<Class<?>, FilterEvent> items = new HashMap<>();
         items.put(FieldFilterSetting.class, FieldFilter::new);
         items.put(FieldFilterSettings.class, FieldFilter::new);
         items.put(SessionStrategy.class, StrategyFilter::new);

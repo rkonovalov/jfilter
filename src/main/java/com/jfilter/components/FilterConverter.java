@@ -31,14 +31,14 @@ public class FilterConverter extends AbstractHttpMessageConverter<Object> {
     }
 
     @Override
-    public boolean canRead(Class clazz, MediaType mediaType) {
+    public boolean canRead(Class<?> clazz, MediaType mediaType) {
         return false;
     }
 
     @Override
-    public boolean canWrite(Class clazz, MediaType mediaType) {
+    public boolean canWrite(Class<?> clazz, MediaType mediaType) {
         return filterConfiguration.isEnabled() &&
-                (filterConfiguration.supportedMediaTypes().indexOf(mediaType) >= 0 || Objects.isNull(mediaType));
+                (filterConfiguration.supportedMediaTypes().contains(mediaType) || Objects.isNull(mediaType));
     }
 
     @Override
