@@ -73,6 +73,12 @@ public class FileFilter extends BaseFilter {
         }
     }
 
+    /**
+     * Get file extension
+     *
+     * @param file instance of {@link File}
+     * @return return file extension otherwise return empty string
+     */
     public String fileExtension(File file) {
         String fileName = file.getName();
         int index = fileName.lastIndexOf(".");
