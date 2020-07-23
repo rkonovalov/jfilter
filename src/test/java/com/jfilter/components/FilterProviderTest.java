@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class FilterProviderTest {
     private FilterProvider filterProvider;
     private MethodParameter fileAnnotationMethod;
+    private MethodParameter fileAnnotationYamlMethod;
     private MethodParameter methodWithoutAnnotationsMethod;
 
     @Before
@@ -20,7 +21,9 @@ public class FilterProviderTest {
         filterProvider = new FilterProvider();
 
         fileAnnotationMethod = MockMethods.fileAnnotation();
+        fileAnnotationYamlMethod = MockMethods.fileAnnotationYaml();
         assertNotNull(fileAnnotationMethod);
+        assertNotNull(fileAnnotationYamlMethod);
 
         methodWithoutAnnotationsMethod = MockMethods.methodWithoutAnnotations();
         assertNotNull(methodWithoutAnnotationsMethod);
@@ -43,6 +46,23 @@ public class FilterProviderTest {
     @Test
     public void testCacheSizeZero() {
         BaseFilter filter = filterProvider.getFilter(fileAnnotationMethod);
+        assertNotNull(filter);
+
+        filterProvider.clearCache();
+        assertEquals(0, filterProvider.cacheSize());
+    }
+
+    @Test
+    public void testCacheSizeGreaterZeroYaml() {
+        BaseFilter filter = filterProvider.getFilter(fileAnnotationYamlMethod);
+        assertNotNull(filter);
+
+        assertTrue(filterProvider.cacheSize() > 0);
+    }
+
+    @Test
+    public void testCacheSizeZeroYaml() {
+        BaseFilter filter = filterProvider.getFilter(fileAnnotationYamlMethod);
         assertNotNull(filter);
 
         filterProvider.clearCache();

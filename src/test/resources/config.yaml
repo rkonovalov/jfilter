@@ -1,0 +1,19 @@
+---
+controllers:
+- className: "com.jfilter.mock.MockMethods"
+  strategies:
+  - attributeName: "ROLE"
+    attributeValue: "ADMIN"
+    filters:
+    - className: "com.jfilter.mock.MockUser"
+      fields:
+      - name: "id"
+      filterBehaviour: "HIDE_FIELDS"
+  - attributeName: "ROLE"
+    attributeValue: "USER"
+    filters:
+    - className: "com.jfilter.mock.MockUser"
+      fields:
+      - name: "id"
+      - name: "password"
+      filterBehaviour: "HIDE_FIELDS"

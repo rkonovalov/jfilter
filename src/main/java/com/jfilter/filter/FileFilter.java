@@ -1,6 +1,7 @@
 package com.jfilter.filter;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.jfilter.FilterException;
 import com.jfilter.components.FileWatcher;
 import com.jfilter.request.RequestSession;
@@ -55,10 +56,28 @@ public class FileFilter extends BaseFilter {
     private FileConfig load(File file) {
         this.file = file;
         try {
-            return file != null ? new XmlMapper().readValue(file, FileConfig.class) : this.config;
+            if (file != null) {
+                String extension = fileExtension(file);
+                switch (extension) {
+                    case "yml":
+                    case "yaml":
+                        return new YAMLMapper().readValue(file, FileConfig.class);
+                    case "xml":
+                    default:
+                        return new XmlMapper().readValue(file, FileConfig.class);
+                }
+            } else
+                return this.config;
+            //return file != null ? new XmlMapper().readValue(file, FileConfig.class) : this.config;
         } catch (IOException e) {
             throw new FilterException(e);
         }
+    }
+
+    public String fileExtension(File file) {
+        String fileName = file.getName();
+        int index = fileName.lastIndexOf(".");
+        return index > 0 ? fileName.substring(index + 1).toLowerCase() : "";
     }
 
     /**
@@ -123,4 +142,16 @@ public class FileFilter extends BaseFilter {
         }
         return result;
     }
+
+    /*public static void main(String[] args) throws IOException {
+        File file = new File("/Users/ruslan/IdeaProjects/jfilter/src/test/resources/config.xml");
+
+        FileConfig fileConfig = new XmlMapper().readValue(file, FileConfig.class);
+
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        objectMapper.writeValue(new File("/Users/ruslan/IdeaProjects/jfilter/src/test/resources/config.yaml"), fileConfig);
+
+
+        System.out.println(fileConfig);
+    }*/
 }

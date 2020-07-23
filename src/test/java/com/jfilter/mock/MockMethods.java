@@ -89,6 +89,11 @@ public class MockMethods {
         return findMethodParameterByName("fileAnnotation");
     }
 
+    @FileFilterSetting(fileName = "config.yaml")
+    public static MethodParameter fileAnnotationYaml() {
+        return findMethodParameterByName("fileAnnotationYaml");
+    }
+
     @FileFilterSetting(fileName = "bad_config.xml")
     public static MethodParameter fileBadConfig() {
         return findMethodParameterByName("fileBadConfig");

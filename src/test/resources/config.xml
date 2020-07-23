@@ -6,7 +6,7 @@
     <controller class-name="com.jfilter.mock.MockMethods">
         <strategy attribute-name="ROLE" attribute-value="ADMIN">
 
-            <filter class="com.jfilter.mock.MockUse">
+            <filter class="com.jfilter.mock.MockUser">
                 <field name="id"/>
             </filter>
         </strategy>
