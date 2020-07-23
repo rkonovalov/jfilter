@@ -147,16 +147,4 @@ public class FileFilter extends BaseFilter {
         }
         return result;
     }
-
-    /*public static void main(String[] args) throws IOException {
-        File file = new File("/Users/ruslan/IdeaProjects/jfilter/src/test/resources/config.xml");
-
-        FileConfig fileConfig = new XmlMapper().readValue(file, FileConfig.class);
-
-        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
-        objectMapper.writeValue(new File("/Users/ruslan/IdeaProjects/jfilter/src/test/resources/config.yaml"), fileConfig);
-
-
-        System.out.println(fileConfig);
-    }*/
 }
