@@ -68,7 +68,6 @@ public class FileFilter extends BaseFilter {
                 }
             } else
                 return this.config;
-            //return file != null ? new XmlMapper().readValue(file, FileConfig.class) : this.config;
         } catch (IOException e) {
             throw new FilterException(e);
         }
