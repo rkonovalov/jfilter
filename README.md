@@ -46,7 +46,7 @@ Or you can try it [Online](https://jfilter-samples-248816.appspot.com/swagger-ui
 
 
 # Diagram of library flowchart
-![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram-1.0.17.svg)
+![Diagram](https://rkonovalov.github.io/assets/images/jfilter-diagram-1.0.18.svg)
 
 
 # Installation
@@ -60,6 +60,15 @@ For using this library you need to import dependency
 </dependency>
 ```
 * Attention: if you have used previous versions of library please rename artifactId from **json-ignore** to **jfilter**
+
+If you need to add SOAP Web Services support you need to import SOAP dependency also
+```xml
+<dependency>
+    <groupId>com.github.rkonovalov</groupId>
+    <artifactId>jfilter-soap</artifactId>
+    <version>1.0.18</version>
+</dependency>
+```
 
 # Getting started
 For activation of JFilter library just add next annotation
@@ -128,6 +137,7 @@ Just add FieldFilterSetting annotation with filterable fields and library will e
 ## Version 1.0.18
     * Added ability of using DynamicFilter along with FilterSettings, Case #16
     * Added ability of using DynamicFilter on class level, Case #18
+    * Added support of SOAP Web Services (alpha version)
 
 ## Version 1.0.17
     * Added ability of using custom Message Converters, Case #11
