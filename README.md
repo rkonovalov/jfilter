@@ -27,8 +27,6 @@ Article in [dzone.com](https://dzone.com/articles/spring-web-service-response-fi
 ## Samples
 You can view all samples in GitHub [Samples](https://github.com/rkonovalov/jfilter-samples)
 
-Or you can try it [Online](https://jfilter-samples-248816.appspot.com/swagger-ui.html)
-
 ## Index
 * [Main page](https://rkonovalov.github.io/projects/jfilter/1.0.18/)
 * [Requirements](https://rkonovalov.github.io/projects/jfilter/1.0.18/requirements/)
@@ -69,6 +67,7 @@ If you need to add SOAP Web Services support you need to import SOAP dependency 
     <version>1.0.18</version>
 </dependency>
 ```
+Link to project [JFilter Soap](https://github.com/rkonovalov/jfilter-soap)
 
 # Getting started
 For activation of JFilter library just add next annotation
