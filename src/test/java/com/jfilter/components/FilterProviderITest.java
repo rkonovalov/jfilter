@@ -47,7 +47,7 @@ public class FilterProviderITest {
     @Test
     public void testGetFilter() throws Exception {
         WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
-        MethodParameter methodParameter = MockMethods.singleAnnotation();
+        MethodParameter methodParameter = MockMethods.singleAnnotation(null);
 
         BaseFilter filter = filterProvider.getFilter(methodParameter);
 
@@ -57,7 +57,7 @@ public class FilterProviderITest {
     @Test
     public void testGetFilterNull() throws Exception {
         WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
-        MethodParameter methodParameter = MockMethods.methodWithLazyAnnotation();
+        MethodParameter methodParameter = MockMethods.methodWithLazyAnnotation(null);
 
         BaseFilter filter = filterProvider.getFilter(methodParameter);
 

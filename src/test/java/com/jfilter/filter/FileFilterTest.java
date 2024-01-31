@@ -16,7 +16,7 @@ public class FileFilterTest {
 
     @Test
     public void testMethodWithoutAnnotations() {
-        FileFilter fileFilter = new FileFilter(MockMethods.methodWithoutAnnotations());
+        FileFilter fileFilter = new FileFilter(MockMethods.methodWithoutAnnotations(null));
         FilterFields filterFields = fileFilter.getFields(MockClassesHelper.getUserMock(),
                 new RequestSession(MockHttpRequestHelper.getMockAdminRequest()));
         Assert.assertEquals(0, filterFields.getFieldsMap().size());
@@ -24,7 +24,7 @@ public class FileFilterTest {
 
     @Test
     public void testMethodNotExistFile() {
-        FileFilter fileFilter = new FileFilter(MockMethods.fileNotExist());
+        FileFilter fileFilter = new FileFilter(MockMethods.fileNotExist(null));
         FilterFields filterFields = fileFilter.getFields(MockClassesHelper.getUserMock(),
                 new RequestSession(MockHttpRequestHelper.getMockAdminRequest()));
         Assert.assertEquals(0, filterFields.getFieldsMap().size());
@@ -32,7 +32,7 @@ public class FileFilterTest {
 
     @Test
     public void testMethodBadConfig() {
-        FileFilter fileFilter = new FileFilter(MockMethods.fileBadConfig());
+        FileFilter fileFilter = new FileFilter(MockMethods.fileBadConfig(null));
         FilterFields filterFields = fileFilter.getFields(MockClassesHelper.getUserMock(),
                 new RequestSession(MockHttpRequestHelper.getMockAdminRequest()));
         Assert.assertEquals(0, filterFields.getFieldsMap().size());
@@ -40,7 +40,7 @@ public class FileFilterTest {
 
     @Test
     public void testFileAnnotationClassNotFound() {
-        FileFilter fileFilter = new FileFilter(MockMethods.fileAnnotationClassNotFound());
+        FileFilter fileFilter = new FileFilter(MockMethods.fileAnnotationClassNotFound(null));
         FilterFields filterFields = fileFilter.getFields(MockClassesHelper.getUserMock(),
                 new RequestSession(MockHttpRequestHelper.getMockAdminRequest()));
         Assert.assertEquals(Arrays.asList("id", "password"), filterFields.getFieldsMap().get(null));
@@ -48,7 +48,7 @@ public class FileFilterTest {
 
     @Test
     public void testFileAnnotationEmpty() {
-        FileFilter fileFilter = new FileFilter(MockMethods.fileAnnotationEmpty());
+        FileFilter fileFilter = new FileFilter(MockMethods.fileAnnotationEmpty(null));
         FilterFields filterFields = fileFilter.getFields(MockClassesHelper.getUserMock(),
                 new RequestSession(MockHttpRequestHelper.getMockAdminRequest()));
 
@@ -63,7 +63,7 @@ public class FileFilterTest {
         try (FileOutputStream in = new FileOutputStream(file)) {
             java.nio.channels.FileLock lock = in.getChannel().lock();
             try {
-                FileFilter fileFilter = new FileFilter(MockMethods.fileLocked());
+                FileFilter fileFilter = new FileFilter(MockMethods.fileLocked(null));
                 FilterFields filterFields = fileFilter.getFields(MockClassesHelper.getUserMock(),
                         new RequestSession(MockHttpRequestHelper.getMockAdminRequest()));
 

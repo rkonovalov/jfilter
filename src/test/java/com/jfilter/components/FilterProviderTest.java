@@ -20,12 +20,12 @@ public class FilterProviderTest {
     public void init() {
         filterProvider = new FilterProvider();
 
-        fileAnnotationMethod = MockMethods.fileAnnotation();
-        fileAnnotationYamlMethod = MockMethods.fileAnnotationYaml();
+        fileAnnotationMethod = MockMethods.fileAnnotation(null);
+        fileAnnotationYamlMethod = MockMethods.fileAnnotationYaml(null);
         assertNotNull(fileAnnotationMethod);
         assertNotNull(fileAnnotationYamlMethod);
 
-        methodWithoutAnnotationsMethod = MockMethods.methodWithoutAnnotations();
+        methodWithoutAnnotationsMethod = MockMethods.methodWithoutAnnotations(null);
         assertNotNull(methodWithoutAnnotationsMethod);
     }
 

@@ -55,7 +55,7 @@ public class DynamicFilterProviderITest {
 
     @Test
     public void testWithAnnotation() {
-        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter(null);
 
         RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(filterFields));
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
@@ -65,7 +65,7 @@ public class DynamicFilterProviderITest {
 
     @Test
     public void testWithoutAnnotation() {
-        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations(null);
 
         RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(filterFields));
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, requestSession);
@@ -75,7 +75,7 @@ public class DynamicFilterProviderITest {
 
     @Test
     public void testWithAnnotationWithEmptySession() {
-        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter(null);
 
         RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(null));
 
@@ -87,7 +87,7 @@ public class DynamicFilterProviderITest {
     @Test
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void testWithAnnotationAndEmptyMap() throws NoSuchFieldException, IllegalAccessException {
-        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter(null);
 
         Field field = dynamicFilterProvider.getClass().getDeclaredField("dynamicFilterMap");
         field.setAccessible(true);

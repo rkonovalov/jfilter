@@ -37,7 +37,7 @@ public class ObjectMapperCacheITest {
     public void init() throws Exception {
         WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED2, this);
         filterConfiguration.setEnabled(true);
-        methodParameter = MockMethods.mockIgnoreSettingsMethod();
+        methodParameter = MockMethods.mockIgnoreSettingsMethod(null);
     }
 
     @Test

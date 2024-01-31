@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_SINGLE_ANNOTATION;
 import static com.jfilter.mock.webservice.WSMethod.MAPPING_SIGN_IN_KEEP_SINGLE_ANNOTATION;

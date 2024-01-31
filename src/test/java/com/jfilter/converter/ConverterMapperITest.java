@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
@@ -28,7 +28,7 @@ public class ConverterMapperITest {
 
         FilterFields filterFields = new FilterFields(MockUser.class, Arrays.asList("id", "password"));
 
-        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter(null);
         HttpServletRequest request = MockHttpRequestHelper.getMockDynamicFilterRequest(filterFields);
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
 
@@ -39,7 +39,7 @@ public class ConverterMapperITest {
     public void testOnGetFilterFieldsEmpty() throws Exception {
         WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
 
-        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations(null);
         HttpServletRequest request = MockHttpRequestHelper.getMockDynamicFilterRequest(null);
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
 

@@ -6,7 +6,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static com.jfilter.components.DynamicSessionFilter.ATTRIBUTE_FILTER_FIELDS;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
