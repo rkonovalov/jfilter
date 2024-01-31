@@ -1,9 +1,9 @@
 package com.jfilter.request;
 
 import org.springframework.http.server.ServerHttpRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.util.StringUtils;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 import java.util.Objects;
 

@@ -17,7 +17,7 @@ public class MethodParameterDetailsTest {
 
     @Before
     public void init() {
-        methodParameter = MockMethods.mockIgnoreSettingsMethod();
+        methodParameter = MockMethods.mockIgnoreSettingsMethod(null);
         methodParameterHash = methodParameter.getMethod().hashCode();
     }
 
@@ -62,7 +62,7 @@ public class MethodParameterDetailsTest {
 
     @Test
     public void testNotEqualsHashCode() {
-        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(MockMethods.dynamicSessionFilter(), null, null);
+        MethodParameterDetails methodParameterDetails1 = new MethodParameterDetails(MockMethods.dynamicSessionFilter(null), null, null);
         MethodParameterDetails methodParameterDetails2 = new MethodParameterDetails(methodParameter, null, null);
         assertNotEquals(methodParameterDetails1, methodParameterDetails2);
     }

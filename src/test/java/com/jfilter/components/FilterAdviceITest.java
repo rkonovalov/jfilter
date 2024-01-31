@@ -41,14 +41,14 @@ public class FilterAdviceITest {
 
     @Test
     public void testSupports() {
-        boolean supports = filterAdvice.supports(MockMethods.singleAnnotation(), null);
+        boolean supports = filterAdvice.supports(MockMethods.singleAnnotation(null), null);
         assertTrue(supports);
     }
 
     @Test
     public void testNotSupports() {
         filterConfiguration.setEnabled(false);
-        boolean supports = filterAdvice.supports(MockMethods.singleAnnotation(), null);
+        boolean supports = filterAdvice.supports(MockMethods.singleAnnotation(null), null);
         assertFalse(supports);
     }
 

@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableJsonFilter
-@ComponentScan({"com.jfilter.mock.webservice"})
-public class WSConfigurationCustomConverter extends WebMvcConfigurerAdapter {
+@ComponentScan({"com.jfilter.mock.webservice", "com.jfilter"})
+public class WSConfigurationCustomConverter implements WebMvcConfigurer {
 
     public class CustomJsonConverter extends MappingJackson2HttpMessageConverter {
         public CustomJsonConverter(ObjectMapper objectMapper) {
