@@ -14,7 +14,7 @@ public class StrategyFilterTest {
 
     @Before
     public void init() {
-        MethodParameter methodParameter = MockMethods.mockIgnoreStrategyMethod();
+        MethodParameter methodParameter = MockMethods.mockIgnoreStrategyMethod(null);
         strategyFilter = new StrategyFilter(methodParameter);
     }
 

@@ -98,7 +98,7 @@ public class FileWatcherModifyITest {
         boolean copyResult = MockUtils.fileCopy("config.xml", "config_dynamic.xml");
         assertTrue(copyResult);
 
-        MethodParameter methodParameter = MockMethods.fileFilterDynamic();
+        MethodParameter methodParameter = MockMethods.fileFilterDynamic(null);
         RequestSession request = new RequestSession(MockHttpRequestHelper.getMockUserRequest());
 
         BaseFilter filter = filterProvider.getFilter(methodParameter);
@@ -122,7 +122,7 @@ public class FileWatcherModifyITest {
         boolean copyResult = MockUtils.fileCopy("config.xml", "config_dynamic.xml");
         assertTrue(copyResult);
 
-        MethodParameter methodParameter = MockMethods.fileFilterDynamic();
+        MethodParameter methodParameter = MockMethods.fileFilterDynamic(null);
         RequestSession request = new RequestSession(MockHttpRequestHelper.getMockUserRequest());
 
         BaseFilter filter = filterProvider.getFilter(methodParameter);

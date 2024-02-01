@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 public class MockMethods {
 
     @FieldFilterSetting(fields = {"id", "password"})
-    public static MethodParameter mockIgnoreSettingsMethod() {
+    public static MethodParameter mockIgnoreSettingsMethod(Object mock) {
         return findMethodParameterByName("mockIgnoreSettingsMethod");
     }
 
@@ -25,19 +25,19 @@ public class MockMethods {
             @FieldFilterSetting(fields = {"email", "password"})
     })
 
-    public static MethodParameter mockIgnoreStrategiesMethod() {
+    public static MethodParameter mockIgnoreStrategiesMethod(Object object) {
         return findMethodParameterByName("mockIgnoreStrategiesMethod");
     }
 
     @SessionStrategy(attributeName = "ROLE", attributeValue = "USER", ignoreFields = {
             @FieldFilterSetting(fields = {"id", "password"})
     })
-    public static MethodParameter mockIgnoreStrategyMethod() {
+    public static MethodParameter mockIgnoreStrategyMethod(Object object) {
         return findMethodParameterByName("mockIgnoreStrategyMethod");
     }
 
     @FieldFilterSetting(fields = {"id"})
-    public static MethodParameter singleAnnotation() {
+    public static MethodParameter singleAnnotation(Object object) {
         return findMethodParameterByName("singleAnnotation");
     }
 
@@ -47,22 +47,22 @@ public class MockMethods {
     }
 
     @FieldFilterSetting(fields = {"strValue", "intValue", "items2"})
-    public static MethodParameter mockClass2() {
+    public static MethodParameter mockClass2(Object object) {
         return findMethodParameterByName("mockClass2");
     }
 
     @FieldFilterSetting(fields = {"id"})
-    public static MethodParameter secondSingleAnnotation() {
+    public static MethodParameter secondSingleAnnotation(Object object) {
         return findMethodParameterByName("secondSingleAnnotation");
     }
 
     @FieldFilterSetting(fields = {"filters"})
-    public static MethodParameter withoutFileFilters() {
+    public static MethodParameter withoutFileFilters(Object object) {
         return findMethodParameterByName("withoutFileFilters");
     }
 
     @FieldFilterSetting(fields = {"password"})
-    public static MethodParameter thirdSingleAnnotation() {
+    public static MethodParameter thirdSingleAnnotation(Object object) {
         return findMethodParameterByName("thirdSingleAnnotation");
     }
 
@@ -71,81 +71,81 @@ public class MockMethods {
     @FieldFilterSetting(className = MockUser.class, fields = {"password", "intValue", "collectionValue"})
     @FieldFilterSetting(className = MockUser.class, fields = {"mapValue", "boolValue", "byteValue", "charValue"})
     @FieldFilterSetting(className = MockUser.class, fields = {"doubleValue", "floatValue", "longValue", "shortValue"})
-    public static MethodParameter multipleAnnotation() {
+    public static MethodParameter multipleAnnotation(Object object) {
         return findMethodParameterByName("multipleAnnotation");
     }
 
-    public static MethodParameter methodWithoutAnnotations() {
+    public static MethodParameter methodWithoutAnnotations(Object object) {
         return findMethodParameterByName("methodWithoutAnnotations");
     }
 
     @Lazy
-    public static MethodParameter methodWithLazyAnnotation() {
+    public static MethodParameter methodWithLazyAnnotation(Object object) {
         return findMethodParameterByName("methodWithLazyAnnotation");
     }
 
     @FileFilterSetting(fileName = "config.xml")
-    public static MethodParameter fileAnnotation() {
+    public static MethodParameter fileAnnotation(Object object) {
         return findMethodParameterByName("fileAnnotation");
     }
 
     @FileFilterSetting(fileName = "config.yaml")
-    public static MethodParameter fileAnnotationYaml() {
+    public static MethodParameter fileAnnotationYaml(Object object) {
         return findMethodParameterByName("fileAnnotationYaml");
     }
 
     @FileFilterSetting(fileName = "bad_config.xml")
-    public static MethodParameter fileBadConfig() {
+    public static MethodParameter fileBadConfig(Object object) {
         return findMethodParameterByName("fileBadConfig");
     }
 
     @FileFilterSetting(fileName = "unknown_config.xml")
-    public static MethodParameter fileNotExist() {
+    public static MethodParameter fileNotExist(Object object) {
         return findMethodParameterByName("fileNotExist");
     }
 
     @FileFilterSetting(fileName = "config_no_controllers.xml")
-    public static MethodParameter fileAnnotationNoControllers() {
+    public static MethodParameter fileAnnotationNoControllers(Object object) {
         return findMethodParameterByName("fileAnnotationNoControllers");
     }
 
     @FileFilterSetting(fileName = "config_no_strategies.xml")
-    public static MethodParameter fileAnnotationNoStrategies() {
+    public static MethodParameter fileAnnotationNoStrategies(Object object) {
         return findMethodParameterByName("fileAnnotationNoStrategies");
     }
 
     @FileFilterSetting(fileName = "config_class_duplicated.xml")
-    public static MethodParameter fileAnnotationClassDuplicated() {
+    public static MethodParameter fileAnnotationClassDuplicated(Object object) {
         return findMethodParameterByName("fileAnnotationClassDuplicated");
     }
 
     @DynamicFilter(DynamicSessionFilter.class)
-    public static MethodParameter dynamicSessionFilter() {
+    public static MethodParameter dynamicSessionFilter(Object object) {
         return findMethodParameterByName("dynamicSessionFilter");
     }
 
     @DynamicFilter(MockDynamicNullFilter.class)
-    public static MethodParameter mockDynamicNullFilter() {
+    public static MethodParameter mockDynamicNullFilter(Object object) {
         return findMethodParameterByName("mockDynamicNullFilter");
     }
 
     @FileFilterSetting(fileName = "config_class_not_found.xml")
-    public static MethodParameter fileAnnotationClassNotFound() {
+    public static MethodParameter fileAnnotationClassNotFound(Object object) {
         return findMethodParameterByName("fileAnnotationClassNotFound");
     }
 
     @FileFilterSetting()
-    public static MethodParameter fileAnnotationEmpty() {
+    public static MethodParameter fileAnnotationEmpty(Object object) {
         return findMethodParameterByName("fileAnnotationEmpty");
     }
 
     @FileFilterSetting(fileName = "config_io_exception.xml")
-    public static MethodParameter fileLocked() {
+    public static MethodParameter fileLocked(Object object) {
         return findMethodParameterByName("fileLocked");
     }
 
     @FileFilterSetting(fileName = "config_dynamic.xml")
-    public static MethodParameter fileFilterDynamic() {
+    public static MethodParameter fileFilterDynamic(Object object) {
         return findMethodParameterByName("fileFilterDynamic");
     }
 

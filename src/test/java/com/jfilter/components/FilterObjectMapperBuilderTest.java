@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig;
 import com.fasterxml.jackson.databind.module.SimpleSerializers;
 import com.fasterxml.jackson.databind.ser.BasicSerializerFactory;
 import com.fasterxml.jackson.databind.ser.Serializers;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Serializers;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.PackageVersion;
 import com.jfilter.converter.SerializationConfig;
 import com.jfilter.filter.FilterFields;
 import org.junit.Before;
@@ -61,8 +61,6 @@ public class FilterObjectMapperBuilderTest {
     public void testConfigureSerializersTrue() {
         SerializerFactoryConfig serializerFactoryConfig = getFactoryConfig(filterObjectMapperTrue);
 
-        boolean jdk8SerializerExist = serializerExist(serializerFactoryConfig.serializers(), Jdk8Serializers.class);
-        assertTrue(jdk8SerializerExist);
 
         boolean simpleSerializerExist = serializerExist(serializerFactoryConfig.serializers(), SimpleSerializers.class);
         assertTrue(simpleSerializerExist);
@@ -70,17 +68,16 @@ public class FilterObjectMapperBuilderTest {
 
     @Test
     public void testRegisteredModulesTrue() {
-        boolean timeModuleExist = registeredModule(filterObjectMapperTrue, JavaTimeModule.class.getName());
+        String javaTimeModuleName = PackageVersion.VERSION.getArtifactId();
+        boolean timeModuleExist = registeredModule(filterObjectMapperTrue, javaTimeModuleName);
         assertTrue(timeModuleExist);
     }
 
     @Test
     public void testConfigureSerializersFalse() {
         SerializerFactoryConfig serializerFactoryConfig = getFactoryConfig(filterObjectMapperFalse);
-
-        boolean jdk8SerializerExist = serializerExist(serializerFactoryConfig.serializers(), Jdk8Serializers.class);
-        assertFalse(jdk8SerializerExist);
-
+        boolean timeModuleExist = registeredModule(filterObjectMapperFalse, JavaTimeModule.class.getName());
+        assertFalse(timeModuleExist);
         boolean simpleSerializerExist = serializerExist(serializerFactoryConfig.serializers(), SimpleSerializers.class);
         assertFalse(simpleSerializerExist);
     }

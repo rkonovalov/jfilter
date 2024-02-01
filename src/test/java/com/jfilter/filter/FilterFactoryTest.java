@@ -20,25 +20,25 @@ public class FilterFactoryTest {
 
     @Test
     public void testIgnoreSettingMethod() {
-        MethodParameter methodParameter = MockMethods.mockIgnoreSettingsMethod();
+        MethodParameter methodParameter = MockMethods.mockIgnoreSettingsMethod(null);
         assertTrue(FilterFactory.isAccept(methodParameter));
     }
 
     @Test
     public void testIgnoreWithoutAnnotations() {
-        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations(null);
         assertFalse(FilterFactory.isAccept(methodParameter));
     }
 
     @Test
     public void testStrategiesMethod() {
-        MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod();
+        MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod(null);
         assertTrue(FilterFactory.isAccept(methodParameter));
     }
 
     @Test
     public void testFactoryFieldIgnore() {
-        MethodParameter methodParameter = MockMethods.mockIgnoreSettingsMethod();
+        MethodParameter methodParameter = MockMethods.mockIgnoreSettingsMethod(null);
         assertNotNull(methodParameter);
 
         BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
@@ -49,7 +49,7 @@ public class FilterFactoryTest {
 
     @Test
     public void testFactoryStrategyFilter() {
-        MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod();
+        MethodParameter methodParameter = MockMethods.mockIgnoreStrategiesMethod(null);
         assertNotNull(methodParameter);
 
         BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
@@ -60,7 +60,7 @@ public class FilterFactoryTest {
 
     @Test
     public void testFactoryNull() {
-        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations();
+        MethodParameter methodParameter = MockMethods.methodWithoutAnnotations(null);
         assertNotNull(methodParameter);
         BaseFilter filter = FilterFactory.getFromFactory(methodParameter);
         assertNull(filter);

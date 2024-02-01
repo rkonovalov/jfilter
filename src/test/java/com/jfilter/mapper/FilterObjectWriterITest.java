@@ -67,7 +67,7 @@ public class FilterObjectWriterITest {
     @Test
     public void testWriteValueFilterClassWrapperNotNull() throws IOException {
 
-        MethodParameter methodParameter = MockMethods.singleAnnotation();
+        MethodParameter methodParameter = MockMethods.singleAnnotation(null);
 
         BaseFilter filter = filterProvider.getFilter(methodParameter);
 

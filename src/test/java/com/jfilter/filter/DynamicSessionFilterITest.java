@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertNotNull;
@@ -26,7 +26,7 @@ public class DynamicSessionFilterITest {
     @Test
     public void testOnGetFilterFieldsNotNull() throws Exception {
         WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
-        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter(null);
         HttpServletRequest request = MockHttpRequestHelper.getMockDynamicFilterRequest(null);
         FilterFields found = dynamicFilterProvider.getFields(methodParameter, new RequestSession(request));
 
@@ -36,7 +36,7 @@ public class DynamicSessionFilterITest {
     @Test
     public void testMockDynamicNullFilter() throws Exception {
         WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
-        MethodParameter methodParameter = MockMethods.mockDynamicNullFilter();
+        MethodParameter methodParameter = MockMethods.mockDynamicNullFilter(null);
 
         RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(new FilterFields(MockUser.class, Arrays.asList("id", "password"))));
         
@@ -48,7 +48,7 @@ public class DynamicSessionFilterITest {
     @Test
     public void testDynamicSessionFilter() throws Exception {
         WSConfigurationHelper.instance(WSConfigurationHelper.Instance.FILTER_ENABLED, this);
-        MethodParameter methodParameter = MockMethods.dynamicSessionFilter();
+        MethodParameter methodParameter = MockMethods.dynamicSessionFilter(null);
 
         RequestSession requestSession = new RequestSession(MockHttpRequestHelper.getMockDynamicFilterRequest(new FilterFields(MockUser.class, Arrays.asList("id", "password"))));
 

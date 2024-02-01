@@ -143,6 +143,7 @@ public class WSMethod {
         return MockClassesHelper.getUserMock();
     }
 
+
     @FieldFilterSetting(fields = {"id", "password"})
     @RequestMapping(value = MAPPING_SIGN_IN_OPTIONAL_SINGLE_ANNOTATION,
             params = {"email", "password"}, method = RequestMethod.POST,

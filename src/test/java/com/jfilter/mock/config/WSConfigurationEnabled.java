@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 @Configuration
 @EnableJsonFilter
-@ComponentScan({"com.jfilter.mock.webservice"})
-public class WSConfigurationEnabled extends WebMvcConfigurerAdapter {
+@ComponentScan({"com.jfilter.mock.webservice", "com.jfilter"})
+public class WSConfigurationEnabled implements WebMvcConfigurer {
     @Autowired
     private FilterRegister filterRegister;
 
@@ -24,6 +24,6 @@ public class WSConfigurationEnabled extends WebMvcConfigurerAdapter {
             filterRegister.configureMessageConverters(converters);
         converters.add(new MappingJackson2HttpMessageConverter());
         converters.add(new MappingJackson2XmlHttpMessageConverter());
-        super.configureMessageConverters(converters);
+        extendMessageConverters(converters);
     }
 }
